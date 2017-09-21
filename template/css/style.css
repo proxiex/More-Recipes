@@ -1,6 +1,66 @@
 body {
-  background: rgba(20, 31, 77, 0.2);
+ background: rgba(214, 208, 208, 0.69);
 }
-.transparent {
-  background: transparent;
+
+nav ul a,
+nav .brand-logo {
+  color: #444;
+}
+a {
+  color: #444444;
+}
+
+.material-icons{
+  display: inline-flex;
+  vertical-align: top;
+}
+  
+a:hover {
+  color: #039BE5;
+}
+
+a .active {
+  background: #ccc;
+}
+
+p {
+  line-height: 2rem;
+}
+
+.button-collapse {
+  color: #26a69a;
+}
+
+#index-banner {
+  height: 380px;
+}
+
+#header {
+  background: rgba(238, 238, 238, 0.31);
+}
+
+footer div {
+  color: #000;
+}
+
+.white-shadow {
+  text-shadow: 1px 1px 3px #FFFFFF;
+}
+
+.black-shadow {
+  text-shadow: 1px 1px 3px #000000;
+}
+
+.transparent-bg {
+  background: rgba(255, 255, 255, 0.69);
+}
+
+/* Signup page */
+
+#container {
+  background: red;
+  position: absolute;
+  top: 0px;
+  height: 500px;
+  width: 100%;  
 }
