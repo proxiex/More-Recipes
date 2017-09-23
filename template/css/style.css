@@ -2,6 +2,15 @@ body {
  background: rgba(214, 208, 208, 0.69);
 }
 
+ .body {
+  background: url('../imgs/post_1.jpg'); 
+  background-size: cover;
+}
+
+ #wrapper {
+  background: rgba(20, 31, 77, 0.7);
+}
+
 nav ul a,
 nav .brand-logo {
   color: #444;
@@ -13,6 +22,7 @@ a {
 .material-icons{
   display: inline-flex;
   vertical-align: top;
+  color: teal;
 }
   
 a:hover {
@@ -25,6 +35,11 @@ a .active {
 
 p {
   line-height: 2rem;
+}
+
+.justify {
+  text-align: justify;
+  padding: 5%;
 }
 
 .button-collapse {
@@ -52,7 +67,8 @@ footer div {
 }
 
 .transparent-bg {
-  background: rgba(255, 255, 255, 0.69);
+  background: rgba(255, 255, 255, 0.7);
+  padding: 1%;
 }
 
 /* Signup page */

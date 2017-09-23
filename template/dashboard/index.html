@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+    <!--
+  <link type="text/css" rel="stylesheet" href="css/materialize.min.css" media="screen,projection" /> -->
+    <link type="text/css" rel="stylesheet" href="../css/style.css">
+    <title>More Recipes - Welcome to Dashboard!</title>
+</head>
+
+<body class="">
+    <div id="wrapper">
+        <div class="row">
+            <div class="col s12 m4 l3" role="navigation" >
+                <div class="hide-on-small-only white" id="side-menu">
+                    <div class="row" id="profile">
+                        <div class="col m4">
+                            <img src="../imgs/profile.jpg" class="circle responsive-img" alt="">
+                        </div>
+                        <div>
+                            <h5>Samuel Longshak</h5>
+                            <i class="material-icons">account_circle</i> Profile <br>
+                            <i class="material-icons">settings</i> Settings <br>
+                            <i class="material-icons">exit_to_app</i> Logout
+                        </div>
+                    </div>
+                    <div class="divider"></div>
+                    <div class="nav-wraper">
+                        <div class="row">
+                            <div class="col m12">
+                                <a href="#"><i class="material-icons">home</i> Home </a>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col m12">
+                                <a href="#"><i class="material-icons">note_add</i> Add Recipes </a>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col m12">
+                                <a href="#"><i class="material-icons">view_list</i> View Recipes </a>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col m12">
+                                <a href="#"><i class="material-icons">favorite</i> Favorites </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Moblie Menu -->
+                 <!-- <div class="row hide-on-med-and-up" id="profile ">
+                    <div class="col m4 s12 white">
+                        <img src="../imgs/profile.jpg" class="circle responsive-img" alt="">
+                    </div>
+                    <div>
+                        <h5>Samuel Longshak</h5>
+                      <br>
+                        Settings <br>
+                       
+                    </div>
+
+                </div>            
+            -->
+
+                <ul id="dropdown1" class="dropdown-content">
+                    <li><a href="#!"><i class="material-icons">account_circle</i> Profile </a></li>
+                    <li><a href="#!"><i class="material-icons">settings</i></a></li>
+                    <li class="divider"></li>
+                    <li><a href="#!"><i class="material-icons">exit_to_app</i> Logout</a></li>
+                </ul>
+                
+                <nav class="hide-on-med-and-up">
+                    <div class="nav-wrapper white">
+                        <a href="#" data-activates="nav-mobile" class="button-collapse hide-on-med-and-up"><i class="material-icons">menu</i></a>
+                        <a href="#" class="brand-logo center"><h5></h5></a>
+                        <ul id="nav-moble" class="right hide-on-med-and-up">
+                             <li>
+                                <a href="" class="dropdown-button" data-activates="dropdown1">
+                                   <!--  <img src="../imgs/profile.jpg" class="circle responsive-img col s3 right" alt=""> -->
+                                   Profile
+                                    <i class="material-icons right">arrow_drop_down</i>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>                
+                </nav>
+
+                <ul id="nav-mobile" class="side-nav">
+                    <li><a href="#"><i class="material-icons">home</i> Home </a></li> 
+                    <li><a href="#"><i class="material-icons">note_add</i> Add Recipes </a></li> 
+                    <li><a href="#"><i class="material-icons">view_list</i> View Recipes </a></li> 
+                    <li><a href="#"><i class="material-icons">favorite</i> Favorites </a></li>                   
+                </ul>
+
+            </div>
+
+            <div class="col s12 m8 l9" id="main-content">
+                main content
+
+            </div>
+
+        </div>
+
+        <footer class="page-footer white">
+            <div class="center">
+                © 2017 Copyright <a style="color: #039BE5" href="#">More Recipes</a>
+            </div>
+            <br>
+        </footer>
+        <!-- Footer ends here-->
+    </div>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+    <script>
+        document.getElementById('side-menu').style.height = (window.innerHeight - 50) + "px";
+        document.getElementById('main-content').style.height = (window.innerHeight - 50) + "px";
+
+        $(".buttoncollapse").sideNav();
+        document.getElementById('wrapper').style.height = (window.innerHeight) + "px";
+        $(document).ready(function() {
+            $('.carousel').carousel();
+        });
+
+        (function($) {
+            $(function() {
+
+                $('.button-collapse').sideNav();
+                $('.parallax').parallax();
+
+            }); // end of document ready
+        })(jQuery); // end of jQuery name space
+    </script>
+</body>
+
+</html>
