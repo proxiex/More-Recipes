@@ -9,34 +9,64 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
   <!--
   <link type="text/css" rel="stylesheet" href="css/materialize.min.css" media="screen,projection" /> -->
-  <link type="text/css" rel="stylesheet" href="css/style.css">
+  <link type="text/css" rel="stylesheet" href="../css/style.css">
   <title>More Recipes - Recipe Catalog</title>
 </head>
 <body class="body">
   <div id="wrapper">
-    <div class="row z-depth-1" >
-        <nav class="white" role="navigation">
-          <div class="nav-wrapper">
-            <a id="logo-container" style="padding-left: 5%;" href="index.html" class="brand-logo">More Recipes</a>
-            <ul class="right hide-on-med-and-down">
-              <li><a class="active" href="index.html">Home</a></li> 
-              <li><a href="recipes.html">Recipes</a></li> 
-              <li><a href="about.html">About</a></li> 
-              <li><a href="signup.html">Signup</a></li>
-              <li><a href="signin.html">Signin</a></li>            
-            </ul>
+          <div class="row z-depth-1">
+            <nav class="white" role="navigation">
+                <div class="nav-wrapper">
+                    <a id="logo-container" style="padding-left: 5%;" href="index.html" class="brand-logo">More Recipes</a>
+                    <ul class="right hide-on-med-and-down">
+                        <li><a class="active" href="index.html">Home</a></li>
+                        <li>
+                            <a href="" class="recipes" data-activates="recipes">
+                                Recipes
+                                <i class="material-icons right">arrow_drop_down</i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="" class="dropdown-button" data-activates="dropdown1">                                
+                                Menu
+                                <i class="material-icons right">arrow_drop_down</i>
+                            </a>
+                        </li>
+                    </ul>
+                    <ul id="recipes" class="dropdown-content">
+                        <li><a href="my_recipes.html"><i class="material-icons">view_list</i>Mine</a></li>
+                        <li><a href="recipes.html"><i class="material-icons">view_list</i>View</a></li>
+                        <li><a href="add_recipes.html"><i class="material-icons">note_add</i>Add</a></li>
+                        <li><a href="favorite.html"><i class="material-icons">favorite</i> Fav's</a></li>
+                        <li><a href="trash.html"><i class="material-icons">delete</i>Trash</a></li>
+                    </ul>
 
-            <ul id="nav-mobile" class="side-nav">
-              <li><a href="index.html">Home</a></li> 
-              <li><a href="recipes.html">Recipes</a></li> 
-              <li><a href="about.html">About</a></li> 
-              <li><a href="signup.html">Signup</a></li>
-              <li><a href="signin.html">Signin</a></li>                         
-            </ul>
-            <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+                    <ul id="dropdown1" class="dropdown-content">
+                        <li><a href="profile.html"><i class="material-icons">account_circle</i>Profile</a></li>
+                        <li><a href="notifications.html"><i class="material-icons">notifications</i><span class="new badge red">4</span> Notifications </a></li>
+                        <li><a href="settings.html"><i class="material-icons">settings</i>Settings</a></li>
+                        <li class="divider"></li>
+                        <li><a href="../index.html"><i class="material-icons">exit_to_app</i> Logout</a></li>
+                    </ul>
+
+                    <ul id="nav-mobile" class="side-nav">
+                        <li><a href="index.html"><i class="material-icons">home</i>Home</a></li>
+                        <li><a href="my_recipes.html"><i class="material-icons">view_list</i>My Recipes</a></li>                        
+                        <li><a href="recipes.html"><i class="material-icons">view_list</i>View Recipes</a></li>
+                        <li><a href="add_recipes.html"><i class="material-icons">note_add</i>Add Recipes </a></li>
+                        <li><a href="index.html"><i class="material-icons">favorite</i>Favorite</a></li>
+                        <li><a href="trash.html"><i class="material-icons">delete</i>Trash</a></li>
+                        <li><a href="profile.html"><i class="material-icons">account_circle</i>Profile</a></li>
+                        <li><a href="notifications.html"><i class="material-icons">notifications</i><span class="new badge red">4</span> Notifications </a></li>
+                        <li><a href="settings.html"><i class="material-icons">settings</i>Settings</a></li>
+                        <li class="divider"></li>
+                        <li><a href="../index.html"><i class="material-icons">exit_to_app</i> Logout</a></li>
+                    </ul>
+                    <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+                </div>
+            </nav>
+            <!-- Nav endes here-->
           </div>
-        </nav> <!-- Nav endes here-->
-      </div>
       <div class="row">
          <div class="container transparent-bg">
           <div class="section">
@@ -58,7 +88,7 @@
               <div class="col s12 m4">
                 <div class="card">
                   <div class="card-image">
-                    <img src="imgs/post_1.jpg">
+                    <img src="../imgs/post_1.jpg">
                   </div>
                   <div class="card-content">
                     <p>By <a href="recipe_by.html">Samuel Longshak</a></p>
@@ -77,7 +107,7 @@
               <div class="col s12 m4">
                 <div class="card">
                   <div class="card-image">
-                    <img src="imgs/post_2.jpg">
+                    <img src="../imgs/post_2.jpg">
                   </div>
                   <div class="card-content">
                     <p>By <a href="recipe_by.html">Enloa Longshak</a></p>
@@ -95,7 +125,7 @@
               <div class="col s12 m4">
                 <div class="card">
                   <div class="card-image">
-                    <img src="imgs/post_3.jpg">
+                    <img src="../imgs/post_3.jpg">
                   </div>
                   <div class="card-content">
                     <p>By <a href="recipe_by.html">Jane Samson</a></p>
@@ -119,7 +149,7 @@
               <div class="col s12 m4">
                 <div class="card">
                   <div class="card-image">
-                    <img src="imgs/post_4.jpg">
+                    <img src="../imgs/post_4.jpg">
                   </div>
                   <div class="card-content">
                     <p>By <a href="recipe_by.html">Madung Gyang</a></p>
@@ -137,7 +167,7 @@
               <div class="col s12 m4">
                 <div class="card">
                   <div class="card-image"> 
-                    <img src="imgs/post_5.jpg">
+                    <img src="../imgs/post_5.jpg">
                   </div>
                   <div class="card-content">
                     <p>By <a href="recipe_by.html">Samuel Longshak</a></p>
@@ -155,7 +185,7 @@
                <div class="col s12 m4">
                 <div class="card">
                   <div class="card-image"> 
-                    <img src="imgs/post_6.jpg">
+                    <img src="../imgs/post_6.jpg">
                   </div>
                   <div class="card-content">
                     <p>By <a href="recipe_by.html">Tapsuk Samson</a></p>
@@ -174,7 +204,7 @@
               <div class="col s12 m4">
                 <div class="card">
                   <div class="card-image">
-                    <img src="imgs/post_4.jpg">
+                    <img src="../imgs/post_4.jpg">
                   </div>
                   <div class="card-content">
                     <p>By <a href="recipe_by.html">Madung Gyang</a></p>
@@ -192,7 +222,7 @@
               <div class="col s12 m4">
                 <div class="card">
                   <div class="card-image"> 
-                    <img src="imgs/post_5.jpg">
+                    <img src="../imgs/post_5.jpg">
                   </div>
                   <div class="card-content">
                     <p>By <a href="recipe_by.html">Samuel Longshak</a></p>
@@ -210,7 +240,7 @@
                <div class="col s12 m4">
                 <div class="card">
                   <div class="card-image"> 
-                    <img src="imgs/post_6.jpg">
+                    <img src="../imgs/post_6.jpg">
                   </div>
                   <div class="card-content">
                     <p>By <a href="recipe_by.html">Tapsuk Samson</a></p>
@@ -237,29 +267,7 @@
             <li class="waves-effect"><a href="#!"><i class="material-icons">chevron_right</i></a></li>
           </ul>
         </div>
-      </div><!--content ends here -->
-     <!--  <div class="col m3 transparent-bg">
-        <div class="row">
-          <div class="col m12"> <h3 class="header">Popular Recipes</h3></div>
-        </div>
-        <div class="row">
-          <div class="col s12 m12">
-            <div class="card horizontal">
-              <div class="card-image">
-                <img src="https://lorempixel.com/100/190/nature/6">
-              </div>
-              <div class="card-stacked">
-                <div class="card-content">
-                  <p>I am a very simple card. I am good at containing small bits of information.</p>
-                </div>
-                <div class="card-action">
-                  <a href="#">This is a link</a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div> -->
+      </div>
     </div>
         <footer class="page-footer white">
           <div class="center">
@@ -274,6 +282,8 @@
    $(document).ready(function(){
       $('.carousel').carousel();
     });
+
+  $(".recipes").dropdown();
 
    (function($){
       $(function(){

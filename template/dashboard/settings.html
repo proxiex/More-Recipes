@@ -11,9 +11,6 @@
     <!--
   <link type="text/css" rel="stylesheet" href="css/materialize.min.css" media="screen,projection" /> -->
     <link type="text/css" rel="stylesheet" href="../css/style.css">
-    <script>
-        window.location = 'my_recipes.html'; 
-    </script>
     <title>More Recipes</title>
 </head>
 
@@ -48,7 +45,7 @@
 
                     <ul id="dropdown1" class="dropdown-content">
                         <li><a href="profile.html"><i class="material-icons">account_circle</i>Profile</a></li>
-                       <li><a href="notifications.html"><i class="material-icons">notifications</i><span class="new badge red">4</span> Notifications </a></li>
+                        <li><a href="notifications.html"><i class="material-icons">notifications</i><span class="new badge red">4</span> Notifications </a></li>
                         <li><a href="settings.html"><i class="material-icons">settings</i>Settings</a></li>
                         <li class="divider"></li>
                         <li><a href="../index.html"><i class="material-icons">exit_to_app</i> Logout</a></li>
@@ -75,11 +72,65 @@
         </div>
         <!-- Header ends here -->
         <div class="row">
-            <div class="container">
+            <div class="container transparent-bg">
                 <div class="section">
                     <!--   -->
                     <div class="row">
-
+                        <h5 class="center">Mannage Your Settings</h5>
+                        <div class="card">
+                          <div class="card-content">
+                            <div class="row">
+                              <h5>Notifications</h5>
+                              <div class="switch">
+                                In app Notifications &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <label>
+                                  Off
+                                  <input type="checkbox">
+                                  <span class="lever"></span>
+                                  On
+                                </label>
+                              </div>
+                              <div class="switch">
+                              Notifications via Email &nbsp;
+                                <label>
+                                  Off
+                                  <input type="checkbox">
+                                  <span class="lever"></span>
+                                  On
+                                </label>
+                              </div>
+                            </div>
+                            <div class="row">
+                              <h5>Passwords</h5>
+                              <form class="col m4" >
+                                <div class="row">
+                                  <div class="input-field s12">
+                                    <i class="material-icons prefix">lock</i>
+                                    <input id="oldPassword" type="password" required class="validate">
+                                    <label for="oldPassword">Old Password</label>
+                                  </div>
+                                </div>
+                                <div class="row">
+                                  <div class="input-field s12">
+                                    <i class="material-icons prefix">lock</i>
+                                    <input id="password" type="password" required class="validate">
+                                    <label for="password">Password</label>
+                                  </div>
+                                </div>
+                                <div class="row">
+                                  <div class="input-field s12">
+                                    <i class="material-icons prefix">lock</i>
+                                    <input id="cpassword" type="password" required class="validate">
+                                    <label for="cpassword">Confirm Password</label>
+                                  </div>
+                                </div>
+                                <div class="row center">
+                                  <input type="submit" value="Rest Password" class="btn ">
+                                </div>
+                              </form>
+                            </div>
+                          </div>
+                        </div>    
                     </div>
                 </div>
             </div>

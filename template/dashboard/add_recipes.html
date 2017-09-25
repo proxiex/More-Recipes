@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <!--Import materialize.css-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+  <script src="https://cloud.tinymce.com/stable/tinymce.min.js"></script>
+  <script>tinymce.init({ selector:'.method' });</script>
+  <!--
+  <link type="text/css" rel="stylesheet" href="css/materialize.min.css" media="screen,projection" /> -->
+  <link type="text/css" rel="stylesheet" href="../css/style.css">
+  <title>More Recipes - Details</title>
+    <style>
+   
+  </style>
+</head>
+<body class="body">
+  <div id="wrapper">
+    <div class="row z-depth-1">
+            <nav class="white" role="navigation">
+                <div class="nav-wrapper">
+                    <a id="logo-container" style="padding-left: 5%;" href="index.html" class="brand-logo">More Recipes</a>
+                    <ul class="right hide-on-med-and-down">
+                        <li><a class="active" href="index.html">Home</a></li>
+                        <li>
+                            <a href="" class="recipes" data-activates="recipes">
+                                Recipes
+                                <i class="material-icons right">arrow_drop_down</i>
+                            </a>
+                        </li>
+                         <li>
+                            <a href="" class="dropdown-button" data-activates="dropdown1">                                
+                                Menu
+                                <i class="material-icons right">arrow_drop_down</i>
+                            </a>
+                        </li>
+                    </ul>
+                    <ul id="recipes" class="dropdown-content">
+                        <li><a href="my_recipes.html"><i class="material-icons">view_list</i>Mine</a></li>
+                        <li><a href="recipes.html"><i class="material-icons">view_list</i>View</a></li>
+                        <li><a href="add_recipes.html"><i class="material-icons">note_add</i>Add</a></li>
+                        <li><a href="favorite.html"><i class="material-icons">favorite</i> Fav's</a></li>
+                        <li><a href="trash.html"><i class="material-icons">delete</i>Trash</a></li>
+                    </ul>
+
+                    <ul id="dropdown1" class="dropdown-content">
+                        <li><a href="profile.html"><i class="material-icons">account_circle</i>Profile</a></li>
+                        <li><a href="notifications.html"><i class="material-icons">notifications</i><span class="new badge red">4</span> Notifications </a></li>
+                        <li><a href="settings.html"><i class="material-icons">settings</i>Settings</a></li>
+                        <li class="divider"></li>
+                        <li><a href="../index.html"><i class="material-icons">exit_to_app</i> Logout</a></li>
+                    </ul>
+
+                    <ul id="nav-mobile" class="side-nav">
+                        <li><a href="index.html"><i class="material-icons">home</i>Home</a></li>
+                        <li><a href="my_recipes.html"><i class="material-icons">view_list</i>My Recipes</a></li>                        
+                        <li><a href="recipes.html"><i class="material-icons">view_list</i>View Recipes</a></li>
+                        <li><a href="add_recipes.html"><i class="material-icons">note_add</i>Add Recipes </a></li>
+                        <li><a href="index.html"><i class="material-icons">favorite</i>Favorite</a></li>
+                        <li><a href="trash.html"><i class="material-icons">delete</i>Trash</a></li>
+                        <li><a href="profile.html"><i class="material-icons">account_circle</i>Profile</a></li>
+                        <li><a href="notifications.html"><i class="material-icons">notifications</i><span class="new badge red">4</span> Notifications </a></li>
+                        <li><a href="settings.html"><i class="material-icons">settings</i>Settings</a></li>
+                        <li class="divider"></li>
+                        <li><a href="../index.html"><i class="material-icons">exit_to_app</i> Logout</a></li>
+                    </ul>
+                    <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+                </div>
+            </nav>
+            <!-- Nav endes here-->
+          </div>
+      <div class="row">
+        <div class="container">
+          <div class="col s12 m12 l12 transparent-bg"> 
+            <div class="col m2"></div>
+            <div class="col s12 m8 white">     
+              <form action="">
+                <h5 class="center">Add a Recipe</h5>
+                <div class="file-field input-field">
+                  <div class="btn">
+                    <span>Recipe Image</span>
+                    <input type="file">
+                  </div>
+                  <div class="file-path-wrapper">
+                    <input class="file-path validate" type="text">
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="input-field col s12">
+                    <input id="recipeName" type="text" class="validate">
+                    <label for="recipName">Name of Recipe</label>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="input-field col s12">
+                    <textarea id="description" class="materialize-textarea" data-length="250"></textarea>
+                    <label for="description">Description</label>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="input-field col s12">
+                    <select>
+                      <option value="" disabled selected>Choose Meal type</option>
+                      <option value="1">Breakfast</option>
+                      <option value="2">Elevenses</option>
+                      <option value="3">Brunch</option>
+                      <option value="4">Lunch</option>
+                      <option value="5">Plate lunch</option>
+                      <option value="6">Dinner</option>
+                    </select>
+                    <label>Meal Type</label>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="input-field col s12">
+                    <input id="mealType" type="text" class="validate">
+                    <label for="mealType">Meal Type</label>
+                  </div>
+                </div>
+                <div class="row">
+                  <h5 class="center">Ingredients</h5>
+                  <ul class="collection">
+                    <li class="collection-item">50g of brown rice</li>
+                    <li class="collection-item">2 cups of sugar</li>
+                    <li class="collection-item">3 eggs</li>
+                  </ul>
+                </div>
+                <div class="row">
+                  <div class="input-field col s12">
+                    <input id="ingredients" type="text" class="validate">
+                    <label for="ingredients">Ingredients</label>
+                  </div>
+                </div>
+                <div class="row">
+                   <div class="col s2 m6"><a href="#" class="btn">next ingredient</a></div>
+                </div>
+
+                <div class="row">
+                  <div class="input-field col s12">
+                    <h5 class="center">Method</h5>
+                    <textarea class="method"></textarea>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col m3"></div>
+                  <div class="input-field col m6 center">
+                    <input type="submit" value="Add Recipe" class="btn">
+                  </div>
+                  <div class="col m3"></div>
+                </div>
+              </form>
+            </div>     
+            <div class="col m2"></div> 
+          </div>
+        </div>
+      </div>
+        <footer class="page-footer white">
+          <div class="center">
+            © 2017 Copyright <a style="color: #039BE5" href="#">More Recipes</a>
+          </div>
+          <br>
+        </footer><!-- Footer ends here-->
+    </div>
+  <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+  <script src="../js/init.js"></script>
+</body>
+</html>
