@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <!--Import materialize.css-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+  <!--
+  <link type="text/css" rel="stylesheet" href="css/materialize.min.css" media="screen,projection" /> -->
+  <link type="text/css" rel="stylesheet" href="../css/style.css">
+  <title>More Recipes - Recipe Catalog</title>
+</head>
+<body class="body">
+  <div id="wrapper">
+          <div class="row z-depth-1">
+            <nav class="white" role="navigation">
+                <div class="nav-wrapper">
+                   <a id="logo-container" style="padding-left: 5%;" href="index.html" class="brand-logo">More Recipes</a>
+                    <ul class="right hide-on-med-and-down">
+                        <li><a class="active" href="index.html">Home</a></li>
+                        <li>
+                            <a href="" class="recipes" data-activates="recipes">
+                                Recipes
+                                <i class="material-icons right">arrow_drop_down</i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="" class="dropdown-button" data-activates="dropdown1">                                
+                                Menu
+                                <i class="material-icons right">arrow_drop_down</i>
+                            </a>
+                        </li>
+                    </ul>
+                    <ul id="recipes" class="dropdown-content">
+                        <li><a href="my_recipes.html"><i class="material-icons">view_list</i>Mine</a></li>
+                        <li><a href="recipes.html"><i class="material-icons">view_list</i>View</a></li>
+                        <li><a href="add_recipes.html"><i class="material-icons">note_add</i>Add</a></li>
+                        <li><a href="favorite.html"><i class="material-icons">favorite</i> Fav's</a></li>
+                        <li><a href="trash.html"><i class="material-icons">delete</i>Trash</a></li>
+                    </ul>
+
+                    <ul id="dropdown1" class="dropdown-content">
+                        <li><a href="profile.html"><i class="material-icons">account_circle</i>Profile</a></li>
+                       <li><a href="notifications.html"><i class="material-icons">notifications</i><span class="new badge red">4</span> Notifications </a></li>
+                        <li><a href="settings.html"><i class="material-icons">settings</i>Settings</a></li>
+                        <li class="divider"></li>
+                        <li><a href="../index.html"><i class="material-icons">exit_to_app</i> Logout</a></li>
+                    </ul>
+
+                    <ul id="nav-mobile" class="side-nav">
+                        <li><a href="index.html"><i class="material-icons">home</i>Home</a></li>
+                        <li><a href="my_recipes.html"><i class="material-icons">view_list</i>My Recipes</a></li>                        
+                        <li><a href="recipes.html"><i class="material-icons">view_list</i>View Recipes</a></li>
+                        <li><a href="add_recipes.html"><i class="material-icons">note_add</i>Add Recipes </a></li>
+                        <li><a href="index.html"><i class="material-icons">favorite</i>Favorite</a></li>
+                        <li><a href="trash.html"><i class="material-icons">delete</i>Trash</a></li>
+                        <li><a href="profile.html"><i class="material-icons">account_circle</i>Profile</a></li>
+                        <li><a href="notifications.html"><i class="material-icons">notifications</i><span class="new badge red">4</span> Notifications </a></li>
+                        <li><a href="settings.html"><i class="material-icons">settings</i>Settings</a></li>
+                        <li class="divider"></li>
+                        <li><a href="../index.html"><i class="material-icons">exit_to_app</i> Logout</a></li>
+                    </ul>
+                    <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+                </div>
+            </nav>
+            <!-- Nav endes here-->
+          </div>
+      <div class="row">
+         <div class="container transparent-bg">
+          <div class="section">
+            <!--   Icon Section   -->
+            <div class="row">
+              <div class="col m4"></div>
+              <div class="col m4"><h4 class="center">Trash </h4></div>
+              <div class="col m4">
+                  <form>
+                   <div class="input-field s12">
+                    <input id="search" type="search" required class="validate">
+                    <label for="search">Search for Recipes</label>
+                  </div>
+                  </form>
+              </div>
+            </div>
+            <div class="row">
+
+              <div class="col s12 m4">
+                <div class="card">
+                  <div class="card-image">
+                    <img src="../imgs/post_1.jpg">
+                  </div>
+                  <div class="card-content">
+                    <p>By <a href="recipe_by.html">Samuel Longshak</a></p>
+                    <p><a href="meal_type.html">Snack</a></p>
+                    <a href="recipe_details.html"><span class="card-title">Pizza Mozzarella with Black Olives</span></a>
+                    <div class="row">
+                      <div class="col m4"><span class="left"><i class="material-icons">remove_red_eye</i> 3</span></div>
+                      <div class="col m4"> &nbsp;&nbsp;&nbsp; <span class=""><i class="material-icons">comment</i> 5</span></div>
+                      <div class="col m4"><span class="right"><i class="material-icons">favorite</i> 5</span></div>
+                    </div>
+                    <a onclick="Materialize.toast('Deleting...', 2500)" class="btn red center">Delete</a>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col s12 m4">
+                <div class="card">
+                  <div class="card-image">
+                    <img src="../imgs/post_2.jpg">
+                  </div>
+                  <div class="card-content">
+                    <p>By <a href="recipe_by.html">Enloa Longshak</a></p>
+                    <p><a href="meal_type.html">Dessert</a></p>
+                    <a href="recipe_details.html"><span class="card-title">Healthier Christmas Recipe</span></a>
+                    <div class="row">
+                      <div class="col m4"><span class="left"><i class="material-icons">remove_red_eye</i> 3</span></div>
+                      <div class="col m4"> &nbsp;&nbsp;&nbsp; <span class=""><i class="material-icons">comment</i> 5</span></div>
+                      <div class="col m4"><span class="right"><i class="material-icons">favorite</i> 5</span></div>
+                    </div>
+                    <a onclick="Materialize.toast('Deleting...', 2500)" class="btn red center">Delete</a>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col s12 m4">
+                <div class="card">
+                  <div class="card-image">
+                    <img src="../imgs/post_3.jpg">
+                  </div>
+                  <div class="card-content">
+                    <p>By <a href="recipe_by.html">Jane Samson</a></p>
+                    <p><a href="meal_type.html">Lunch</a></p>
+                    <a href="recipe_details.html"><span class="card-title">Spaghetti and Shrimps Tappings</span></a>
+                    <div class="row">
+                      <div class="col m4"><span class="left"><i class="material-icons">remove_red_eye</i> 3</span></div>
+                      <div class="col m4"> &nbsp;&nbsp;&nbsp; <span class=""><i class="material-icons">comment</i> 5</span></div>
+                      <div class="col m4"><span class="right"><i class="material-icons">favorite</i> 5</span></div>
+                    </div>
+                    <a onclick="Materialize.toast('Deleting...', 2500)" class="btn red center">Delete</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </div> 
+        <div class="row">         
+          <ul class="pagination center">
+            <li class="disabled"><a href="#!"><i class="material-icons">chevron_left</i></a></li>
+            <li class="active teal"><a href="#!">1</a></li>
+            <li class="waves-effect"><a href="#!">2</a></li>
+            <li class="waves-effect"><a href="#!">3</a></li>
+            <li class="waves-effect"><a href="#!">4</a></li>
+            <li class="waves-effect"><a href="#!">5</a></li>
+            <li class="waves-effect"><a href="#!"><i class="material-icons">chevron_right</i></a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+        <footer class="page-footer white">
+          <div class="center">
+            © 201 Copyright <a style="color: #039BE5" href="#">More Recipes</a>
+          </div>
+          <br>
+        </footer><!-- Footer ends here-->
+    </div>
+  <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+ <script src="../js/init.js"></script>
+</body>
+</html>

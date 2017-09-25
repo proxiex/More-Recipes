@@ -5,11 +5,124 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+    <!--
+  <link type="text/css" rel="stylesheet" href="css/materialize.min.css" media="screen,projection" /> -->
+    <link type="text/css" rel="stylesheet" href="css/style.css">
+    <title>More Recipes</title>
 </head>
 
 <body>
+    <div id="wrap">
+        <div class="row z-depth-1">
+            <nav class="white" role="navigation">
+                <div class="nav-wrapper">
+                    <a id="logo-container" style="padding-left: 5%;" href="index.html" class="brand-logo">More Recipes</a>
+                    <ul class="right hide-on-med-and-down">
+                        <li><a class="active" href="index.html">Home</a></li>
+                        <li><a href="recipes.html">Recipes</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="signup.html">Signup</a></li>
+                        <li><a href="signin.html">Signin</a></li>
+                    </ul>
 
+                    <ul id="nav-mobile" class="side-nav">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="recipes.html">Recipes</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="signup.html">Signup</a></li>
+                        <li><a href="signin.html">Signin</a></li>
+                    </ul>
+                    <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+                </div>
+            </nav>
+            <!-- Nav endes here-->
+            <div id="index-banner" class="parallax-container">
+                <div class="section no-pad-bot">
+                    <div class="container" id="header">
+                        <br><br>
+                        <h1 class="header center teal-text text-lighten-2 black-shadow">Create Your Recipes</h1>
+                        <div class="row center">
+                            <h5 class="header col s12 light white-shadow">Share​ Your Aawesome​ ​and​ Exciting​ ​​ Recipe​ ​<br>Ideas<br> which You have​ ​Invented​ ​or​ ​Learnt</h5>
+                        </div>
+                        <div class="row center">
+                            <a href="signup.html" id="download-button" class="btn-large waves-effect waves-light teal lighten-1 pulse">Signup Its Free </a>
+                        </div>
+                        <br><br>
+
+                    </div>
+                </div>
+                <div class="parallax"><img src="imgs/bg.jpg" alt="Unsplashed background img 1"></div>
+            </div>
+        </div>
+        <!-- Header ends here -->
+        <div class="row">
+            <div class="container">
+                <div class="row">
+                    <div class="col s12 m4">
+                    <div class="icon-block">
+                        <h2 class="center brown-text"><i class="material-icons">local_bar</i></h2>
+                        <h5 class="center">Taste</h5>
+
+                        <p class="light">
+                            Its all about taste, eating is not just man's way or nessessity to survival but
+                            a means to also enjoy himself. When you eat, you have to enjoy the taste of what you eat!
+                        <p>
+                    </div>
+                    </div>
+
+                    <div class="col s12 m4">
+                    <div class="icon-block">
+                        <h2 class="center brown-text"><i class="material-icons">share</i></h2>
+                        <h5 class="center">Share</h5>
+
+                        <p class="light">For all you know you may have been doing it all wrong, for all you know, what you have to share is just what
+                            someone else just needs! It's All about sharing
+                        </p>
+                    </div>
+                    </div>
+
+                    <div class="col s12 m4">
+                    <div class="icon-block">
+                        <h2 class="center brown-text"><i class="material-icons">create</i></h2>
+                        <h5 class="center">Create</h5>
+
+                        <p class="light">
+                            Who said it had to be what existe? If you are a Creator, please alow us to endulge you! What have you Created, let us know about it.
+                        </p>
+                    </div>
+                    </div>
+                </div>
+            </div>
+            <!--content ends here -->
+            <footer class="page-footer white">
+                <div class="center">
+                    © 2017 Copyright <a style="color: #039BE5" href="#">More Recipes</a>
+                </div>
+                <br>
+            </footer>
+            <!-- Footer ends here-->
+        </div>
+
+
+        <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+        <script>
+            $(document).ready(function() {
+                $('.carousel').carousel();
+            });
+
+            (function($) {
+                $(function() {
+
+                    $('.button-collapse').sideNav();
+                    $('.parallax').parallax();
+
+                }); // end of document ready
+            })(jQuery); // end of jQuery name space
+        </script>
 </body>
 
 </html>
