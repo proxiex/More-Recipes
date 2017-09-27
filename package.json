@@ -1,0 +1,33 @@
+{
+  "name": "morerecipes",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon --watch server --exec babel-node  -- server/bin/www.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/proxiex/More-Recipes.git"
+  },
+  "author": "Samuel Longshak",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/proxiex/More-Recipes/issues"
+  },
+  "homepage": "https://github.com/proxiex/More-Recipes#readme",
+  "dependencies": {
+    "bcrypt": "^1.0.3",
+    "express": "^4.15.5"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-preset-env": "^1.6.0",
+    "body-parser": "^1.18.2",
+    "morgan": "^1.8.2",
+    "nodemon": "^1.12.1"
+  }
+}
