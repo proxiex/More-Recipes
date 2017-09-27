@@ -27,6 +27,7 @@
     "babel-loader": "^7.1.2",
     "babel-preset-env": "^1.6.0",
     "body-parser": "^1.18.2",
+    "eslint": "^4.7.2",
     "morgan": "^1.8.2",
     "nodemon": "^1.12.1"
   }
