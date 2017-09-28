@@ -60,37 +60,33 @@ class Recipe {
   }
   
   static update(req, res) {
-    const updateFields = {};
     const  id = req.params.Id;
     const { recipeName, mealType, dishType, method, ingredients } = req.body;
-    const found = false;
-    console.log(id);
+    
+    // console.log(Recipes[1].id);
+
     for (let i = 0; i < Recipes.length; i++) {
       if (Recipes[i].id === parseInt(id, 10)){
-        if (recipeName) {
-          updateFields.recipeName = recipeName;
-        }else if (mealType) {
-          updateFields.mealType = mealType;
-        } else if (dishType) {
-          updateFields.method = method;
-        } else if (ingredients) {
-          updateFields.ingredients = ingredients;
-        } else {
-          return res.status(200).send({
-            Message: 'Nothing to update'
-          });
-        }
-      } else {
-        return res.status(404).send({
-          message: 'Recipe Not found!'
-        });
-      }
+        Recipes[i].recipeName = recipeName || Recipes[i].recipeName,
+        Recipes[i].mealType = mealType || Recipes[i].mealType,
+        Recipes[i].dishType = dishType || Recipes[i].dishType,
+        Recipes[i].method = method || Recipes[i].method,
+        Recipes[i].ingredients = ingredients ||  Recipes[i].ingredients ;     
+        
+        return res.status(200).send({Recipes});   
+      } 
     }
 
+    return res.status(404).send({
+      message: 'Recipe Not found!'
+    });
   }
 
+  static delete(req, res) {
+    
+  }
   static test(req, res) {
-    return res.status(200).send(Recipes.ingredients);
+    return res.status(200).send(Recipes.ingredients); 
   }
 
   

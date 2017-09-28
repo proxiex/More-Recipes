@@ -1,4 +1,4 @@
-let recipes = []
+let recipes = [];
 
 recipes = [
   {
@@ -7,7 +7,12 @@ recipes = [
     recipeName: 'Rice and Beans',
     mealType: 'Lunch',
     dishType: 'Nigerian Delicay',
-    method: 'this is just a dummy so i can write what ever i want in here ok? thanks you@'
+    method: 'this is just a dummy so i can write what ever i want in here ok? thanks you@',
+    ingreidents: [
+      'rice',
+      'beans',
+      'palm oil'
+    ]
   },
   {
     id: 2,
@@ -15,7 +20,12 @@ recipes = [
     recipeName: 'Pounded Yam',
     mealType: 'Dinner',
     dishType: 'Nigerian Delicay',
-    method: 'this is just a dummy so i can write what ever i want in here ok? thanks you@'
+    method: 'this is just a dummy so i can write what ever i want in here ok? thanks you@',
+    ingreidents: [
+      'rice',
+      'beans',
+      'palm oil'
+    ]
   },
   {
     id: 3,
@@ -23,13 +33,19 @@ recipes = [
     recipeName: 'Tea and Bread',
     mealType: 'Breakfast',
     dishType: 'Nigerian Delicay',
-    method: 'this is just a dummy so i can write what ever i want in here ok? thanks you@'
+    method: 'this is just a dummy so i can write what ever i want in here ok? thanks you@',
+    ingreidents: [
+      'rice',
+      'beans',
+      'palm oil'
+    ]   
   }
 
-]
+];
 
 /* let l = recipes.length;
 const id = 1 + l;
 console.log(id)  */
+// console.log(recipes);
 
-export default recipes
+export default recipes;
