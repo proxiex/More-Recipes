@@ -1,7 +1,8 @@
 import db from '../models/db';
 
 class review {
-  static add(req, res) {
+ 
+  add(req, res) {
     const { review, userId } = req.body;
     if(!review) {
       res.status(400).send({
