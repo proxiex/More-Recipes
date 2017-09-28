@@ -1,0 +1,335 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for src/controller/recipes.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="..\..\prettify.css" />
+    <link rel="stylesheet" href="..\..\base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(..\..\sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="..\..\index.html">All files</a> / <a href="index.html">src/controller</a> recipes.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">2.86% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>1/35</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>0/24</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">100% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>0/0</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">2.86% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>1/35</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91</td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import db from '../models/db';
+&nbsp;
+class Recipe {
+  add(req, res) <span class="cstat-no" title="statement not covered" >{</span>
+    const { recipeName, mealType, dishType, method, ingredients } = <span class="cstat-no" title="statement not covered" >req.body;</span>
+<span class="cstat-no" title="statement not covered" >    if (!recipeName) {</span>
+<span class="cstat-no" title="statement not covered" >      res.status(400).send({</span>
+        message: 'Please Enter Recipe Name'
+      });
+    } else <span class="cstat-no" title="statement not covered" >if (!mealType) {</span>
+<span class="cstat-no" title="statement not covered" >      res.status(400).send({</span>
+        message: 'Please Enter Meal Type'
+      });
+    } else <span class="cstat-no" title="statement not covered" >if (!dishType) {</span>
+<span class="cstat-no" title="statement not covered" >      res.status(400).send({</span>
+        message: 'Please Enter Dish Type'
+      });
+    } else <span class="cstat-no" title="statement not covered" >if (!method) {</span>
+<span class="cstat-no" title="statement not covered" >      res.status(400).send({</span>
+        message: 'Please Enter Method'
+      });
+    } 
+    else <span class="cstat-no" title="statement not covered" >if (!ingredients) {</span>
+<span class="cstat-no" title="statement not covered" >      res.status(400).send({</span>
+        message: 'Please Enter Ingredients'
+      });
+    }else {
+&nbsp;
+      let l = <span class="cstat-no" title="statement not covered" >db.recipes.length;</span>
+      const id = <span class="cstat-no" title="statement not covered" >1 + l;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      db.recipes.push({</span>
+        id: id,
+        userId: 2,
+        recipeName: recipeName,
+        mealType: mealType,
+        dishType: dishType,
+        method: method,
+        ingredients: [ ingredients ],
+        upVotes: 0,
+        downVotes: 0,
+      });
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      return res.status(200).send(db.recipes[id -1]);</span>
+    }
+  }
+&nbsp;
+  get(req, res){
+<span class="cstat-no" title="statement not covered" >    return res.status(200).send(db.recipes);</span>
+  }
+  
+  update(req, res) <span class="cstat-no" title="statement not covered" >{</span>
+    const  id = <span class="cstat-no" title="statement not covered" >req.params.Id;</span>
+    const { recipeName, mealType, dishType, method, ingreidents } = <span class="cstat-no" title="statement not covered" >req.body;</span>
+    
+    // console.log(db.recipes[1].id);
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    for (let i = 0; i &lt; db.recipes.length; i++) {</span>
+<span class="cstat-no" title="statement not covered" >      if (db.recipes[i].id === parseInt(id, 10)){</span>
+<span class="cstat-no" title="statement not covered" >        db.recipes[i].recipeName = recipeName || db.recipes[i].recipeName;</span>
+<span class="cstat-no" title="statement not covered" >        db.recipes[i].mealType = mealType || db.recipes[i].mealType;</span>
+<span class="cstat-no" title="statement not covered" >        db.recipes[i].dishType = dishType || db.recipes[i].dishType;</span>
+<span class="cstat-no" title="statement not covered" >        db.recipes[i].method = method || db.recipes[i].method;</span>
+<span class="cstat-no" title="statement not covered" >        db.recipes[i].ingreidents = ingreidents ||  db.recipes[i].ingreidents; </span>
+        
+<span class="cstat-no" title="statement not covered" >        return res.status(200).send(db.recipes[i]);   </span>
+      } 
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    return res.status(404).send({</span>
+      message: 'Recipe Not found!'
+    });
+  }
+&nbsp;
+  delete(req, res) {
+<span class="cstat-no" title="statement not covered" >    for (let i = 0; i &lt; db.recipes.length; i++) {</span>
+<span class="cstat-no" title="statement not covered" >      if (db.recipes[i].id === parseInt(req.params.Id, 10)){</span>
+<span class="cstat-no" title="statement not covered" >        db.recipes.splice(i, 1);</span>
+<span class="cstat-no" title="statement not covered" >        return res.status(204).send({</span>
+          message: 'Recipe has been Deleted'
+        });
+      }
+    }
+<span class="cstat-no" title="statement not covered" >    return res.status(404).send({</span>
+      message: 'Recipe Not found!'
+    });    
+  }
+  
+}
+&nbsp;
+export default Recipe;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Thu Sep 28 2017 17:02:06 GMT+0100 (W. Central Africa Standard Time)
+</div>
+</div>
+<script src="..\..\prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="..\..\sorter.js"></script>
+</body>
+</html>
