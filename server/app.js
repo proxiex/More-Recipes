@@ -14,16 +14,16 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use('/api/recipes', recipes);
 
 app.get('/', (req, res) => {
-    res.status(200).send({
-        Message: 'Welcome to More Recipes!'
-    });
-})
+  res.status(200).send({
+    Message: 'Welcome to More Recipes!'
+  });
+});
 
 app.use((req, res, next) => {
-    const err = res.status(404).send({
-        ERrOR: '404: Sorry Page Not Found!'
-    })
-    next(err)
+  const err = res.status(404).send({
+    ERrOR: '404: Sorry Page Not Found!'
+  });
+  next(err);
 });
 
 export default app;
