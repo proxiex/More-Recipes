@@ -58,6 +58,10 @@ class Recipe {
     
     //return res.status(200).send(recipes.ingredients)
   }
+
+  static get(req, res){
+    return res.status(200).send(Recipes);
+  }
   
   static update(req, res) {
     const  id = req.params.Id;
@@ -83,8 +87,19 @@ class Recipe {
   }
 
   static delete(req, res) {
-    
+    for (let i = 0; i < Recipes.length; i++) {
+      if (Recipes[i].id === parseInt(req.params.Id, 10)){
+        Recipes.splice(i, 1);
+        return res.status(204).send({
+          message: 'Recipe has been Deleted'
+        });
+      }
+    }
+    return res.status(404).send({
+      message: 'Recipe Not found!'
+    });    
   }
+
   static test(req, res) {
     return res.status(200).send(Recipes.ingredients); 
   }

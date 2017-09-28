@@ -7,5 +7,7 @@ let router = express.Router();
 
 router.post('/', recipeController.add);
 router.put('/:Id', recipeController.update);
+router.delete('/:Id', recipeController.delete);
+router.get('/', recipeController.get);
 
 export default router;
