@@ -5,7 +5,7 @@
   "main": "app.js",
   "scripts": {
     "test": "nyc --reporter=html --reporter=text mocha ./server/tests/first --compilers js:babel-register",
-    "start": "nodemon ./server/dist/app.js",
+    "start": "nodemon ./server/dist/bin/www.js",
     "build": "babel ./server/src -d ./server/dist",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
     "coveralls": "nyc --reporter=lcov --reporter=text-lcov npm test",
