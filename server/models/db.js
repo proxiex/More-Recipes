@@ -1,6 +1,7 @@
-let recipes = [];
+let db = [];
 
-recipes = [
+
+db.recipes = [
   {
     id: 1,
     userId: 1,
@@ -43,9 +44,26 @@ recipes = [
 
 ];
 
+db.review = [
+  {
+    id: 1,
+    userId: 2,
+    review: 'i like it i like it i like it i like it i likie it'
+  },
+  {
+    id: 2,
+    userId: 1,
+    review: 'i like it i like it i like it i like it i likie it'
+  },
+  {
+    id: 3,
+    userId: 4,
+    review: 'i like it i like it i like it i like it i likie it'
+  }
+];
 /* let l = recipes.length;
 const id = 1 + l;
 console.log(id)  */
-// console.log(recipes);
+console.log(db.recipes[2]);
 
-export default recipes;
+export default db;
