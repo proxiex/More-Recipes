@@ -1,21 +1,7 @@
 import db from '../models/db';
 
 class Recipe {
-  
-  static ingredient(req, res){
-    const { ingredient, recipId } = req.body;
-    let l = db.recipes.ingredients.lenght;
-    const id = 1 + l;
-
-    db.recipes.ingredients.push({
-      id: id,
-      recipId: recipId,
-      ingredient: ingredient
-    });     
-    return res.ststus(200).send(db.recipes.ingredients);
-  }
-
-  static add(req, res) {
+  add(req, res) {
     const { recipeName, mealType, dishType, method, ingredients } = req.body;
     if (!recipeName) {
       res.status(400).send({
@@ -50,34 +36,34 @@ class Recipe {
         mealType: mealType,
         dishType: dishType,
         method: method,
-        ingredients: [ ingredients ]
+        ingredients: [ ingredients ],
+        upVotes: 0,
+        downVotes: 0,
       });
 
-      res.status(200).send(db.recipes[id -1]);
+      return res.status(200).send(db.recipes[id -1]);
     }
-    
-    //return res.status(200).send(recipes.ingredients)
   }
 
-  static get(req, res){
+  get(req, res){
     return res.status(200).send(db.recipes);
   }
   
-  static update(req, res) {
+  update(req, res) {
     const  id = req.params.Id;
-    const { recipeName, mealType, dishType, method, ingredients } = req.body;
+    const { recipeName, mealType, dishType, method, ingreidents } = req.body;
     
     // console.log(db.recipes[1].id);
 
     for (let i = 0; i < db.recipes.length; i++) {
       if (db.recipes[i].id === parseInt(id, 10)){
-        db.recipes[i].recipeName = recipeName || db.recipes[i].recipeName,
-        db.recipes[i].mealType = mealType || db.recipes[i].mealType,
-        db.recipes[i].dishType = dishType || db.recipes[i].dishType,
-        db.recipes[i].method = method || db.recipes[i].method,
-        db.recipes[i].ingredients = ingredients ||  db.recipes[i].ingredients ;     
+        db.recipes[i].recipeName = recipeName || db.recipes[i].recipeName;
+        db.recipes[i].mealType = mealType || db.recipes[i].mealType;
+        db.recipes[i].dishType = dishType || db.recipes[i].dishType;
+        db.recipes[i].method = method || db.recipes[i].method;
+        db.recipes[i].ingreidents = ingreidents ||  db.recipes[i].ingreidents; 
         
-        return res.status(200).send(db.recipes);   
+        return res.status(200).send(db.recipes[i]);   
       } 
     }
 
@@ -86,7 +72,7 @@ class Recipe {
     });
   }
 
-  static delete(req, res) {
+  delete(req, res) {
     for (let i = 0; i < db.recipes.length; i++) {
       if (db.recipes[i].id === parseInt(req.params.Id, 10)){
         db.recipes.splice(i, 1);
@@ -99,12 +85,6 @@ class Recipe {
       message: 'Recipe Not found!'
     });    
   }
-
-  static test(req, res) {
-    return res.status(200).send(db.recipes.ingredients); 
-  }
-
-  
   
 }
 
