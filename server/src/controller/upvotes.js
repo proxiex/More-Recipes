@@ -17,12 +17,12 @@ class UpVotes {
     }
   }
 
-  getUpvotesRecip(req, res) {
+  getUpvotesRecipe(req, res) {
     if (req.query.sort === 'upvotes' && req.query.order === 'des')  {
       const compareFunc = ((a, b ) => b.upVotes - a.upVotes);
-      const up = [db.recipes.sort(compareFunc)];
-      //console.log(up);
-      return res.status(200).send(up);
+      const up = db.recipes.sort(compareFunc);
+      console.log(db.recipes.sort('Ok: '+compareFunc));
+      return res.status(200).send('ook');
     }
   }
 

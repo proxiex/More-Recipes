@@ -53,16 +53,19 @@ db.recipes = [
 db.review = [
   {
     id: 1,
+    revipeId: 1,
     userId: 2,
     review: 'i like it i like it i like it i like it i likie it'
   },
   {
     id: 2,
+    revipeId: 3,
     userId: 1,
     review: 'i like it i like it i like it i like it i likie it'
   },
   {
     id: 3,
+    revipeId: 4,
     userId: 4,
     review: 'i like it i like it i like it i like it i likie it'
   }

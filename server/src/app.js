@@ -4,6 +4,7 @@ import bodyParser from 'body-parser';
 // import users from './routes/users';
 
 import recipes from './routes/recipes';
+import upvote from './routes/upvotes';
 
 const app = express();
 
@@ -12,6 +13,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 //app.use('/api/users', users);
 app.use('/api/recipes', recipes);
+//app.use('/api', upvote);
 
 app.get('/', (req, res) => {
   res.status(200).send({
