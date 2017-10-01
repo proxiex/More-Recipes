@@ -3,50 +3,56 @@ import db from '../models/db';
 class Recipe {
   add(req, res) {
     const { recipeName, mealType, dishType, method, ingredients } = req.body;
+    console.log(req.body);
     if (!recipeName) {
-      res.status(400).send({
+      return res.status(400).send({
         message: 'Please Enter Recipe Name'
       });
-    } else if (!mealType) {
-      res.status(400).send({
+    }  else if (!mealType) {
+      return res.status(400).send({
         message: 'Please Enter Meal Type'
       });
     } else if (!dishType) {
-      res.status(400).send({
+      return res.status(400).send({
         message: 'Please Enter Dish Type'
       });
     } else if (!method) {
-      res.status(400).send({
+      return res.status(400).send({
         message: 'Please Enter Method'
       });
     } 
     else if (!ingredients) {
-      res.status(400).send({
+      return res.status(400).send({
         message: 'Please Enter Ingredients'
       });
-    }else {
+    } 
 
-      let l = db.recipes.length;
-      const id = 1 + l;
+    let l = db.recipes.length;
+    const id = 1 + l;
 
-      db.recipes.push({
-        id: id,
-        userId: 2,
-        recipeName: recipeName,
-        mealType: mealType,
-        dishType: dishType,
-        method: method,
-        ingredients: [ ingredients ],
-        upVotes: 0,
-        downVotes: 0,
-      });
+    db.recipes.push({
+      id: id,
+      userId: 2,
+      recipeName: recipeName,
+      mealType: mealType,
+      dishType: dishType,
+      method: method,
+      ingredients: [ ingredients ],
+      upVotes: 0,
+      downVotes: 0
+    });
 
-      return res.status(200).send(db.recipes[id -1]);
-    }
+    return res.status(201).send(db.recipes[id -1]);
   }
 
   get(req, res){
-    return res.status(200).send(db.recipes);
+    if (req.query.sort && req.query.order)  {
+
+      const up = db.recipes.sort(function(a, b){return b.upVotes - a.upVotes; });
+      return res.status(200).send(up);
+    } else {
+      return res.status(200).send(db.recipes);
+    }
   }
   
   update(req, res) {
@@ -61,7 +67,7 @@ class Recipe {
         db.recipes[i].mealType = mealType || db.recipes[i].mealType;
         db.recipes[i].dishType = dishType || db.recipes[i].dishType;
         db.recipes[i].method = method || db.recipes[i].method;
-        db.recipes[i].ingreidents = ingreidents ||  db.recipes[i].ingreidents; 
+        db.recipes[i].ingreidents = [ ingreidents ] ||  db.recipes[i].ingreidents; 
         
         return res.status(200).send(db.recipes[i]);   
       } 
