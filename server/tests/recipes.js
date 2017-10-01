@@ -55,7 +55,7 @@ describe('Recipes', () => {
       });
   });
     
-  const review = {
+  /* const review = {
     userId: 1,
     review: 'thisis ok i like it.'
   };
@@ -70,5 +70,5 @@ describe('Recipes', () => {
         console.log(res);
         done();
       });
-  });
+  }); */
 });
