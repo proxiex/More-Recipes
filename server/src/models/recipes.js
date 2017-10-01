@@ -1,38 +1,67 @@
-import request from 'supertest';
-import chai from 'chai';
-import app from '../src/app';
-
-const expect = chai.expect;
-
-describe('More-Recipes', () => {
-  it('Loads the Home page', (done) => {
-    request(app)
-      .get('/')
-      .expect(200)
-      .end((err, res) => {
-        if (err) {
-          return done(err);
-        }
-        done();
-      });
+'use strict';
+module.exports = (sequelize, DataTypes) =>  {
+  const recipes = sequelize.define('recipes', {
+    userId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: 'users',
+        key: 'id'
+      }
+    },
+    recipeName: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    meanType: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    description: {
+      type: DataTypes.TEXT,
+      allowNull: false
+    },
+    method: {
+      type: DataTypes.TEXT,
+      allowNull: false
+    },
+    ingredients: {
+      type: DataTypes.TEXT,
+      allowNull: false
+    },
+    upVotes: {
+      type: DataTypes.INTEGER,
+      allowNull: false
+    },
+    downVotes: {
+      type: DataTypes.INTEGER,
+      allowNull: false
+    },
   });
-    
-  it('Creates Recipe', (done) => {
-    request(app)
-      .post('/api/recipes')
-      .set('Content-Type', 'application/json')
-      .send({
-        recipeName: 'Rice',
-        mealType: 'Lunch',
-        dishType: 'Indian',
-        ingredients: ['rice', 'breans', 'cow']
-      })
-      .expect(201)
-      .end((err, res) => {
-        if (err) {
-          return done(err);
-        }
-        done();
-      });
-  });
-});
+
+  recipes.associate = (models) => {
+    recipes.hasMany(models.reviews, {
+      foreignKey: 'recipeId'
+    });
+  };
+
+  recipes.associate = (models) => {
+    recipes.hasMany(models.favorites, {
+      foreignKey: 'recipeId'
+    });
+  };
+
+  recipes.associate = (models) => {
+    recipes.hasMany(models.views, {
+      foreignKey: 'recipeId'
+    });
+  };
+
+  recipes.associate = (models) => {
+    recipes.belongsTo(models.users, {
+      foreignKey: 'userId'
+    });
+  };
+
+  return recipes;
+};
