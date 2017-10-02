@@ -1,5 +1,5 @@
 'use strict';
-module.exports = function(sequelize, DataTypes) {
+module.exports = (sequelize, DataTypes) => {
   const favorites = sequelize.define('favorites', {
     userId: {
       type: DataTypes.INTEGER,
