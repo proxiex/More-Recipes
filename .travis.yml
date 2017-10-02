@@ -5,6 +5,7 @@ services:
 - postgresql
 before_script:
   - psql -c 'create database test;' -U postgres
+  - cd /server/src
   - sequelize db:migrate
 env:
   global:
