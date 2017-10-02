@@ -9,9 +9,10 @@ import upvote from './routes/upvotes'; */
 const app = express();
 
 app.use(logger('dev'));
+app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-process.env.SECRET_KEY = '#1001-tapsuk-bis-bellal;kajd;lf9u2309ruld;fa '
+process.env.SECRET_KEY = '#1001-tapsuk-bis-bellal;kajd;lf9u2309ruld;fa ';
 
 
 app.use('/api/v1/users', users);

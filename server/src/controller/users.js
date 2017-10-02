@@ -8,87 +8,62 @@ const users = db.users;
 const Op = Sequelize.Op;
 
 class Users {
-  signup (req, res) {
-    const { firstName, lastName, email, username, password, confirmPassword } = req.body;
-    if(!firstName) {
-      return res.status(400).send({
-        message: 'Please enter Your First Name!'
-      });
-    } else if (!lastName){
-      return res.status(400).send({
-        message: 'Please enter Your Last Name!'
-      });
-    } else if (!email) {
-      return res.status(400).send({
-        message: 'Please enter Your Email!'
-      });
-    } else if(!username) {
-      return res.status(400).send({
-        message: 'Please enter Your Username!'
-      });
-    } else if (!password) {
-      return res.status(400).send({
-        message: 'Please enter Your Password'
-      });
-    } else if (password !== confirmPassword) {
-      return res.status(400).send({
-        message: 'Password Mismatch!!'
-      });
-    } else {
-      users.find({
-        where: {
-          [Op.or] : [
-            { email: email },
-            { username: username }
-          ]
-        }
-      }).then(foundUser => {
-        console.log('Found user: ' + foundUser);
-
-        if (!foundUser) {
-          return users
-            .create({
-              firstName: firstName,
-              lastName: lastName,
-              email: email.trim().toLowerCase(),
-              username: username.trim().toLowerCase(),
-              password: bcrypt.hashSync(password, 10)
-            }).then(signup => {
-              res.status(201).send(signup);
-            })
-            .catch(err => {
-            // console.log(Sequelize.ValidationErrorItem.message);
-              if (Sequelize.ValidationError) {
-                return res.status(400).send({
-                  message: 'Invalid Email Address'
-                });
-              }
-              //console.log(err);
-              res.status(500).send({
-                message: 'Some Error occured!'
+  signup(req, res) {
+    console.log(req.body);
+    users.find({
+      where: {
+        email: req.body.email
+      }
+    }).then(found => {
+      if (found) {
+        res.status(400).send({
+          message: 'User already Exist!'
+        });
+      } else {
+        // Validating user input
+        if (!req.body.username) {
+          res.status(400).send({
+            message: 'Please Enter Username'
+          });
+        } else if (!req.body.email) {
+          res.status(400).send({
+            message: 'Please Enter Email'
+          });
+        } else if (!req.body.password) {
+          res.status(400).send({
+            message: 'Please Enter password'
+          });
+        } else {
+          if (req.body.password === req.body.cpassword) {
+            return users
+              .create({
+                firstName: req.body.firstName,
+                lastName: req.body.lastName,
+                username: req.body.username,
+                email: req.body.email,
+                password: bcrypt.hashSync(req.body.password, 10)
+              }).then(register => res.status(201).send(register))
+              .catch(error => {
+                res.status(404).send(error);
               });
+          } else {
+            res.status(400).send({
+              message: 'Password Missmatch!'
             });
-        }else if (foundUser.email === email) {
-          res.status(400).send({
-            message: 'Email is already associated with another account!'
-          });
-        } else if (foundUser.userName === username) {
-          res.status(400).send({
-            message: 'User name already exist!'
-          });
+          }
         }
-      });
-    }
+      }
+    });
   }
 
   signin (req, res) {
-    const { username, password } = req.body;
-    if (!username) {
-      return res.status(400).send({
-        message: 'Please enter Your username or email address'
+    console.log(req.body)
+    if (!req.body.username) {
+      res.status(400).send({
+        message: 'Please enter Your username or email'
       });
-    } else if (!password) {
-      return res.status(400).send({
+    } else if (!req.body.password) {
+      res.status(400).send({
         message: 'Please enter Your Password'
       });
     } else {
@@ -96,29 +71,34 @@ class Users {
         .findOne({
           where: {
             [Op.or] : [
-              { email: username },
-              { username: username }
+              { email: req.body.username },
+              { username: req.body.username}
+
             ]
           }
-        }).then (foundUser => {
-          if (!foundUser) {
-            return res.status(404).send({
-              message: 'User NOT found!'
+        }).then(found => {
+          // console.log(found)
+          if (!found) {
+            res.status(404).send({
+              message: 'User does NOT exist!'
             });
-          } else if (bcrypt.compareSync(req.body.password, foundUser.password)) {
+          } else if (bcrypt.compareSync(req.body.password, found.password)) {
             // console.log(found.role)
-            const token = jwt.sign({ id: foundUser.id }, process.env.SECRET_KEY, {
+            const token = jwt.sign({id: found.id}, process.env.SECRET_KEY, {
               expiresIn: 60 * 60 * 24 // Token expires in 24 hours
             });
             return res.status(200).send({
               message: 'Sign in Successful!',
-              token: token
+              Token: token
             });
           } else {
-            return res.status(404).send({
-              message: 'User NOT found!'
+            res.status(401).send({
+              ERrOR: 'Incorrect Password'
             });
           }
+        })
+        .catch(error => {
+          res.status(404).send(error);
         });
     }
   }
