@@ -5,7 +5,6 @@ import Sequelize from 'sequelize';
 // const Sequelize = new sequelize();
 const users = db.users;
 const Op = Sequelize.Op;
-console.log(db.users);
 
 class Users {
   signup (req, res) {
@@ -43,7 +42,7 @@ class Users {
           ]
         }
       }).then(foundUser => {
-        console.log(foundUser);
+        console.log('Found user: ' + foundUser);
 
         if (!foundUser) {
           return users
@@ -57,12 +56,13 @@ class Users {
               res.status(201).send(signup);
             })
             .catch(err => {
-              if (err.message === 'Invalid Email Address') {
+            // console.log(Sequelize.ValidationErrorItem.message);
+              if (Sequelize.ValidationError) {
                 return res.status(400).send({
                   message: 'Invalid Email Address'
                 });
               }
-              console.log(err);
+              //console.log(err);
               res.status(500).send({
                 message: 'Some Error occured!'
               });
