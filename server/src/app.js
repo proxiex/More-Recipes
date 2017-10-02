@@ -11,6 +11,9 @@ const app = express();
 app.use(logger('dev'));
 app.use(bodyParser.urlencoded({ extended: false }));
 
+process.env.SECRET_KEY = '#1001-tapsuk-bis-bellal;kajd;lf9u2309ruld;fa '
+
+
 app.use('/api/v1/users', users);
 //app.use('/api/recipes', recipes);
 //app.use('/api', upvote);
