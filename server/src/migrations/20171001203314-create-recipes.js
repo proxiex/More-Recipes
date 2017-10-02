@@ -21,7 +21,7 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false
       },
-      meanType: {
+      mealType: {
         type: Sequelize.STRING,
         allowNull: false
       },
@@ -36,6 +36,16 @@ module.exports = {
       ingredients: {
         type: Sequelize.TEXT,
         allowNull: false
+      },
+      upVotes: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        defaultValue: 0
+      },
+      downVotes: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        defaultValue: 0
       },
       createdAt: {
         allowNull: false,

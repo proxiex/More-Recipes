@@ -31,5 +31,35 @@ module.exports = (sequelize, DataTypes) => {
       } */
     }
   });  
+
+  users.associate = (models) => {
+    users.hasMany(models.reviews, {
+      foreignKey: 'userId'
+    });
+  };
+
+  users.associate = (models) => {
+    users.hasMany(models.votes, {
+      foreignKey: 'userId'
+    });
+  };
+ 
+  users.associate = (models) => {
+    users.hasMany(models.favorites, {
+      foreignKey: 'userId'
+    });
+  };
+
+  users.associate = (models) => {
+    users.hasMany(models.views, {
+      foreignKey: 'userId'
+    });
+  };
+ 
+  users.associate = (models) => {
+    users.hasMany(models.recipes, {
+      foreignKey: 'userId'
+    });
+  };
   return users;
 };

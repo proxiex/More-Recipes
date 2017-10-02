@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) =>  {
       type: DataTypes.STRING,
       allowNull: false
     },
-    meanType: {
+    mealType: {
       type: DataTypes.STRING,
       allowNull: false
     },
@@ -26,8 +26,18 @@ module.exports = (sequelize, DataTypes) =>  {
       allowNull: false
     },
     ingredients: {
-      type: DataTypes.TEXT,
+      type: DataTypes.ARRAY(DataTypes.TEXT),
       allowNull: false
+    },
+    upVotes: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      defaultValue: 0
+    },
+    downVotes: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      defaultValue: 0
     }
   });
 
