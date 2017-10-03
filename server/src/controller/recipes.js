@@ -1,6 +1,8 @@
 import db from '../models';
+import Sequelize from 'sequelize';
 
 const recipes = db.recipes;
+const Op = Sequelize.Op;
 
 class Recipes {
   add(req, res) {
@@ -40,6 +42,48 @@ class Recipes {
         return res.status(201).send(created);
       })
       .catch();
+  }
+  modify(req, res) {
+    const updateFields = {};
+    const { recipeName, mealType, description, method, ingredients } = req.body;
+    console.log(req.body)
+    recipes.findOne({
+      where: {
+        userId: req.decoded.id,
+        id: req.params.recipeId
+      }
+    }).then(found => {
+      //console.log(found);
+      if(found) {
+        if (recipeName) {
+          updateFields.recipeName = recipeName;
+        } else if (mealType) {
+          updateFields.mealType = mealType;
+        } else if (description) {
+          updateFields.description = description;
+        } else if (method) {
+          updateFields.method = method;
+        } else if (ingredients) {
+          updateFields.ingredients = [ingredients];
+          //found.update({ingredients: ingredients});
+        } else {
+          return res.status(200).send({
+            Message: 'Nothing to update!'
+          });
+        }
+        console.log(updateFields);
+        found.update(updateFields).then(updated => {
+          return res.status(200).send({
+            Message: 'Succesfully Updated Recipe',
+            updated
+          });
+        });
+      } else {
+        return res.status(404).send({
+          message: 'Recipe Not found!'
+        });
+      }
+    });
   }
 }
 
