@@ -115,6 +115,35 @@ class Recipes {
         });
     }
   }
+
+  delete(req, res) {
+    const id = req.params.recipeId;
+    if (isNaN(id)) {
+      return res.status(400).send({
+        message: 'Parameter must be a number!'
+      });
+    }
+    recipes.findAll({
+      userId: req.decoded.id,
+      id: id
+    }).then(found => {
+      if (!found) {
+        return res.status(404).send({
+          message: 'You did not created this recipe, you cannot delete it!'
+        });
+      }
+      return recipes
+        .destroy({
+          where: {
+            id: id
+          }
+        }).then(() => {
+          return res.status(200).send({
+            message: 'Recipe Deleted!'
+          });
+        });
+    });
+  }
 }
 
 export default Recipes;
