@@ -15,13 +15,13 @@ module.exports = (sequelize, DataTypes) => {
     favorites.belongsTo(models.recipes, {
       foreignKey: 'recipeId'
     });
-  };
 
-  favorites.associate = (models) => {
     favorites.belongsTo(models.users, {
       foreignKey: 'userId'
     });
   };
+
+
   return favorites;
 };
 
