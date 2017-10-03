@@ -12,11 +12,11 @@ let router = express.Router();
 router.post('/', Auth.Verify, recipeController.add);
 router.get('/', recipeController.get);
 router.put('/:recipeId', Auth.Verify, recipeController.modify);
+router.delete('/:recipeId', Auth.Verify, recipeController.delete);
 
-/* 
-router.delete('/:Id', recipeController.delete);
-
-router.post('/:Id/reviews', reviewController.add); */
+/*
+router.post('/:Id/reviews', reviewController.add); 
+*/
 
 
 
