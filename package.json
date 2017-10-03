@@ -5,6 +5,7 @@
   "main": "app.js",
   "scripts": {
     "test": "nyc --reporter=html --reporter=text mocha ./server/tests/ --compilers js:babel-register",
+    "test:dev": "mocha ./server/tests/* --compilers js:babel-register",
     "start": "nodemon ./server/dist/bin/www.js",
     "build": "babel ./server/src -d ./server/dist",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
@@ -40,7 +41,8 @@
     "pg": "^7.3.0",
     "pg-hstore": "^2.3.2",
     "sequelize": "^4.13.1",
-    "sequelize-cli": "^3.0.0"
+    "sequelize-cli": "^3.0.0",
+    "supertest": "^3.0.0"
   },
   "devDependencies": {
     "chai": "^4.1.2",

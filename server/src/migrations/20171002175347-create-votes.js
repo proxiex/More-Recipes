@@ -1,12 +1,21 @@
 'use strict';
 module.exports = {
-  up: (queryInterface, Sequelize) =>
-    queryInterface.createTable('recipes', {
+  up: function(queryInterface, Sequelize) {
+    return queryInterface.createTable('votes', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
+      },
+      recipeId: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+          model: 'recipes',
+          key: 'id',
+          as: 'recipeId'
+        }
       },
       userId: {
         type: Sequelize.INTEGER,
@@ -17,24 +26,12 @@ module.exports = {
           as: 'userId'
         }
       },
-      recipeName: {
-        type: Sequelize.STRING,
+      upVotes: {
+        type: Sequelize.INTEGER,
         allowNull: false
       },
-      meanType: {
-        type: Sequelize.STRING,
-        allowNull: false
-      },
-      description: {
-        type: Sequelize.TEXT,
-        allowNull: false
-      },
-      method: {
-        type: Sequelize.TEXT,
-        allowNull: false
-      },
-      ingredients: {
-        type: Sequelize.TEXT,
+      downVotes: {
+        type: Sequelize.INTEGER,
         allowNull: false
       },
       createdAt: {
@@ -45,7 +42,9 @@ module.exports = {
         allowNull: false,
         type: Sequelize.DATE
       }
-    }),
-
-  down: (queryInterface) => queryInterface.dropTable('recipes')
+    });
+  },
+  down: function(queryInterface, Sequelize) {
+    return queryInterface.dropTable('votes');
+  }
 };
