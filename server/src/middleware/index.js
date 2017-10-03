@@ -6,7 +6,7 @@ const authenticate = {
   Verify: (req, res, next) => {
     const token = req.body.token || req.query.token || req.headers['x-token'];
     if (!token) {
-      res.status(400).send({
+      return res.status(403).send({
         message: 'Unauthorised User!'
       });
     }
