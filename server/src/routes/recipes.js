@@ -9,10 +9,8 @@ const recipeController = new Recipes();
 
 let router = express.Router();
 
-//router.get('/', recipeController.test)
-
 router.post('/', Auth.Verify, recipeController.add);
-//router.get('/', recipeController.get);
+router.get('/', recipeController.get);
 router.put('/:recipeId', Auth.Verify, recipeController.modify);
 
 /* 

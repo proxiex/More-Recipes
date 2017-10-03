@@ -43,14 +43,21 @@ class Recipes {
       })
       .catch();
   }
+  
   modify(req, res) {
     const updateFields = {};
     const { recipeName, mealType, description, method, ingredients } = req.body;
-    console.log(req.body)
+    const id = req.params.recipeId;
+    if (isNaN(id)) {
+      return res.status(400).send({
+        message: 'Parameter must be a number!'
+      });
+    }
+    console.log(req.body);
     recipes.findOne({
       where: {
         userId: req.decoded.id,
-        id: req.params.recipeId
+        id: id
       }
     }).then(found => {
       //console.log(found);
@@ -84,6 +91,29 @@ class Recipes {
         });
       }
     });
+  }
+
+  get(req, res) {
+    if (req.query.order || req.query.sort) {
+      return recipes
+        .findAll({
+          order: [
+            ['upVotes', 'DESC']
+          ]
+        }).then(sortedRecipes => {
+          return res.status(200).send(sortedRecipes);
+        });
+    } else {
+      return recipes
+        .findAll({ offset: req.query.next, limit: 2 }).then(getAllRecipes => {
+          if (!getAllRecipes) {
+            return res.status(200).send({
+              Message: 'No recipes have yet been created!'
+            });
+          }
+          return res.status(200).send(getAllRecipes);
+        });
+    }
   }
 }
 
