@@ -1,15 +1,16 @@
 import chai from 'chai';
 import chaiHttp from 'chai-http';
 import app from '../src/app';
-import faker from 'faker';
 import fakeData from './helper/fake';
 
 const should = chai.should();
 
 chai.use(chaiHttp);
 
+let token;
+
 describe('More Recipes', () => {
-   it('should get the home page', (done) => {
+  it('should get the home page', (done) => {
     chai.request(app)
       .get('/')
       .end((err, res) => {
@@ -81,6 +82,8 @@ describe('Users', () => {
       .post('/api/v1/users/signin')
       .send(User)
       .end((err, res) => {
+        token = res.body.Token;
+        console.log(token);
         res.should.have.status(200);
         res.should.be.json;
         res.body.should.be.a('object');
@@ -103,6 +106,88 @@ describe('Users', () => {
         res.should.be.json;
         res.body.should.be.a('object');
         res.body.should.have.property('message').equal('User does NOT exist!');
+        done();
+      });
+  });
+
+});
+
+
+
+
+describe('Recipes', () => {
+  const recipes = {
+    recipeName: 'recipeName',
+    mealType: 'mealType',
+    description: 'description',
+    method: 'method',
+    ingredients: [ 'ingredients','ingredients','ingredients','ingredients' ]
+  };
+
+  it('should not let unauthorized user create new recipe', (done) => {
+    chai.request(app)
+      .post('/api/v1/recipes')
+      .send(recipes)
+      .end((err, res) => {
+        console.log(err);
+        res.should.have.status(401);
+        res.should.be.json;
+        res.body.should.be.a('object');
+        // res.body.should.have.property('message').equal('User does NOT exist!');
+        done();
+      });
+  });
+    
+  it('should not let user with un-verified Token create new recipe', (done) => {
+    chai.request(app)
+      .post('/api/v1/recipes')
+      .send(recipes)
+      .set('x-token', 'this sia bungo iasd ionoiapdif')
+      .end((err, res) => {
+        console.log(err);
+        res.should.have.status(403);
+        res.should.be.json;
+        res.body.should.be.a('object');
+        // res.body.should.have.property('message').equal('User does NOT exist!');
+        done();
+      });
+  });
+    
+  it('should let authorized user create new recipe', (done) => {
+    chai.request(app)
+      .post('/api/v1/recipes')
+      .send(recipes)
+      .set('x-token', token)
+      .end((err, res) => {
+        console.log(err);
+        res.should.have.status(201);
+        res.should.be.json;
+        res.body.should.be.a('object');
+        // res.body.should.have.property('message').equal('User does NOT exist!');
+        done();
+      });
+  });
+  
+  it('should get all recipe', (done) => {
+    chai.request(app)
+      .get('/api/v1/recipes')
+      .end((err, res) => {
+        console.log(err);
+        res.should.have.status(200);
+        res.should.be.json;
+        // res.body.should.have.property('message').equal('User does NOT exist!');
+        done();
+      });
+    });
+    
+  it('should let unauthorized user delete a recipe', (done) => {
+    chai.request(app)
+      .delete('/api/v1/recipes/12')
+      .end((err, res) => {
+        console.log(err);
+        res.should.have.status(401);
+        res.should.be.json;
+        // res.body.should.have.property('message').equal('User does NOT exist!');
         done();
       });
   });
