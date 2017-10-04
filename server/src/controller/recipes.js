@@ -144,6 +144,10 @@ class Recipes {
         });
     });
   }
+
+  /* getOne(req, res) {
+
+  } */
 }
 
 export default Recipes;
