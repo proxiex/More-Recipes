@@ -13,11 +13,13 @@ module.exports = (sequelize, DataTypes) => {
 
   favorites.associate = (models) => {
     favorites.belongsTo(models.recipes, {
-      foreignKey: 'recipeId'
+      foreignKey: 'recipeId',
+      onDelete: 'CASCADE',
     });
 
     favorites.belongsTo(models.users, {
-      foreignKey: 'userId'
+      foreignKey: 'userId',
+      onDelete: 'CASCADE',
     });
   };
 

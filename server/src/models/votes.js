@@ -29,13 +29,15 @@ module.exports = function(sequelize, DataTypes) {
   
   votes.associate = (models) => {
     votes.belongsTo(models.recipes, {
-      foreignKey: 'recipeId'
+      foreignKey: 'recipeId',
+      onDelete: 'CASCADE',
     });
   };
 
   votes.associate = (models) => {
     votes.belongsTo(models.users, {
-      foreignKey: 'userId'
+      foreignKey: 'userId',
+      onDelete: 'CASCADE',
     });
   };
   return votes;

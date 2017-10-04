@@ -124,8 +124,10 @@ class Recipes {
       });
     }
     recipes.findAll({
-      userId: req.decoded.id,
-      id: id
+      where: { 
+        userId: req.decoded.id,
+        id: id
+      }
     }).then(found => {
       if (!found) {
         return res.status(404).send({
