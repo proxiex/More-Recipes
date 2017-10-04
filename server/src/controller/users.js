@@ -9,7 +9,7 @@ const Op = Sequelize.Op;
 
 class Users {
   signup(req, res) {
-    console.log(req.body);
+    //console.log(req.body);
     users.find({
       where: {
         email: req.body.email
@@ -57,7 +57,7 @@ class Users {
   }
 
   signin (req, res) {
-    console.log(req.body)
+    //console.log(req.body)
     if (!req.body.username) {
       res.status(400).send({
         message: 'Please enter Your username or email'

@@ -41,7 +41,7 @@ class Recipes {
       }).then(created => {
         return res.status(201).send(created);
       })
-      .catch();
+      //.catch();
   }
   
   modify(req, res) {
