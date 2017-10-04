@@ -1,14 +1,36 @@
 import chai from 'chai';
 import chaiHttp from 'chai-http';
-import db from '../src/models';
 import app from '../src/app';
 import faker from 'faker';
 import fakeData from './helper/fake';
 
 const should = chai.should();
-const Users = db.users;
 
 chai.use(chaiHttp);
+
+describe('More Recipes', () => {
+   it('should get the home page', (done) => {
+    chai.request(app)
+      .get('/')
+      .end((err, res) => {
+        res.should.be.json;
+        res.body.should.be.a('object');
+        res.should.have.status(200);
+        done();
+      });
+  });
+  
+  it('should get 404 page', (done) => {
+    chai.request(app)
+      .get('/ssammi')
+      .end((err, res) => {
+        res.should.be.json;
+        res.body.should.be.a('object');
+        res.should.have.status(404);
+        done();
+      });
+  });
+});
 
 describe('Users', () => {
   
@@ -17,7 +39,6 @@ describe('Users', () => {
       .post('/api/v1/users/signup')
       .send(fakeData.newUsers)
       .end((err, res) => {
-        console.log(err);
         res.should.be.json;
         res.body.should.be.a('object');
         res.should.have.status(201);
@@ -30,7 +51,6 @@ describe('Users', () => {
       .post('/api/v1/users/signup')
       .send(fakeData.newUsers)
       .end((err, res) => {
-        console.log(err);
         res.should.have.status(400);
         res.should.be.json;
         res.body.should.be.a('object');
@@ -44,7 +64,6 @@ describe('Users', () => {
       .post('/api/v1/users/signup')
       .send(fakeData.noEmailUsers)
       .end((err, res) => {
-        console.log(err);
         res.should.have.status(400);
         res.should.be.json;
         res.body.should.be.a('object');
@@ -62,7 +81,6 @@ describe('Users', () => {
       .post('/api/v1/users/signin')
       .send(User)
       .end((err, res) => {
-        console.log(err);
         res.should.have.status(200);
         res.should.be.json;
         res.body.should.be.a('object');
@@ -81,7 +99,6 @@ describe('Users', () => {
       .post('/api/v1/users/signin')
       .send(User)
       .end((err, res) => {
-        console.log(err);
         res.should.have.status(404);
         res.should.be.json;
         res.body.should.be.a('object');
