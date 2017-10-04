@@ -194,11 +194,11 @@ describe('Recipes', () => {
     
   it('should let authorized user delete a recipe', (done) => {
     chai.request(app)
-      .delete('/api/v1/recipes/12')
-      .send('x-token', token)
+      .delete('/api/v1/recipes/5')
+      .set('x-token', token)
       .end((err, res) => {
         console.log(err);
-        res.should.have.status(401);
+        res.should.have.status(200);
         res.should.be.json;
         // res.body.should.have.property('message').equal('User does NOT exist!');
         done();
