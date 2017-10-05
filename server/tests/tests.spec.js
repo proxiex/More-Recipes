@@ -112,9 +112,6 @@ describe('Users', () => {
 
 });
 
-
-
-
 describe('Recipes', () => {
   const recipes = {
     recipeName: 'recipeName',
@@ -199,7 +196,7 @@ describe('Recipes', () => {
     
   it('should let unauthorized user delete a recipe', (done) => {
     chai.request(app)
-      .delete('/api/v1/recipes/12')
+      .delete('/api/v1/recipes/1')
       .end((err, res) => {
         // console.log(err);
         res.should.have.status(401);
@@ -207,20 +204,7 @@ describe('Recipes', () => {
         // res.body.should.have.property('message').equal('User does NOT exist!');
         done();
       });
-  });
-    
-  it('should let authorized user delete a recipe', (done) => {
-    chai.request(app)
-      .delete('/api/v1/recipes/5')
-      .set('x-token', token)
-      .end((err, res) => {
-        // console.log(err);
-        res.should.have.status(200);
-        res.should.be.json;
-        // res.body.should.have.property('message').equal('User does NOT exist!');
-        done();
-      });
-  });  
+  }); 
   
   it('should return error for invalid params', (done) => {
     chai.request(app)
@@ -236,7 +220,6 @@ describe('Recipes', () => {
   });  
 
 });
-
 
 describe('Favorite Recipes', () => { 
   it('should return error for recipe that does not exist', (done) => {
@@ -254,7 +237,7 @@ describe('Favorite Recipes', () => {
     
   it('should Favorite a recipe', (done) => {
     chai.request(app)
-      .post('/api/v1/recipes/14/favorites')
+      .post('/api/v1/recipes/1/favorites')
       .set('x-token', token)
       .end((err, res) => {
         // console.log(err);
@@ -267,7 +250,7 @@ describe('Favorite Recipes', () => {
     
   it('should return error for recipe already favorited', (done) => {
     chai.request(app)
-      .post('/api/v1/recipes/14/favorites')
+      .post('/api/v1/recipes/1/favorites')
       .set('x-token', token)
       .end((err, res) => {
         // console.log(err);
@@ -277,4 +260,19 @@ describe('Favorite Recipes', () => {
         done();
       });
   });
+    
+
+
+  it('should let authorized user delete a recipe', (done) => {
+    chai.request(app)
+      .delete('/api/v1/recipes/1')
+      .set('x-token', token)
+      .end((err, res) => {
+        // console.log(err);
+        res.should.have.status(200);
+        res.should.be.json;
+        // res.body.should.have.property('message').equal('User does NOT exist!');
+        done();
+      });
+  }); 
 });
