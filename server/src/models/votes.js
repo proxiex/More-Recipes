@@ -1,5 +1,4 @@
-'use strict';
-module.exports = function(sequelize, DataTypes) {
+export default (sequelize, DataTypes)  => {
   var votes = sequelize.define('votes', {
     recipeId: {
       type: DataTypes.INTEGER,

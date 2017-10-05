@@ -1,8 +1,4 @@
-const dotenv = require('dotenv');
-
-dotenv.config();
-
-module.exports = {
+module.exports ={
   development: {
     username: 'postgres',
     password: '#101bootcamp',
