@@ -40,7 +40,7 @@ class Recipes {
         ingredients: [ ingredients ]
       }).then(created => {
         return res.status(201).send(created);
-      })
+      });
       //.catch();
   }
   
@@ -60,7 +60,7 @@ class Recipes {
         id: id
       }
     }).then(found => {
-      //console.log(found);
+      console.log(found);
       if(found) {
         if (recipeName) {
           updateFields.recipeName = recipeName;
@@ -79,7 +79,14 @@ class Recipes {
           });
         }
         console.log(updateFields);
-        found.update(updateFields).then(updated => {
+        found.update({ 
+          updateFields 
+        }, {
+          where: {
+            userId: req.decoded.id,
+            id: id
+          }
+        }).then(updated => {
           return res.status(200).send({
             Message: 'Succesfully Updated Recipe',
             updated
