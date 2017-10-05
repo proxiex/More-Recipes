@@ -2,6 +2,7 @@ import db from '../models';
 import Sequelize from 'sequelize';
 
 const recipes = db.recipes;
+const votes = db.votes;
 const Op = Sequelize.Op;
 
 class Recipes {

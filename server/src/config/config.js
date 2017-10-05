@@ -19,10 +19,7 @@ module.exports = {
     logging: false
   },
   production: {
-    username: 'root',
-    password: '#101bootcamp',
-    database: 'hello_book',
-    host: '127.0.0.1',
+    use_env_variable: 'DATABASE_URL',
     dialect: 'postgres'
   }
 };
