@@ -256,7 +256,7 @@ describe('Favorite Recipes', () => {
         // console.log(err);
         res.should.have.status(400);
         res.should.be.json;
-        res.body.should.have.property('message').equal('Recipe already Favorited!');
+        res.body.should.have.property('message').equal('Recipe already Favorited');
         done();
       });
   });
