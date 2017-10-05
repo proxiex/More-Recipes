@@ -83,7 +83,7 @@ describe('Users', () => {
       .send(User)
       .end((err, res) => {
         token = res.body.Token;
-        console.log(token);
+        // console.log(token);
         res.should.have.status(200);
         res.should.be.json;
         res.body.should.be.a('object');
@@ -112,9 +112,6 @@ describe('Users', () => {
 
 });
 
-
-
-
 describe('Recipes', () => {
   const recipes = {
     recipeName: 'recipeName',
@@ -129,7 +126,7 @@ describe('Recipes', () => {
       .post('/api/v1/recipes')
       .send(recipes)
       .end((err, res) => {
-        console.log(err);
+        // console.log(err);
         res.should.have.status(401);
         res.should.be.json;
         res.body.should.be.a('object');
@@ -144,7 +141,7 @@ describe('Recipes', () => {
       .send(recipes)
       .set('x-token', 'this sia bungo iasd ionoiapdif')
       .end((err, res) => {
-        console.log(err);
+        // console.log(err);
         res.should.have.status(403);
         res.should.be.json;
         res.body.should.be.a('object');
@@ -168,40 +165,114 @@ describe('Recipes', () => {
       });
   });
   
-  it('should get all recipe', (done) => {
+  it('should let authorized user Modify new recipe', (done) => {
     chai.request(app)
-      .get('/api/v1/recipes')
+      .put('/api/v1/recipes/1')
+      .send({
+        method: 'This is a simple meal that we all need to have at the end of the day so enjoy'
+      })
+      .set('x-token', token)
       .end((err, res) => {
         console.log(err);
         res.should.have.status(200);
         res.should.be.json;
+        res.body.should.be.a('object');
         // res.body.should.have.property('message').equal('User does NOT exist!');
         done();
       });
-    });
-    
-  it('should let unauthorized user delete a recipe', (done) => {
+  });
+
+  it('should get all recipe', (done) => {
     chai.request(app)
-      .delete('/api/v1/recipes/12')
+      .get('/api/v1/recipes')
       .end((err, res) => {
-        console.log(err);
-        res.should.have.status(401);
+        // console.log(err);
+        res.should.have.status(200);
         res.should.be.json;
         // res.body.should.have.property('message').equal('User does NOT exist!');
         done();
       });
   });
     
-  it('should let authorized user delete a recipe', (done) => {
+  it('should let unauthorized user delete a recipe', (done) => {
     chai.request(app)
-      .delete('/api/v1/recipes/5')
+      .delete('/api/v1/recipes/1')
+      .end((err, res) => {
+        // console.log(err);
+        res.should.have.status(401);
+        res.should.be.json;
+        // res.body.should.have.property('message').equal('User does NOT exist!');
+        done();
+      });
+  }); 
+  
+  it('should return error for invalid params', (done) => {
+    chai.request(app)
+      .delete('/api/v1/recipes/me')
       .set('x-token', token)
       .end((err, res) => {
-        console.log(err);
+        // console.log(err);
+        res.should.have.status(400);
+        res.should.be.json;
+        res.body.should.have.property('message').equal('Parameter must be a number!');
+        done();
+      });
+  });  
+
+});
+
+describe('Favorite Recipes', () => { 
+  it('should return error for recipe that does not exist', (done) => {
+    chai.request(app)
+      .post('/api/v1/recipes/12202/favorites')
+      .set('x-token', token)
+      .end((err, res) => {
+        // console.log(err);
+        res.should.have.status(404);
+        res.should.be.json;
+        res.body.should.have.property('message').equal('Recipe Not found!');
+        done();
+      });
+  });  
+    
+  it('should Favorite a recipe', (done) => {
+    chai.request(app)
+      .post('/api/v1/recipes/1/favorites')
+      .set('x-token', token)
+      .end((err, res) => {
+        // console.log(err);
+        res.should.have.status(201);
+        res.should.be.json;
+        res.body.should.have.property('message').equal('Recipe Favorited!');
+        done();
+      });
+  }); 
+    
+  it('should return error for recipe already favorited', (done) => {
+    chai.request(app)
+      .post('/api/v1/recipes/1/favorites')
+      .set('x-token', token)
+      .end((err, res) => {
+        // console.log(err);
+        res.should.have.status(400);
+        res.should.be.json;
+        res.body.should.have.property('message').equal('Recipe already Favorited');
+        done();
+      });
+  });
+    
+
+
+  it('should let authorized user delete a recipe', (done) => {
+    chai.request(app)
+      .delete('/api/v1/recipes/1')
+      .set('x-token', token)
+      .end((err, res) => {
+        // console.log(err);
         res.should.have.status(200);
         res.should.be.json;
         // res.body.should.have.property('message').equal('User does NOT exist!');
         done();
       });
-  });  
+  }); 
 });

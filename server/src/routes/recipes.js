@@ -16,7 +16,7 @@ router.get('/', recipeController.get);
 router.put('/:recipeId', Auth.Verify, recipeController.modify);
 router.delete('/:recipeId', Auth.Verify, recipeController.delete);
 router.post('/:recipeId/reviews', Auth.Verify, reviewController.add); 
-router.post('/:recipeId/favorites', /* Auth.Verify, */ favoritesController.add);
+router.post('/:recipeId/favorites', Auth.Verify, favoritesController.add);
 
 
 

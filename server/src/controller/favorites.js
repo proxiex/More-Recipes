@@ -26,7 +26,7 @@ class Favorite {
         }).then(foundFavorite => {
           if (foundFavorite) {
             return res.status(400).send({
-              messagee: 'Recipe already Favorited'
+              message: 'Recipe already Favorited'
             });
           } else  {
             return favorites
@@ -35,7 +35,7 @@ class Favorite {
                 userId: req.decoded.id
               }).then(favorited => {
                 return res.status(201).send({
-                  Message: 'Recipe Favorited!',
+                  message: 'Recipe Favorited!',
                   favorited
                 });
               });
