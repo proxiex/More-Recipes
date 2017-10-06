@@ -1,5 +1,4 @@
-'use strict';
-module.exports = (sequelize, DataTypes) =>  {
+export default (sequelize, DataTypes) =>  {
   const recipes = sequelize.define('recipes', {
     userId: {
       type: DataTypes.INTEGER,
@@ -26,7 +25,7 @@ module.exports = (sequelize, DataTypes) =>  {
       allowNull: false
     },
     ingredients: {
-      type: DataTypes.ARRAY(DataTypes.TEXT),
+      type: DataTypes.TEXT,
       allowNull: false
     },
     upVotes: {
