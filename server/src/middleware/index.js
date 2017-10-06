@@ -4,7 +4,7 @@ import app from '../app';
 
 require('dotenv').config();
 
-const key = process.env.SECRET;
+const key = process.env.SECRET_KEY;
 
 const authenticate = {
   Verify: (req, res, next) => {
