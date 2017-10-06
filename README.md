@@ -56,9 +56,14 @@ recipe. Users can also keep a list of their favorite recipes on the application.
   </tr>
   
   <tr>
-      <td>POST</td>
-      <td>/api/v1/recipes/:recipeId/upvote</td>
-      <td>Upvote a recipe</td>
+      <td>GET</td>
+      <td>/api/v1/recipes/</td>
+      <td>Get all recipes</td>
+  </tr>
+   <tr>
+      <td>GET</td>
+      <td>/api/v1/recipes/?sort=upVote&order=desc</td>
+      <td>Get all recipes</td>
   </tr>
   <tr>
       <td>POST</td>
