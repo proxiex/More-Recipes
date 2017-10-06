@@ -25,7 +25,7 @@ export default (sequelize, DataTypes) =>  {
       allowNull: false
     },
     ingredients: {
-      type: DataTypes.ARRAY(DataTypes.TEXT),
+      type: DataTypes.TEXT,
       allowNull: false
     },
     upVotes: {

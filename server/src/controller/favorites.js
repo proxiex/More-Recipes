@@ -8,7 +8,7 @@ class Favorite {
   add(req, res) {
     const id = req.params.recipeId;
     if (isNaN(id)) {
-      return res.status(400).send({
+      return res.status(400).json({
         message: 'Parameter must be a number!'
       });
     }
@@ -25,7 +25,7 @@ class Favorite {
           }
         }).then(foundFavorite => {
           if (foundFavorite) {
-            return res.status(400).send({
+            return res.status(400).json({
               message: 'Recipe already Favorited'
             });
           } else  {
@@ -34,7 +34,7 @@ class Favorite {
                 recipeId: id,
                 userId: req.decoded.id
               }).then(favorited => {
-                return res.status(201).send({
+                return res.status(201).json({
                   message: 'Recipe Favorited!',
                   favorited
                 });
@@ -42,7 +42,7 @@ class Favorite {
           }
         });
       } else  {
-        return res.status(404).send({
+        return res.status(404).json({
           message: 'Recipe Not found!'
         });
       }
@@ -52,7 +52,7 @@ class Favorite {
   get(req, res) {
     const id = req.params.userId;
     if (isNaN(id)) {
-      return res.status(400).send({
+      return res.status(400).json({
         message: 'Parameter must be a number!'
       });
     }
@@ -68,9 +68,9 @@ class Favorite {
         ]
       }).then(found => {
         if (found) {
-          return res.status(200).send(found);
+          return res.status(200).json(found);
         } else  {
-          return res.status(404).send({
+          return res.status(404).json({
             message: 'Recipe Not found'
           });
         }
