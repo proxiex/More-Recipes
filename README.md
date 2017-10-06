@@ -65,10 +65,5 @@ recipe. Users can also keep a list of their favorite recipes on the application.
       <td>/api/recipes/:recipeId/reviews </td>
       <td>Post a review</td>
   </tr>
-  <tr>
-      <td>GET</td>
-      <td>/api/recipes?sort=upvotes&order=des </td>
-      <td>Gets recipe with most Upvotes</td>
-  </tr>
 </table>
 
