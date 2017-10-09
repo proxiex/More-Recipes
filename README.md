@@ -1,5 +1,5 @@
 [![Build Status](https://travis-ci.org/proxiex/More-Recipes.svg)](https://travis-ci.org/proxiex/More-Recipes)
-<a href='https://coveralls.io/github/proxiex/More-Recipes?branch=develop'><img src='https://coveralls.io/repos/github/proxiex/More-Recipes/badge.svg?branch=develop' alt='Coverage Status' /></a>
+[![Coverage Status](https://coveralls.io/repos/github/proxiex/More-Recipes/badge.svg?branch=develop)](https://coveralls.io/github/proxiex/More-Recipes?branch=develop)
 [![Code Climate](https://codeclimate.com/github/proxiex/More-Recipes.png)](https://codeclimate.com/github/proxiex/More-Recipes)
 
 
