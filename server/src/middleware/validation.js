@@ -1,10 +1,20 @@
 
 const Validation = {
-  params(req, res, next){
+  recipeId(req, res, next){
     const recipeId = req.params.recipeId;
+
+    if (isNaN(recipeId)) {
+      return res.status(400).json({
+        message: 'Parameter must be a number!'
+      });
+    }
+    next();
+  },
+
+  userId(req, res, next){
     const userId = req.params.userId;
 
-    if (isNaN(userId) || isNaN(recipeId)) {
+    if (isNaN(userId)) {
       return res.status(400).json({
         message: 'Parameter must be a number!'
       });
@@ -57,7 +67,7 @@ const Validation = {
         message: 'Please enter Your Password'
       });
     } 
-<<<<<<< HEAD
+    next();
   },
 
   addRecipe(req, res, next) {
@@ -85,9 +95,6 @@ const Validation = {
       });
     }
     next();
-=======
-    next()
->>>>>>> develop
   }
 };
 
