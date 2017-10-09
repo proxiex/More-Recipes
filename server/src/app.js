@@ -13,9 +13,6 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-process.env.SECRET_KEY;
-
-
 app.use('/api/v1/users', users);
 app.use('/api/v1/recipes', recipes);
 //app.use('/api', upvote);

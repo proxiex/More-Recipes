@@ -125,8 +125,8 @@ class Recipes {
         });
     } else {
       return recipes
-        .findAll({ offset: req.query.next, limit: 2 }).then(getAllRecipes => {
-          if (!getAllRecipes) {
+        .findAll({ offset: req.query.next }).then(getAllRecipes => {
+          if (!getAllRecipes || getAllRecipes.length < 0) {
             return res.status(200).json({
               Message: 'No recipes have yet been created!'
             });
@@ -143,27 +143,29 @@ class Recipes {
         message: 'Parameter must be a number!'
       });
     }
-    recipes.findAll({
+    recipes.findOne({
       where: { 
         userId: req.decoded.id,
         id: id
       }
-    }).then(found => {
+    }).then(found => { 
       if (!found) {
         return res.status(404).json({
           message: 'You did not created this recipe, you cannot delete it!'
         });
-      }
-      return recipes
-        .destroy({
-          where: {
-            id: id
-          }
-        }).then(() => {
-          return res.status(200).json({
-            message: 'Recipe Deleted!'
+      } else {
+        return recipes
+          .destroy({
+            where: {
+              userId: req.decoded.id,
+              id: id
+            }
+          }).then(() => {
+            return res.status(200).json({
+              message: 'Recipe Deleted!'
+            });
           });
-        });
+      }
     });
   }
 
