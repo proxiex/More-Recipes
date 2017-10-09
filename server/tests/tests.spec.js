@@ -2,6 +2,7 @@ import chai from 'chai';
 import chaiHttp from 'chai-http';
 import app from '../src/app';
 import fakeData from './helper/fake';
+import db from '../src/models';
 
 const should = chai.should();
 
@@ -33,7 +34,14 @@ describe('More Recipes', () => {
   });
 });
 
+
 describe('Users', () => {
+  db
+    .users
+    .destroy({
+      cascade: true, 
+      truncate: true
+    });
   
   it('should let users sign up /signup POST', (done) => {
     chai.request(app)
@@ -52,6 +60,7 @@ describe('Users', () => {
       .post('/api/v1/users/signup')
       .send(fakeData.newUsers)
       .end((err, res) => {
+        //console.log(err)
         res.should.have.status(400);
         res.should.be.json;
         res.body.should.be.a('object');
@@ -65,6 +74,7 @@ describe('Users', () => {
       .post('/api/v1/users/signup')
       .send(fakeData.noEmailUsers)
       .end((err, res) => {
+        //console.log(err)
         res.should.have.status(400);
         res.should.be.json;
         res.body.should.be.a('object');
@@ -76,7 +86,7 @@ describe('Users', () => {
   it('should let users sign in /signin POST', (done) => {
     const User = {
       username: fakeData.newUsers.email,
-      password: '1111'
+      password: '11110000'
     };
     chai.request(app)
       .post('/api/v1/users/signin')
@@ -93,19 +103,19 @@ describe('Users', () => {
       });
   });
     
-  it('should let users sign in /signin POST', (done) => {
+  it('should NOT let users sign in /signin POST', (done) => {
     const User = {
       username: 'non existend',
-      password: '1111'
+      password: '11110000'
     };
     chai.request(app)
       .post('/api/v1/users/signin')
       .send(User)
       .end((err, res) => {
-        res.should.have.status(404);
+        res.should.have.status(400);
         res.should.be.json;
         res.body.should.be.a('object');
-        res.body.should.have.property('message').equal('User does NOT exist!');
+        res.body.should.have.property('message').equal('Incorrect signin credentials!');
         done();
       });
   });
@@ -118,7 +128,7 @@ describe('Recipes', () => {
     mealType: 'mealType',
     description: 'description',
     method: 'method',
-    ingredients: [ 'ingredients','ingredients','ingredients','ingredients' ]
+    ingredients: 'ingredients, ingredients, ingredients, ingredients'
   };
 
   it('should not let unauthorized user create new recipe', (done) => {
@@ -274,5 +284,5 @@ describe('Favorite Recipes', () => {
         // res.body.should.have.property('message').equal('User does NOT exist!');
         done();
       });
-  }); 
+  });  
 });

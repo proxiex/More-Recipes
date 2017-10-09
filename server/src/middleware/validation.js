@@ -57,6 +57,7 @@ const Validation = {
         message: 'Please enter Your Password'
       });
     } 
+<<<<<<< HEAD
   },
 
   addRecipe(req, res, next) {
@@ -84,6 +85,9 @@ const Validation = {
       });
     }
     next();
+=======
+    next()
+>>>>>>> develop
   }
 };
 
