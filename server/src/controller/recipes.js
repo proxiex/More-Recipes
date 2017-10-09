@@ -9,25 +9,25 @@ class Recipes {
   add(req, res) {
     const { recipeName, mealType, description, method, ingredients } = req.body;
     console.log(req.body);
-    if (!recipeName) {
-      return res.status(400).send({
+    if (!recipeName || typeof recipeName !== 'string') {
+      return res.status(400).json({
         message: 'Please Enter Recipe Name'
       });
-    }  else if (!mealType) {
-      return res.status(400).send({
+    }  else if (!mealType || typeof mealType !== 'string') {
+      return res.status(400).json({
         message: 'Please Enter Meal Type'
       });
-    } else if (!description) {
-      return res.status(400).send({
+    } else if (!description || typeof description !== 'string') {
+      return res.status(400).json({
         message: 'Please Enter Description'
       });
-    } else if (!method) {
-      return res.status(400).send({
+    } else if (!method || typeof method !== 'string') {
+      return res.status(400).json({
         message: 'Please Enter Method'
       });
     } 
-    else if (!ingredients) {
-      return res.status(400).send({
+    else if (!ingredients || typeof ingredients !== 'string') {
+      return res.status(400).json({
         message: 'Please Enter Ingredients'
       });
     }
@@ -38,64 +38,76 @@ class Recipes {
         mealType: mealType,
         description: description,
         method: method,
-        ingredients: [ ingredients ]
+        ingredients: ingredients
       }).then(created => {
-        return res.status(201).send(created);
+        return res.status(201).json(created);
+      })
+      .catch(error => {
+        console.log(error);
+        return res.status(500).json({
+          message: 'Some error occured!'
+        });
       });
-      //.catch();
   }
   
   modify(req, res) {
-    const updateFields = {};
     const { recipeName, mealType, description, method, ingredients } = req.body;
+    console.log(req.body);
     const id = req.params.recipeId;
+    let updateFields = {};
+
     if (isNaN(id)) {
-      return res.status(400).send({
+      return res.status(400).json({
         message: 'Parameter must be a number!'
       });
     }
-    console.log(req.body);
     recipes.findOne({
       where: {
         userId: req.decoded.id,
         id: id
       }
     }).then(found => {
-      console.log(found);
       if(found) {
         if (recipeName) {
-          updateFields.recipeName = recipeName;
-        } else if (mealType) {
-          updateFields.mealType = mealType;
-        } else if (description) {
-          updateFields.description = description;
-        } else if (method) {
-          updateFields.method = method;
-        } else if (ingredients) {
-          updateFields.ingredients = [ingredients];
-          //found.update({ingredients: ingredients});
+          updateFields.recipeName = req.body.recipeName;
+        } 
+        
+        if (mealType) {
+          updateFields.mealType = req.body.mealType;
+        } 
+        
+        if (description) {
+          updateFields.description = req.body.description;
+        } 
+        
+        if (method) {
+          updateFields.method = req.body.method;
+        } 
+        
+        if (ingredients) {
+          updateFields.ingredients = req.body.ingredients;
         } else {
-          return res.status(200).send({
+          return res.status(200).json({
             Message: 'Nothing to update!'
           });
         }
         console.log(updateFields);
-        found.update({ 
-          updateFields 
-        }, {
-          where: {
-            userId: req.decoded.id,
-            id: id
-          }
-        }).then(updated => {
-          return res.status(200).send({
+        found.update( 
+          updateFields, 
+          {
+            where: {
+              userId: req.decoded.id,
+              id: id
+            }
+          }).then((updated) => {
+          return res.status(200).json({
             Message: 'Succesfully Updated Recipe',
             updated
           });
         });
       } else {
-        return res.status(404).send({
-          message: 'Recipe Not found!'
+        return res.status(401).json({
+          message: 'You cannot modify this Recipe!'
         });
       }
     });
@@ -109,17 +121,17 @@ class Recipes {
             ['upVotes', 'DESC']
           ]
         }).then(sortedRecipes => {
-          return res.status(200).send(sortedRecipes);
+          return res.status(200).json(sortedRecipes);
         });
     } else {
       return recipes
-        .findAll({ offset: req.query.next, limit: 2 }).then(getAllRecipes => {
-          if (!getAllRecipes) {
-            return res.status(200).send({
+        .findAll({ offset: req.query.next }).then(getAllRecipes => {
+          if (!getAllRecipes || getAllRecipes.length < 0) {
+            return res.status(200).json({
               Message: 'No recipes have yet been created!'
             });
           }
-          return res.status(200).send(getAllRecipes);
+          return res.status(200).json(getAllRecipes);
         });
     }
   }
@@ -127,31 +139,33 @@ class Recipes {
   delete(req, res) {
     const id = req.params.recipeId;
     if (isNaN(id)) {
-      return res.status(400).send({
+      return res.status(400).json({
         message: 'Parameter must be a number!'
       });
     }
-    recipes.findAll({
+    recipes.findOne({
       where: { 
         userId: req.decoded.id,
         id: id
       }
-    }).then(found => {
+    }).then(found => { 
       if (!found) {
-        return res.status(404).send({
+        return res.status(404).json({
           message: 'You did not created this recipe, you cannot delete it!'
         });
-      }
-      return recipes
-        .destroy({
-          where: {
-            id: id
-          }
-        }).then(() => {
-          return res.status(200).send({
-            message: 'Recipe Deleted!'
+      } else {
+        return recipes
+          .destroy({
+            where: {
+              userId: req.decoded.id,
+              id: id
+            }
+          }).then(() => {
+            return res.status(200).json({
+              message: 'Recipe Deleted!'
+            });
           });
-        });
+      }
     });
   }
 

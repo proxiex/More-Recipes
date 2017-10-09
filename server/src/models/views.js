@@ -1,5 +1,4 @@
-'use strict';
-module.exports = (sequelize, DataTypes) => {
+export default (sequelize, DataTypes) => {
   const views = sequelize.define('views', {
     recipeId: {
       type: DataTypes.INTEGER,

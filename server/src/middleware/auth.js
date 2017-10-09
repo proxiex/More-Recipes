@@ -2,6 +2,10 @@
 import jwt from 'jsonwebtoken';
 import app from '../app';
 
+require('dotenv').config();
+
+const key = process.env.SECRET_KEY ;
+
 const authenticate = {
   Verify: (req, res, next) => {
     const token = req.body.token || req.query.token || req.headers['x-token'];
@@ -11,7 +15,7 @@ const authenticate = {
       });
     }
 
-    jwt.verify(token, process.env.SECRET_KEY, (err, decoded) => {
+    jwt.verify(token, key, (err, decoded) => {
       console.log(app);
       if (err) {
         return res.status(403).send({

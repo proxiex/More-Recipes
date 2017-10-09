@@ -1,5 +1,4 @@
-'use strict';
-module.exports = (sequelize, DataTypes) => {
+export default (sequelize, DataTypes) => {
   const reviews = sequelize.define('reviews', {
     userId: {
       type: DataTypes.INTEGER,

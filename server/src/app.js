@@ -13,22 +13,19 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-process.env.SECRET_KEY;
-
-
 app.use('/api/v1/users', users);
 app.use('/api/v1/recipes', recipes);
 //app.use('/api', upvote);
 
 app.get('/', (req, res) => {
   res.status(200).send({
-    Message: 'Welcome to More Recipes!'
+    message: 'Welcome to More Recipes!'
   });
 });
 
 app.use((req, res, next) => {
   const err = res.status(404).send({
-    ERrOR: '404: Sorry Page Not Found!'
+    message: '404: Sorry Page Not Found!'
   });
   next(err);
 });

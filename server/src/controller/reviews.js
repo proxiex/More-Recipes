@@ -9,18 +9,18 @@ class Reviews {
     // check if recipe exsits.
     const id = req.params.recipeId;
     if (isNaN(id)) {
-      return res.status(400).send({
+      return res.status(400).json({
         message: 'Parameter must be a number!'
       });
     }
     recipes.findOne({id: id }).then(found => {
       if (!found) {
-        return res.status(404).send({
+        return res.status(404).json({
           message: 'Recipe Not foune!'
         });
       }
       if (!req.body.reviews) {
-        return res.status(400).send({
+        return res.status(400).json({
           message: 'Please enter Review'
         });
       }
@@ -30,7 +30,7 @@ class Reviews {
           recipeId: id,
           review: req.body.reviews
         }).then(created => {
-          return res.status(201).send(created);
+          return res.status(201).json(created);
         });
     });
  
