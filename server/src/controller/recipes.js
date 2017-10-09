@@ -8,29 +8,6 @@ const Op = Sequelize.Op;
 class Recipes {
   add(req, res) {
     const { recipeName, mealType, description, method, ingredients } = req.body;
-    console.log(req.body);
-    if (!recipeName || typeof recipeName !== 'string') {
-      return res.status(400).json({
-        message: 'Please Enter Recipe Name'
-      });
-    }  else if (!mealType || typeof mealType !== 'string') {
-      return res.status(400).json({
-        message: 'Please Enter Meal Type'
-      });
-    } else if (!description || typeof description !== 'string') {
-      return res.status(400).json({
-        message: 'Please Enter Description'
-      });
-    } else if (!method || typeof method !== 'string') {
-      return res.status(400).json({
-        message: 'Please Enter Method'
-      });
-    } 
-    else if (!ingredients || typeof ingredients !== 'string') {
-      return res.status(400).json({
-        message: 'Please Enter Ingredients'
-      });
-    }
     return recipes
       .create({
         userId: req.decoded.id,
@@ -52,15 +29,9 @@ class Recipes {
   
   modify(req, res) {
     const { recipeName, mealType, description, method, ingredients } = req.body;
-    console.log(req.body);
-    const id = req.params.recipeId;
     let updateFields = {};
+    const id = req.params.recipeId;  
 
-    if (isNaN(id)) {
-      return res.status(400).json({
-        message: 'Parameter must be a number!'
-      });
-    }
     recipes.findOne({
       where: {
         userId: req.decoded.id,
@@ -138,11 +109,7 @@ class Recipes {
 
   delete(req, res) {
     const id = req.params.recipeId;
-    if (isNaN(id)) {
-      return res.status(400).json({
-        message: 'Parameter must be a number!'
-      });
-    }
+    
     recipes.findOne({
       where: { 
         userId: req.decoded.id,

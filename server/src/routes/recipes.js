@@ -1,6 +1,7 @@
 import express from 'express';
 import Recipes from '../controller/recipes';
 import Auth from '../middleware/auth';
+import Validate from '../middleware/validation';
 import Reviews from '../controller/reviews';
 import Favorites from '../controller/favorites';
 import Votes from '../controller/votes';
@@ -13,17 +14,17 @@ const voteController = new Votes();
 
 let router = express.Router();
 
-router.post('/', Auth.Verify, recipeController.add);
+router.post('/',  Auth.Verify, Validate.addRecipe, recipeController.add);
 router.get('/', recipeController.get);
-router.put('/:recipeId', Auth.Verify, recipeController.modify);
-router.delete('/:recipeId', Auth.Verify, recipeController.delete);
+router.put('/:recipeId', Auth.Verify, Validate.params, recipeController.modify);
+router.delete('/:recipeId',  Auth.Verify, Validate.params, recipeController.delete);
 
-router.post('/:recipeId/favorites', Auth.Verify, favoritesController.add);
+router.post('/:recipeId/favorites',  Auth.Verify, Validate.params, favoritesController.add);
 router.post('/favorites', Auth.Verify, favoritesController.add);
-router.get('/userId', Auth.Verify, favoritesController.get);
+router.get('/:userId',  Auth.Verify, Validate.params, favoritesController.get);
 
-router.post('/:recipeId/reviews', Auth.Verify, reviewController.add); 
-router.post('/:recipeId/vote', voteController.votes);
+router.post('/:recipeId/reviews', Auth.Verify,  Validate.params, reviewController.add); 
+router.post('/:recipeId/vote', Auth.Verify, Validate.params, voteController.votes);
 
 
 
