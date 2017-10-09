@@ -1,7 +1,7 @@
 import express from 'express';
 import Users from '../controller/users';
 import Favorites from '../controller/favorites';
-import Auth from '../middleware';
+//import Auth from '../middleware';
 
 const usersController = new Users();
 const favoritesController = new Favorites();
