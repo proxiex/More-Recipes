@@ -1,6 +1,5 @@
 // route middleware that will happen on every request
 import jwt from 'jsonwebtoken';
-import app from '../app';
 
 require('dotenv').config();
 
@@ -16,7 +15,6 @@ const authenticate = {
     }
 
     jwt.verify(token, key, (err, decoded) => {
-      console.log(app);
       if (err) {
         return res.status(403).send({
           error: 'Token could not be authenticated'

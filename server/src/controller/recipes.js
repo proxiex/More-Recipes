@@ -1,9 +1,9 @@
 import db from '../models';
-import Sequelize from 'sequelize';
+// import Sequelize from 'sequelize';
 
 const recipes = db.recipes;
-const votes = db.votes;
-const Op = Sequelize.Op;
+const reviews = db.reviews;
+// const Op = Sequelize.Op;
 
 class Recipes {
   add(req, res) {
@@ -19,8 +19,7 @@ class Recipes {
       }).then(created => {
         return res.status(201).json(created);
       })
-      .catch(error => {
-        console.log(error);
+      .catch(() => {
         return res.status(500).json({
           message: 'Some error occured!'
         });
@@ -62,7 +61,7 @@ class Recipes {
             Message: 'Nothing to update!'
           });
         }
-        console.log(updateFields);
+        //  console.log(updateFields);
         found.update( 
           updateFields, 
           {
@@ -136,9 +135,44 @@ class Recipes {
     });
   }
 
-  /* getOne(req, res) {
+  getOne(req, res) {
+    return recipes
+      .findOne({
+        where: { 
+          id: req.params.recipeId
+        }
+      }).then(recipeDetails => {
+        if (recipeDetails) {
+          if (!req.decoded || req.decoded.id !== recipeDetails.userId) {
+            // updat eview
+            recipes.update({
+              views: recipeDetails.views + 1
+            }, 
+            {
+              where: {
+                id: req.params.recipeId
+              }
+            });
+          }
+          reviews.findAll({
+            where: {
+              recipeId: req.params.recipeId
+            }
+          }).then(recipeReviews =>{
+            const reviews = (recipeReviews.length <= 0)? 'No reviews yet': recipeReviews;
+            return res.status(200).json({
+              recipeDetails,
+              reviews: reviews
+            });
+          });
 
-  } */
+        } else {
+          return res.status(400).json({
+            message: 'Recipe Not found'
+          });
+        }
+      });
+  }
 }
 
 export default Recipes;
