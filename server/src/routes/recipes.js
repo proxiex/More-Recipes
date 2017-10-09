@@ -1,6 +1,6 @@
 import express from 'express';
 import Recipes from '../controller/recipes';
-import Auth from '../middleware';
+import Auth from '../middleware/auth';
 import Reviews from '../controller/reviews';
 import Favorites from '../controller/favorites';
 import Votes from '../controller/votes';
