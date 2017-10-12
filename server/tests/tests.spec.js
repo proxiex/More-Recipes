@@ -9,6 +9,7 @@ const should = chai.should();
 chai.use(chaiHttp);
 
 let token;
+let id;
 
 describe('More Recipes', () => {
   it('should get the home page', (done) => {
@@ -34,6 +35,9 @@ describe('More Recipes', () => {
   });
 });
 
+/////////////////////////
+//// *** USERS *** ///
+///////////////////////
 
 describe('Users', () => {
   db
@@ -42,7 +46,98 @@ describe('Users', () => {
       cascade: true, 
       truncate: true
     });
+    
+  it('should not let user sign up with no first name', (done) => {
+    chai.request(app)
+      .post('/api/v1/users/signup')
+      .send(fakeData.noFirstNameUsers)
+      .end((err, res) => {
+        res.should.have.status(400);
+        res.should.be.json;
+        res.body.should.be.a('object');
+        res.body.should.have.property('message').equal('Please Enter First Name');
+        done();
+      });
+  });
+    
+  it('should not let user sign up with no last name', (done) => {
+    chai.request(app)
+      .post('/api/v1/users/signup')
+      .send(fakeData.noLastNameUsers)
+      .end((err, res) => {
+        res.should.have.status(400);
+        res.should.be.json;
+        res.body.should.be.a('object');
+        res.body.should.have.property('message').equal('Please Enter Last Name');
+        done();
+      });
+  });
   
+  it('should not let user sign up with no username', (done) => {
+    chai.request(app)
+      .post('/api/v1/users/signup')
+      .send(fakeData.noUsernameUsers)
+      .end((err, res) => {
+        res.should.have.status(400);
+        res.should.be.json;
+        res.body.should.be.a('object');
+        res.body.should.have.property('message').equal('Please Enter Username');
+        done();
+      });
+  });
+  
+  it('should not let user sign up with no email', (done) => {
+    chai.request(app)
+      .post('/api/v1/users/signup')
+      .send(fakeData.noEmailUsers)
+      .end((err, res) => {
+        res.should.have.status(400);
+        res.should.be.json;
+        res.body.should.be.a('object');
+        res.body.should.have.property('message').equal('Please Enter Email');
+        done();
+      });
+  });
+  
+  it('should not let user sign up with no password', (done) => {
+    chai.request(app)
+      .post('/api/v1/users/signup')
+      .send(fakeData.noPasswordUsers)
+      .end((err, res) => {
+        res.should.have.status(400);
+        res.should.be.json;
+        res.body.should.be.a('object');
+        res.body.should.have.property('message').equal('Please Enter password');
+        done();
+      });
+  });
+    
+  it('should not let user sign up with password less than 6', (done) => {
+    chai.request(app)
+      .post('/api/v1/users/signup')
+      .send(fakeData.lessPass)
+      .end((err, res) => {
+        res.should.have.status(400);
+        res.should.be.json;
+        res.body.should.be.a('object');
+        res.body.should.have.property('message').equal('Password is too short!');
+        done();
+      });
+  });
+  
+  it('should not let user sign up with password mismatch', (done) => {
+    chai.request(app)
+      .post('/api/v1/users/signup')
+      .send(fakeData.passMismatchUsers)
+      .end((err, res) => {
+        res.should.have.status(400);
+        res.should.be.json;
+        res.body.should.be.a('object');
+        res.body.should.have.property('message').equal('Password Missmatch!');
+        done();
+      });
+  });
+    
   it('should let users sign up /signup POST', (done) => {
     chai.request(app)
       .post('/api/v1/users/signup')
@@ -54,31 +149,15 @@ describe('Users', () => {
         done();
       });
   });
-
+  
   it('should not let user sign up with the same email twice', (done) => {
     chai.request(app)
       .post('/api/v1/users/signup')
       .send(fakeData.newUsers)
       .end((err, res) => {
-        //console.log(err)
         res.should.have.status(400);
         res.should.be.json;
         res.body.should.be.a('object');
-        // res.body.should.have.property('message').equal('User already Exist!');
-        done();
-      });
-  });
-    
-  it('should not let user sign up with no email address', (done) => {
-    chai.request(app)
-      .post('/api/v1/users/signup')
-      .send(fakeData.noEmailUsers)
-      .end((err, res) => {
-        //console.log(err)
-        res.should.have.status(400);
-        res.should.be.json;
-        res.body.should.be.a('object');
-        res.body.should.have.property('message').equal('Please Enter Email');
         done();
       });
   });
@@ -93,7 +172,6 @@ describe('Users', () => {
       .send(User)
       .end((err, res) => {
         token = res.body.Token;
-        // console.log(token);
         res.should.have.status(200);
         res.should.be.json;
         res.body.should.be.a('object');
@@ -122,6 +200,10 @@ describe('Users', () => {
 
 });
 
+/////////////////////////
+//// *** RECIPES *** ///
+///////////////////////
+
 describe('Recipes', () => {
   const recipes = {
     recipeName: 'recipeName',
@@ -136,7 +218,6 @@ describe('Recipes', () => {
       .post('/api/v1/recipes')
       .send(recipes)
       .end((err, res) => {
-        // console.log(err);
         res.should.have.status(401);
         res.should.be.json;
         res.body.should.be.a('object');
@@ -151,7 +232,6 @@ describe('Recipes', () => {
       .send(recipes)
       .set('x-token', 'this sia bungo iasd ionoiapdif')
       .end((err, res) => {
-        // console.log(err);
         res.should.have.status(403);
         res.should.be.json;
         res.body.should.be.a('object');
@@ -166,7 +246,7 @@ describe('Recipes', () => {
       .send(recipes)
       .set('x-token', token)
       .end((err, res) => {
-        console.log(err);
+        id = res.body.id;
         res.should.have.status(201);
         res.should.be.json;
         res.body.should.be.a('object');
@@ -177,13 +257,12 @@ describe('Recipes', () => {
   
   it('should let authorized user Modify new recipe', (done) => {
     chai.request(app)
-      .put('/api/v1/recipes/1')
+      .put('/api/v1/recipes/'+id)
       .send({
         method: 'This is a simple meal that we all need to have at the end of the day so enjoy'
       })
       .set('x-token', token)
       .end((err, res) => {
-        console.log(err);
         res.should.have.status(200);
         res.should.be.json;
         res.body.should.be.a('object');
@@ -196,7 +275,6 @@ describe('Recipes', () => {
     chai.request(app)
       .get('/api/v1/recipes')
       .end((err, res) => {
-        // console.log(err);
         res.should.have.status(200);
         res.should.be.json;
         // res.body.should.have.property('message').equal('User does NOT exist!');
@@ -206,9 +284,8 @@ describe('Recipes', () => {
     
   it('should let unauthorized user delete a recipe', (done) => {
     chai.request(app)
-      .delete('/api/v1/recipes/1')
+      .delete('/api/v1/recipes/'+id)
       .end((err, res) => {
-        // console.log(err);
         res.should.have.status(401);
         res.should.be.json;
         // res.body.should.have.property('message').equal('User does NOT exist!');
@@ -221,7 +298,6 @@ describe('Recipes', () => {
       .delete('/api/v1/recipes/me')
       .set('x-token', token)
       .end((err, res) => {
-        // console.log(err);
         res.should.have.status(400);
         res.should.be.json;
         res.body.should.have.property('message').equal('Parameter must be a number!');
@@ -237,7 +313,6 @@ describe('Favorite Recipes', () => {
       .post('/api/v1/recipes/12202/favorites')
       .set('x-token', token)
       .end((err, res) => {
-        // console.log(err);
         res.should.have.status(404);
         res.should.be.json;
         res.body.should.have.property('message').equal('Recipe Not found!');
@@ -247,10 +322,9 @@ describe('Favorite Recipes', () => {
     
   it('should Favorite a recipe', (done) => {
     chai.request(app)
-      .post('/api/v1/recipes/1/favorites')
+      .post('/api/v1/recipes/'+id+'/favorites')
       .set('x-token', token)
       .end((err, res) => {
-        // console.log(err);
         res.should.have.status(201);
         res.should.be.json;
         res.body.should.have.property('message').equal('Recipe Favorited!');
@@ -260,10 +334,9 @@ describe('Favorite Recipes', () => {
     
   it('should return error for recipe already favorited', (done) => {
     chai.request(app)
-      .post('/api/v1/recipes/1/favorites')
+      .post('/api/v1/recipes/'+id+'/favorites')
       .set('x-token', token)
       .end((err, res) => {
-        // console.log(err);
         res.should.have.status(400);
         res.should.be.json;
         res.body.should.have.property('message').equal('Recipe already Favorited');
@@ -275,10 +348,9 @@ describe('Favorite Recipes', () => {
 
   it('should let authorized user delete a recipe', (done) => {
     chai.request(app)
-      .delete('/api/v1/recipes/1')
+      .delete('/api/v1/recipes/'+id)
       .set('x-token', token)
       .end((err, res) => {
-        // console.log(err);
         res.should.have.status(200);
         res.should.be.json;
         // res.body.should.have.property('message').equal('User does NOT exist!');
