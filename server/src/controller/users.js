@@ -86,7 +86,7 @@ class Users {
       .findById(userId).then(UserDetails => {
         // -- total number of recipes created by user
         const details = {
-          firstName: UserDetails.firstName,
+          Names: UserDetails.firstName + ' ' + UserDetails.lastName,
           email: UserDetails.email,
           username: UserDetails.username
         };
@@ -129,6 +129,55 @@ class Users {
         });
       });
   }
+    
+  updateProfile(req, res) {
+    // fetch user details from decoded.
+    let updateFields = {};
+    const { firstName, lastName, oldPassword, newPassword } = req.body;
+    users.findById(req.decoded.id).then(foundUser => {
+      if (firstName) {
+        updateFields.firstName = req.body.firstName;
+      } 
+
+      if (lastName) {
+        updateFields.lastName = lastName;
+      } 
+
+      if (oldPassword && newPassword.length > 6){
+        if (bcrypt.compareSync(oldPassword, foundUser.password)) {
+          updateFields.password =  bcrypt.hashSync(newPassword, 10);
+        } else {
+          return res.status(400).json({
+            message: 'Incorrect Old password'
+          });
+        }
+      } else {
+        return res.status(400).json({
+          message: 'Password is too short'
+        });
+      }
+      foundUser.update(
+        updateFields,
+        {
+          where: {
+            id: req.decoded.id
+          }
+        }).then(() => {
+        return res.status(200).json({
+          message: 'Updated Succesfully!',
+        });
+      });
+    })
+      .catch(err => {
+        console.log(err);
+        return res.status(500).json({
+          message: 'Some error occured!'
+        });
+      });
+    // collect data from user.
+    // update where nessary 
+  }
+
 }
 
 export default Users;
