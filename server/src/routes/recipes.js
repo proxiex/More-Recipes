@@ -26,7 +26,7 @@ router.post('/favorites', Auth.Verify, favoritesController.add);
 router.get('/:userId',  Auth.Verify, Validate.userId, favoritesController.get);
 
 router.post('/:recipeId/reviews', Auth.Verify,  Validate.recipeId, reviewController.add); 
-router.post('/:recipeId/vote', Auth.Verify, Validate.recipeId, voteController.votes);
+router.post('/:recipeId/votes', Auth.Verify, Validate.recipeId, voteController.votes);
 
 
 
