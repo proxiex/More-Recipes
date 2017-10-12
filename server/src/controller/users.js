@@ -58,7 +58,7 @@ class Users {
           return res.status(400).json({
             message: 'Incorrect signin credentials!'
           });
-        } else if (bcrypt.compareSync(req.body.password, found.password)) {
+        } else if (bcrypt.compareSync(password, found.password)) {
           const token = jwt.sign({id: found.id}, key, {
             expiresIn: 60 * 60 * 24 // Token expires in 24 hours
           });

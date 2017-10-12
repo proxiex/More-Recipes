@@ -39,42 +39,45 @@ class Recipes {
     }).then(found => {
       if(found) {
         if (recipeName) {
-          updateFields.recipeName = req.body.recipeName;
+          updateFields.recipeName = recipeName;
         } 
         
         if (mealType) {
-          updateFields.mealType = req.body.mealType;
+          updateFields.mealType = mealType;
         } 
         
         if (description) {
-          updateFields.description = req.body.description;
+          updateFields.description = description;
         } 
         
         if (method) {
-          updateFields.method = req.body.method;
+          updateFields.method = method;
         } 
         
         if (ingredients) {
-          updateFields.ingredients = req.body.ingredients;
-        } else {
+          updateFields.ingredients = ingredients;
+        } 
+        if (updateFields.length < 0 ){
           return res.status(200).json({
             Message: 'Nothing to update!'
           });
-        }
-        //  console.log(updateFields);
-        found.update( 
-          updateFields, 
-          {
-            where: {
-              userId: req.decoded.id,
-              id: id
-            }
-          }).then((updated) => {
-          return res.status(200).json({
-            Message: 'Succesfully Updated Recipe',
-            updated
+        } else {
+          console.log(updateFields);
+
+          found.update( 
+            updateFields, 
+            {
+              where: {
+                userId: req.decoded.id,
+                id: id
+              }
+            }).then((updated) => {
+            return res.status(200).json({
+              Message: 'Succesfully Updated Recipe',
+              updated
+            });
           });
-        });
+        }
       } else {
         return res.status(401).json({
           message: 'You cannot modify this Recipe!'

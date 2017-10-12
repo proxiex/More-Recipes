@@ -15,6 +15,6 @@ router.get('/:userId/recipes', Auth.Verify, favoritesController.get);
 
 router.get('/me', Auth.Verify, usersController.profile);
 router.patch('/me', Auth.Verify, usersController.updateProfile);
-router.delete('/me', Auth.Verify, usersController.deleteAccount);
+// router.delete('/me', Auth.Verify, usersController.deleteAccount);
 
 export default router;
