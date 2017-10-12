@@ -7,10 +7,14 @@ require('dotenv').config();
 
 const key = process.env.SECRET_KEY;
 const users = db.users;
+const recipes = db.recipes;
+const favorites = db.favorites;
+const reviews = db.reviews;
+const votes = db.votes;
 const Op = Sequelize.Op;
 
 class Users {
-  signup(req, res) {
+  signup (req, res) {
     const { firstName, lastName, username, email, password} = req.body;
     users.find({
       where: {
@@ -75,6 +79,56 @@ class Users {
       });
   }
 
+  profile (req, res) {
+    // - get user name
+    const userId = req.decoded.id;
+    return users
+      .findById(userId).then(UserDetails => {
+        // -- total number of recipes created by user
+        const details = {
+          firstName: UserDetails.firstName,
+          email: UserDetails.email,
+          username: UserDetails.username
+        };
+        recipes.findAndCountAll({
+          where: {
+            userId: userId
+          }
+        }).then(result => {
+          // collect an array of all users recipes.
+          let id = [];
+          for (let i = 0; i < result.rows.length; i++ ){
+            id.push(result.rows[i].id);
+          }
+          // - total number of favorites user recipe has
+          favorites.count({ where : { recipeId: id } }).then(totalFavorites =>{
+            // - total number of likes for user recipes
+            votes.count({ where:{ recipeId: id }}).then(totalVotes => {
+              // - recipes liked by user
+              votes.count({ where: { userId } }).then(userVotes => {
+                // - recipes favoried by user
+                favorites.count({ where: { userId } }).then(userFavorites => {
+                  return res.status(200).json({
+                    UserDetails: details,
+                    recipes: 'You have crated ' + result.count + ' recipes',
+                    Favorited: 'Your recipes have been Favorited ' + totalFavorites + ' times',
+                    TotalVotes: 'Your Recipes have recived a total of ' + totalVotes + ' Votes (up and donw)',
+                    UserVotes: 'You have voted (up and down) for ' + userVotes + ' recipes',
+                    UserFavorites: 'You have favorited ' + userFavorites + ' recipes'
+                  });
+                });
+              });
+            });
+          });
+        });
+      })
+      .catch(err => {
+        console.log(err);
+        return res.status(500).json({
+          message: 'Some error occured!'
+        });
+      });
+  }
 }
 
 export default Users;
