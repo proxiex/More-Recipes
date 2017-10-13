@@ -3,6 +3,7 @@ body {
 }
 
  .body {
+  background: url('imgs/post_1.jpg'); 
   background-size: cover;
 }
 
@@ -15,6 +16,7 @@ body {
 .padding-left {
   padding-left: 50px;
 }
+
 .parallax-container-bottm {
   margin-bottom: 0px;
 }
@@ -86,4 +88,8 @@ footer div {
   top: 0px;
   height: 500px;
   width: 100%;  
+}
+
+@media (max-width: 12450px) {
+
 }
