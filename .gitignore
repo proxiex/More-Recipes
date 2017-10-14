@@ -1,6 +1,7 @@
 node_modules/
 server/dist/
 .vscode/
+
 coverage/
 .nyc_output/
 .coveralls

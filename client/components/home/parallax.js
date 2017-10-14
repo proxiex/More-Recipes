@@ -1,11 +1,13 @@
 import React from 'react';
+import { Link } from 'react-router';
+import img from '../../assets/imgs/bg.jpg';
 
 export default () => {
   return (
     <div className="row  z-depth-1">
       <div id="index-banner" className="parallax-container">
         <div className="section no-pad-bot">
-          <div className="container" id="header">
+          <div className="container">
             <br/><br/>
             <h1 className="header center teal-text text-lighten-2 black-shadow">Create Your Recipes</h1>
             <div className="row center">
@@ -14,13 +16,13 @@ export default () => {
                 ​<br/>Ideas<br/> which You have​ ​Invented​ ​or​ ​Learnt</h5>
             </div>
             <div className="row center">
-              <a href="signup.html" id="download-button" className="btn-large waves-effect waves-light teal lighten-1">Signup Its Free </a>
+              <Link to="/signup" id="download-button" className="btn-large waves-effect waves-light teal lighten-1">Signup Its Free </Link>
             </div>
             <br/><br/>
 
           </div>
         </div>
-        <div className="parallax"><img src="bg.jpg" alt="Unsplashed background img 1"/></div>
+        <div className="parallax"><img src={img} alt="Unsplashed background img 1"/></div>
       </div>
     </div>
   )

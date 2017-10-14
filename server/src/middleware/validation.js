@@ -23,16 +23,8 @@ const Validation = {
   },
 
   userSignup(req, res, next) {
-    const { firstName, lastName, username, email, password, confirmPassword} = req.body;
-    if (!firstName || typeof firstName !== 'string') {
-      return res.status(400).json({
-        message: 'Please Enter First Name'
-      });
-    } else if (!lastName || typeof lastName !== 'string') {
-      return res.status(400).json({
-        message: 'Please Enter Last Name'
-      });
-    } else if (!username || typeof username !== 'string') {
+    const { username, email, password } = req.body;
+    if (!username || typeof username !== 'string') {
       return res.status(400).json({
         message: 'Please Enter Username'
       });
@@ -47,10 +39,6 @@ const Validation = {
     } else if (password.length < 6) {
       return res.status(400).json({
         message: 'Password is too short!'
-      });
-    } else if (password !== confirmPassword) {
-      return res.status(400).json({
-        message: 'Password Missmatch!'
       });
     }
     next();
