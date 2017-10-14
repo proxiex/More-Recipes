@@ -1,12 +1,10 @@
 export default (sequelize, DataTypes) => {
   const users = sequelize.define('users', {
     firstName: {
-      type: DataTypes.STRING,
-      allowNull: false,
+      type: DataTypes.STRING
     },
     lastName: {
-      type: DataTypes.STRING,
-      allowNull: false,
+      type: DataTypes.STRING
     },
     username: {
       type: DataTypes.STRING,
@@ -24,11 +22,15 @@ export default (sequelize, DataTypes) => {
     },
     password: {
       type: DataTypes.STRING,
-      allowNull: false,
-    /*   validate: {
-        len: []
-      } */
+      allowNull: false
+    },
+    inAppNotice: {
+      type: DataTypes.INTEGER
+    },
+    emailNotice: {
+      type: DataTypes.INTEGER
     }
+
   });  
 
   users.associate = (models) => {

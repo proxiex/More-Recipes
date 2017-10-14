@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router';
+import axios from 'axios';
 
 class SignupForm extends React.Component {
   constructor(props) {
@@ -19,7 +20,7 @@ class SignupForm extends React.Component {
 
   onSubmit(e) {
     e.preventDefault();
-    console.log(this.state);
+    axios.post('/api/v1/users/signup', this.state );
   }
 
   render() {

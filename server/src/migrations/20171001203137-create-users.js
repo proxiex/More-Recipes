@@ -9,12 +9,10 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       firstName: {
-        type: Sequelize.STRING,
-        allowNull: false
+        type: Sequelize.STRING
       },
       lastName: {
-        type: Sequelize.STRING,
-        allowNull: false
+        type: Sequelize.STRING
       },
       username: {
         type: Sequelize.STRING,
@@ -27,6 +25,14 @@ module.exports = {
       password: {
         type: Sequelize.STRING,
         allowNull: false
+      },
+      inAppNotice: {
+        type: Sequelize.INTEGER,
+        defaultValue: 0
+      },
+      emailNotice: {
+        type: Sequelize.INTEGER,
+        defaultValue: 0
       },
       createdAt: {
         allowNull: false,
