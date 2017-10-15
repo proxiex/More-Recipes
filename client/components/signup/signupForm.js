@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router';
-import axios from 'axios';
 
 class SignupForm extends React.Component {
   constructor(props) {
@@ -20,7 +19,8 @@ class SignupForm extends React.Component {
 
   onSubmit(e) {
     e.preventDefault();
-    axios.post('/api/v1/users/signup', this.state );
+    this.props.userSignupRequest(this.state);
+   
   }
 
   render() {
@@ -83,6 +83,10 @@ class SignupForm extends React.Component {
       </div>
     )
   }
+}
+
+SignupForm.propTypes = {
+  userSignupRequest: React.PropTypes.func.isRequired
 }
 
 export default SignupForm;
