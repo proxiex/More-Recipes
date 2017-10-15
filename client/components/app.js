@@ -1,15 +1,27 @@
-import React from 'react';
+import React, { Component } from 'react';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import NavigationBar from './navigationBar';
 import Footer from './footer';
+import HomePage from './home/homePage';
+import ReecipesPage from './recipes/recipePage';
+import SignupPage from './signup/signupPage';
+import SigninPage from './signin/signinPage';
 
-class App extends React.Component {
+class App extends Component {
   render() {
     return (
-      <div id="wrap">
-        <NavigationBar />
-        { this.props.children }
-        <Footer />
-      </div>
+      <BrowserRouter>
+        <div id="wrap">
+          <NavigationBar />
+            <Switch>
+              <Route path="/" exact component={HomePage} />
+              <Route path="/recipes" component={ReecipesPage} />    
+              <Route path="/signup" component={SignupPage} />    
+              <Route path="/signin" component={SigninPage} /> 
+            </Switch>
+          <Footer />
+        </div>
+      </BrowserRouter>
     );
   }
 }

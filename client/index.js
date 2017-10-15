@@ -1,6 +1,5 @@
 import React from 'react';
-import { render } from 'react-dom';
-import {Router, browserHistory } from 'react-router';
+import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 import { createStore, applyMiddleware } from 'redux';
@@ -8,7 +7,7 @@ import { createStore, applyMiddleware } from 'redux';
 import './assets/init';
 import './assets/style.css';
 
-import routes from './routes';
+import App from './components/app';
 
 const store = createStore(
   (state = {}) => state,
@@ -17,8 +16,9 @@ const store = createStore(
 
 
 
-render(
+ReactDOM.render(
   <Provider store={store}>
-    <Router history={ browserHistory } routes={ routes } />
-  </Provider> , document.getElementById('app')
+    <App />
+  </Provider>, 
+  document.getElementById('app')
 ); 
