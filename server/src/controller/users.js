@@ -36,7 +36,10 @@ class Users {
             username: username,
             email: email,
             password: bcrypt.hashSync(password, 10)
-          }).then(register => res.status(201).json(register))
+          }).then(register => res.status(201).json({
+            message: 'Signup succesfull',
+            register
+          }))
           .catch(error => res.status(400).json({ message: error.errors[0].message }));
       }
     });
