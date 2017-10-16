@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import TextFieldGroup from '../common/textFieldGroup';
 import validateInput from './validations';
@@ -38,14 +38,24 @@ class SignupForm extends React.Component {
     if (this.isValid()) {
       this.setState({ errors: {}, isLoading: true });
       this.props.userSignupRequest(this.state).then(
-        ({ a }) => this.setState({success: a }),
-        ({ data }) => this.setState({ errors: data })
+        () => {
+          this.props.addFlashMessage({
+            type: 'success',
+            text: 'You signed up sccessfully. Welcome!'
+          })
+          this.setState({ redirect: true});
+        },
+        ({ data }) => this.setState({ errors: data, isLoading: false })
       );
     }
   }
 
   render() {
     const { errors } = this.state;
+    const { redirect } = this.state;
+    if (redirect) {
+      return <Redirect to="/" />;
+    }
     return (
       <div className="card-panel">
         <form onSubmit={this.onSubmit} className="s12">
@@ -97,7 +107,9 @@ class SignupForm extends React.Component {
 }
 
 SignupForm.propTypes = {
-  userSignupRequest: PropTypes.func.isRequired
+  userSignupRequest: PropTypes.func.isRequired,
+  addFlashMessage: PropTypes.func.isRequired
+  
 }
 
 export default SignupForm;
