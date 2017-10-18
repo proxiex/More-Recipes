@@ -6,7 +6,7 @@ import { createStore, applyMiddleware, compose } from 'redux';
 import rootReducer from './rootReducer';
 
 import './assets/init';
-import './assets/style.css';
+import './assets/styles.scss';
 
 import App from './components/app';
 

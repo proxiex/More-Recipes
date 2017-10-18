@@ -67,7 +67,7 @@ class SignupForm extends React.Component {
             name="username"
             label="Username"
             type="text"
-            error={errors.username}
+            error={errors.username || errors.erusername}
           />
           <TextFieldGroup 
             icon="email"
@@ -77,7 +77,7 @@ class SignupForm extends React.Component {
             name="email"
             label="Email"
             type="text"
-            error={errors.email}
+            error={errors.email || errors.eremail}
           />
           <TextFieldGroup 
             icon="lock"
