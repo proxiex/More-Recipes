@@ -1,12 +1,27 @@
 import React from 'react';
+import SigninForm from './signinForm';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { userSigninRequest } from '../../actions/signinActions';
 
 class SigninPage extends React.Component {
   render () {
+    const { userSigninRequest } = this.props;
     return (
-      <div>
-        <h3>Signin page</h3>   
+      <div id="wrapper" className="contiainer center">
+        <div className="row">
+            <div className="col s12 m4 offset-m4">
+              <h4 className="white-text">Signin</h4>
+                <SigninForm userSigninRequest={userSigninRequest}  />
+            </div>      
+        </div>
       </div>
     );
   }
 }
-export default SigninPage;
+
+SigninPage.propTypes = {
+  userSigninRequest: PropTypes.func.isRequired
+}
+
+export default connect(null, { userSigninRequest })(SigninPage);
