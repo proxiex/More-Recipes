@@ -16,7 +16,7 @@ const TextFieldGroup = ({ icon, value, onChange, id, type, name, label, error })
           name={name}
          
         />
-        <label className="red-text" htmlFor={id}>{label}</label>
+        <label className={classnames('', {'red-text': error})} htmlFor={id}>{label}</label>
       </div>
       {error && <span className="red-text">{error}</span>}
     </div>
