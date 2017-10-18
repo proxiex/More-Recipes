@@ -15,7 +15,7 @@ const Op = Sequelize.Op;
 
 class Users {
   signup (req, res) {
-    const { firstName, lastName, username, email, password} = req.body;
+    const { username, email, password} = req.body;
     users.find({
       where: {
         [Op.or]: [
@@ -25,14 +25,25 @@ class Users {
       }
     }).then(found => {
       if (found) {
-        res.status(400).json({
-          message: 'User already Exist!'
+        let eremail;
+        let erusername;
+
+        if (found.email === email) {
+          eremail = 'Email is already in use';
+        } 
+
+        if (found.username === username) {
+          erusername = 'Username already taken';
+        }
+
+        return res.status(400).json({
+          eremail,
+          erusername
         });
+
       } else {
         return users
           .create({
-            firstName: firstName,
-            lastName: lastName,
             username: username,
             email: email,
             password: bcrypt.hashSync(password, 10)
@@ -125,8 +136,8 @@ class Users {
           });
         });
       })
-      .catch(err => {
-        console.log(err);
+      .catch(() => {
+        // console.log(err);
         return res.status(500).json({
           message: 'Some error occured!'
         });
@@ -171,8 +182,8 @@ class Users {
         });
       });
     })
-      .catch(err => {
-        console.log(err);
+      .catch(() => {
+        // console.log(err);
         return res.status(500).json({
           message: 'Some error occured!'
         });

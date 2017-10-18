@@ -26,24 +26,27 @@ const Validation = {
     const { username, email, password } = req.body;
     if (!username || typeof username !== 'string') {
       return res.status(400).json({
-        message: 'Please Enter Username'
+        username: 'Please Enter Username'
       });
     } else if (!email || typeof email !== 'string') {
       return res.status(400).json({
-        message: 'Please Enter Email'
+        email: 'Please Enter Email'
       });
     } else if (!password || typeof  password !== 'string') {
       return res.status(400).json({
-        message: 'Please Enter password'
+        password: 'Please Enter password'
       });
     } else if (password.length < 6) {
       return res.status(400).json({
-        message: 'Password is too short!'
+        password: 'Password is too short!'
       });
+    } else {
+      next();
     }
-    next();
+    
+   
   },
-
+  
   userSignin(req, res, next) {
     const { username, password } = req.body;
     if (!username || typeof username !== 'string') {

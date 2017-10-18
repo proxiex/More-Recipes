@@ -73,6 +73,8 @@
     "chai-http": "^3.0.0",
     "eslint": "^4.7.2",
     "faker": "^4.1.0",
-    "mocha": "^3.5.3"
+    "mocha": "^3.5.3",
+    "node-sass": "^4.5.3",
+    "sass-loader": "^6.0.6"
   }
 }
