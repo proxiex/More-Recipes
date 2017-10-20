@@ -48,13 +48,14 @@ class SigninForm extends React.Component {
   }
 
   render() {
-    const { errors, redirect } = this.state;
+    const { errors, redirect, isLoading } = this.state;
 
     if (redirect) {
       return <Redirect to="/" />;
     }
     return (
       <div className="card-panel">
+      { isLoading ? <div className="green-text green lighten-4"> Checking Login Credeintials ... <br/></div> : ''}
       { errors.message && <div className="red-text red lighten-4"> {errors.message} <br/></div> }
         <br/>
         <form onSubmit={this.onSubmit} className="s12">
