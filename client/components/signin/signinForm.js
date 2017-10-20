@@ -1,7 +1,9 @@
 import React from 'react';
 import { Redirect, Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import TextFieldGroup from '../common/textFieldGroup';
+import { userSigninRequest } from '../../actions/signinActions';
 import validateInput from './validations';
 
 class SigninForm extends React.Component {
@@ -15,10 +17,6 @@ class SigninForm extends React.Component {
     }
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
-  }
-
-  onChange(e) {
-    this.setState({ [e.target.name]: e.target.value });
   }
 
   isValid() {
@@ -37,7 +35,7 @@ class SigninForm extends React.Component {
     if (this.isValid()) {
       this.setState({ errors: {}, isLoading: true });
       this.props.userSigninRequest(this.state).then(
-        () => {
+        (res) => {
           this.setState({ redirect: true});
         },
         ({ data }) => this.setState({ errors: data, isLoading: false })
@@ -45,16 +43,19 @@ class SigninForm extends React.Component {
     }
   }
 
+  onChange(e) {
+    this.setState({ [e.target.name]: e.target.value });
+  }
+
   render() {
-    const { errors } = this.state;
-    const { redirect } = this.state;
+    const { errors, redirect } = this.state;
+
     if (redirect) {
       return <Redirect to="/" />;
     }
     return (
-    
       <div className="card-panel">
-      { errors.message && <span className="red-text"> {errors.message} <br/></span> }
+      { errors.message && <div className="red-text red lighten-4"> {errors.message} <br/></div> }
         <br/>
         <form onSubmit={this.onSubmit} className="s12">
           <TextFieldGroup 
@@ -98,4 +99,4 @@ SigninForm.propTypes = {
   userSigninRequest: PropTypes.func.isRequired  
 }
 
-export default SigninForm;
+export default connect(null, { userSigninRequest })(SigninForm);

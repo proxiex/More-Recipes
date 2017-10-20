@@ -9,12 +9,14 @@ $(document).ready(function() {
   $('.carousel').carousel();
 });
 
-$(".recipes").dropdown();
-  (function($){
-    $(function(){
+$('.recipes').dropdown();
+$('.dropdown-button').dropdown();
+
+(function($){
+  $(function(){
 
     $('.button-collapse').sideNav();
     $('.parallax').parallax();
 
-   }); // end of document ready
+  }); // end of document ready
 })(jQuery); // end of jQuery name space
