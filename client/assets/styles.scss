@@ -90,6 +90,19 @@ footer div {
   width: 100%;  
 }
 
+  /// loged in
+
+#welcome {
+  color: #000;
+}
+
+#welcome > i {
+  display: inline-block;
+  padding-right: 1%;
+  line-height: 0;
+  vertical-align: middle;
+}
+
 @media (min-width: 320px) and (max-width: 498px) {
   #logo-container {
     width: 50%;
