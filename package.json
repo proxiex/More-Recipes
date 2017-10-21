@@ -6,14 +6,14 @@
   "scripts": {
     "test": "nyc --reporter=html --reporter=text mocha ./server/tests/ --compilers js:babel-register",
     "test:dev": "sequelize db:migrate:undo:all && mocha ./server/tests/* --compilers js:babel-register",
-    "start": "nodemon ./server/dist/app.js",
-    "react": "nodemon --watch server --exec babel-node -- server/src/app.js",
-    "hot": "webpack-dev-server --hot",
+    "start": "nodemon ./server/dist/server.js",
+    "react": "nodemon --watch server --exec babel-node -- server/src/server.js",
+    "hot": "webpack-dev-server --hot --config ./webpack.dev.client.js",
     "build": "babel ./server/src -d ./server/dist",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
     "coveralls": "nyc --reporter=lcov --reporter=text-lcov npm test",
     "postinstall": "npm run build",
-    "start:dev": "nodemon --watch server/src --exec babel-node  -- server/src/app.js"
+    "start:dev": "nodemon --watch server/src --exec babel-node  -- server/src/server.js"
   },
   "repository": {
     "type": "git",
