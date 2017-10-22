@@ -49,7 +49,7 @@ class SigninForm extends React.Component {
 
   render() {
     const { errors, redirect, isLoading } = this.state;
-
+    
     if (redirect) {
       return <Redirect to="/" />
     }
