@@ -19,7 +19,7 @@ class NavigationBar extends Component {
         
         <ul className="right hide-on-med-and-down">
           <li id="welcome">{ isAuthenticated ? <span> Welcome User </span> : '' }  </li>
-          <li><Link className="active" to="index.html">Home</Link ></li>
+          <li><Link className="active" to="/">Home</Link ></li>
           <li>
               <Link to="" className="dropdown-button" data-activates="recipes">
                   Recipes
@@ -34,31 +34,31 @@ class NavigationBar extends Component {
           </li>
         </ul>
         <ul id="recipes" className="dropdown-content">
-            <li><Link to="my_recipes.html"><i className="material-icons">view_list</i>Mine</Link ></li>
-            <li><Link to="recipes.html"><i className="material-icons">view_list</i>View</Link ></li>
-            <li><Link to="add_recipes.html"><i className="material-icons">note_add</i>Add</Link ></li>
-            <li><Link to="favorite.html"><i className="material-icons">favorite</i> Fav's</Link ></li>
-            <li><Link to="trash.html"><i className="material-icons">delete</i>Trash</Link ></li>
+            <li><Link to="/my-recipes"><i className="material-icons">view_list</i>Mine</Link ></li>
+            <li><Link to="/recipes"><i className="material-icons">view_list</i>View</Link ></li>
+            <li><Link to="/add-recipe"><i className="material-icons">note_add</i>Add</Link ></li>
+            <li><Link to="/favorite"><i className="material-icons">favorite</i> Fav's</Link ></li>
+            <li><Link to="/trash"><i className="material-icons">delete</i>Trash</Link ></li>
         </ul>
 
         <ul id="dropdown1" className="dropdown-content">
-            <li><Link to="profile.html"><i className="material-icons">account_circle</i>Profile</Link ></li>
-            <li><Link to="notifications.html"><i className="material-icons">notifications</i><span className="new badge red">4</span> Notifications </Link ></li>
-            <li><Link to="settings.html"><i className="material-icons">settings</i>Settings</Link ></li>
+            <li><Link to="/profile"><i className="material-icons">account_circle</i>Profile</Link ></li>
+            <li><Link to="/notifications"><i className="material-icons">notifications</i><span className="new badge red">4</span> Notifications </Link ></li>
+            <li><Link to="/settings"><i className="material-icons">settings</i>Settings</Link ></li>
             <li className="divider"></li>
             <li><a to="/logout" onClick={this.logout.bind(this)}><i className="material-icons">exit_to_app</i> Logout</a></li>
         </ul>
 
         <ul id="nav-mobile" className="side-nav">
-            <li><Link to="index.html"><i className="material-icons">home</i>Home</Link ></li>
-            <li><Link to="my_recipes.html"><i className="material-icons">view_list</i>My Recipes</Link ></li>                        
-            <li><Link to="recipes.html"><i className="material-icons">view_list</i>View Recipes</Link ></li>
-            <li><Link to="add_recipes.html"><i className="material-icons">note_add</i>Add Recipes </Link ></li>
-            <li><Link to="index.html"><i className="material-icons">favorite</i>Favorite</Link ></li>
-            <li><Link to="trash.html"><i className="material-icons">delete</i>Trash</Link ></li>
-            <li><Link to="profile.html"><i className="material-icons">account_circle</i>Profile</Link ></li>
-            <li><Link to="notifications.html"><i className="material-icons">notifications</i><span className="new badge red">4</span> Notifications </Link ></li>
-            <li><Link to="settings.html"><i className="material-icons">settings</i>Settings</Link ></li>
+            <li><Link to="/"><i className="material-icons">home</i>Home</Link ></li>
+            <li><Link to="/my-recipes"><i className="material-icons">view_list</i>My Recipes</Link ></li>                        
+            <li><Link to="/recipes"><i className="material-icons">view_list</i>View Recipes</Link ></li>
+            <li><Link to="/add-recipe"><i className="material-icons">note_add</i>Add Recipes </Link ></li>
+            <li><Link to="/favorite"><i className="material-icons">favorite</i>Favorite</Link ></li>
+            <li><Link to="/trash"><i className="material-icons">delete</i>Trash</Link ></li>
+            <li><Link to="/profile"><i className="material-icons">account_circle</i>Profile</Link ></li>
+            <li><Link to="/notifications"><i className="material-icons">notifications</i><span className="new badge red">4</span> Notifications </Link ></li>
+            <li><Link to="/settings"><i className="material-icons">settings</i>Settings</Link ></li>
             <li className="divider"></li>
             <li><a to="/logout" onClick={this.logout.bind(this)}><i className="material-icons">exit_to_app</i> Logout</a></li>
         </ul>

@@ -7,9 +7,9 @@ const Materialize = window.Materialize;
 
 export default function(ComposedComponent) {
   class Authenticate extends Component {
-
+    
     render() {
-       if (!this.props.isAuthenticated) {
+      if (!this.props.isAuthenticated) {
         Materialize.toast('Login to proceed', 4000, 'red darken-3');
         return <Redirect to="/signin" />
       }
