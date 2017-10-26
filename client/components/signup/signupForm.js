@@ -41,7 +41,10 @@ class SignupForm extends React.Component {
         () => {
           this.setState({ redirect: true});
         },
-        ({ data }) => this.setState({ errors: data, isLoading: false })
+
+        (err) => {
+          this.setState({ errors: err.response.data, isLoading: false }) 
+        }
       );
     }
   }
@@ -49,6 +52,7 @@ class SignupForm extends React.Component {
   render() {
     const { errors } = this.state;
     const { redirect } = this.state;
+
     if (redirect) {
       return <Redirect to="/" />;
     }
@@ -103,8 +107,7 @@ class SignupForm extends React.Component {
 }
 
 SignupForm.propTypes = {
-  userSignupRequest: PropTypes.func.isRequired,
-  addFlashMessage: PropTypes.func.isRequired
+  userSignupRequest: PropTypes.func.isRequired
   
 }
 

@@ -7,13 +7,13 @@ import { addFlashMessage } from '../../actions/flashMessages';
 
 class SignupPage extends React.Component {
   render () {
-    const { userSignupRequest, addFlashMessage } = this.props;
+    const { userSignupRequest } = this.props;
     return (
       <div id="wrapper" className="contiainer center">
         <div className="row">
             <div className="col s12 m4 offset-m4">
               <h4 className="white-text">Signup</h4>
-                <SignupForm userSignupRequest={userSignupRequest} addFlashMessage={addFlashMessage}  />
+                <SignupForm userSignupRequest={userSignupRequest} />
             </div>      
         </div>
       </div>
@@ -22,8 +22,7 @@ class SignupPage extends React.Component {
 }
 
 SignupPage.propTypes = {
-  userSignupRequest: PropTypes.func.isRequired,
-  addFlashMessage: PropTypes.func.isRequired
+  userSignupRequest: PropTypes.func.isRequired
 }
 
-export default connect(null, { userSignupRequest, addFlashMessage })(SignupPage);
+export default connect(null, { userSignupRequest })(SignupPage);

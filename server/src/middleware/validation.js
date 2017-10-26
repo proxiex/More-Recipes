@@ -65,24 +65,24 @@ const Validation = {
     const { recipeName, mealType, description, method, ingredients } = req.body;
     if (!recipeName || typeof recipeName !== 'string') {
       return res.status(400).json({
-        message: 'Please Enter Recipe Name'
+        recipeName: 'Please Enter Recipe Name'
       });
     }  else if (!mealType || typeof mealType !== 'string') {
       return res.status(400).json({
-        message: 'Please Enter Meal Type'
+        mealType: 'Please Enter Meal Type'
       });
     } else if (!description || typeof description !== 'string') {
       return res.status(400).json({
-        message: 'Please Enter Description'
+        description: 'Please Enter Description'
       });
     } else if (!method || typeof method !== 'string') {
       return res.status(400).json({
-        message: 'Please Enter Method'
+        method: 'Please Enter Method'
       });
     } 
     else if (!ingredients || typeof ingredients !== 'string') {
       return res.status(400).json({
-        message: 'Please Enter Ingredients'
+        ingredients: 'Please Enter Ingredients'
       });
     }
     next();

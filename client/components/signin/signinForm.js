@@ -38,7 +38,9 @@ class SigninForm extends React.Component {
         (res) => {
           this.setState({ redirect: true});
         },
-        ({ data }) => this.setState({ errors: data, isLoading: false })
+        ( err ) => { 
+          console.log(err);
+          this.setState({ errors: err.response.data, isLoading: false }) }
       );
     }
   }
@@ -99,7 +101,7 @@ class SigninForm extends React.Component {
 }
 
 SigninForm.propTypes = {
-  userSigninRequest: PropTypes.func.isRequired  
+  userSigninRequest: PropTypes.func.isRequired
 }
 
 export default connect(null, { userSigninRequest })(SigninForm);
