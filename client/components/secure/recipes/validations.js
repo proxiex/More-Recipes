@@ -1,32 +1,40 @@
 import Validator from 'validator';
 import isEmpty from 'lodash/isEmpty';
 
-export default function validateInput (data, errors={}) {
+export default function validateInput (data) {
 
+  let errors={};
+  
   const errMsg = 'This field is required';
 
-  if (Validator.isNull(data.file)) {
-    errors.file = errMsg;
+  if (!data.imageUrl) {
+    errors.recipeImage = errMsg;
   }
 
   if (Validator.isNull(data.recipeName)) {
     errors.recipeName = errMsg;
 
-  } 
+  }
   
-  if (!Validator.isEmail(data.email)) {
-    errors.email = 'Email is invalid';
+  if (Validator.isNull(data.description)) {
+    errors.description = errMsg;
+
   }
 
-  if (Validator.isNull(data.password)) {
-    errors.password = errMsg;
+  if (Validator.isNull(data.mealType)) {
+    errors.mealType = errMsg;
     
-  } 
-  
-  if (data.password.length < 6) {
-    errors.password = 'Password is Tooooo Short';
   }
 
+  if (Validator.isNull(data.ingredients)) {
+    errors.ingredients = errMsg;
+
+  }
+
+  if (Validator.isNull(data.method)) {
+    errors.method = errMsg;
+
+  }
   return {
     errors,
     isValid: isEmpty(errors)

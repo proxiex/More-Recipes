@@ -7,19 +7,23 @@ const reviews = db.reviews;
 
 class Recipes {
   add(req, res) {
-    const { recipeName, mealType, description, method, ingredients } = req.body;
+    console.log(req.body);
+
+    const { recipeImage, recipeName, mealType, description, method, ingredients } = req.body;
     return recipes
       .create({
         userId: req.decoded.id,
-        recipeName: recipeName,
-        mealType: mealType,
-        description: description,
-        method: method,
-        ingredients: ingredients
+        recipeImage,
+        recipeName,
+        mealType,
+        description,
+        method,
+        ingredients
       }).then(created => {
         return res.status(201).json(created);
       })
-      .catch(() => {
+      .catch((err) => {
+        console.log(err);
         return res.status(500).json({
           message: 'Some error occured!'
         });

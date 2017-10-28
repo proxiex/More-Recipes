@@ -5,8 +5,8 @@ import PropTypes from 'prop-types';
 const TextFieldGroup = ({ icon, value, onChange, id, type, name, label, error }) => {
   return (
     <div className="row">
-      <div className="input-field s12">
-        <i className="material-icons prefix">{icon}</i>
+      <div className="input-field col s12">
+       {icon && <i className="material-icons prefix">{icon}</i> }
         <input 
           value={value}
           onChange={onChange}
@@ -17,14 +17,14 @@ const TextFieldGroup = ({ icon, value, onChange, id, type, name, label, error })
          
         />
         <label className={classnames('', {'red-text': error})} htmlFor={id}>{label}</label>
-      </div>
-      {error && <span className="red-text">{error}</span>}
+        {error && <span className="red-text">{error}</span>}
+      </div>     
     </div>
   );
 };
 
 TextFieldGroup.propTypes = {
-  icon: PropTypes.string.isRequired,
+  icon: PropTypes.string,
   value: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
   id: PropTypes.string.isRequired,
