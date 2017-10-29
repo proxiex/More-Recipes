@@ -206,6 +206,7 @@ describe('Users', () => {
 
 describe('Recipes', () => {
   const recipes = {
+    recipeImage: 'http://www.url.here.com/this-cool',
     recipeName: 'recipeName',
     mealType: 'mealType',
     description: 'description',

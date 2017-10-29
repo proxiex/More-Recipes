@@ -21,14 +21,13 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use('/api/v1/users', users);
 app.use('/api/v1/recipes', recipes);
 
-
-app.use(webpackMiddleware(compiler));
-
-app.use(webpackHotMiddleware(compiler, {
+app.use(webpackMiddleware(compiler, {
   hot: true,
   publicPath: webpackConfig.output.publicPath,
   noInfo: true
 }));
+
+app.use(webpackHotMiddleware(compiler));
 
 app.get('/*', (req, res) => {
   res.status(200).sendFile(path.join(__dirname, '../../client/index.html'));

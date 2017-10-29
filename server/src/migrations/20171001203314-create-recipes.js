@@ -18,6 +18,10 @@ module.exports = {
           as: 'userId'
         }
       },
+      recipeImage: {
+        type: Sequelize.STRING,
+        allowNull: false
+      },
       recipeName: {
         type: Sequelize.STRING,
         allowNull: false

@@ -8,6 +8,10 @@ export default (sequelize, DataTypes) =>  {
         key: 'id'
       }
     },
+    recipeImage: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
     recipeName: {
       type: DataTypes.STRING,
       allowNull: false
