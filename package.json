@@ -62,7 +62,7 @@
     "react-hot-loader": "^3.0.0",
     "react-redux": "^4.4.5",
     "react-router": "^4.2.0",
-    "react-router-dom": "^4.2.2",
+    "react-router-dom": "^4.1.1",
     "redux": "^3.7.2",
     "redux-file-upload": "0.0.19",
     "redux-form": "^7.1.1",

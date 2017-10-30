@@ -1,7 +1,49 @@
 import React from 'react';
+import { getAllRecipeAction } from '../../actions/getAllRecipeAction';
+import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 class RecipePage extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      recipes: []
+    }
+    //this.getAllRecipe = this.getAllRecipe.bind(this);
+  }
+
+  
+  componentWillMount() {
+    this.props.getAllRecipeAction().then( 
+      (recipes) => {
+      this.setState({ recipes:  recipes.data })
+    })
+  }
+ 
   render () {
+    const { recipes } = this.state;   
+    const allRecipes = recipes.map(recipe =>
+      <div className="col s12 m4" key={recipe.id}>
+        <div className="card">
+          <div className="card-image">
+            <img src={recipe.recipeImage} alt={recipe.recipeName +' Image'} height="230" width="400"/>
+          </div>
+          <div className="card-content">
+            <p>By <a href="recipe_by.html">Samuel Longshak</a></p>
+            <p><a href="meal_type.html">{recipe.mealType}</a></p>
+            <Link to={"/recipe-details/"+recipe.id}><span className="card-title">{recipe.recipeName}</span></Link>
+            <div className="divider"></div>
+            <div className="row">
+              <div className="col m4"><span className="left"><i className="material-icons">remove_red_eye</i>{recipe.views}</span></div>
+              <div className="col m4"><span className="right"><i className="material-icons">thumb_down</i> {recipe.downVotes}</span></div>  
+              <div className="col m4"> &nbsp;&nbsp;&nbsp; <span className=""><i className="material-icons">thumb_up</i>{recipe.upVotes}</span></div>
+            </div>
+          </div>
+        </div>
+      </div>  
+    )
+
     return (
         <div className="row">
          <div className="col m8 transparent-bg">
@@ -13,178 +55,12 @@ class RecipePage extends React.Component {
               </div>
             </div>
             <div className="row">
-
-              <div className="col s12 m4">
-                <div className="card">
-                  <div className="card-image">
-                    <img src="imgs/post_1.jpg" />
-                  </div>
-                  <div className="card-content">
-                    <p>By <a href="recipe_by.html">Samuel Longshak</a></p>
-                    <p><a href="meal_type.html">Snack</a></p>
-                    <a href="recipe_details.html"><span className="card-title">Pizza Mozzarella with Black Olives</span></a>
-                    <div className="divider"></div>
-                    <div className="row">
-                      <div className="col m4"><span className="left"><i className="material-icons">remove_red_eye</i> 3</span></div>
-                      <div className="col m4"> &nbsp;&nbsp;&nbsp; <span className=""><i className="material-icons">comment</i> 5</span></div>
-                      <div className="col m4"><span className="right"><i className="material-icons">favorite</i> 5</span></div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div className="col s12 m4">
-                <div className="card">
-                  <div className="card-image">
-                    <img src="imgs/post_2.jpg" />
-                  </div>
-                  <div className="card-content">
-                    <p>By <a href="recipe_by.html">Enloa Longshak</a></p>
-                    <p><a href="meal_type.html">Dessert</a></p>
-                    <a href="recipe_details.html"><span className="card-title">Healthier Christmas Recipe</span></a>
-                    <div className="row">
-                      <div className="col m4"><span className="left"><i className="material-icons">remove_red_eye</i> 3</span></div>
-                      <div className="col m4"> &nbsp;&nbsp;&nbsp; <span className=""><i className="material-icons">comment</i> 5</span></div>
-                      <div className="col m4"><span className="right"><i className="material-icons">favorite</i> 5</span></div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div className="col s12 m4">
-                <div className="card">
-                  <div className="card-image">
-                    <img src="imgs/post_3.jpg" />
-                  </div>
-                  <div className="card-content">
-                    <p>By <a href="recipe_by.html">Jane Samson</a></p>
-                    <p><a href="meal_type.html">Lunch</a></p>
-                    <a href="recipe_details.html"><span className="card-title">Spaghetti and Shrimps Tappings</span></a>
-                   <div className="row">
-                      <div className="col m4"><span className="left"><i className="material-icons">remove_red_eye</i> 3</span></div>
-                      <div className="col m4"> &nbsp;&nbsp;&nbsp; <span className=""><i className="material-icons">comment</i> 5</span></div>
-                      <div className="col m4"><span className="right"><i className="material-icons">favorite</i> 5</span></div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="row">
-              <div className="col m4"></div>
-              <div className="col m4"><h4 className="center">Recent Recipes</h4></div>
-              <div className="col m4"></div>
-            </div>
-            <div className="row">
-              <div className="col s12 m4">
-                <div className="card">
-                  <div className="card-image">
-                    <img src="imgs/post_4.jpg" />
-                  </div>
-                  <div className="card-content">
-                    <p>By <a href="recipe_by.html">Madung Gyang</a></p>
-                    <p><a href="meal_type.html">Lunch</a></p>
-                    <a href="recipe_details.html"><span className="card-title">Chicken Soup for Lunch and Dinner</span></a>
-                    <div className="row">
-                      <div className="col m4"><span className="left"><i className="material-icons">remove_red_eye</i> 3</span></div>
-                      <div className="col m4"> &nbsp;&nbsp;&nbsp; <span className=""><i className="material-icons">comment</i> 5</span></div>
-                      <div className="col m4"><span className="right"><i className="material-icons">favorite</i> 5</span></div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div className="col s12 m4">
-                <div className="card">
-                  <div className="card-image"> 
-                    <img src="imgs/post_5.jpg" />
-                  </div>
-                  <div className="card-content">
-                    <p>By <a href="recipe_by.html">Samuel Longshak</a></p>
-                    <p><a href="meal_type.html">Dessert</a></p>
-                    <a href="recipe_details.html"><span className="card-title">Italian Chicken Burritos with Onions</span></a>
-                    <div className="row">
-                      <div className="col m4"><span className="left"><i className="material-icons">remove_red_eye</i> 3</span></div>
-                      <div className="col m4"> &nbsp;&nbsp;&nbsp; <span className=""><i className="material-icons">comment</i> 5</span></div>
-                      <div className="col m4"><span className="right"><i className="material-icons">favorite</i> 5</span></div>
-                    </div>   
-                  </div>
-                </div>
-              </div>
-
-               <div className="col s12 m4">
-                <div className="card">
-                  <div className="card-image"> 
-                    <img src="imgs/post_6.jpg" />
-                  </div>
-                  <div className="card-content">
-                    <p>By <a href="recipe_by.html">Tapsuk Samson</a></p>
-                    <p><a href="meal_type.html">Dessert</a></p>
-                    <a href="recipe_details.html"><span className="card-title">Yummy Strawberry Pancake</span></a>
-                    <div className="row">
-                      <div className="col m4"><span className="left"><i className="material-icons">remove_red_eye</i> 3</span></div>
-                      <div className="col m4"> &nbsp;&nbsp;&nbsp; <span className=""><i className="material-icons">comment</i> 5</span></div>
-                      <div className="col m4"><span className="right"><i className="material-icons">favorite</i> 5</span></div>
-                    </div>   
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="row">
-              <div className="col s12 m4">
-                <div className="card">
-                  <div className="card-image">
-                    <img src="imgs/post_4.jpg" />
-                  </div>
-                  <div className="card-content">
-                    <p>By <a href="recipe_by.html">Madung Gyang</a></p>
-                    <p><a href="meal_type.html">Lunch</a></p>
-                    <a href="recipe_details.html"><span className="card-title">Chicken Soup for Lunch and Dinner</span></a>
-                    <div className="row">
-                      <div className="col m4"><span className="left"><i className="material-icons">remove_red_eye</i> 3</span></div>
-                      <div className="col m4"> &nbsp;&nbsp;&nbsp; <span className=""><i className="material-icons">comment</i> 5</span></div>
-                      <div className="col m4"><span className="right"><i className="material-icons">favorite</i> 5</span></div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div className="col s12 m4">
-                <div className="card">
-                  <div className="card-image"> 
-                    <img src="imgs/post_5.jpg" />
-                  </div>
-                  <div className="card-content">
-                    <p>By <a href="recipe_by.html">Samuel Longshak</a></p>
-                    <p><a href="meal_type.html">Dessert</a></p>
-                    <a href="recipe_details.html"><span className="card-title">Italian Chicken Burritos with Onions</span></a>
-                    <div className="row">
-                      <div className="col m4"><span className="left"><i className="material-icons">remove_red_eye</i> 3</span></div>
-                      <div className="col m4"> &nbsp;&nbsp;&nbsp; <span className=""><i className="material-icons">comment</i> 5</span></div>
-                      <div className="col m4"><span className="right"><i className="material-icons">favorite</i> 5</span></div>
-                    </div>   
-                  </div>
-                </div>
-              </div>
-
-               <div className="col s12 m4">
-                <div className="card">
-                  <div className="card-image"> 
-                    <img src="imgs/post_6.jpg" />
-                  </div>
-                  <div className="card-content">
-                    <p>By <a href="recipe_by.html">Tapsuk Samson</a></p>
-                    <p><a href="meal_type.html">Dessert</a></p>
-                    <a href="recipe_details.html"><span className="card-title">Yummy Strawberry Pancake</span></a>
-                    <div className="row">
-                      <div className="col m4"><span className="left"><i className="material-icons">remove_red_eye</i> 3</span></div>
-                      <div className="col m4"> &nbsp;&nbsp;&nbsp; <span className=""><i className="material-icons">comment</i> 5</span></div>
-                      <div className="col m4"><span className="right"><i className="material-icons">favorite</i> 5</span></div>
-                    </div>   
-                  </div>
-                </div>
-              </div>
+              {allRecipes}
             </div>
         </div> 
+
+        {/* Pagination here */}
+
         <div className="row">         
           <ul className="pagination center">
             <li className="disabled"><a href="#!"><i className="material-icons">chevron_left</i></a></li>
@@ -197,6 +73,8 @@ class RecipePage extends React.Component {
           </ul>
         </div>
       </div>
+      {/* end of recipe dispalyy here */}
+
       <div className="col m4">
         <div className="row">
           <div className="col s12 m12">
@@ -251,4 +129,9 @@ class RecipePage extends React.Component {
     );
   }
 }
-export default RecipePage;
+
+RecipePage.propTypes = {
+  getAllRecipeAction: PropTypes.func.isRequired
+}
+
+export default connect(null, { getAllRecipeAction })(RecipePage);

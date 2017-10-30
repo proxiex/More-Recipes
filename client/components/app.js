@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
+
 import NavigationBar from './navigationBar';
 import Footer from './footer';
 import HomePage from './home/homePage';
@@ -7,6 +8,7 @@ import ReecipesPage from './recipes/recipePage';
 import SignupPage from './signup/signupPage';
 import SigninPage from './signin/signinPage';
 import AddRecipePage from './secure/recipes/addRecipePage';
+import RecipeDetails from './recipes/recipeDetails';
 
 
 import notFound from './404';
@@ -20,11 +22,12 @@ class App extends Component {
           <NavigationBar />
             <Switch>
               <Route path="/" exact component={HomePage} /> 
-              <Route path="/recipes" component={ReecipesPage} />    
+              <Route path="/recipes" component={ReecipesPage} />  
+              <Route path="/recipe-details/:recipeId" component={RecipeDetails} />  
               <Route path="/signup" component={SignupPage} />    
               <Route path="/signin" component={SigninPage} /> 
 
-              <Route path="/add-recipe" component={requireAuth(AddRecipePage)} />
+              <Route path="/add-recipe" component={requireAuth(AddRecipePage)} />            
               
               <Route component={notFound} />
             </Switch>
