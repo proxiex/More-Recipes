@@ -20,3 +20,11 @@ $('.dropdown-button').dropdown();
 
   }); // end of document ready
 })(jQuery); // end of jQuery name space
+
+/* $(function() {
+  $('textarea').froalaEditor({
+    // Set custom buttons with separator between them.
+    toolbarButtons: ['fullscreen','undo', 'redo' , '|', 'bold', 'italic', 'underline', 'formatOL', 'formatUL', 'clearFormatting', '|', 'help', '|', 'html'],
+    // toolbarButtonsXS: ['undo', 'redo' , 'bold', 'italic', 'underline']
+  });
+}); */
