@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import classnames from 'classnames';
 import { addRecipeAction } from '../../../actions/addRecipeAction';
 import validateInput from './validations';
+import FroalaEditor from 'react-froala-wysiwyg';
 
 import * as firebase from 'firebase';
 
@@ -19,8 +20,8 @@ const config = {
 firebase.initializeApp(config);
 
 class AddRecipeForm extends React.Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
     this.state = {
       recipeImage: '',
       recipeName: '',
@@ -29,15 +30,35 @@ class AddRecipeForm extends React.Component {
       ingredients: '',
       method: '',
       errors: {},
-      isLoading: false
+      isLoading: false,
+      model: ''
     }
 
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
     this.getPhoto = this.getPhoto.bind(this);
-    //this.upload = this.upload.bind(this);
+    this.ingredients = this.ingredients.bind(this);
+    this.method = this.method.bind(this);
+
+    this.config = {
+      placeholderText: 'Edit Your Content Here!',
+      toolbarButtons: ['fullscreen','undo', 'redo' , '|', 'bold', 'italic', 'underline', 'formatOL', 'formatUL', 'clearFormatting', '|', 'help', '|', 'html']
+    }
   }
 
+  method(model) {
+     console.log(model)
+    this.setState({
+      method: model
+    });
+  }
+
+  ingredients(model) {
+     console.log(model)
+    this.setState({
+      ingredients: model
+    });
+  }
   onChange(e) {
     this.setState({ [e.target.name]: e.target.value });
   }
@@ -68,7 +89,7 @@ class AddRecipeForm extends React.Component {
 
   onSubmit(e) {
     e.preventDefault();
-
+    console.log(this.state)
     if (this.isValid()) {
       const storage = firebase.storage();
       const url = 'images/more-recipes_'+this.state.recipeName.split(' ').join('_')+'_'+Date.now()+'.jpg';
@@ -93,7 +114,7 @@ class AddRecipeForm extends React.Component {
         
     }
   } 
-
+  
   render() {
     const { errors, isLoading } = this.state;
     return (
@@ -135,16 +156,16 @@ class AddRecipeForm extends React.Component {
                 <div className="row">
                   <div className="input-field col s12">
                     <textarea 
-                      id="ingredients" 
-                      name="ingredients" 
-                      value={this.state.ingredients} 
+                      id="description" 
+                      name="description" 
+                      value={this.state.description} 
                       onChange={this.onChange} 
                       className="materialize-textarea" 
                       data-length="250"
                     ></textarea>
-                    <label htmlFor="ingredients"  className={classnames('', {'red-text': errors.ingredients})} >Description</label>
+                    <label htmlFor="description"  className={classnames('', {'red-text': errors.description})} >Description</label>
                   </div>
-                  {errors.ingredients && <span className="red-text">{errors.description}</span>}
+                  {errors.description && <span className="red-text">{errors.description}</span>}
                 </div>
 
                 <div className="row">
@@ -182,28 +203,26 @@ class AddRecipeForm extends React.Component {
 
                 <div className="row">
                   <div className="input-field col s12">
-                    <textarea 
-                      id="description" 
-                      name="description" 
-                      value={this.state.description} 
-                      onChange={this.onChange} 
-                      className="materialize-textarea" 
-                      data-length="250"
-                    ></textarea>
-                    <label htmlFor="description"  className={classnames('', {'red-text': errors.description})} >Description</label>
+                    <h5 className={classnames('center', {'red-text': errors.ingredients})} >Ingredients</h5>
+                    <FroalaEditor 
+                      tag='textarea'
+                      config={this.config}
+                      model={this.state.ingredients}
+                      onModelChange={this.ingredients}
+                      />
                   </div>
-                  {errors.description && <span className="red-text">{errors.description}</span>}
+                  {errors.ingredients && <span className="red-text">{errors.ingredients}</span>}
                 </div>
 
                 <div className="row">
                   <div className="input-field col s12">
-                    <h5 className="center" className={classnames('', {'red-text': errors.description})} >Method</h5>
-                    <textarea 
-                      className="materialize-textarea" 
-                      name="method" 
-                      value={this.state.method} 
-                      onChange={this.onChange}
-                      ></textarea>
+                    <h5 className={classnames('center', {'red-text': errors.method})} >Preperation</h5>
+                    <FroalaEditor 
+                      tag='textarea'
+                      config={this.config}
+                      model={this.state.method}
+                      onModelChange={this.method}
+                    />
                   </div>
                   {errors.method && <span className="red-text">{errors.method}</span>}
                 </div>
