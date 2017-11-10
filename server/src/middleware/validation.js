@@ -43,8 +43,6 @@ const Validation = {
     } else {
       next();
     }
-    
-   
   },
   
   userSignin(req, res, next) {

@@ -4,11 +4,21 @@ import db from '../models';
 const recipes = db.recipes;
 const reviews = db.reviews;
 // const Op = Sequelize.Op;
-
+/**
+ * 
+ * 
+ * @class Recipes
+ */
 class Recipes {
+  /**
+   * 
+   * 
+   * @param {any} req 
+   * @param {any} res 
+   * @returns 
+   * @memberof Recipes
+   */
   add(req, res) {
-    console.log(req.body);
-
     const { recipeImage, recipeName, mealType, description, method, ingredients } = req.body;
     return recipes
       .create({
@@ -66,7 +76,6 @@ class Recipes {
             Message: 'Nothing to update!'
           });
         } else {
-          console.log(updateFields);
 
           found.update( 
             updateFields, 
@@ -100,6 +109,42 @@ class Recipes {
         }).then(sortedRecipes => {
           return res.status(200).json(sortedRecipes);
         });
+    } else if (req.query.search) {
+      // lets search something 
+      const searchQuery = req.query.search.split(' ');
+      
+      let search = searchQuery.map((value) => {
+        return {
+          name: {$iLike : `%${value}%`}
+        };
+      });
+      
+      let ingredients = searchQuery.map((value) => {
+        return {
+          ingredients: {$iLike : `%${value}%`}
+        };
+      });
+
+      recipes.findAll({
+        where: {
+          $or: 
+          search.concat(ingredients)
+        },
+        order: [
+          ['id', 'DESC']
+        ]
+      }).then(result => {
+        if (result.length <= 0) {
+          return res.status(404).json({
+            message: 'No recipe Matched your Search!'
+          });
+        }
+        return res.status(200).json({
+          result
+        });
+      });
+
+
     } else {
       return recipes
         .findAll({ offset: req.query.next }).then(getAllRecipes => {

@@ -5,5 +5,6 @@ server/dist/
 coverage/
 .nyc_output/
 .coveralls
+.DS_Store
 npm-debug
 npm-debug.log

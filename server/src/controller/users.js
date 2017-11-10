@@ -14,7 +14,15 @@ const votes = db.votes;
 const Op = Sequelize.Op;
 
 class Users {
+  /**
+   * 
+   * 
+   * @param {any} req 
+   * @param {any} res 
+   * @memberof Users
+   */
   signup (req, res) {
+    
     const { username, email, password} = req.body;
     users.find({
       where: {
@@ -114,9 +122,11 @@ class Users {
         }).then(result => {
           // collect an array of all users recipes.
           let id = [];
-          for (let i = 0; i < result.rows.length; i++ ){
+          result.row.map(key => id.push(key.id));
+          
+          /* for (let i = 0; i < result.rows.length; i++ ){
             id.push(result.rows[i].id);
-          }
+          } */
           // - total number of favorites user recipe has
           favorites.count({ where : { recipeId: id } }).then(totalFavorites =>{
             // - total number of likes for user recipes
