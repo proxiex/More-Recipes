@@ -23,7 +23,7 @@ router.put('/:recipeId', Auth.Verify, Validate.recipeId, recipeController.modify
 router.delete('/:recipeId',  Auth.Verify, Validate.recipeId, recipeController.delete);
 
 router.post('/:recipeId/favorites',  Auth.Verify, Validate.recipeId, favoritesController.add);
-router.get('/:userId',  Auth.Verify, Validate.userId, favoritesController.get);
+
 router.post('/:recipeId/reviews', Auth.Verify,  Validate.recipeId, reviewController.add); 
 router.post('/:recipeId/votes', Auth.Verify, Validate.recipeId, voteController.votes);
 
