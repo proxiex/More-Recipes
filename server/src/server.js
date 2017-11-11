@@ -9,8 +9,38 @@ import webpack from 'webpack';
 import webpackMiddleware from 'webpack-dev-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
 import webpackConfig from '../../webpack.config.dev';
+import swaggerJSDoc from 'swagger-jsdoc';
 
 const app = express();
+// swagger definition
+var swaggerDefinition = {
+  info: {
+    title: 'More Recipe API',
+    version: '1',
+    description: 'More recipe allows users add recipes to share with the world!',
+  },
+  host: 'localhost:8000',
+  basePath: '/',
+};
+
+// options for the swagger docs
+var options = {
+  // import swaggerDefinitions
+  swaggerDefinition: swaggerDefinition,
+  // path to the API docs
+  apis: ['./server/src/doc.js'],
+};
+
+// initialize swagger-jsdoc
+var swaggerSpec = swaggerJSDoc(options);
+
+app.get('/swagger.json', function(req, res) {
+  res.setHeader('Content-Type', 'application/json');
+  res.send(swaggerSpec);
+});
+
+app.use(express.static('server/api'));
+
 const compiler = webpack(webpackConfig);
 
 app.use(logger('dev'));

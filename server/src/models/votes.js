@@ -31,13 +31,12 @@ export default (sequelize, DataTypes)  => {
       foreignKey: 'recipeId',
       onDelete: 'CASCADE',
     });
-  };
-
-  votes.associate = (models) => {
+    
     votes.belongsTo(models.users, {
       foreignKey: 'userId',
       onDelete: 'CASCADE',
     });
   };
+
   return votes;
 };

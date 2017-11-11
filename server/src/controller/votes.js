@@ -101,7 +101,7 @@ class Votes {
               votings = {
                 userId: req.decoded.id,
                 recipeId: id,
-                upVotes:  1,
+                upVotes:  1, 
                 downVotes: 0
               };
               createVoteRecipe = {

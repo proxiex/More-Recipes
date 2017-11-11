@@ -1,6 +1,7 @@
 node_modules/
 server/dist/
 .vscode/
+server/api/
 
 coverage/
 .nyc_output/

@@ -147,7 +147,7 @@ class Recipes {
 
     } else {
       return recipes
-        .findAll({ offset: req.query.next }).then(getAllRecipes => {
+        .findAll({ offset: req.query.next, limit: 5 }).then(getAllRecipes => {
           if (!getAllRecipes || getAllRecipes.length < 0) {
             return res.status(200).json({
               Message: 'No recipes have yet been created!'
