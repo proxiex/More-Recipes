@@ -18,7 +18,7 @@ class RecipePage extends React.Component {
     this.props.getAllRecipeAction().then( 
       (recipes) =>{
         console.log(recipes)
-      this.setState({ recipes:  recipes.data.rows })
+      this.setState({ recipes:  recipes.data.getAllRecipes.rows })
     })
   }
  
