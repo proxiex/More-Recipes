@@ -21,16 +21,16 @@ class NavigationBar extends Component {
           <li id="welcome">{ isAuthenticated ? <span> Welcome User </span> : '' }  </li>
           <li><Link className="active" to="/">Home</Link ></li>
           <li>
-              <Link to="" className="dropdown-button" data-activates="recipes">
+              <a className="dropdown-button" data-activates="recipes">
                   Recipes
                   <i className="material-icons right">arrow_drop_down</i>
-              </Link >
+              </a >
           </li>
           <li>
-              <Link to="" className="dropdown-button" data-activates="dropdown1">                                
+              <a className="dropdown-button" data-activates="dropdown1">                                
                   Menu
                   <i className="material-icons right">arrow_drop_down</i>
-              </Link >
+              </a >
           </li>
         </ul>
         <ul id="recipes" className="dropdown-content">

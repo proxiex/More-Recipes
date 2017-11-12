@@ -27,5 +27,20 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.5.1//js/froala_editor.pkgd.min.js"></script>
   <script src="/bundle.js"></script>
+  <script>
+    $(document).ready(function(){
+      $('select').material_select();
+      $('.tooltipped').tooltip({delay: 50});
+
+      $('textarea#description, textarea#method').characterCounter();
+      $('.carousel').carousel();
+
+      $('.recipes').dropdown();
+      $('.dropdown-button').dropdown();
+
+      $('.button-collapse').sideNav();
+      $('.parallax').parallax();
+    })
+  </script>
 </body>
 </html>

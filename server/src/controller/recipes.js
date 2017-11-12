@@ -115,7 +115,7 @@ class Recipes {
       
       let search = searchQuery.map((value) => {
         return {
-          name: {$iLike : `%${value}%`}
+          recipeName: {$iLike : `%${value}%`}
         };
       });
       
@@ -146,14 +146,21 @@ class Recipes {
 
 
     } else {
+      const limitValue = req.query.limit || 12;
+      const pageValue = req.query.page - 1 || 0;
+
       return recipes
-        .findAll({ offset: req.query.next, limit: 5 }).then(getAllRecipes => {
-          if (!getAllRecipes || getAllRecipes.length < 0) {
+        .findAndCountAll({ offset: limitValue * pageValue, limit: limitValue }).then(getAllRecipes => {
+          if (!getAllRecipes || getAllRecipes.length <= 0) {
+           
             return res.status(200).json({
               Message: 'No recipes have yet been created!'
             });
-          }
-          return res.status(200).json(getAllRecipes);
+          } 
+          const totalCount = getAllRecipes.count;
+          const pageCount = Math.ceil(totalCount / limitValue);
+
+          return res.status(200).json({ totalCount, page: pageValue + 1,  pageCount, getAllRecipes});
         });
     }
   }
