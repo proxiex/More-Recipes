@@ -204,7 +204,7 @@ RecipeDetails.propTypes = {
   addReviewAction: PropTypes.func.isRequired
 }
 
-function mapStateToProps(state) {
+function mapStateToProps(state) { 
   return {
     auth: state.auth
   }

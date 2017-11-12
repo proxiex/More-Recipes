@@ -8,7 +8,7 @@ import setAuthorizationToken from './utils/setAuthorizationToken';
 import jwtDecode from 'jwt-decode';
 import { setCurrentUser } from './actions/signinActions';
 
-import './assets/init';
+// import './assets/init';
 import './assets/styles.scss';
 
 import App from './components/app';

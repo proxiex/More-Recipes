@@ -38,7 +38,7 @@ class Votes {
 
                 if (foundVotes.downVotes === 1) {
                   // remove form db
-                  updateVotes.downpVotes = 0;
+                  updateVotes.downVotes = 0;
                   updateRecipeVotes.downVotes = (found.downVotes > 0 )? found.downVotes - 1: 0;
 
                   console.log('down voted already removing it now we need to up vote');
@@ -91,7 +91,13 @@ class Votes {
                   message: voteMsg
                 });
               });             
-            });
+            })
+              .catch(error => {
+                console.log(error),
+                res.status(500).json({
+                  message: 'an error occured!'
+                });
+              });
             
           } else {
             // create vote records
@@ -101,7 +107,7 @@ class Votes {
               votings = {
                 userId: req.decoded.id,
                 recipeId: id,
-                upVotes:  1,
+                upVotes:  1, 
                 downVotes: 0
               };
               createVoteRecipe = {

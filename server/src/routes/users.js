@@ -11,6 +11,8 @@ let router = express.Router();
 
 router.post('/signup', Validate.userSignup, usersController.signup);
 router.post('/signin', Validate.userSignin, usersController.signin);
+
+router.post('/:recipeId/recipes',  Auth.Verify, Validate.recipeId, favoritesController.add);
 router.get('/:userId/recipes', Auth.Verify, favoritesController.get);
 
 router.get('/me', Auth.Verify, usersController.profile);

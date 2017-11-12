@@ -40,12 +40,12 @@ describe('More Recipes', () => {
 ///////////////////////
 
 describe('Users', () => {
-  db
+  /* db
     .users
     .destroy({
       cascade: true, 
       truncate: true
-    });
+    }); */
     
 /*   it('should not let user sign up with no first name', (done) => {
     chai.request(app)

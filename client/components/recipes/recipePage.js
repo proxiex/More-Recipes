@@ -16,8 +16,9 @@ class RecipePage extends React.Component {
   
   componentWillMount() {
     this.props.getAllRecipeAction().then( 
-      (recipes) => {
-      this.setState({ recipes:  recipes.data })
+      (recipes) =>{
+        console.log(recipes)
+      this.setState({ recipes:  recipes.data.rows })
     })
   }
  
