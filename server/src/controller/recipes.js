@@ -135,18 +135,18 @@ class Recipes {
       });
 
 
-    } else {
+    } else if (req.query) {
+      const sort = req.query.sort === 'upvotes' || req.query.sort === 'downvotes' ? req.query.sort : 'upvotes';
+      const order = req.query.order === 'des' ? 'DESC' : 'DESC';
+      
+    } else {  
       const limitValue = req.query.limit || 12;
       const pageValue = req.query.page - 1 || 0;
-      const order = req.query.order;
-      const sort = req.query.sort;
-      
-      
+
       return recipes
         .findAndCountAll({ 
           offset: limitValue * pageValue, 
-          limit: limitValue, 
-          order: [ order, sort]
+          limit: limitValue,
         }).then(getAllRecipes => {
           if (getAllRecipes.length <= 0) {
            
