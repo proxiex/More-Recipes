@@ -26,19 +26,15 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false
       },
-      mealType: {
-        type: Sequelize.STRING,
-        allowNull: false
-      },
       description: {
         type: Sequelize.TEXT,
         allowNull: false
       },
-      method: {
+      ingredients: {
         type: Sequelize.TEXT,
         allowNull: false
       },
-      ingredients: {
+      instructions: {
         type: Sequelize.TEXT,
         allowNull: false
       },

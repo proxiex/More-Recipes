@@ -12,7 +12,7 @@ class Favorite {
         message: 'Parameter must be a number!'
       });
     }
-    recipes.find({
+    recipes.find({ 
       where: {
         id: id
       }
@@ -50,31 +50,39 @@ class Favorite {
   }
 
   get(req, res) {
-    const id = req.params.userId;
+    const id = parseInt(req.params.userId, 10);
     if (isNaN(id)) {
       return res.status(400).json({
         message: 'Parameter must be a number!'
       });
     }
-    return favorites
-      .findAll({
-        where: {
-          userId: id
-        },
-        include: [
-          {
-            model: recipes
+
+    if (id === req.decoded.id) {
+      return favorites
+        .findAll({
+          where: {
+            userId: id
+          },
+          include: [
+            {
+              model: recipes
+            }
+          ]
+        }).then(found => {
+          if (found) {
+            return res.status(200).json(found);
+          } else  {
+            return res.status(404).json({
+              message: 'Recipe Not found'
+            });
           }
-        ]
-      }).then(found => {
-        if (found) {
-          return res.status(200).json(found);
-        } else  {
-          return res.status(404).json({
-            message: 'Recipe Not found'
-          });
-        }
+        });
+    } else {
+      return res.status(403).json({
+        message: 'You Can not access this recipe'
       });
+    }
+    
 
   }
 }

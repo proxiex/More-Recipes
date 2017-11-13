@@ -31,7 +31,7 @@ recipe. Users can also keep a list of their favorite recipes on the application.
   <tr>
       <td>POST</td>
       <td>/api/v1/users/signup</td>
-      <td>Create an account</td>
+      <td>Create a new user</td>
   </tr>
   <tr>
       <td>POST</td>
@@ -42,33 +42,69 @@ recipe. Users can also keep a list of their favorite recipes on the application.
       <td>POST</td>
       <td>/api/v1/recipes</td>
       <td>Creates New Recipe</td>
-  </tr>  
+  </tr>
+
+  <tr>
+      <td>GET</td>
+      <td>/api/v1/recipes/</td>
+      <td>Get all recipes</td>
+  </tr>
+  <tr>
+      <td>GET</td>
+      <td>/api/v1/recipes/:recipeId</td>
+      <td>Get Specific recipe details</td>
+  </tr>
+  <tr>
+      <td>GET</td>
+      <td>/api/v1/recipes/:userId</td>
+      <td>Get recipes of a specific user</td>
+  </tr>
+  <tr>
+      <td>PUT</td>
+      <td>/api/v1/recipes/:recipeId</td>
+      <td>Modify Recipe information</td>
+  </tr>
+
   <tr>
       <td>DELETE</td>
       <td>/api/v1/recipes/:recipeId</td>
       <td>Delete a recipe</td>
   </tr>
   
-  <tr>
-      <td>PUT</td>
-      <td>/api/v1/recipes/:recipeId<bookId></td>
-      <td>Modify Recipe information</td>
-  </tr>
-  
-  <tr>
-      <td>GET</td>
-      <td>/api/v1/recipes/</td>
-      <td>Get all recipes</td>
-  </tr>
    <tr>
       <td>GET</td>
       <td>/api/v1/recipes/?sort=upVote&order=desc</td>
-      <td>Get all recipes</td>
+      <td>Get all recipes, sorted by upvotes</td>
   </tr>
   <tr>
       <td>POST</td>
       <td>/api/recipes/:recipeId/reviews </td>
       <td>Post a review</td>
+  </tr>
+  <tr>
+      <td>POST</td>
+      <td>/api/users/:recipeId/recipes </td>
+      <td>Favorite a recipe</td>
+  </tr>
+  <tr>
+      <td>GET</td>
+      <td>/api/users/:userId/recipes </td>
+      <td>Get Favorite recipes</td>
+  </tr>
+  <tr>
+      <td>POST</td>
+      <td>/api/recipes/:recipeId/votes?vote=up </td>
+      <td>Up vote a recipe</td>
+  </tr>
+   <tr>
+      <td>POST</td>
+      <td>/api/recipes/:recipeId/votes?vote=down </td>
+      <td>Down vote a recipe</td>
+  </tr>
+  <tr>
+      <td>GET</td>
+      <td>/api/users/me</td>
+      <td>Get user profile details</td>
   </tr>
 </table>
 
