@@ -135,12 +135,12 @@ class Recipes {
       });
 
 
-    } else if (req.query) {
+    } else if (req.query.sort) {
       const sort = req.query.sort === 'upvotes' || req.query.sort === 'downvotes' ? req.query.sort : 'upvotes';
       const order = req.query.order === 'des' ? 'DESC' : 'DESC';
-      
+
     } else {  
-      const limitValue = req.query.limit || 12;
+      const limitValue = (req.query.limit <= 0) ? 12: req.query.limit || 12;
       const pageValue = req.query.page - 1 || 0;
 
       return recipes
@@ -156,8 +156,9 @@ class Recipes {
           } 
           const totalCount = getAllRecipes.count;
           const pageCount = Math.ceil(totalCount / limitValue);
+          const recipes = getAllRecipes.rows;
 
-          return res.status(200).json({ totalCount, page: pageValue + 1,  pageCount, getAllRecipes});
+          return res.status(200).json({ totalCount, page: pageValue + 1,  pageCount, recipes });
         });
     }
   }
