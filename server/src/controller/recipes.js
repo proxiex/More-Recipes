@@ -19,15 +19,14 @@ class Recipes {
    * @memberof Recipes
    */
   add(req, res) {
-    const { recipeImage, recipeName, mealType, description, method, ingredients } = req.body;
+    const { recipeImage, recipeName, description, instructions, ingredients } = req.body;
     return recipes
       .create({
         userId: req.decoded.id,
         recipeImage,
         recipeName,
-        mealType,
         description,
-        method,
+        instructions,
         ingredients
       }).then(created => {
         return res.status(201).json(created);
@@ -100,16 +99,7 @@ class Recipes {
   }
 
   get(req, res) {
-    if (req.query.order || req.query.sort) {
-      return recipes
-        .findAll({
-          order: [
-            ['upVotes', 'DESC']
-          ]
-        }).then(sortedRecipes => {
-          return res.status(200).json(sortedRecipes);
-        });
-    } else if (req.query.search) {
+    if (req.query.search) {
       // lets search something 
       const searchQuery = req.query.search.split(' ');
       
@@ -148,10 +138,17 @@ class Recipes {
     } else {
       const limitValue = req.query.limit || 12;
       const pageValue = req.query.page - 1 || 0;
-
+      const order = req.query.order;
+      const sort = req.query.sort;
+      
+      
       return recipes
-        .findAndCountAll({ offset: limitValue * pageValue, limit: limitValue }).then(getAllRecipes => {
-          if (!getAllRecipes || getAllRecipes.length <= 0) {
+        .findAndCountAll({ 
+          offset: limitValue * pageValue, 
+          limit: limitValue, 
+          order: [ order, sort]
+        }).then(getAllRecipes => {
+          if (getAllRecipes.length <= 0) {
            
             return res.status(200).json({
               Message: 'No recipes have yet been created!'
@@ -163,35 +160,6 @@ class Recipes {
           return res.status(200).json({ totalCount, page: pageValue + 1,  pageCount, getAllRecipes});
         });
     }
-  }
-
-  delete(req, res) {
-    const id = req.params.recipeId;
-    
-    recipes.findOne({
-      where: { 
-        userId: req.decoded.id,
-        id: id
-      }
-    }).then(found => { 
-      if (!found) {
-        return res.status(404).json({
-          message: 'You did not created this recipe, you cannot delete it!'
-        });
-      } else {
-        return recipes
-          .destroy({
-            where: {
-              userId: req.decoded.id,
-              id: id
-            }
-          }).then(() => {
-            return res.status(200).json({
-              message: 'Recipe Deleted!'
-            });
-          });
-      }
-    });
   }
 
   getOne(req, res) {
@@ -232,6 +200,55 @@ class Recipes {
         }
       });
   }
+
+  getUserRecipe(req, res) {
+    return recipes
+      .findAll({
+        where: {
+          userId: (req.params.userId)? req.params.userId : req.decoded.id
+        }
+      }).then(found => {
+        if (found.length <= 0) {
+          return res.status(404).json({
+            message: (req.params.userId)? 'This user has not created any recipes yet!': 'You have not created any recipe Yet'
+          });
+        } else {
+          return res.status(200).json({
+            found
+          });
+        }
+      });
+  }
+
+  delete(req, res) {
+    const id = req.params.recipeId;
+    
+    recipes.findOne({
+      where: { 
+        userId: req.decoded.id,
+        id: id
+      }
+    }).then(found => { 
+      if (!found) {
+        return res.status(404).json({
+          message: 'You did not created this recipe, you cannot delete it!'
+        });
+      } else {
+        return recipes
+          .destroy({
+            where: {
+              userId: req.decoded.id,
+              id: id
+            }
+          }).then(() => {
+            return res.status(200).json({
+              message: 'Recipe Deleted!'
+            });
+          });
+      }
+    });
+  }
+
 }
 
 export default Recipes;

@@ -16,19 +16,15 @@ export default (sequelize, DataTypes) =>  {
       type: DataTypes.STRING,
       allowNull: false
     },
-    mealType: {
-      type: DataTypes.STRING,
-      allowNull: false
-    },
     description: {
       type: DataTypes.TEXT,
       allowNull: false
     },
-    method: {
+    ingredients: {
       type: DataTypes.TEXT,
       allowNull: false
     },
-    ingredients: {
+    instructions: {
       type: DataTypes.TEXT,
       allowNull: false
     },
