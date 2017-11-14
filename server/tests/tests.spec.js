@@ -10,6 +10,7 @@ chai.use(chaiHttp);
 
 let token;
 let id;
+let userId;
 
 describe('More Recipes', () => {
   it('should get the home page', (done) => {
@@ -39,39 +40,13 @@ describe('More Recipes', () => {
 //// *** USERS *** ///
 ///////////////////////
 
-describe('Users', () => {
+describe('Users Controller', () => {
   /* db
     .users
     .destroy({
       cascade: true, 
       truncate: true
     }); */
-    
-/*   it('should not let user sign up with no first name', (done) => {
-    chai.request(app)
-      .post('/api/v1/users/signup')
-      .send(fakeData.noFirstNameUsers)
-      .end((err, res) => {
-        res.should.have.status(400);
-        res.should.be.json;
-        res.body.should.be.a('object');
-        res.body.should.have.property('message').equal('Please Enter First Name');
-        done();
-      });
-  });
-    
-  it('should not let user sign up with no last name', (done) => {
-    chai.request(app)
-      .post('/api/v1/users/signup')
-      .send(fakeData.noLastNameUsers)
-      .end((err, res) => {
-        res.should.have.status(400);
-        res.should.be.json;
-        res.body.should.be.a('object');
-        res.body.should.have.property('message').equal('Please Enter Last Name');
-        done();
-      });
-  }); */
   
   it('should not let user sign up with no username', (done) => {
     chai.request(app)
@@ -124,19 +99,6 @@ describe('Users', () => {
         done();
       });
   });
-  
-/*   it('should not let user sign up with password mismatch', (done) => {
-    chai.request(app)
-      .post('/api/v1/users/signup')
-      .send(fakeData.passMismatchUsers)
-      .end((err, res) => {
-        res.should.have.status(400);
-        res.should.be.json;
-        res.body.should.be.a('object');
-        res.body.should.have.property('message').equal('Password Missmatch!');
-        done();
-      });
-  }); */
     
   it('should let users sign up /signup POST', (done) => {
     chai.request(app)
@@ -144,6 +106,8 @@ describe('Users', () => {
       .send(fakeData.newUsers)
       .end((err, res) => {
         res.should.be.json;
+        userId = res.body.register.id;
+        console.log(res.body)
         res.body.should.be.a('object');
         res.should.have.status(201);
         done();
@@ -204,13 +168,12 @@ describe('Users', () => {
 //// *** RECIPES *** ///
 ///////////////////////
 
-describe('Recipes', () => {
+describe('Recipes Controller', () => {
   const recipes = {
     recipeImage: 'http://www.url.here.com/this-cool',
     recipeName: 'recipeName',
-    mealType: 'mealType',
     description: 'description',
-    method: 'method',
+    instructions: 'method',
     ingredients: 'ingredients, ingredients, ingredients, ingredients'
   };
 
@@ -222,7 +185,6 @@ describe('Recipes', () => {
         res.should.have.status(401);
         res.should.be.json;
         res.body.should.be.a('object');
-        // res.body.should.have.property('message').equal('User does NOT exist!');
         done();
       });
   });
@@ -236,7 +198,7 @@ describe('Recipes', () => {
         res.should.have.status(403);
         res.should.be.json;
         res.body.should.be.a('object');
-        // res.body.should.have.property('message').equal('User does NOT exist!');
+        
         done();
       });
   });
@@ -247,16 +209,17 @@ describe('Recipes', () => {
       .send(recipes)
       .set('x-token', token)
       .end((err, res) => {
+        console.log(res.body)
         id = res.body.id;
         res.should.have.status(201);
         res.should.be.json;
         res.body.should.be.a('object');
-        // res.body.should.have.property('message').equal('User does NOT exist!');
+        
         done();
       });
   });
   
-  it('should let authorized user Modify new recipe', (done) => {
+  it('should let authorized user Modify specific recipe', (done) => {
     chai.request(app)
       .put('/api/v1/recipes/'+id)
       .send({
@@ -267,7 +230,7 @@ describe('Recipes', () => {
         res.should.have.status(200);
         res.should.be.json;
         res.body.should.be.a('object');
-        // res.body.should.have.property('message').equal('User does NOT exist!');
+        
         done();
       });
   });
@@ -278,18 +241,18 @@ describe('Recipes', () => {
       .end((err, res) => {
         res.should.have.status(200);
         res.should.be.json;
-        // res.body.should.have.property('message').equal('User does NOT exist!');
+        
         done();
       });
   });
     
-  it('should let unauthorized user delete a recipe', (done) => {
+  it('should not let unauthorized user delete a recipe', (done) => {
     chai.request(app)
       .delete('/api/v1/recipes/'+id)
       .end((err, res) => {
         res.should.have.status(401);
         res.should.be.json;
-        // res.body.should.have.property('message').equal('User does NOT exist!');
+        
         done();
       });
   }); 
@@ -308,10 +271,28 @@ describe('Recipes', () => {
 
 });
 
-describe('Favorite Recipes', () => { 
+/////////////////////////
+/// *** Favorites *** //
+///////////////////////
+
+describe('Favorite Recipes Controller', () => { 
+
+  it('should return error for invalid params', (done) => {
+    chai.request(app)
+      .post('/api/v1/users/x3s/recipes')
+      .set('x-token', token)
+      .end((err, res) => {
+        console.log(err)
+        res.should.have.status(400);
+        res.should.be.json;
+        res.body.should.have.property('message').equal('Parameter must be a number!');
+        done();
+      });
+  });  
+
   it('should return error for recipe that does not exist', (done) => {
     chai.request(app)
-      .post('/api/v1/recipes/12202/favorites')
+      .post('/api/v1/users/12202/recipes')
       .set('x-token', token)
       .end((err, res) => {
         res.should.have.status(404);
@@ -323,7 +304,7 @@ describe('Favorite Recipes', () => {
     
   it('should Favorite a recipe', (done) => {
     chai.request(app)
-      .post('/api/v1/recipes/'+id+'/favorites')
+      .post('/api/v1/users/'+id+'/recipes')
       .set('x-token', token)
       .end((err, res) => {
         res.should.have.status(201);
@@ -335,7 +316,7 @@ describe('Favorite Recipes', () => {
     
   it('should return error for recipe already favorited', (done) => {
     chai.request(app)
-      .post('/api/v1/recipes/'+id+'/favorites')
+      .post('/api/v1/users/'+id+'/recipes')
       .set('x-token', token)
       .end((err, res) => {
         res.should.have.status(400);
@@ -354,7 +335,7 @@ describe('Favorite Recipes', () => {
       .end((err, res) => {
         res.should.have.status(200);
         res.should.be.json;
-        // res.body.should.have.property('message').equal('User does NOT exist!');
+        
         done();
       });
   });  
