@@ -140,8 +140,8 @@ class Recipes {
       const order = req.query.order === 'des' ? 'DESC' : 'DESC';
 
     } else {  
-      const limitValue = (req.query.limit <= 0) ? 12: req.query.limit || 12;
-      const pageValue = req.query.page - 1 || 0;
+      const limitValue = (req.query.limit <= 0) ? 12 : req.query.limit || 12;
+      const pageValue = (req.query.page <= 0 ) ? 0 : req.query.page - 1 || 0;
 
       return recipes
         .findAndCountAll({ 
