@@ -12,8 +12,6 @@ let token;
 let id;
 let userId;
 
-improt 'users.text'
-
 describe('More Recipes', () => {
   it('should get the home page', (done) => {
     chai.request(app)
