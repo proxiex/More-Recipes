@@ -14,7 +14,7 @@ const voteController = new Votes();
 let router = express.Router();
 
 // CRUD => Recipes
-router.post('/',  Auth.Verify, Validate.addRecipe, recipeController.add);
+router.post('/',  Auth.Verify, Auth.Admin, Validate.addRecipe, recipeController.add);
 router.get('/', recipeController.get);
 router.get('/:recipeId', Pass.Verify, Validate.recipeId, recipeController.getOne);
 router.put('/:recipeId', Auth.Verify, Validate.recipeId, recipeController.modify);
@@ -22,8 +22,5 @@ router.delete('/:recipeId',  Auth.Verify, Validate.recipeId, recipeController.de
 
 router.post('/:recipeId/reviews', Auth.Verify,  Validate.recipeId, reviewController.add); 
 router.post('/:recipeId/votes', Auth.Verify, Validate.recipeId, voteController.votes);
-
-
-
 
 export default router;
