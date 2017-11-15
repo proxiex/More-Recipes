@@ -106,7 +106,8 @@ describe('Users Controller', () => {
       .send(fakeData.newUsers)
       .end((err, res) => {
         res.should.be.json;
-        userId = res.body.register.id;
+
+        userId = res.body.newUser.id;
         console.log(res.body)
         res.body.should.be.a('object');
         res.should.have.status(201);
@@ -282,7 +283,6 @@ describe('Favorite Recipes Controller', () => {
       .post('/api/v1/users/x3s/recipes')
       .set('x-token', token)
       .end((err, res) => {
-        console.log(err)
         res.should.have.status(400);
         res.should.be.json;
         res.body.should.have.property('message').equal('Parameter must be a number!');
