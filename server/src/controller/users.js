@@ -51,14 +51,18 @@ class Users {
 
       } else {
         return users
+
           .create({
             username: username,
             email: email,
             password: bcrypt.hashSync(password, 10)
-          }).then(register => res.status(201).json({
-            message: 'Signup succesfull',
-            register
-          }))
+          }).then((register) => {
+            const registered = { username: register.username, email: register.email };
+            res.status(201).json({ 
+              message: 'Signup succesfull',
+              registered
+            });
+          })
           .catch(error => res.status(400).json({ message: error.errors[0].message }));
       }
     });
