@@ -70,7 +70,8 @@ app.use((req, res, next) => {
   next(err);
 });
 
+
 const port = parseInt(process.env.PORT, 10) || 8000;
-app.listen(port,  () => console.log('Running on localhost: '+port));
+app.listen(port,  () => console.log('Running on localhost: '+port+' Node Env: ' + process.env.NODE_ENV));
 
 export default app;

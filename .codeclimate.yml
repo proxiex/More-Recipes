@@ -15,3 +15,4 @@ exclude_paths:
 - "tests/"
 - "node_modules/"
 - "template/"
+- "server/api/"

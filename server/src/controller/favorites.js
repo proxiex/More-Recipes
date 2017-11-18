@@ -3,8 +3,20 @@ import db from '../models';
 
 const recipes = db.recipes;
 const favorites = db.favorites;
-
+/**
+ * 
+ * 
+ * @class Favorite
+ */
 class Favorite {
+  /**
+   * 
+   * 
+   * @param {any} req 
+   * @param {any} res 
+   * @returns 
+   * @memberof Favorite
+   */
   add(req, res) {
     const id = req.params.recipeId;
     if (isNaN(id)) {
@@ -25,18 +37,25 @@ class Favorite {
           }
         }).then(foundFavorite => {
           if (foundFavorite) {
-            return res.status(400).json({
-              message: 'Recipe already Favorited'
+            favorites.destroy({
+              where: {
+                userId: req.decoded.id,
+                recipeId: id
+              }
+            }).then(() => {
+              return res.status(200).json({
+                message: 'Recipe removed from Favorites'
+              });
             });
           } else  {
             return favorites
               .create({
                 recipeId: id,
                 userId: req.decoded.id
-              }).then(favorited => {
+              }).then(favorite => {
                 return res.status(201).json({
                   message: 'Recipe Favorited!',
-                  favorited
+                  favorite
                 });
               });
           }
@@ -56,32 +75,25 @@ class Favorite {
         message: 'Parameter must be a number!'
       });
     }
-
-    if (id === req.decoded.id) {
-      return favorites
-        .findAll({
-          where: {
-            userId: id
-          },
-          include: [
-            {
-              model: recipes
-            }
-          ]
-        }).then(found => {
-          if (found) {
-            return res.status(200).json(found);
-          } else  {
-            return res.status(404).json({
-              message: 'Recipe Not found'
-            });
+    return favorites
+      .findAll({
+        where: {
+          userId: id
+        },
+        include: [
+          {
+            model: recipes
           }
-        });
-    } else {
-      return res.status(403).json({
-        message: 'You Can not access this recipe'
+        ]
+      }).then(found => {
+        if (found) {
+          return res.status(200).json(found);
+        } else  {
+          return res.status(404).json({
+            message: 'Recipe Not found'
+          });
+        }
       });
-    }
     
 
   }

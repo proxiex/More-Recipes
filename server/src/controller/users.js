@@ -28,7 +28,7 @@ class Users {
       where: {
         [Op.or]: [
           { email: email },
-          { username: username}
+          { username: username.trim()}
         ]
       }
     }).then(found => {
@@ -40,11 +40,11 @@ class Users {
           eremail = 'Email is already in use';
         } 
 
-        if (found.username === username) {
+        if (found.username === username.trim()) {
           erusername = 'Username already taken';
         }
 
-        return res.status(400).json({
+        return res.status(409).json({
           eremail,
           erusername
         });
@@ -53,7 +53,7 @@ class Users {
         return users
 
           .create({
-            username: username,
+            username: username.trim(),
             email: email,
             password: bcrypt.hashSync(password, 10)
           }).then((user) => {
@@ -85,6 +85,10 @@ class Users {
             message: 'Incorrect signin credentials!'
           });
         } else if (bcrypt.compareSync(password, found.password)) {
+          const user = {
+            firstName: found.firstName,
+            lastName: found.lastName
+          };
           const token = jwt.sign({
             id: found.id,
             username: found.username
@@ -93,11 +97,12 @@ class Users {
           });
           return res.status(200).json({
             message: 'Sign in Successful!',
+            user,
             Token: token
           });
         } else {
           return res.status(400).json({
-            message: 'Incorrect signin credentials'
+            message: 'Incorrect signin credentials!'
           });
         }
       })
@@ -114,43 +119,53 @@ class Users {
     return users
       .findById(userId).then(UserDetails => {
         // -- total number of recipes created by user
-        const details = {
+        const user = {
           Names: UserDetails.firstName + ' ' + UserDetails.lastName,
           email: UserDetails.email,
-          username: UserDetails.username
+          username: UserDetails.username,
+          inAppNotice: (UserDetails.inAppNotice)? true : false,
+          emailNotice: (UserDetails.emailNotice)? true : false
         };
         recipes.findAndCountAll({
           where: {
             userId: userId
           }
         }).then(result => {
-          // collect an array of all users recipes.
-          let id = [];
-          result.row.map(key => id.push(key.id));
+          if (result.rows.length < 1) {
+            return res.status(200).json({
+              recipes: 0,
+              user
+            });
+          } else {
+            // collect an array of all users recipes.
+            let id = [];
+            result.row.map(key => id.push(key.id));
           
-          /* for (let i = 0; i < result.rows.length; i++ ){
+            /* for (let i = 0; i < result.rows.length; i++ ){
             id.push(result.rows[i].id);
           } */
-          // - total number of favorites user recipe has
-          favorites.count({ where : { recipeId: id } }).then(totalFavorites =>{
+            // - total number of favorites user recipe has
+            favorites.count({ where : { recipeId: id } }).then(totalFavorites => {
             // - total number of likes for user recipes
-            votes.count({ where:{ recipeId: id }}).then(totalVotes => {
+              votes.count({ where:{ recipeId: id }}).then(totalVotes => {
               // - recipes liked by user
-              votes.count({ where: { userId } }).then(userVotes => {
+                votes.count({ where: { userId } }).then(userVotes => {
                 // - recipes favoried by user
-                favorites.count({ where: { userId } }).then(userFavorites => {
-                  return res.status(200).json({
-                    UserDetails: details,
-                    recipes: 'You have crated ' + result.count + ' recipes',
-                    Favorited: 'Your recipes have been Favorited ' + totalFavorites + ' times',
-                    TotalVotes: 'Your Recipes have recived a total of ' + totalVotes + ' Votes (up and donw)',
-                    UserVotes: 'You have voted (up and down) for ' + userVotes + ' recipes',
-                    UserFavorites: 'You have favorited ' + userFavorites + ' recipes'
+                  favorites.count({ where: { userId } }).then(userFavorites => {
+                    return res.status(200).json({
+                      UserDetails: user,
+                      recipes: 'You have crated ' + result.count + ' recipes',
+                      Favorited: 'Your recipes have been Favorited ' + totalFavorites + ' times',
+                      TotalVotes: 'Your Recipes have recived a total of ' + totalVotes + ' Votes (up and donw)',
+                      UserVotes: 'You have voted (up and down) for ' + userVotes + ' recipes',
+                      UserFavorites: 'You have favorited ' + userFavorites + ' recipes'
+                    });
                   });
                 });
               });
             });
-          });
+          }
+          
         });
       })
       .catch(() => {
@@ -193,9 +208,10 @@ class Users {
           where: {
             id: req.decoded.id
           }
-        }).then(() => {
+        }).then((user) => {
         return res.status(200).json({
           message: 'Updated Succesfully!',
+          user
         });
       });
     })

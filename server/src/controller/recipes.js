@@ -28,8 +28,8 @@ class Recipes {
         description,
         instructions,
         ingredients
-      }).then(created => {
-        return res.status(201).json(created);
+      }).then(Recipe => {
+        return res.status(201).json(Recipe);
       })
       .catch((err) => {
         console.log(err);
@@ -40,7 +40,7 @@ class Recipes {
   }
   
   modify(req, res) {
-    const { recipeName, mealType, description, method, ingredients } = req.body;
+    const { recipeName, description, instructions, ingredients } = req.body;
     let updateFields = {};
     const id = req.params.recipeId;  
 
@@ -54,17 +54,13 @@ class Recipes {
         if (recipeName) {
           updateFields.recipeName = recipeName;
         } 
-        
-        if (mealType) {
-          updateFields.mealType = mealType;
-        } 
-        
+
         if (description) {
           updateFields.description = description;
         } 
         
-        if (method) {
-          updateFields.method = method;
+        if (instructions) {
+          updateFields.instructions = instructions;
         } 
         
         if (ingredients) {
@@ -83,10 +79,10 @@ class Recipes {
                 userId: req.decoded.id,
                 id: id
               }
-            }).then((updated) => {
+            }).then((Recipe) => {
             return res.status(200).json({
               Message: 'Succesfully Updated Recipe',
-              updated
+              Recipe
             });
           });
         }
@@ -136,9 +132,18 @@ class Recipes {
 
 
     } else if (req.query.sort) {
-      const sort = req.query.sort === 'upvotes' || req.query.sort === 'downvotes' ? req.query.sort : 'upvotes';
+      const sort = req.query.sort === 'upVotes' || req.query.sort === 'downVotes' ? req.query.sort : 'upVotes';
       const order = req.query.order === 'des' ? 'DESC' : 'DESC';
 
+      recipes.findAll({
+        order: [
+          [sort, order]
+        ]
+      }).then(recipe => {
+        return res.status(200).json({
+          recipe
+        });
+      });
     } else {  
       const limitValue = (req.query.limit <= 0) ? 12 : req.query.limit || 12;
       const pageValue = (req.query.page <= 0 ) ? 0 : req.query.page - 1 || 0;
@@ -206,16 +211,16 @@ class Recipes {
     return recipes
       .findAll({
         where: {
-          userId: (req.params.userId)? req.params.userId : req.decoded.id
+          userId: (req.query.userId)? req.query.userId : req.decoded.id
         }
-      }).then(found => {
-        if (found.length <= 0) {
+      }).then(recipe => {
+        if (recipe.length <= 0) {
           return res.status(404).json({
-            message: (req.params.userId)? 'This user has not created any recipes yet!': 'You have not created any recipe Yet'
+            message: (req.query.userId)? 'This user has not created any recipes yet!': 'You have not created any recipe Yet'
           });
         } else {
           return res.status(200).json({
-            found
+            recipe
           });
         }
       });
@@ -225,13 +230,16 @@ class Recipes {
     const id = req.params.recipeId;
     
     recipes.findOne({
-      where: { 
-        userId: req.decoded.id,
+      where: {
         id: id
       }
     }).then(found => { 
       if (!found) {
         return res.status(404).json({
+          message: 'Recipe Not found!'
+        });
+      } else if (found.userId !== req.decoded.id) {
+        return res.status(403).json({
           message: 'You did not created this recipe, you cannot delete it!'
         });
       } else {

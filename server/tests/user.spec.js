@@ -2,15 +2,13 @@ import chai from 'chai';
 import chaiHttp from 'chai-http';
 import app from '../src/app';
 import fakeData from './helper/fake';
-import db from '../src/models';
 
 const should = chai.should();
 
-chai.use(chaiHttp);
+chai.use(chaiHttp); 
 
-let token;
-let id;
-let userId;
+export let token;
+export let userId;
 
 describe('More Recipes', () => {
   it('should get the home page', (done) => {
@@ -106,9 +104,7 @@ describe('Users Controller', () => {
       .send(fakeData.newUsers)
       .end((err, res) => {
         res.should.be.json;
-
         userId = res.body.newUser.id;
-        console.log(res.body)
         res.body.should.be.a('object');
         res.should.have.status(201);
         done();
@@ -120,7 +116,7 @@ describe('Users Controller', () => {
       .post('/api/v1/users/signup')
       .send(fakeData.newUsers)
       .end((err, res) => {
-        res.should.have.status(400);
+        res.should.have.status(409);
         res.should.be.json;
         res.body.should.be.a('object');
         done();
@@ -163,180 +159,32 @@ describe('Users Controller', () => {
       });
   });
 
-});
-
-/////////////////////////
-//// *** RECIPES *** ///
-///////////////////////
-
-describe('Recipes Controller', () => {
-  const recipes = {
-    recipeImage: 'http://www.url.here.com/this-cool',
-    recipeName: 'recipeName',
-    description: 'description',
-    instructions: 'method',
-    ingredients: 'ingredients, ingredients, ingredients, ingredients'
-  };
-
-  it('should not let unauthorized user create new recipe', (done) => {
+  it('should not let users signin with wrong password', (done) => {
+    const User = {
+      username: fakeData.newUsers.email,
+      password: '11110000x'
+    };
     chai.request(app)
-      .post('/api/v1/recipes')
-      .send(recipes)
+      .post('/api/v1/users/signin')
+      .send(User)
       .end((err, res) => {
-        res.should.have.status(401);
+        res.should.have.status(400);
         res.should.be.json;
         res.body.should.be.a('object');
+        res.body.should.have.property('message').equal('Incorrect signin credentials!');
         done();
       });
   });
-    
-  it('should not let user with un-verified Token create new recipe', (done) => {
+
+  it('should user profile', (done) => {
     chai.request(app)
-      .post('/api/v1/recipes')
-      .send(recipes)
-      .set('x-token', 'this sia bungo iasd ionoiapdif')
-      .end((err, res) => {
-        res.should.have.status(403);
-        res.should.be.json;
-        res.body.should.be.a('object');
-        
-        done();
-      });
-  });
-    
-  it('should let authorized user create new recipe', (done) => {
-    chai.request(app)
-      .post('/api/v1/recipes')
-      .send(recipes)
-      .set('x-token', token)
-      .end((err, res) => {
-        console.log(res.body)
-        id = res.body.id;
-        res.should.have.status(201);
-        res.should.be.json;
-        res.body.should.be.a('object');
-        
-        done();
-      });
-  });
-  
-  it('should let authorized user Modify specific recipe', (done) => {
-    chai.request(app)
-      .put('/api/v1/recipes/'+id)
-      .send({
-        method: 'This is a simple meal that we all need to have at the end of the day so enjoy'
-      })
+      .get('/api/v1/users/me')
       .set('x-token', token)
       .end((err, res) => {
         res.should.have.status(200);
         res.should.be.json;
-        res.body.should.be.a('object');
-        
         done();
       });
   });
-
-  it('should get all recipe', (done) => {
-    chai.request(app)
-      .get('/api/v1/recipes')
-      .end((err, res) => {
-        res.should.have.status(200);
-        res.should.be.json;
-        
-        done();
-      });
-  });
-    
-  it('should not let unauthorized user delete a recipe', (done) => {
-    chai.request(app)
-      .delete('/api/v1/recipes/'+id)
-      .end((err, res) => {
-        res.should.have.status(401);
-        res.should.be.json;
-        
-        done();
-      });
-  }); 
-  
-  it('should return error for invalid params', (done) => {
-    chai.request(app)
-      .delete('/api/v1/recipes/me')
-      .set('x-token', token)
-      .end((err, res) => {
-        res.should.have.status(400);
-        res.should.be.json;
-        res.body.should.have.property('message').equal('Parameter must be a number!');
-        done();
-      });
-  });  
-
-});
-
-/////////////////////////
-/// *** Favorites *** //
-///////////////////////
-
-describe('Favorite Recipes Controller', () => { 
-
-  it('should return error for invalid params', (done) => {
-    chai.request(app)
-      .post('/api/v1/users/x3s/recipes')
-      .set('x-token', token)
-      .end((err, res) => {
-        res.should.have.status(400);
-        res.should.be.json;
-        res.body.should.have.property('message').equal('Parameter must be a number!');
-        done();
-      });
-  });  
-
-  it('should return error for recipe that does not exist', (done) => {
-    chai.request(app)
-      .post('/api/v1/users/12202/recipes')
-      .set('x-token', token)
-      .end((err, res) => {
-        res.should.have.status(404);
-        res.should.be.json;
-        res.body.should.have.property('message').equal('Recipe Not found!');
-        done();
-      });
-  });  
-    
-  it('should Favorite a recipe', (done) => {
-    chai.request(app)
-      .post('/api/v1/users/'+id+'/recipes')
-      .set('x-token', token)
-      .end((err, res) => {
-        res.should.have.status(201);
-        res.should.be.json;
-        res.body.should.have.property('message').equal('Recipe Favorited!');
-        done();
-      });
-  }); 
-    
-  it('should return error for recipe already favorited', (done) => {
-    chai.request(app)
-      .post('/api/v1/users/'+id+'/recipes')
-      .set('x-token', token)
-      .end((err, res) => {
-        res.should.have.status(400);
-        res.should.be.json;
-        res.body.should.have.property('message').equal('Recipe already Favorited');
-        done();
-      });
-  });
-    
-
-
-  it('should let authorized user delete a recipe', (done) => {
-    chai.request(app)
-      .delete('/api/v1/recipes/'+id)
-      .set('x-token', token)
-      .end((err, res) => {
-        res.should.have.status(200);
-        res.should.be.json;
-        
-        done();
-      });
-  });  
+// end of user describe
 });

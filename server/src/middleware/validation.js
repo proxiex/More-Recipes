@@ -23,7 +23,10 @@ const Validation = {
   },
 
   userSignup(req, res, next) {
-    const { username, email, password } = req.body;
+    const username = (req.body.username)? req.body.username.trim() : null;
+    const email = req.body.email;
+    const password  = req.body.password;
+
     if (!username || typeof username !== 'string') {
       return res.status(400).json({
         username: 'Please Enter Username'
@@ -60,12 +63,16 @@ const Validation = {
   },
 
   addRecipe(req, res, next) {
-    const { recipeName, description, instructions, ingredients } = req.body;
-    if (!recipeName || typeof recipeName !== 'string') {
+    const { recipeImage, recipeName, description, instructions, ingredients } = req.body;
+    if (!recipeImage || typeof recipeName !== 'string') {
+      return res.status(400).json({
+        recipeImage: 'Please Enter Recipe Image'
+      });
+    } else if (!recipeName || typeof recipeName !== 'string') {
       return res.status(400).json({
         recipeName: 'Please Enter Recipe Name'
       });
-    } else if (!description || typeof description !== 'string') {
+    }  else if (!description || typeof description !== 'string') {
       return res.status(400).json({
         description: 'Please Enter Description'
       });

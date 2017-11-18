@@ -1,5 +1,4 @@
 import db from '../models';
-import Sequelize from 'sequelize';
 
 const reviews = db.reviews;
 const recipes = db.recipes;
@@ -16,7 +15,7 @@ class Reviews {
     recipes.findOne({id: id }).then(found => {
       if (!found) {
         return res.status(404).json({
-          message: 'Recipe Not foune!'
+          message: 'Recipe Not found!'
         });
       }
       if (!req.body.reviews) {
@@ -29,8 +28,8 @@ class Reviews {
           userId: req.decoded.id,
           recipeId: id,
           review: req.body.reviews
-        }).then(created => {
-          return res.status(201).json(created);
+        }).then(review => {
+          return res.status(201).json(review);
         });
     });
  
