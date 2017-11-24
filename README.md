@@ -97,7 +97,7 @@
       <td>GET</td>
       <td>/api/v1/recipes/?sort=upVote&order=desc</td>
       <td>Get all recipes, sorted by upvotes</td>
-      <td>{sort=upVote&order=desc}</td>      
+      <td></td>      
   </tr>
   <tr>
       <td>POST</td>
