@@ -36,10 +36,10 @@
       <td>/api/v1/users/signup</td>
       <td>Create a new user</td>
       <td>
-      {
-          username: 'username',
-          email: 'email@email.com'
-          password: 'password'
+      {<br>
+          username: 'string',<br>
+          email: 'string'<br>
+          password: 'string'<br>
       }
       </td>
   </tr>
@@ -55,8 +55,8 @@
       <td>Creates New Recipe</td>
       <td>
       {
-          username: 'username',
-          password: 'password'
+          username: 'string',
+          password: 'string'
       }
       </td>      
   </tr>
@@ -71,7 +71,7 @@
       <td>GET</td>
       <td>/api/v1/recipes/:recipeId</td>
       <td>Get Specific recipe details</td>
-      <td>{recipeId as params}</td>            
+      <td></td>            
   </tr>
   <tr>
       <td>GET</td>
@@ -103,31 +103,31 @@
       <td>POST</td>
       <td>/api/recipes/:recipeId/reviews </td>
       <td>Post a review</td>
-      <td>{RecipeId}</td>      
+      <td></td>     
   </tr>
   <tr>
       <td>POST</td>
       <td>/api/users/:recipeId/favorite </td>
       <td>Favorite a recipe</td>
-      <td>{recipeId}</td>
+      <td></td>
   </tr>
   <tr>
       <td>GET</td>
       <td>/api/users/:userId/favorite </td>
       <td>Get Favorite recipes</td>
-      <td>{recipeId}</td>
+      <td></td>
   </tr>
   <tr>
       <td>POST</td>
       <td>/api/recipes/:recipeId/votes?vote=up </td>
       <td>Up vote a recipe</td>
-      <td>{query = up}</td>
+      <td></td>
   </tr>
    <tr>
       <td>POST</td>
       <td>/api/recipes/:recipeId/votes?vote=down </td>
       <td>Down vote a recipe</td>
-      <td>{query = down}</td>
+      <td></td>
   </tr>
   <tr>
       <td>GET</td>
