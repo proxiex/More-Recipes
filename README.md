@@ -47,17 +47,22 @@
       <td>POST</td>
       <td>/api/v1/users/signin</td>
       <td>Login to the app</td>
-      <td></td>
+      <td>{<br>
+          username: 'string',<br>
+          password: 'string'<br>
+      }</td>
   </tr>
   <tr>
       <td>POST</td>
       <td>/api/v1/recipes</td>
       <td>Creates New Recipe</td>
       <td>
-      {<br>
-          username: 'string',<br>
-          password: 'string'<br>
-      }
+        {<br>
+          recipeImage: 'string'<br>
+          recipeName: 'string'<br>
+          description: 'text'<br>
+          ingredients: 'text' <br>
+          instructions: 'text' <br>
       </td>      
   </tr>
 
