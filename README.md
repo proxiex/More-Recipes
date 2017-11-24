@@ -54,9 +54,9 @@
       <td>/api/v1/recipes</td>
       <td>Creates New Recipe</td>
       <td>
-      {
-          username: 'string',
-          password: 'string'
+      {<br>
+          username: 'string',<br>
+          password: 'string'<br>
       }
       </td>      
   </tr>
@@ -133,7 +133,7 @@
       <td>GET</td>
       <td>/api/users/me</td>
       <td>Get user profile details</td>
-      <td>{<i>null</i>}</td>
+      <td><i>null</i></td>
   </tr>
 </table>
 
