@@ -4,7 +4,7 @@ import img from '../../assets/imgs/bg.jpg';
 
 export default () => {
   return (
-    <div className="row  z-depth-1">
+    <div className="row  z-depth-1" style={{marginBottom: '0'}}>
       <div id="index-banner" className="parallax-container">
         <div className="section no-pad-bot">
           <div className="container">

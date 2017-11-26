@@ -8,7 +8,9 @@ class AddRecipePage extends React.Component {
   render () {
     const { addRecipeAction } = this.props;
     return (
-      <AddRecipeForm addRecipeAction={addRecipeAction}  />
+      <div id="wrapper" className="contiainer center">
+        <AddRecipeForm addRecipeAction={addRecipeAction}  />
+      </div>
     );
   }
 }

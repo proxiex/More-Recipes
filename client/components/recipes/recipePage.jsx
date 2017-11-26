@@ -18,13 +18,14 @@ class RecipePage extends React.Component {
     this.props.getAllRecipeAction().then( 
       (recipes) =>{
         console.log(recipes)
-      this.setState({ recipes:  recipes.data.getAllRecipes.rows })
+      this.setState({ recipes:  recipes.data.recipes })
     })
   }
  
   render () {
     const { recipes } = this.state;   
     const allRecipes = recipes.map(recipe =>
+      
       <div className="col s12 m4" key={recipe.id}>
         <div className="card">
           <div className="card-image">

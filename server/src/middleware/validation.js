@@ -63,7 +63,8 @@ const Validation = {
   },
 
   addRecipe(req, res, next) {
-    const { recipeImage, recipeName, description, instructions, ingredients } = req.body;
+    const error = {};
+    const { recipeImage, recipeName, description, method, ingredients } = req.body;
     if (!recipeImage || typeof recipeName !== 'string') {
       return res.status(400).json({
         recipeImage: 'Please Enter Recipe Image'
@@ -76,7 +77,7 @@ const Validation = {
       return res.status(400).json({
         description: 'Please Enter Description'
       });
-    } else if (!instructions || typeof instructions !== 'string') {
+    } else if (!method || typeof method !== 'string') {
       return res.status(400).json({
         method: 'Please Enter Instructions'
       });

@@ -12,8 +12,8 @@ class NavigationBar extends Component {
   }
 
   render () {
+    console.log(this.props.user)
     const { isAuthenticated } = this.props.auth;
-
     const userLinks = (
       <div>
         
@@ -90,9 +90,7 @@ class NavigationBar extends Component {
             <Link to="/" id="logo-container" className="brand-logo">More Recipes</Link>
 
             { isAuthenticated ? userLinks : viewerLinks }
-
-             { isAuthenticated ? <ul><li className="right black-text hide-on-large-only">Welcom user &nbsp;&nbsp;&nbsp;</li></ul>: '' }
-            <a href="#" data-activates="nav-mobile" className="button-collapse"><i className="material-icons">menu</i></a>            
+                       
           </div>
         </nav>
       </div>

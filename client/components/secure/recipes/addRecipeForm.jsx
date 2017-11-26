@@ -42,7 +42,7 @@ class AddRecipeForm extends React.Component {
 
     this.config = {
       placeholderText: 'Edit Your Content Here!',
-      toolbarButtons: ['fullscreen','undo', 'redo' , '|', 'bold', 'italic', 'underline', 'formatOL', 'formatUL', 'clearFormatting', '|', 'help', '|', 'html']
+      toolbarButtons: ['fullscreen','undo', 'redo' , '|', 'bold', 'italic', 'underline', 'formatOL', 'formatUL', 'clearFormatting', '|', 'help']
     }
   }
 
@@ -104,6 +104,7 @@ class AddRecipeForm extends React.Component {
         newData.recipeImage = downloadURL;
           this.props.addRecipeAction(this.state).then(
             (res) => {
+              console.log(res, "response")
               this.setState({ redirect: true, isLoading: false});
             },
             ( err ) => { 
@@ -117,8 +118,9 @@ class AddRecipeForm extends React.Component {
   
   render() {
     const { errors, isLoading } = this.state;
+    console.log(this.state, "-----");
     return (
-      <div className="row" style={{marginTop: '3%'}} >
+      <div className="row" style={{paddingTop: '3%'}} >
         <div className="container">
           <div className="col s12 m12 l12"> 
             <div className="col m2"></div>

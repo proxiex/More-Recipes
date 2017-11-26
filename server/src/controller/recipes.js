@@ -19,7 +19,10 @@ class Recipes {
    * @memberof Recipes
    */
   add(req, res) {
-    const { recipeImage, recipeName, description, instructions, ingredients } = req.body;
+    console.log(res.body);
+
+    const { recipeImage, recipeName, description, method, ingredients } = req.body;
+    const instructions = method;
     return recipes
       .create({
         userId: req.decoded.id,

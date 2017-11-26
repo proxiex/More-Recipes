@@ -2,7 +2,7 @@ import React from 'react';
 
 export default () => {
     return (
-      <div className="row">
+      <div style={{background: 'white', marginBottom: '0', paddingTop: '5%', paddingBottom: '5%'}} className="row">
         <div className="container">
           <div className="row">
             <div className="col s12 m4">
