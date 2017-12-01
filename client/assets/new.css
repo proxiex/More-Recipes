@@ -3,23 +3,16 @@ body {
 }
 
  .body {
-  background: url('imgs/post_1.jpg'); 
+  background: url('../imgs/post_1.jpg'); 
   background-size: cover;
 }
 
  #wrapper {
   background: rgba(22, 22, 22, 0.897);
+  padding-bottom: 10%;
 }
-
 .logo-container{
   padding-left: 3% !important;
-}
-.padding-left {
-  padding-left: 50px;
-}
-
-.parallax-container-bottm {
-  margin-bottom: 0px;
 }
 nav ul a,
 nav .brand-logo {
@@ -91,39 +84,3 @@ footer div {
   width: 100%;  
 }
 
-  /* My recipes*/
-
-  .my-recipe {
-    margin: 0 auto;
-    float: none !important;
-  }
-
-  /* loged in */
-
-#welcome {
-  color: #000;
-}
-
-#welcome > i {
-  display: inline-block;
-  padding-right: 1%;
-  line-height: 0;
-  vertical-align: middle;
-}
-
-.no-margin-bottom {
-  margin-bottom: 0;
-}
-
-@media (min-width: 320px) and (max-width: 498px) {
-  #logo-container {
-    width: 50%;
-    margin-left: 3%; 
-  } 
-  
-  #index-banner h1 {
-    font-size: 320%;
-    margin-top: 0%;
-  }
-
-}

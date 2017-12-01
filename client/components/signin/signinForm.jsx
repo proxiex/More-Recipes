@@ -53,7 +53,7 @@ class SigninForm extends React.Component {
     const { errors, redirect, isLoading } = this.state;
     
     if (redirect) {
-      return <Redirect to="/" />
+      return <Redirect to="/recipes" />
     }
     
     return (
@@ -86,7 +86,7 @@ class SigninForm extends React.Component {
           <div className="row">
             <input 
               type="submit" 
-              value="Signup" 
+              value="Signin" 
               className="btn black-text grey lighten-2" 
               disabled={this.state.isLoading}
             />
@@ -95,6 +95,10 @@ class SigninForm extends React.Component {
             <p className="center">or <br/><Link to="/signup" >Signup</Link></p>
           </div>
         </form>
+        <br/>    
+            <br/>    
+            <br/>    
+            <br/>   
       </div>
     )
   }

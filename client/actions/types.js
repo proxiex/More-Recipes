@@ -18,10 +18,11 @@ export const SEARCH_RECIPE = 'SEARCH_RECIPE';
 // *** Favorites
 export const ADD_FAVORITE_RECIPE = 'ADD_FAVORITE_RECIPE';
 export const GET_FAVORITE_RECIPES = 'GET_FAVORITE_RECIPES';
+export const GET_RECIPE_REVIEW = 'GET_RECIPE_REVIEW';
 export const REMOVE_FAVORITE_RECIPE = 'REMOVE_FAVORITE_RECIPE';
+export const ADD_REVIEW = 'ADD_REVIEW';
 
 // *** Votes
-export const ADD_REVIEW = 'ADD_REVIEW';
-export const UP_VOTE = 'UP_VOTE';
-export const DOWN_VOTE = 'DOWN_VOTE';
+export const VOTE = 'VOTE';
+
 
