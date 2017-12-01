@@ -2,17 +2,13 @@ import db from '../models';
 
 const votes = db.votes;
 const recipes = db.recipes;
+const users = db.users;
 
 class Votes {
   votes(req, res) {
     // check if user has voted
     const id = req.params.recipeId;
-    if (isNaN(id)) {
-      return res.status(400).json({
-        message: 'Parameter must be a number!'
-      });
-    }
-
+    console.log(id);
     return recipes.findById(id).then(found => {
       if (found) {
         votes.find({
@@ -21,6 +17,7 @@ class Votes {
             recipeId: found.id
           }
         }).then(foundVotes => {
+          console.log('from votes >>>>>>>>>>>>>', foundVotes.user);
 
           if (foundVotes) {
             let updateVotes = {};
@@ -41,6 +38,9 @@ class Votes {
                   // remove form db
                   updateVotes.downVotes = 0;
                   updateRecipeVotes.downVotes = (found.downVotes > 0 )? found.downVotes - 1: 0;
+
+                  updateVotes.upVotes = 1;
+                  updateRecipeVotes.upVotes = found.upVotes + 1;
 
                   msg.up = 'Removing downVote to upVote';
                 } else {
@@ -66,6 +66,9 @@ class Votes {
                   updateVotes.upVotes = 0;
                   updateRecipeVotes.upVotes = (found.upVotes > 0)? found.upVotes - 1: 0;
                   
+                  updateVotes.downVotes = 1;
+                  updateRecipeVotes.downVotes = found.downVotes + 1;
+                  
                   msg.down = 'Removing upVote to downVote';
                 } else {
                   // down vote
@@ -75,24 +78,37 @@ class Votes {
                 }
                 
               }
+            } else {
+              return res.status(400).json({
+                message: 'Invalid query'
+              });
             }
 
-            votes.update( updateVotes,
+            foundVotes.update( updateVotes,
               {
                 where: {
                   userId: req.decoded.id,
                   recipeId: id
                 }
-              }).then(() => {
-              recipes.update( updateRecipeVotes,
+              }).then((userVotes) => {
+              found.update( updateRecipeVotes,
                 {
                   where: {
                     id: id
-                  }
-                }).then(() => {
+                  },
+                  include: [
+                    {
+                      attributes: ['id', 'firstName', 'lastName'],
+                      model: users
+                    }
+                  ]
+                }).then((recipeDetails) => {
+                console.log('#################>>>>>>>>>>', recipeDetails);
                 const voteMsg = (req.query.vote === 'up')? msg.up : msg.down;
                 return res.status(200).json({
-                  message: voteMsg
+                  message: voteMsg,
+                  userVotes,
+                  recipeDetails
                 });
               });             
             })
@@ -129,17 +145,23 @@ class Votes {
               createVoteRecipe = {
                 downVotes: found.downpVotes + 1
               };
+            } else {
+              return res.status(400).json({
+                message: 'Invalid query'
+              });
             }
-            votes.create(votings).then(() => {
-              recipes.update( createVoteRecipe,
+            votes.create(votings).then((userVotes) => {
+              found.update( createVoteRecipe,
                 {
                   where: {
                     id: id
                   }
-                }).then(() => {
+                }).then((recipeDetails) => {
                 const voteMsg = (req.query.vote === 'up')? 'Thank you for voting' : 'Sorry you do not like it';
                 return res.status(201).json({
-                  message: voteMsg
+                  message: voteMsg,
+                  userVotes,
+                  recipeDetails
                 });
               });
              

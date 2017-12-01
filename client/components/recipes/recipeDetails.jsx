@@ -4,6 +4,8 @@ import PropTypes from 'prop-types';
 import { getRecipeDetails } from '../../actions/getRecipeDetails';
 import { addReviewAction } from '../../actions/addReviewAction';
 import { voteAction } from '../../actions/voteActions';
+import shortid from 'shortid';
+import classnames from 'classnames'
 
 
 class RecipeDetails extends React.Component {
@@ -20,29 +22,21 @@ class RecipeDetails extends React.Component {
     this.downVote = this.downVote.bind(this)
   }
 
-  componentWillMount() {    
+  componentDidMount() {
+    console.log(this.props)
     const recipeId = this.props.match.params.recipeId;
-    this.props.getRecipeDetails(recipeId).then( 
-      (details) => {
-      this.setState({
-        details: details.data.recipeDetails,
-        recipeReviews: details.data.reviews
-      })
-    })
+    this.props.getRecipeDetails(recipeId)
   }
   
   upVote(){
+    console.log('ok')
     const recipeId = this.props.match.params.recipeId;
-    this.props.voteAction(recipeId, 'up').then((up) => {
-      console.log(up)
-    })
+    this.props.voteAction(recipeId, 'up')
   }
   
   downVote(){
     const recipeId = this.props.match.params.recipeId;
-    this.props.voteAction(recipeId, 'down').then(down =>{
-      console.log(down)
-    })
+    this.props.voteAction(recipeId, 'down')
   }
 
   onChange(e) {
@@ -51,23 +45,22 @@ class RecipeDetails extends React.Component {
 
   onSubmit(e) {
     e.preventDefault();
-    console.log(this.state)
+    console.log('from submit', this.state)
     const recipeId = this.props.match.params.recipeId;
     const data = {
       reviews: this.state.reviews
     }
-    this.props.addReviewAction(recipeId, data ).then(
-      (res) =>{
-        console.log(res)      
-      },
-      (err) => {
-        console.log(err)
-    })
+    this.props.addReviewAction(recipeId, data )
   }
 
   render () {
-    const recipeInfo = this.state.details;
-    const review = this.state.recipeReviews;
+    const recipeInfo = this.props.recipe.recipeDetails ? this.props.recipe.recipeDetails : {};
+    const reviewData = this.props.review ? this.props.review : {};
+    const userVotes = this.props.recipe.userVotes ? this.props.recipe.userVotes : {} ;
+    console.log( '>>>>>>>>>>>>>>>>>>>>', this.props.recipe)
+    console.log('####### user votes ########', userVotes)
+    const review = (review instanceof  Array) ? reviewData.sort(function(a, b){ return b.id - a.id }) : reviewData;
+    
     const { isAuthenticated } = this.props.auth;
 
     const reviewForm = (
@@ -92,104 +85,101 @@ class RecipeDetails extends React.Component {
     )
 
   return (
-    <div className="row" style={{marginTop: '3%'}}>
-      <div className="container">
-        <div className="col s12 m12 l12 transparent-bg">            
-          <div className="row">
-            <div className="col m4">
-                <div className="card">
-                <div className="card-image">
-                  <img src={recipeInfo.recipeImage} />
-                </div>
-                <div className="card-content">
-                  <div className="row">
-                    <span className="card-title">{recipeInfo.recipeName}</span>
-                    <span className="teal-text">Created By: Samuel Longshak</span>
+    <div id="wrapper">
+      <div className="row" style={{paddingTop: '3%', marginBottom: '0'}}>
+        <div className="container">
+          <div className="col s12 m12 l12 transparent-bg">            
+            <div className="row">
+              <div className="col m4">
+                  <div className="card">
+                  <div className="card-image">
+                    <img src={recipeInfo.recipeImage} />
                   </div>
-                  <div className="row">
-                    <span className="left"><a onClick={this.upVote} style={{cursor: 'pointer'}} ><i className="material-icons">thumb_up</i></a> {recipeInfo.upVotes} Likes</span>
-                    <span className="right"><a onClick={this.downVote} style={{cursor: 'pointer'}} ><i className="material-icons">thumb_down</i></a>{recipeInfo.downVotes} Dislikes</span>                        
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="col m8">
-              <div className="row">
-                <p className="justify">
-                  {recipeInfo.description}
-                </p>
-              </div>
-              <div className="row " style={{ padding: '5%'}}> 
-                  <div className="row">
-                    <div className="col m3"><span className=""><i className="material-icons">remove_red_eye</i> {recipeInfo.views} Views</span></div>
-                    <div className="col m3"><span className=""><i className="material-icons">favorite</i>5 Favorites</span></div>
-                    <div className="col m6">
-                        <span className="">
-                        <i className="material-icons teal-text">star</i> 
-                        <i className="material-icons">star</i>
-                        <i className="material-icons">star</i>
-                        <i className="material-icons">star_half</i>
-                        <i className="material-icons">star_border</i>
-                        5 reviews
-                      </span>
+                  <div className="card-content">
+                    <div className="row">
+                      <span className="card-title">{recipeInfo.recipeName}</span>
+                      <span className="teal-text">Created By: {recipeInfo.user !== undefined? recipeInfo.user.firstName + ' '+recipeInfo.user.lastName: null}</span>
                     </div>
                   </div>
+                </div>
+              </div>
+              <div className="col m8">
+                <div className="row">
+                  <p className="justify">
+                    {recipeInfo.description}
+                  </p>
+                </div>
+                <div className="row">
+                    <table>
+                      <tbody>
+                        <tr>
+                          <td> <span className=""><a onClick={this.downVote} style={{cursor: 'pointer'}} ><i className={classnames("material-icons", { 'red-text': userVotes.downVotes })}>favorite</i></a>{recipeInfo.views} Favorite</span></td>
+                          <td> <span className=""><a onClick={this.downVote} style={{cursor: 'pointer'}} ><i className={classnames("material-icons", { 'red-text': userVotes.downVotes })}>remove_red_eye</i></a>{recipeInfo.views} Views</span></td>
+                          <td><span className=""><a onClick={this.upVote} style={{cursor: 'pointer'}} ><i className={classnames("material-icons", { 'red-text': userVotes.upVotes })}>thumb_up</i></a> {recipeInfo.upVotes} Like</span></td>
+                          <td><span className=""><a onClick={this.downVote} style={{cursor: 'pointer'}} ><i className={classnames("material-icons", { 'red-text': userVotes.downVotes })}>thumb_down</i></a>{recipeInfo.downVotes} Dislike</span></td>
+                        </tr>
+                      </tbody>
+                    </table>
+                    </div>
+              </div>
+            </div>         
+            <div className="row white">
+              <div className="col m4">
+                <h5 className="center">Ingredients</h5>
+                <p dangerouslySetInnerHTML={{ __html:recipeInfo.ingredients}} />
+              </div>
+              <div className="col m8">
+                <h5 className="center">Preperation</h5>
+                  <p dangerouslySetInnerHTML={{ __html: recipeInfo.instructions }} />
               </div>
             </div>
-          </div>         
-          <div className="row white">
-            <div className="col m4">
-              <h5 className="center">Ingredients</h5>
-              <p dangerouslySetInnerHTML={{ __html:recipeInfo.ingredients}} />
-            </div>
-            <div className="col m8">
-              <h5 className="center">Preperation</h5>
-                <p dangerouslySetInnerHTML={{ __html: recipeInfo.method }} />
-            </div>
-          </div>
 
-          {isAuthenticated ? reviewForm : null}
+            {isAuthenticated ? reviewForm : null}
 
-          { (review instanceof  Array)?  
-            review.map(reviewInfo =>
-            <div key={reviewInfo.id} className="row white">
-              <div className="col m12">
-                <h5 className="center">Reiviews</h5>
-                <div className="row">
-                  <div className="">
-                    <div className="col s12 m8 offset-m2 l6 offset-l3">
-                      <div className="card-panel grey lighten-5 z-depth-1">
-                        <div className="row valign-wrapper">
-                          <div className="col s2">
-                            <img src="imgs/ruth.jpg" alt="" className="circle responsive-img" />
-                          </div>
-                          <div className="col s10">
-                            <span className="black-text">
-                              {reviewInfo.review}
-                            </span>
-                            <p>{reviewInfo.userId}</p>
+          
+              <div className="row white">
+                <div className="col m12">
+                  <h5 className="center">Reiviews</h5>
+
+                  { (review instanceof  Array)?  
+                  
+                    review.map(reviewInfo =>
+                  <div key={shortid.generate()} className="row">
+                    <div className="">
+                      <div className="col s12 m8 offset-m2 l6 offset-l3">
+                        <div className="card-panel grey lighten-5 z-depth-1">
+                          <div className="row valign-wrapper">
+                            <div className="col s2">
+                              <img src="imgs/ruth.jpg" alt="" className="circle responsive-img" />
+                            </div>
+                            <div className="col s10">
+                              <span className="black-text">
+                                {reviewInfo.review}
+                              </span>
+                              <p>{reviewInfo.user ? reviewInfo.user.username: null}</p>
+                            </div>
                           </div>
                         </div>
                       </div>
                     </div>
                   </div>
-                </div>
-              </div>
-            </div>
-            )
-          : 
-            <div className="row white">
-              <div className="col m12">
-                <h5 className="center">Reiviews</h5>
-                <div className="row">
-                  <div className="">
-                    <h4 className="center"> {review} </h4>
-                  </div>
-                </div>
-              </div>
-            </div>
-          }
 
+                  ) : 
+                  <div className="row white">
+                    <div className="col m12">
+                      <div className="row">
+                        <div className="">
+                          <p className="center"> {review} </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  }
+
+
+                </div>
+              </div>
+          </div>
         </div>
       </div>
     </div>
@@ -206,7 +196,9 @@ RecipeDetails.propTypes = {
 
 function mapStateToProps(state) { 
   return {
-    auth: state.auth
+    auth: state.auth,
+    recipe: state.recipe,
+    review: state.review
   }
 }
 

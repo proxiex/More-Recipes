@@ -3,6 +3,7 @@ import { getAllRecipeAction } from '../../actions/getAllRecipeAction';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import classnames from 'classnames';
 
 class RecipePage extends React.Component {
   constructor(props) {
@@ -15,16 +16,14 @@ class RecipePage extends React.Component {
 
   
   componentWillMount() {
-    this.props.getAllRecipeAction().then( 
-      (recipes) =>{
-        console.log(recipes)
-      this.setState({ recipes:  recipes.data.recipes })
-    })
+    this.props.getAllRecipeAction()
   }
  
   render () {
-    const { recipes } = this.state;   
-    const allRecipes = recipes.map(recipe =>
+    const { recipes } = this.state;  
+    const recipe2  = this.props.recipe;
+    const { isAuthenticated } = this.props.auth;
+    const allRecipes = recipe2.map(recipe =>
       
       <div className="col s12 m4" key={recipe.id}>
         <div className="card">
@@ -34,7 +33,7 @@ class RecipePage extends React.Component {
           <div className="card-content">
             <p>By <a href="recipe_by.html">Samuel Longshak</a></p>
             <p><a href="meal_type.html">{recipe.mealType}</a></p>
-            <Link to={"/recipe-details/"+recipe.id}><span className="card-title">{recipe.recipeName}</span></Link>
+            <Link to={`/recipe-details/${recipe.id}`}><span className="card-title">{recipe.recipeName}</span></Link>
             <div className="divider"></div>
             <div className="row">
               <div className="col m4"><span className="left"><i className="material-icons">remove_red_eye</i>{recipe.views}</span></div>
@@ -46,37 +45,7 @@ class RecipePage extends React.Component {
       </div>  
     )
 
-    return (
-        <div className="row">
-         <div className="col m8 transparent-bg">
-          <div className="section">
-            <div className="row">
-              <div className="col m4"></div>
-              <div className="col m4"><h4 className="center">Recipes</h4></div>
-              <div className="col m4">
-              </div>
-            </div>
-            <div className="row">
-              {allRecipes}
-            </div>
-        </div> 
-
-        {/* Pagination here */}
-
-        <div className="row">         
-          <ul className="pagination center">
-            <li className="disabled"><a href="#!"><i className="material-icons">chevron_left</i></a></li>
-            <li className="active teal"><a href="#!">1</a></li>
-            <li className="waves-effect"><a href="#!">2</a></li>
-            <li className="waves-effect"><a href="#!">3</a></li>
-            <li className="waves-effect"><a href="#!">4</a></li>
-            <li className="waves-effect"><a href="#!">5</a></li>
-            <li className="waves-effect"><a href="#!"><i className="material-icons">chevron_right</i></a></li>
-          </ul>
-        </div>
-      </div>
-      {/* end of recipe dispalyy here */}
-
+    const otherDetails = (
       <div className="col m4">
         <div className="row">
           <div className="col s12 m12">
@@ -127,13 +96,58 @@ class RecipePage extends React.Component {
           </div>
         </div>
       </div>
-    </div>
+    )
+
+    return (
+      <div id="wrapper">
+        <div className="row" style={{marginBottom: '0'}}>
+          <div className={ classnames('col m8 transparent-bg', {'my-recipe': isAuthenticated } ) }>
+            <div className="section">
+              <div className="row">
+                <div className="col m4"></div>
+                <div className="col m4"><h4 className="center"> {isAuthenticated ? 'My': null} Recipes</h4></div>
+                <div className="col m4">
+                </div>
+              </div>
+              <div className="row">
+                {allRecipes}
+              </div>
+            </div> 
+
+            {/* Pagination here */}
+
+            <div className="row">         
+              <ul className="pagination center">
+                <li className="disabled"><a href="#!"><i className="material-icons">chevron_left</i></a></li>
+                <li className="active teal"><a href="#!">1</a></li>
+                <li className="waves-effect"><a href="#!">2</a></li>
+                <li className="waves-effect"><a href="#!">3</a></li>
+                <li className="waves-effect"><a href="#!">4</a></li>
+                <li className="waves-effect"><a href="#!">5</a></li>
+                <li className="waves-effect"><a href="#!"><i className="material-icons">chevron_right</i></a></li>
+              </ul>
+            </div>
+          </div>
+          {/* end of recipe dispalyy here */}
+          
+          { isAuthenticated ? null : otherDetails }
+          
+        </div>
+      </div>
     );
   }
 }
 
 RecipePage.propTypes = {
-  getAllRecipeAction: PropTypes.func.isRequired
+  getAllRecipeAction: PropTypes.func.isRequired,
+  auth: PropTypes.object.isRequired
 }
 
-export default connect(null, { getAllRecipeAction })(RecipePage);
+function mapStateToProps(state) {
+  return {
+    recipe: state.recipes,
+    auth: state.auth
+  }
+}
+
+export default connect(mapStateToProps, { getAllRecipeAction })(RecipePage);

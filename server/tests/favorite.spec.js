@@ -18,7 +18,7 @@ describe('Favorite Recipes Controller', () => {
     
   it('should return error for invalid params', (done) => {
     chai.request(app)
-      .post('/api/v1/users/x3s/recipes')
+      .post('/api/v1/users/x3s/recipes') 
       .set('x-token', token)
       .end((err, res) => {
         res.should.have.status(400);

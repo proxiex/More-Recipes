@@ -3,6 +3,8 @@ import db from '../models';
 
 const recipes = db.recipes;
 const reviews = db.reviews;
+const users = db.users;
+const votes = db.votes;
 // const Op = Sequelize.Op;
 /**
  * 
@@ -19,8 +21,6 @@ class Recipes {
    * @memberof Recipes
    */
   add(req, res) {
-    console.log(res.body);
-
     const { recipeImage, recipeName, description, method, ingredients } = req.body;
     const instructions = method;
     return recipes
@@ -121,6 +121,13 @@ class Recipes {
         },
         order: [
           ['id', 'DESC']
+        ],
+
+        include: [
+          {
+            attributes: ['id', 'firstName', 'lastName'],
+            model: users
+          }
         ]
       }).then(result => {
         if (result.length <= 0) {
@@ -141,6 +148,13 @@ class Recipes {
       recipes.findAll({
         order: [
           [sort, order]
+        ],
+
+        include: [
+          {
+            attributes: ['id', 'firstName', 'lastName'],
+            model: users
+          }
         ]
       }).then(recipe => {
         return res.status(200).json({
@@ -150,11 +164,20 @@ class Recipes {
     } else {  
       const limitValue = (req.query.limit <= 0) ? 12 : req.query.limit || 12;
       const pageValue = (req.query.page <= 0 ) ? 0 : req.query.page - 1 || 0;
-
       return recipes
         .findAndCountAll({ 
           offset: limitValue * pageValue, 
           limit: limitValue,
+
+          include: [
+            {
+              attributes: ['id', 'firstName', 'lastName'],
+              model: users
+            }
+          ],
+          order: [
+            ['id', 'DESC']
+          ]
         }).then(getAllRecipes => {
           if (getAllRecipes.length <= 0) {
            
@@ -176,7 +199,14 @@ class Recipes {
       .findOne({
         where: { 
           id: req.params.recipeId
-        }
+        },
+
+        include: [
+          {
+            attributes: ['id', 'firstName', 'lastName'],
+            model: users
+          }
+        ]
       }).then(recipeDetails => {
         if (recipeDetails) {
           if (!req.decoded || req.decoded.id !== recipeDetails.userId) {
@@ -193,12 +223,31 @@ class Recipes {
           reviews.findAll({
             where: {
               recipeId: req.params.recipeId
-            }
+            },
+            
+            order: [
+              ['id', 'DESC']
+            ],
+
+            include: [
+              {
+                attributes: ['id', 'avatar', 'username'],
+                model: users
+              }
+            ]
           }).then(recipeReviews =>{
-            const reviews = (recipeReviews.length <= 0)? 'No reviews yet': recipeReviews;
-            return res.status(200).json({
-              recipeDetails,
-              reviews: reviews
+            votes.findOne({
+              where: {
+                userId: req.decoded.id,
+                recipeId: req.params.recipeId
+              }
+            }).then(userVotes => {
+              const reviews = (recipeReviews.length <= 0)? 'No reviews yet': recipeReviews;
+              return res.status(200).json({
+                recipeDetails,
+                reviews,
+                userVotes
+              });
             });
           });
 

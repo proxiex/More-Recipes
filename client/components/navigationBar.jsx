@@ -1,68 +1,77 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { logout } from '../actions/signinActions';
+import classnames from 'classnames';
+import FAB from './common/FAB';
+
+import background from '../assets/imgs/post_7.jpg';
+import avater from '../assets/imgs/ruth.jpg';
 
 
 class NavigationBar extends Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      redirect: false
+    }
+  }
+  
+  componentDidUpdate() {
+    $(".button-collapse").sideNav();
+    $(document).ready(function() {
+      
+      $('select').material_select();
+      $('.tooltipped').tooltip({delay: 50});
+    
+      $('textarea#description, textarea#method').characterCounter();
+      $('.carousel').carousel();
+    });
+    
+    $('.recipes').dropdown();
+    $('.dropdown-button').dropdown();
+    
+    (function($){
+      $(function(){
+    
+        $('.button-collapse').sideNav();
+        $('.parallax').parallax();
+    
+      }); // end of document ready
+    })(jQuery);
+  }
+  
   logout(e) {
     e.preventDefault();
     this.props.logout();
+    this.setState({ redirect: true});
+    $('.button-collapse').sideNav('destroy');
+    <Redirect to="/" />
   }
 
   render () {
-    console.log(this.props.user)
+   
     const { isAuthenticated } = this.props.auth;
     const userLinks = (
       <div>
-        
-        <ul className="right hide-on-med-and-down">
-          <li id="welcome">{ isAuthenticated ? <span> Welcome User </span> : '' }  </li>
-          <li><Link className="active" to="/">Home</Link ></li>
-          <li>
-              <a className="dropdown-button" data-activates="recipes">
-                  Recipes
-                  <i className="material-icons right">arrow_drop_down</i>
-              </a >
-          </li>
-          <li>
-              <a className="dropdown-button" data-activates="dropdown1">                                
-                  Menu
-                  <i className="material-icons right">arrow_drop_down</i>
-              </a >
-          </li>
-        </ul>
-        <ul id="recipes" className="dropdown-content">
-            <li><Link to="/my-recipes"><i className="material-icons">view_list</i>Mine</Link ></li>
-            <li><Link to="/recipes"><i className="material-icons">view_list</i>View</Link ></li>
-            <li><Link to="/add-recipe"><i className="material-icons">note_add</i>Add</Link ></li>
-            <li><Link to="/favorite"><i className="material-icons">favorite</i> Fav's</Link ></li>
-            <li><Link to="/trash"><i className="material-icons">delete</i>Trash</Link ></li>
-        </ul>
-
-        <ul id="dropdown1" className="dropdown-content">
-            <li><Link to="/profile"><i className="material-icons">account_circle</i>Profile</Link ></li>
-            <li><Link to="/notifications"><i className="material-icons">notifications</i><span className="new badge red">4</span> Notifications </Link ></li>
-            <li><Link to="/settings"><i className="material-icons">settings</i>Settings</Link ></li>
-            <li className="divider"></li>
-            <li><a to="/logout" onClick={this.logout.bind(this)}><i className="material-icons">exit_to_app</i> Logout</a></li>
-        </ul>
-
-        <ul id="nav-mobile" className="side-nav">
-            <li><Link to="/"><i className="material-icons">home</i>Home</Link ></li>
-            <li><Link to="/my-recipes"><i className="material-icons">view_list</i>My Recipes</Link ></li>                        
-            <li><Link to="/recipes"><i className="material-icons">view_list</i>View Recipes</Link ></li>
-            <li><Link to="/add-recipe"><i className="material-icons">note_add</i>Add Recipes </Link ></li>
-            <li><Link to="/favorite"><i className="material-icons">favorite</i>Favorite</Link ></li>
-            <li><Link to="/trash"><i className="material-icons">delete</i>Trash</Link ></li>
-            <li><Link to="/profile"><i className="material-icons">account_circle</i>Profile</Link ></li>
-            <li><Link to="/notifications"><i className="material-icons">notifications</i><span className="new badge red">4</span> Notifications </Link ></li>
-            <li><Link to="/settings"><i className="material-icons">settings</i>Settings</Link ></li>
-            <li className="divider"></li>
-            <li><a to="/logout" onClick={this.logout.bind(this)}><i className="material-icons">exit_to_app</i> Logout</a></li>
-        </ul>
-      </div>
+        <ul id="slide-out" className="side-nav">
+          <li><div className="user-view">
+            <div className="background">
+              <img src={background} />
+            </div>
+            <a href="#!user"><img className="circle" src={avater} /></a>
+            <a href="#!name"><span className="white-text name">Samuel Longshak</span></a>
+            <a href="#!email"><span className="white-text email">samuel@andela.com</span></a>
+          </div></li>
+          <li><a href="profile.html"><i className="material-icons">account_circle</i>Profile</a></li>
+          {/* <li><a href="notifications.html"><i className="material-icons">notifications</i><span className="new badge red">4</span> Notifications </a></li> */}
+          <li><a href="settings.html"><i className="material-icons">settings</i>Settings</a></li>
+          <li className="divider"></li>
+          <li><a to="/logout" onClick={this.logout.bind(this)}><i className="material-icons">exit_to_app</i> Logout</a></li>
+      </ul>
+      <a href="#" data-activates="slide-out" className="button-collapse show-on-large"><i className="material-icons">menu</i></a>
+    </div>  
     );
 
     const viewerLinks = (
@@ -85,14 +94,15 @@ class NavigationBar extends Component {
 
     return (
       <div className="row parallax-container-bottm">
-        <nav className="white" role="navigation">
+        <nav className={classnames({"white": !isAuthenticated}, {"black": isAuthenticated})} role="navigation">
           <div className="nav-wrapper padding-left" >
-            <Link to="/" id="logo-container" className="brand-logo">More Recipes</Link>
+            
 
             { isAuthenticated ? userLinks : viewerLinks }
-                       
+            <Link to="/" id="logo-container" className="brand-logo">More Recipes</Link>
           </div>
         </nav>
+    { isAuthenticated ?  <FAB /> : null }
       </div>
     )
   }

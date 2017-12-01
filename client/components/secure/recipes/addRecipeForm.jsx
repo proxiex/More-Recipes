@@ -42,7 +42,7 @@ class AddRecipeForm extends React.Component {
 
     this.config = {
       placeholderText: 'Edit Your Content Here!',
-      toolbarButtons: ['fullscreen','undo', 'redo' , '|', 'bold', 'italic', 'underline', 'formatOL', 'formatUL', 'clearFormatting', '|', 'help']
+      toolbarButtons: ['fullscreen','undo', 'redo' , '|', 'bold', 'italic', 'underline', 'formatOL', 'formatUL', 'clearFormatting', 'html', '|', 'help']
     }
   }
 
@@ -120,7 +120,7 @@ class AddRecipeForm extends React.Component {
     const { errors, isLoading } = this.state;
     console.log(this.state, "-----");
     return (
-      <div className="row" style={{paddingTop: '3%'}} >
+      <div className="row" style={{paddingTop: '3%', marginBottom: '0'}} >
         <div className="container">
           <div className="col s12 m12 l12"> 
             <div className="col m2"></div>
@@ -170,25 +170,6 @@ class AddRecipeForm extends React.Component {
                   {errors.description && <span className="red-text">{errors.description}</span>}
                 </div>
 
-                <div className="row">
-                  <div className="input-field col s12">
-                    <select 
-                        name="melType" 
-                        onChange={this.onChange} 
-                        value={this.state.mealType}
-                    >
-
-                      <option value="" disabled >Choose Meal type</option>
-                      <option value="Breakfast">Breakfast</option>
-                      <option value="Elevenses">Elevenses</option>
-                      <option value="Brunch">Brunch</option>
-                      <option value="Lunch">Lunch</option>
-                      <option value="Plate lunch">Plate lunch</option>
-                      <option value="Dinner">Dinner</option>
-                    </select>
-                    <label>Meal Type</label>
-                  </div>
-                </div>
                 <div className="row">
                   <div className="input-field col s12">
                     <input name="mealType" 
