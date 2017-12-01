@@ -19,8 +19,6 @@ class Recipes {
    * @memberof Recipes
    */
   add(req, res) {
-    console.log(res.body);
-
     const { recipeImage, recipeName, description, method, ingredients } = req.body;
     const instructions = method;
     return recipes
@@ -150,7 +148,6 @@ class Recipes {
     } else {  
       const limitValue = (req.query.limit <= 0) ? 12 : req.query.limit || 12;
       const pageValue = (req.query.page <= 0 ) ? 0 : req.query.page - 1 || 0;
-
       return recipes
         .findAndCountAll({ 
           offset: limitValue * pageValue, 
@@ -193,12 +190,16 @@ class Recipes {
           reviews.findAll({
             where: {
               recipeId: req.params.recipeId
-            }
+            },
+            
+            order: [
+              ['id', 'DESC']
+            ]
           }).then(recipeReviews =>{
             const reviews = (recipeReviews.length <= 0)? 'No reviews yet': recipeReviews;
             return res.status(200).json({
               recipeDetails,
-              reviews: reviews
+              reviews
             });
           });
 

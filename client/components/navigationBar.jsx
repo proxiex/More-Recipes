@@ -1,18 +1,28 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { logout } from '../actions/signinActions';
 
 
 class NavigationBar extends Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      redirect: false
+    }
+  }
+  
   logout(e) {
     e.preventDefault();
     this.props.logout();
+    this.setState({ redirect: true})
   }
 
   render () {
-    console.log(this.props.user)
+    if (this.state.redirect) {
+      console.log('ok it works')
+    }
     const { isAuthenticated } = this.props.auth;
     const userLinks = (
       <div>

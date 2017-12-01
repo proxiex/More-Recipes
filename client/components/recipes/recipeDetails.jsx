@@ -22,13 +22,7 @@ class RecipeDetails extends React.Component {
 
   componentWillMount() {    
     const recipeId = this.props.match.params.recipeId;
-    this.props.getRecipeDetails(recipeId).then( 
-      (details) => {
-      this.setState({
-        details: details.data.recipeDetails,
-        recipeReviews: details.data.reviews
-      })
-    })
+    this.props.getRecipeDetails(recipeId)
   }
   
   upVote(){
@@ -56,18 +50,12 @@ class RecipeDetails extends React.Component {
     const data = {
       reviews: this.state.reviews
     }
-    this.props.addReviewAction(recipeId, data ).then(
-      (res) =>{
-        console.log(res)      
-      },
-      (err) => {
-        console.log(err)
-    })
+    this.props.addReviewAction(recipeId, data )
   }
 
   render () {
-    const recipeInfo = this.state.details;
-    const review = this.state.recipeReviews;
+    const recipeInfo = this.props.recipe;
+    const review = this.props.review;
     const { isAuthenticated } = this.props.auth;
 
     const reviewForm = (
@@ -150,12 +138,14 @@ class RecipeDetails extends React.Component {
 
           {isAuthenticated ? reviewForm : null}
 
-          { (review instanceof  Array)?  
-            review.map(reviewInfo =>
-            <div key={reviewInfo.id} className="row white">
+         
+            <div className="row white">
               <div className="col m12">
                 <h5 className="center">Reiviews</h5>
-                <div className="row">
+
+                { (review instanceof  Array)?  
+                  review.map(reviewInfo =>
+                <div key={reviewInfo.id} className="row">
                   <div className="">
                     <div className="col s12 m8 offset-m2 l6 offset-l3">
                       <div className="card-panel grey lighten-5 z-depth-1">
@@ -174,22 +164,23 @@ class RecipeDetails extends React.Component {
                     </div>
                   </div>
                 </div>
-              </div>
-            </div>
-            )
-          : 
-            <div className="row white">
-              <div className="col m12">
-                <h5 className="center">Reiviews</h5>
-                <div className="row">
-                  <div className="">
-                    <h4 className="center"> {review} </h4>
+
+                ) : 
+                <div className="row white">
+                  <div className="col m12">
+                    <h5 className="center">Reiviews</h5>
+                    <div className="row">
+                      <div className="">
+                        <h4 className="center"> {review} </h4>
+                      </div>
+                    </div>
                   </div>
                 </div>
+                }
+
+
               </div>
             </div>
-          }
-
         </div>
       </div>
     </div>
@@ -206,7 +197,9 @@ RecipeDetails.propTypes = {
 
 function mapStateToProps(state) { 
   return {
-    auth: state.auth
+    auth: state.auth,
+    recipe: state.recipe,
+    review: state.review
   }
 }
 

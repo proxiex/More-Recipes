@@ -15,16 +15,13 @@ class RecipePage extends React.Component {
 
   
   componentWillMount() {
-    this.props.getAllRecipeAction().then( 
-      (recipes) =>{
-        console.log(recipes)
-      this.setState({ recipes:  recipes.data.recipes })
-    })
+    this.props.getAllRecipeAction()
   }
  
   render () {
-    const { recipes } = this.state;   
-    const allRecipes = recipes.map(recipe =>
+    const { recipes } = this.state;  
+    const recipe2  = this.props.recipe;
+    const allRecipes = recipe2.map(recipe =>
       
       <div className="col s12 m4" key={recipe.id}>
         <div className="card">
@@ -136,4 +133,10 @@ RecipePage.propTypes = {
   getAllRecipeAction: PropTypes.func.isRequired
 }
 
-export default connect(null, { getAllRecipeAction })(RecipePage);
+function mapStateToProps(state) {
+  return {
+    recipe: state.recipe
+  }
+}
+
+export default connect(mapStateToProps, { getAllRecipeAction })(RecipePage);
