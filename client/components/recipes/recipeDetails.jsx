@@ -135,7 +135,6 @@ class RecipeDetails extends React.Component {
             </div>
 
             {isAuthenticated ? reviewForm : null}
-
           
               <div className="row white">
                 <div className="col m12">
