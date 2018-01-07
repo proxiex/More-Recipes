@@ -54,7 +54,7 @@ class Favorite {
                 userId: req.decoded.id
               }).then(favorite => {
                 return res.status(201).json({
-                  message: 'Recipe Favorited!',
+                  message: 'Recipe has been added to your favorite list',
                   favorite
                 });
               });
