@@ -16,7 +16,7 @@ router.post('/signup', Validate.userSignup, usersController.signup);
 router.post('/signin', Validate.userSignin, usersController.signin);
 
 router.post('/:recipeId/favorites',  Auth.Verify, Validate.recipeId, favoritesController.add);
-router.get('/:recipeId/favorites', Auth.Verify, favoritesController.get);
+router.get('/:userId/favorites', Auth.Verify, favoritesController.get);
 router.get('/recipe', Pass.Verify, recipeController.getUserRecipe);
 
 router.get('/me', Auth.Verify, usersController.profile);

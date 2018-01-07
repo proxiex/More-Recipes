@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { getRecipeDetails } from '../../actions/getRecipeDetails';
 import { addReviewAction } from '../../actions/addReviewAction';
 import { voteAction } from '../../actions/voteActions';
+import { favoriteRecipeAction } from '../../actions/favoriteRecipeAction';
 import shortid from 'shortid';
 import classnames from 'classnames'
 
@@ -20,27 +21,40 @@ class RecipeDetails extends React.Component {
     this.onSubmit = this.onSubmit.bind(this)
     this.upVote = this.upVote.bind(this)
     this.downVote = this.downVote.bind(this)
+    this.favoriteRecipe = this.favoriteRecipe.bind(this)
   }
 
   componentDidMount() {
-    console.log(this.props)
     const recipeId = this.props.match.params.recipeId;
     this.props.getRecipeDetails(recipeId)
+  }
+
+  componentDidUpdate() {
+    Materialize.toast(this.props.recipe.message, 3000, 'green darken-3')
+    Materialize.toast(this.props.favorites.message, 3000, 'green darken-3');
   }
   
   upVote(){
     console.log('ok')
     const recipeId = this.props.match.params.recipeId;
     this.props.voteAction(recipeId, 'up')
+   
   }
   
   downVote(){
     const recipeId = this.props.match.params.recipeId;
     this.props.voteAction(recipeId, 'down')
+    
   }
 
   onChange(e) {
     this.setState({ [e.target.name]: e.target.value });
+  }
+
+  favoriteRecipe() {
+    const recipeId = this.props.match.params.recipeId;
+    console.log('favrited')
+    this.props.favoriteRecipeAction(recipeId);
   }
 
   onSubmit(e) {
@@ -57,8 +71,7 @@ class RecipeDetails extends React.Component {
     const recipeInfo = this.props.recipe.recipeDetails ? this.props.recipe.recipeDetails : {};
     const reviewData = this.props.review ? this.props.review : {};
     const userVotes = this.props.recipe.userVotes ? this.props.recipe.userVotes : {} ;
-    console.log( '>>>>>>>>>>>>>>>>>>>>', this.props.recipe)
-    console.log('####### user votes ########', userVotes)
+
     const review = (review instanceof  Array) ? reviewData.sort(function(a, b){ return b.id - a.id }) : reviewData;
     
     const { isAuthenticated } = this.props.auth;
@@ -113,10 +126,10 @@ class RecipeDetails extends React.Component {
                     <table>
                       <tbody>
                         <tr>
-                          <td> <span className=""><a onClick={this.downVote} style={{cursor: 'pointer'}} ><i className={classnames("material-icons", { 'red-text': userVotes.downVotes })}>favorite</i></a>{recipeInfo.views} Favorite</span></td>
-                          <td> <span className=""><a onClick={this.downVote} style={{cursor: 'pointer'}} ><i className={classnames("material-icons", { 'red-text': userVotes.downVotes })}>remove_red_eye</i></a>{recipeInfo.views} Views</span></td>
-                          <td><span className=""><a onClick={this.upVote} style={{cursor: 'pointer'}} ><i className={classnames("material-icons", { 'red-text': userVotes.upVotes })}>thumb_up</i></a> {recipeInfo.upVotes} Like</span></td>
-                          <td><span className=""><a onClick={this.downVote} style={{cursor: 'pointer'}} ><i className={classnames("material-icons", { 'red-text': userVotes.downVotes })}>thumb_down</i></a>{recipeInfo.downVotes} Dislike</span></td>
+                          <td> <span className=""><a onClick={this.favoriteRecipe} style={{cursor: 'pointer'}} ><i className={classnames("material-icons", { 'teal-text': userVotes.upotes })}>favorite</i></a>Favorite</span></td>
+                          <td> <span className=""><a onClick={this.downVote} style={{cursor: 'pointer'}} ><i className="material-icons">remove_red_eye</i></a>{recipeInfo.views} Views</span></td>
+                          <td><span className=""><a onClick={this.upVote} style={{cursor: 'pointer'}} ><i className={classnames("material-icons", { 'teal-text': userVotes.upVotes })}>thumb_up</i></a> {recipeInfo.upVotes} Like</span></td>
+                          <td><span className=""><a onClick={this.downVote} style={{cursor: 'pointer'}} ><i className={classnames("material-icons", { 'teal-text': userVotes.downVotes })}>thumb_down</i></a>{recipeInfo.downVotes} Dislike</span></td>
                         </tr>
                       </tbody>
                     </table>
@@ -190,16 +203,18 @@ RecipeDetails.propTypes = {
   auth: PropTypes.object.isRequired,
   getRecipeDetails: PropTypes.func.isRequired,
   voteAction: PropTypes.func.isRequired,
-  addReviewAction: PropTypes.func.isRequired
+  addReviewAction: PropTypes.func.isRequired,
+  favoriteRecipeAction: PropTypes.func.isRequired
 }
 
 function mapStateToProps(state) { 
   return {
     auth: state.auth,
     recipe: state.recipe,
-    review: state.review
+    review: state.review,
+    favorites: state.favorites
   }
 }
 
 
-export default connect(mapStateToProps, {voteAction, addReviewAction, getRecipeDetails })(RecipeDetails);
+export default connect(mapStateToProps, {voteAction, addReviewAction, getRecipeDetails, favoriteRecipeAction })(RecipeDetails);

@@ -5,7 +5,7 @@ const FAB = () => {
   return (
     <div className="fixed-action-btn click-to-toggle">
       <a className="btn-floating btn-large red">
-        <i className="large material-icons">add</i>
+        <i className="large material-icons">menu</i>
       </a >
       <ul>
         <li><Link to="/add-recipe" className="btn-floating red tooltipped" data-position="left" data-delay="50" data-tooltip="Add Recipe"><i className="material-icons">add</i></Link ></li>
