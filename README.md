@@ -1,6 +1,6 @@
 [![Build Status](https://travis-ci.org/proxiex/More-Recipes.svg)](https://travis-ci.org/proxiex/More-Recipes)
 [![Coverage Status](https://coveralls.io/repos/github/proxiex/More-Recipes/badge.svg?branch=develop)](https://coveralls.io/github/proxiex/More-Recipes?branch=develop)
-[![Code Climate](https://codeclimate.com/github/proxiex/More-Recipes.png)](https://codeclimate.com/github/proxiex/More-Recipes)
+[![Code Climate](https://codeclimate.com/github/proxiex/More-Recipes/badges/gpa.svg)](https://codeclimate.com/github/proxiex/More-Recipes)
 
 
 # MORE-RECIPES
@@ -36,10 +36,10 @@
       <td>/api/v1/users/signup</td>
       <td>Create a new user</td>
       <td>
-      {
-          username: 'username',
-          email: 'email@email.com'
-          password: 'password'
+      {<br>
+          username: 'string',<br>
+          email: 'string'<br>
+          password: 'string'<br>
       }
       </td>
   </tr>
@@ -47,17 +47,22 @@
       <td>POST</td>
       <td>/api/v1/users/signin</td>
       <td>Login to the app</td>
-      <td></td>
+      <td>{<br>
+          username: 'string',<br>
+          password: 'string'<br>
+      }</td>
   </tr>
   <tr>
       <td>POST</td>
       <td>/api/v1/recipes</td>
       <td>Creates New Recipe</td>
       <td>
-      {
-          username: 'username',
-          password: 'password'
-      }
+        {<br>
+          recipeImage: 'string'<br>
+          recipeName: 'string'<br>
+          description: 'text'<br>
+          ingredients: 'text' <br>
+          instructions: 'text' <br>
       </td>      
   </tr>
 
@@ -71,7 +76,7 @@
       <td>GET</td>
       <td>/api/v1/recipes/:recipeId</td>
       <td>Get Specific recipe details</td>
-      <td>{recipeId as params}</td>            
+      <td></td>            
   </tr>
   <tr>
       <td>GET</td>
@@ -97,43 +102,43 @@
       <td>GET</td>
       <td>/api/v1/recipes/?sort=upVote&order=desc</td>
       <td>Get all recipes, sorted by upvotes</td>
-      <td>{sort=upVote&order=desc}</td>      
+      <td></td>      
   </tr>
   <tr>
       <td>POST</td>
       <td>/api/recipes/:recipeId/reviews </td>
       <td>Post a review</td>
-      <td>{RecipeId}</td>      
+      <td></td>     
   </tr>
   <tr>
       <td>POST</td>
       <td>/api/users/:recipeId/favorite </td>
       <td>Favorite a recipe</td>
-      <td>{recipeId}</td>
+      <td></td>
   </tr>
   <tr>
       <td>GET</td>
       <td>/api/users/:userId/favorite </td>
       <td>Get Favorite recipes</td>
-      <td>{recipeId}</td>
+      <td></td>
   </tr>
   <tr>
       <td>POST</td>
       <td>/api/recipes/:recipeId/votes?vote=up </td>
       <td>Up vote a recipe</td>
-      <td>{query = up}</td>
+      <td></td>
   </tr>
    <tr>
       <td>POST</td>
       <td>/api/recipes/:recipeId/votes?vote=down </td>
       <td>Down vote a recipe</td>
-      <td>{query = down}</td>
+      <td></td>
   </tr>
   <tr>
       <td>GET</td>
       <td>/api/users/me</td>
       <td>Get user profile details</td>
-      <td>{<i>null</i>}</td>
+      <td><i>null</i></td>
   </tr>
 </table>
 
