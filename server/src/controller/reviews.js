@@ -1,8 +1,8 @@
 import db from '../models';
-import Sequelize from 'sequelize';
 
 const reviews = db.reviews;
 const recipes = db.recipes;
+const users = db.users;
 
 class Reviews {
   add(req, res) {
@@ -16,7 +16,7 @@ class Reviews {
     recipes.findOne({id: id }).then(found => {
       if (!found) {
         return res.status(404).json({
-          message: 'Recipe Not foune!'
+          message: 'Recipe Not found!'
         });
       }
       if (!req.body.reviews) {
@@ -29,11 +29,50 @@ class Reviews {
           userId: req.decoded.id,
           recipeId: id,
           review: req.body.reviews
-        }).then(created => {
-          return res.status(201).json(created);
+        }).then(() => {
+          reviews.findAll({
+            where: {
+              recipeId: id
+            },
+            include: [
+              {
+                attributes: ['id', 'avatar', 'username'],
+                model: users
+              }
+            ],
+            
+          }).then(review => {
+            return res.status(201).json(review);
+          });
+          
         });
     });
  
+  }
+
+  getAllRecipeReview(req, res) {
+    const recipeId = req.params.recipeId;
+
+    reviews.findAll({
+      where: {
+        recipeId
+      },
+      order: [
+        ['id', 'DESC']
+      ],
+
+      include: [
+        {
+          attributes: ['id', 'avatar', 'username'],
+          model: users
+        }
+      ]
+    }).then(recipeReviews => {
+      const reviews = (recipeReviews.length <= 0)? 'No reviews yet': recipeReviews;
+      return res.status(200).json({
+        reviews
+      });
+    });
   }
 }
 

@@ -3,24 +3,36 @@ import db from '../models';
 
 const recipes = db.recipes;
 const reviews = db.reviews;
+const users = db.users;
+const votes = db.votes;
 // const Op = Sequelize.Op;
-
+/**
+ * 
+ * 
+ * @class Recipes
+ */
 class Recipes {
+  /**
+   * 
+   * 
+   * @param {any} req 
+   * @param {any} res 
+   * @returns 
+   * @memberof Recipes
+   */
   add(req, res) {
-    console.log(req.body);
-
-    const { recipeImage, recipeName, mealType, description, method, ingredients } = req.body;
+    const { recipeImage, recipeName, description, method, ingredients } = req.body;
+    const instructions = method;
     return recipes
       .create({
         userId: req.decoded.id,
         recipeImage,
         recipeName,
-        mealType,
         description,
-        method,
+        instructions,
         ingredients
-      }).then(created => {
-        return res.status(201).json(created);
+      }).then(Recipe => {
+        return res.status(201).json(Recipe);
       })
       .catch((err) => {
         console.log(err);
@@ -31,7 +43,7 @@ class Recipes {
   }
   
   modify(req, res) {
-    const { recipeName, mealType, description, method, ingredients } = req.body;
+    const { recipeName, description, instructions, ingredients } = req.body;
     let updateFields = {};
     const id = req.params.recipeId;  
 
@@ -45,17 +57,13 @@ class Recipes {
         if (recipeName) {
           updateFields.recipeName = recipeName;
         } 
-        
-        if (mealType) {
-          updateFields.mealType = mealType;
-        } 
-        
+
         if (description) {
           updateFields.description = description;
         } 
         
-        if (method) {
-          updateFields.method = method;
+        if (instructions) {
+          updateFields.instructions = instructions;
         } 
         
         if (ingredients) {
@@ -66,7 +74,6 @@ class Recipes {
             Message: 'Nothing to update!'
           });
         } else {
-          console.log(updateFields);
 
           found.update( 
             updateFields, 
@@ -75,10 +82,10 @@ class Recipes {
                 userId: req.decoded.id,
                 id: id
               }
-            }).then((updated) => {
+            }).then((Recipe) => {
             return res.status(200).json({
               Message: 'Succesfully Updated Recipe',
-              updated
+              Recipe
             });
           });
         }
@@ -91,39 +98,200 @@ class Recipes {
   }
 
   get(req, res) {
-    if (req.query.order || req.query.sort) {
-      return recipes
-        .findAll({
-          order: [
-            ['upVotes', 'DESC']
-          ]
-        }).then(sortedRecipes => {
-          return res.status(200).json(sortedRecipes);
+    if (req.query.search) {
+      // lets search something 
+      const searchQuery = req.query.search.split(' ');
+      
+      let search = searchQuery.map((value) => {
+        return {
+          recipeName: {$iLike : `%${value}%`}
+        };
+      });
+      
+      let ingredients = searchQuery.map((value) => {
+        return {
+          ingredients: {$iLike : `%${value}%`}
+        };
+      });
+
+      recipes.findAll({
+        where: {
+          $or: 
+          search.concat(ingredients)
+        },
+        order: [
+          ['id', 'DESC']
+        ],
+
+        include: [
+          {
+            attributes: ['id', 'firstName', 'lastName'],
+            model: users
+          }
+        ]
+      }).then(result => {
+        if (result.length <= 0) {
+          return res.status(404).json({
+            message: 'No recipe Matched your Search!'
+          });
+        }
+        return res.status(200).json({
+          result
         });
-    } else {
+      });
+
+
+    } else if (req.query.sort) {
+      const sort = req.query.sort === 'upVotes' || req.query.sort === 'downVotes' ? req.query.sort : 'upVotes';
+      const order = req.query.order === 'des' ? 'DESC' : 'DESC';
+
+      recipes.findAll({
+        order: [
+          [sort, order]
+        ],
+
+        include: [
+          {
+            attributes: ['id', 'firstName', 'lastName'],
+            model: users
+          }
+        ]
+      }).then(recipe => {
+        return res.status(200).json({
+          recipe
+        });
+      });
+    } else {  
+      const limitValue = (req.query.limit <= 0) ? 12 : req.query.limit || 12;
+      const pageValue = (req.query.page <= 0 ) ? 0 : req.query.page - 1 || 0;
       return recipes
-        .findAll({ offset: req.query.next }).then(getAllRecipes => {
-          if (!getAllRecipes || getAllRecipes.length < 0) {
+        .findAndCountAll({ 
+          offset: limitValue * pageValue, 
+          limit: limitValue,
+
+          include: [
+            {
+              attributes: ['id', 'firstName', 'lastName'],
+              model: users
+            }
+          ],
+          order: [
+            ['id', 'DESC']
+          ]
+        }).then(getAllRecipes => {
+          if (getAllRecipes.length <= 0) {
+           
             return res.status(200).json({
               Message: 'No recipes have yet been created!'
             });
-          }
-          return res.status(200).json(getAllRecipes);
+          } 
+          const totalCount = getAllRecipes.count;
+          const pageCount = Math.ceil(totalCount / limitValue);
+          const recipes = getAllRecipes.rows;
+
+          return res.status(200).json({ totalCount, page: pageValue + 1,  pageCount, recipes });
         });
     }
+  }
+
+  getOne(req, res) {
+    return recipes
+      .findOne({
+        where: { 
+          id: req.params.recipeId
+        },
+
+        include: [
+          {
+            attributes: ['id', 'firstName', 'lastName'],
+            model: users
+          }
+        ]
+      }).then(recipeDetails => {
+        if (recipeDetails) {
+          if (!req.decoded || req.decoded.id !== recipeDetails.userId) {
+            // updat eview
+            recipes.update({
+              views: recipeDetails.views + 1
+            }, 
+            {
+              where: {
+                id: req.params.recipeId
+              }
+            });
+          }
+          reviews.findAll({
+            where: {
+              recipeId: req.params.recipeId
+            },
+            
+            order: [
+              ['id', 'DESC']
+            ],
+
+            include: [
+              {
+                attributes: ['id', 'avatar', 'username'],
+                model: users
+              }
+            ]
+          }).then(recipeReviews =>{
+            votes.findOne({
+              where: {
+                userId: req.decoded.id,
+                recipeId: req.params.recipeId
+              }
+            }).then(userVotes => {
+              const reviews = (recipeReviews.length <= 0)? 'No reviews yet': recipeReviews;
+              return res.status(200).json({
+                recipeDetails,
+                reviews,
+                userVotes
+              });
+            });
+          });
+
+        } else {
+          return res.status(400).json({
+            message: 'Recipe Not found'
+          });
+        }
+      });
+  }
+
+  getUserRecipe(req, res) {
+    return recipes
+      .findAll({
+        where: {
+          userId: (req.query.userId)? req.query.userId : req.decoded.id
+        }
+      }).then(recipe => {
+        if (recipe.length <= 0) {
+          return res.status(404).json({
+            message: (req.query.userId)? 'This user has not created any recipes yet!': 'You have not created any recipe Yet'
+          });
+        } else {
+          return res.status(200).json({
+            recipe
+          });
+        }
+      });
   }
 
   delete(req, res) {
     const id = req.params.recipeId;
     
     recipes.findOne({
-      where: { 
-        userId: req.decoded.id,
+      where: {
         id: id
       }
     }).then(found => { 
       if (!found) {
         return res.status(404).json({
+          message: 'Recipe Not found!'
+        });
+      } else if (found.userId !== req.decoded.id) {
+        return res.status(403).json({
           message: 'You did not created this recipe, you cannot delete it!'
         });
       } else {
@@ -142,44 +310,6 @@ class Recipes {
     });
   }
 
-  getOne(req, res) {
-    return recipes
-      .findOne({
-        where: { 
-          id: req.params.recipeId
-        }
-      }).then(recipeDetails => {
-        if (recipeDetails) {
-          if (!req.decoded || req.decoded.id !== recipeDetails.userId) {
-            // updat eview
-            recipes.update({
-              views: recipeDetails.views + 1
-            }, 
-            {
-              where: {
-                id: req.params.recipeId
-              }
-            });
-          }
-          reviews.findAll({
-            where: {
-              recipeId: req.params.recipeId
-            }
-          }).then(recipeReviews =>{
-            const reviews = (recipeReviews.length <= 0)? 'No reviews yet': recipeReviews;
-            return res.status(200).json({
-              recipeDetails,
-              reviews: reviews
-            });
-          });
-
-        } else {
-          return res.status(400).json({
-            message: 'Recipe Not found'
-          });
-        }
-      });
-  }
 }
 
 export default Recipes;

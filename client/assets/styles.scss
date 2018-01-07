@@ -8,8 +8,9 @@ body {
 }
 
  #wrapper {
-  background: rgba(20, 31, 77, 0.7);
+  background: rgba(22, 22, 22, 0.897);
 }
+
 .logo-container{
   padding-left: 3% !important;
 }
@@ -90,7 +91,14 @@ footer div {
   width: 100%;  
 }
 
-  /// loged in
+  /* My recipes*/
+
+  .my-recipe {
+    margin: 0 auto;
+    float: none !important;
+  }
+
+  /* loged in */
 
 #welcome {
   color: #000;
@@ -101,6 +109,10 @@ footer div {
   padding-right: 1%;
   line-height: 0;
   vertical-align: middle;
+}
+
+.no-margin-bottom {
+  margin-bottom: 0;
 }
 
 @media (min-width: 320px) and (max-width: 498px) {

@@ -1,0 +1,86 @@
+body {
+ background: rgba(214, 208, 208, 0.69);
+}
+
+ .body {
+  background: url('../imgs/post_1.jpg'); 
+  background-size: cover;
+}
+
+ #wrapper {
+  background: rgba(22, 22, 22, 0.897);
+  padding-bottom: 10%;
+}
+.logo-container{
+  padding-left: 3% !important;
+}
+nav ul a,
+nav .brand-logo {
+  color: #444;
+}
+a {
+  color: #444444;
+}
+
+.material-icons{
+  display: inline-flex;
+  vertical-align: top;
+  color: teal;
+}
+  
+a:hover {
+  color: #039BE5;
+}
+
+a .active {
+  background: #ccc;
+}
+
+p {
+  line-height: 2rem;
+}
+
+.justify {
+  text-align: justify;
+  padding: 5%;
+}
+
+.button-collapse {
+  color: #26a69a;
+}
+
+#index-banner {
+  height: 420px;
+}
+
+#header {
+  background: rgba(238, 238, 238, 0.31);
+}
+
+footer div {
+  color: #000;
+}
+
+.white-shadow {
+  text-shadow: 1px 1px 3px #FFFFFF;
+}
+
+.black-shadow {
+  text-shadow: 1px 1px 3px #000000;
+}
+
+.transparent-bg {
+  background: rgba(255, 255, 255, 0.7);
+  padding: 1%;
+}
+
+/* Signup page */
+
+#container {
+  background: red;
+  position: absolute;
+  top: 0px;
+  height: 500px;
+  width: 100%;  
+}
+

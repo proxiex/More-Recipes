@@ -10,7 +10,7 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-// Routes 
+// Routes
 app.use('/api/v1/users', users);
 app.use('/api/v1/recipes', recipes);
 

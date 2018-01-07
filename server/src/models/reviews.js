@@ -19,9 +19,7 @@ export default (sequelize, DataTypes) => {
       foreignKey: 'userId',
       onDelete: 'CASCADE',
     });
-  };
 
-  reviews.associate = (models) => {
     reviews.belongsTo(models.recipes, {
       foreignKey: 'recipeId',
       onDelete: 'CASCADE',

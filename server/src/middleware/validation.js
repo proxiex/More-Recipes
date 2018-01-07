@@ -23,7 +23,10 @@ const Validation = {
   },
 
   userSignup(req, res, next) {
-    const { username, email, password } = req.body;
+    const username = (req.body.username)? req.body.username.trim() : null;
+    const email = req.body.email;
+    const password  = req.body.password;
+
     if (!username || typeof username !== 'string') {
       return res.status(400).json({
         username: 'Please Enter Username'
@@ -43,8 +46,6 @@ const Validation = {
     } else {
       next();
     }
-    
-   
   },
   
   userSignin(req, res, next) {
@@ -62,22 +63,23 @@ const Validation = {
   },
 
   addRecipe(req, res, next) {
-    const { recipeName, mealType, description, method, ingredients } = req.body;
-    if (!recipeName || typeof recipeName !== 'string') {
+    const error = {};
+    const { recipeImage, recipeName, description, method, ingredients } = req.body;
+    if (!recipeImage || typeof recipeName !== 'string') {
+      return res.status(400).json({
+        recipeImage: 'Please Enter Recipe Image'
+      });
+    } else if (!recipeName || typeof recipeName !== 'string') {
       return res.status(400).json({
         recipeName: 'Please Enter Recipe Name'
       });
-    }  else if (!mealType || typeof mealType !== 'string') {
-      return res.status(400).json({
-        mealType: 'Please Enter Meal Type'
-      });
-    } else if (!description || typeof description !== 'string') {
+    }  else if (!description || typeof description !== 'string') {
       return res.status(400).json({
         description: 'Please Enter Description'
       });
     } else if (!method || typeof method !== 'string') {
       return res.status(400).json({
-        method: 'Please Enter Method'
+        method: 'Please Enter Instructions'
       });
     } 
     else if (!ingredients || typeof ingredients !== 'string') {
