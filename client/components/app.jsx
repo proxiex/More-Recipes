@@ -9,6 +9,7 @@ import SignupPage from './signup/signupPage';
 import SigninPage from './signin/signinPage';
 import AddRecipePage from './secure/recipes/addRecipePage';
 import RecipeDetails from './recipes/recipeDetails';
+import Favorites from './recipes/favorites';
 
 
 import notFound from './404';
@@ -21,14 +22,17 @@ class App extends Component {
         <div id="wrap">
           <NavigationBar />
             <Switch>
-              <Route path="/" exact component={HomePage} /> 
-              <Route path="/recipes" component={ReecipesPage} />  
-              <Route path="/recipe-details/:recipeId" component={RecipeDetails} />  
+              <Route path="/" exact component={HomePage} />   
               <Route path="/signup" component={SignupPage} />    
-              <Route path="/signin" component={SigninPage} /> 
-
-              <Route path="/add-recipe" component={requireAuth(AddRecipePage)} />            
+              <Route path="/signin" component={SigninPage} />
               
+              <Route path="/add-recipe" component={requireAuth(AddRecipePage)} />
+              <Route path="/recipes" component={ReecipesPage} />  
+              <Route path="/recipe-details/:recipeId" component={RecipeDetails} />
+              {/* <Route path="/my-recipes" component={MyRecipe} />
+              <Route path="/recip-by/:userId" component={RecipeBy} /> */}
+              <Route path="/favorites" component={Favorites} />
+
               <Route component={notFound} />
             </Switch>
           <Footer />

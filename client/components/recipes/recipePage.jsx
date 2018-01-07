@@ -1,7 +1,7 @@
 import React from 'react';
 import { getAllRecipeAction } from '../../actions/getAllRecipeAction';
+import RecipeCard from '../common/recipeCard';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import classnames from 'classnames';
 
@@ -23,26 +23,18 @@ class RecipePage extends React.Component {
     const { recipes } = this.state;  
     const recipe2  = this.props.recipe;
     const { isAuthenticated } = this.props.auth;
+    
     const allRecipes = recipe2.map(recipe =>
       
-      <div className="col s12 m4" key={recipe.id}>
-        <div className="card">
-          <div className="card-image">
-            <img src={recipe.recipeImage} alt={recipe.recipeName +' Image'} height="230" width="400"/>
-          </div>
-          <div className="card-content">
-            <p>By <a href="recipe_by.html">Samuel Longshak</a></p>
-            <p><a href="meal_type.html">{recipe.mealType}</a></p>
-            <Link to={`/recipe-details/${recipe.id}`}><span className="card-title">{recipe.recipeName}</span></Link>
-            <div className="divider"></div>
-            <div className="row">
-              <div className="col m4"><span className="left"><i className="material-icons">remove_red_eye</i>{recipe.views}</span></div>
-              <div className="col m4"><span className="right"><i className="material-icons">thumb_down</i> {recipe.downVotes}</span></div>  
-              <div className="col m4"> &nbsp;&nbsp;&nbsp; <span className=""><i className="material-icons">thumb_up</i>{recipe.upVotes}</span></div>
-            </div>
-          </div>
-        </div>
-      </div>  
+      <RecipeCard
+        key={recipe.id}
+        id={recipe.id}
+        recipeName={recipe.recipeName} 
+        recipeImage={recipe.recipeImage} 
+        views={recipe.views} 
+        downVotes={recipe.downVotes} 
+        upVotes={recipe.upVotes}
+      />  
     )
 
     const otherDetails = (

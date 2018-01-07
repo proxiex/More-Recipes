@@ -17,7 +17,6 @@ class Votes {
             recipeId: found.id
           }
         }).then(foundVotes => {
-          console.log('from votes >>>>>>>>>>>>>', foundVotes.user);
 
           if (foundVotes) {
             let updateVotes = {};
@@ -30,8 +29,6 @@ class Votes {
                 updateVotes.upVotes = 0;
                 updateRecipeVotes.upVotes = (found.upVotes > 0)? found.upVotes - 1: 0;
 
-                msg.up = 'Your upVote has been Removed';
-
               } else if (foundVotes.upVotes === 0){
 
                 if (foundVotes.downVotes === 1) { 
@@ -42,7 +39,7 @@ class Votes {
                   updateVotes.upVotes = 1;
                   updateRecipeVotes.upVotes = found.upVotes + 1;
 
-                  msg.up = 'Removing downVote to upVote';
+                  msg.up = 'Thank you for voting';
                 } else {
                   // up vote
                   updateVotes.upVotes = 1;
@@ -50,15 +47,13 @@ class Votes {
                   
                   msg.up = 'Thank you for voting';
                 }
-                
+                 
               }
             } else if(req.query.vote === 'down') {
               if (foundVotes.downVotes === 1) {
                 // remove form db
                 updateVotes.downVotes = 0;
                 updateRecipeVotes.downVotes = (found.downVotes > 0)? found.downVotes - 1: 0;
-
-                msg.down = 'removing down vote';
                 
               } else if (foundVotes.downVotes === 0){
                 if (foundVotes.upVotes === 1) {
@@ -68,8 +63,8 @@ class Votes {
                   
                   updateVotes.downVotes = 1;
                   updateRecipeVotes.downVotes = found.downVotes + 1;
+                  msg.down = 'Sorry you did not like it.';
                   
-                  msg.down = 'Removing upVote to downVote';
                 } else {
                   // down vote
                   updateVotes.downVotes = 1;
@@ -95,15 +90,8 @@ class Votes {
                 {
                   where: {
                     id: id
-                  },
-                  include: [
-                    {
-                      attributes: ['id', 'firstName', 'lastName'],
-                      model: users
-                    }
-                  ]
+                  } 
                 }).then((recipeDetails) => {
-                console.log('#################>>>>>>>>>>', recipeDetails);
                 const voteMsg = (req.query.vote === 'up')? msg.up : msg.down;
                 return res.status(200).json({
                   message: voteMsg,

@@ -16,10 +16,9 @@ export const SEARCH_RECIPE = 'SEARCH_RECIPE';
 
 // Recipe Review Actions types
 // *** Favorites
-export const ADD_FAVORITE_RECIPE = 'ADD_FAVORITE_RECIPE';
+export const FAVORITE_RECIPE = 'FAVORITE_RECIPE';
 export const GET_FAVORITE_RECIPES = 'GET_FAVORITE_RECIPES';
 export const GET_RECIPE_REVIEW = 'GET_RECIPE_REVIEW';
-export const REMOVE_FAVORITE_RECIPE = 'REMOVE_FAVORITE_RECIPE';
 export const ADD_REVIEW = 'ADD_REVIEW';
 
 // *** Votes
