@@ -47,7 +47,6 @@ class Votes {
 
                   msg.up = 'You liked this recipe';
                 }
-
               }
             } else if (req.query.vote === 'down') {
               if (foundVotes.downVotes === 1) {
@@ -64,7 +63,6 @@ class Votes {
                   updateVotes.downVotes = 1;
                   updateRecipeVotes.downVotes = found.downVotes + 1;
                   msg.down = 'Sorry you did not like it.';
-
                 } else {
                   // down vote
                   updateVotes.downVotes = 1;
