@@ -10,6 +10,7 @@ import SigninPage from './signin/signinPage';
 import AddRecipePage from './secure/recipes/addRecipePage';
 import RecipeDetails from './recipes/recipeDetails';
 import Favorites from './recipes/favorites';
+import UserRecipe from './recipes/userRecipe';
 
 
 import notFound from './404';
@@ -29,8 +30,8 @@ class App extends Component {
               <Route path="/add-recipe" component={requireAuth(AddRecipePage)} />
               <Route path="/recipes" component={ReecipesPage} />  
               <Route path="/recipe-details/:recipeId" component={RecipeDetails} />
-              {/* <Route path="/my-recipes" component={MyRecipe} />
-              <Route path="/recip-by/:userId" component={RecipeBy} /> */}
+              <Route path="/my-recipes" component={requireAuth(UserRecipe)} />
+              <Route path="/recipe-by/:userId" component={UserRecipe} />
               <Route path="/favorites" component={Favorites} />
 
               <Route component={notFound} />

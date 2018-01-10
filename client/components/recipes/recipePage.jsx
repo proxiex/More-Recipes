@@ -4,6 +4,7 @@ import RecipeCard from '../common/recipeCard';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import classnames from 'classnames';
+import shortid from 'shortid';
 
 class RecipePage extends React.Component {
   constructor(props) {
@@ -20,20 +21,22 @@ class RecipePage extends React.Component {
   }
  
   render () {
-    const { recipes } = this.state;  
+    const { recipes } = this.state;
     const recipe2  = this.props.recipe;
     const { isAuthenticated } = this.props.auth;
     
     const allRecipes = recipe2.map(recipe =>
       
       <RecipeCard
-        key={recipe.id}
+        key={shortid.generate()}
         id={recipe.id}
         recipeName={recipe.recipeName} 
         recipeImage={recipe.recipeImage} 
         views={recipe.views} 
         downVotes={recipe.downVotes} 
         upVotes={recipe.upVotes}
+        userId={recipe.user.id}
+        userName={`${recipe.user.firstName} ${recipe.user.lastName}`}
       />  
     )
 

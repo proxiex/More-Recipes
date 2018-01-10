@@ -3,11 +3,13 @@ import auth from './reducers/auth';
 import { recipe, recipes } from './reducers/recipe';
 import review from './reducers/review';
 import favorites from './reducers/favorites';
+import { userRecipe } from './reducers/user';
 
 export default combineReducers({
   auth,
   recipe,
   recipes,
   review,
-  favorites
+  favorites,
+  userRecipe
 });
