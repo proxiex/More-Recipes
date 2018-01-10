@@ -3,15 +3,15 @@ import classnames from 'classnames';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
- const RecipeCard = ({id, recipeName, recipeImage, views, downVotes, upVotes }) => {
+ const RecipeCard = ({id, recipeName, recipeImage, views, downVotes, upVotes, userId, userFName, userLName }) => {
    return (
-    <div className="col s12 m4" key={id}>
+    <div className="col s12 m4">
       <div className="card">
         <div className="card-image">
           <img src={recipeImage} alt={recipeName +' Image'} height="230" width="400"/>
         </div>
         <div className="card-content">
-          <p>By <a href="recipe_by.html">Samuel Longshak</a></p>
+          <p>By <Link to={`/recipe-by/${userFName}-${userLName}/${userId}`}>{userFName+' '+userLName}</Link></p>
           <Link to={`/recipe-details/${id}`}><span className="card-title">{recipeName}</span></Link>
           <div className="divider"></div>
           <div className="row">
@@ -31,7 +31,10 @@ import { Link } from 'react-router-dom';
    recipeImage: PropTypes.string.isRequired,
    views: PropTypes.number.isRequired,
    downVotes: PropTypes.number.isRequired,
-   upVotes: PropTypes.number.isRequired
+   upVotes: PropTypes.number.isRequired,
+   userId: PropTypes.number.isRequired,
+   userFName: PropTypes.string.isRequired,
+   userLName: PropTypes.string.isRequired
  }
 
  export default RecipeCard;
