@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import RecipeCard from '../common/recipeCard';
 import { getFavoriteRecipeAction } from '../../actions/getFavoriteRecipe';
-
+import shortid from 'shortid';
 class Favorites extends React.Component {
 
   componentDidMount() {
@@ -14,11 +14,11 @@ class Favorites extends React.Component {
   render () {
    const favorites = this.props.favorites;
 
-   console.log(favorites)
+   console.log('from heree', favorites)
 
     const favoritesRecipes = favorites.map(recipe =>
       <RecipeCard
-        key={recipe.recipe.id}
+        key={shortid.generate()}
         id={recipe.recipe.id}
         recipeName={recipe.recipe.recipeName} 
         recipeImage={recipe.recipe.recipeImage} 
