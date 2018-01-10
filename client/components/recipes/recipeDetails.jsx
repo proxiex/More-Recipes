@@ -29,21 +29,19 @@ class RecipeDetails extends React.Component {
     this.props.getRecipeDetails(recipeId)
   }
 
-  componentDidUpdate() {
-    Materialize.toast(this.props.recipe.message, 3000, 'green darken-3')
-    Materialize.toast(this.props.favorites.message, 3000, 'green darken-3');
-  }
-  
   upVote(){
-    console.log('ok')
     const recipeId = this.props.match.params.recipeId;
-    this.props.voteAction(recipeId, 'up')
+    this.props.voteAction(recipeId, 'up').then(() => {
+      Materialize.toast(this.props.recipe.message, 3000, 'green darken-3')
+    })
    
   }
   
   downVote(){
     const recipeId = this.props.match.params.recipeId;
-    this.props.voteAction(recipeId, 'down')
+    this.props.voteAction(recipeId, 'down').then(() => {
+      Materialize.toast(this.props.recipe.message, 3000, 'green darken-3')
+    })
     
   }
 
@@ -54,7 +52,9 @@ class RecipeDetails extends React.Component {
   favoriteRecipe() {
     const recipeId = this.props.match.params.recipeId;
     console.log('favrited')
-    this.props.favoriteRecipeAction(recipeId);
+    this.props.favoriteRecipeAction(recipeId).then(() => {
+      Materialize.toast(this.props.favorites.message, 3000, 'green darken-3');
+    })
   }
 
   onSubmit(e) {
