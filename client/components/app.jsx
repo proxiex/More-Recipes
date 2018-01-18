@@ -8,6 +8,7 @@ import ReecipesPage from './recipes/recipePage';
 import SignupPage from './signup/signupPage';
 import SigninPage from './signin/signinPage';
 import AddRecipePage from './secure/recipes/addRecipePage';
+import UpdateRecipePage from './secure/recipes/updateRecipePage';
 import RecipeDetails from './recipes/recipeDetails';
 import Favorites from './recipes/favorites';
 import UserRecipe from './recipes/userRecipe';
@@ -30,6 +31,7 @@ class App extends Component {
               <Route path="/add-recipe" component={requireAuth(AddRecipePage)} />
               <Route path="/recipes" component={ReecipesPage} />  
               <Route path="/recipe-details/:recipeId" component={RecipeDetails} />
+              <Route path="/edit-recipe/:recipeId" component={requireAuth(UpdateRecipePage)} />
               <Route path="/my-recipes" component={requireAuth(UserRecipe)} />
               <Route path="/recipe-by/:userName/:userId" component={UserRecipe} />
               <Route path="/favorites" component={Favorites} />

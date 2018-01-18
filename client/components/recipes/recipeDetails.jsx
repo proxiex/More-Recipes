@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { getRecipeDetails } from '../../actions/getRecipeDetails';
 import { addReviewAction } from '../../actions/addReviewAction';
@@ -74,7 +75,7 @@ class RecipeDetails extends React.Component {
 
     const review = (review instanceof  Array) ? reviewData.sort(function(a, b){ return b.id - a.id }) : reviewData;
     
-    const { isAuthenticated } = this.props.auth;
+    const { isAuthenticated, user } = this.props.auth;
 
     const reviewForm = (
       <div className="row">
@@ -99,7 +100,7 @@ class RecipeDetails extends React.Component {
 
   return (
     <div id="wrapper">
-      <div className="row" style={{paddingTop: '3%', marginBottom: '0'}}>
+      <div className="row" style={{padding: '2%', marginBottom: '0'}}>
         <div className="container">
           <div className="col s12 m12 l12 transparent-bg">            
             <div className="row">
@@ -111,7 +112,23 @@ class RecipeDetails extends React.Component {
                   <div className="card-content">
                     <div className="row">
                       <span className="card-title">{recipeInfo.recipeName}</span>
-                      <span className="teal-text">Created By: {recipeInfo.user !== undefined? recipeInfo.user.firstName + ' '+recipeInfo.user.lastName: null}</span>
+                    </div>
+                    <div className='row'>
+                    { user.id === recipeInfo.userId ? 
+                      <div>
+                        <Link to={`/edit-recipe/${recipeInfo.id}`}>
+                          <span className="edit-btn">
+                            Edit
+                          </span>
+                        </Link>
+                        <Link to="">
+                          <span className="del-btn">
+                            Delete
+                          </span>
+                        </Link>
+                      </div>
+                      : null
+                    }
                     </div>
                   </div>
                 </div>

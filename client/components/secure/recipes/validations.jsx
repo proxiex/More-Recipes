@@ -21,11 +21,6 @@ export default function validateInput (data) {
 
   }
 
-  if (Validator.isNull(data.mealType)) {
-    errors.mealType = errMsg;
-    
-  }
-
   if (Validator.isNull(data.ingredients)) {
     errors.ingredients = errMsg;
 

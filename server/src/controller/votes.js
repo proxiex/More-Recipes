@@ -129,7 +129,7 @@ class Votes {
                 downVotes: 1
               };
               createVoteRecipe = {
-                downVotes: found.downpVotes + 1
+                downVotes: found.downVotes + 1
               };
             } else {
               return res.status(400).json({
