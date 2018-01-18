@@ -114,6 +114,32 @@ footer div {
   margin-bottom: 0;
 }
 
+/* edit and delete btn */
+
+.edit-btn {
+  color: green;
+  border: 1px solid black;
+  padding: 1% 5%;
+  border-radius: 4px;
+  margin: 2%;
+}
+
+.del-btn {
+  color: red;
+  border: 1px solid black;
+  padding: 1% 5%;
+  border-radius: 4px;
+  margin: 2%;
+}
+
+.edit-btn:hover {
+  background: #c6ebe7;
+}
+
+.del-btn:hover {
+  background: rgb(237, 197, 197);
+}
+
 @media (min-width: 320px) and (max-width: 498px) {
   #logo-container {
     width: 50%;

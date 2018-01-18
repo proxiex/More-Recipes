@@ -22,14 +22,13 @@ class Recipes {
    */
   add(req, res) {
     const { recipeImage, recipeName, description, method, ingredients } = req.body;
-    const instructions = method;
     return recipes
       .create({
         userId: req.decoded.id,
         recipeImage,
         recipeName,
         description,
-        instructions,
+        instructions: method,
         ingredients
       }).then(Recipe => {
         return res.status(201).json(Recipe);
@@ -43,9 +42,10 @@ class Recipes {
   }
   
   modify(req, res) {
-    const { recipeName, description, instructions, ingredients } = req.body;
+    const { recipeName, recipeImage, description, method, ingredients } = req.body;
     let updateFields = {};
     const id = req.params.recipeId;  
+    const instructions = method;
 
     recipes.findOne({
       where: {
@@ -54,6 +54,10 @@ class Recipes {
       }
     }).then(found => {
       if(found) {
+        if (recipeImage) {
+          updateFields.recipeImage = recipeImage;
+        }
+        
         if (recipeName) {
           updateFields.recipeName = recipeName;
         } 
@@ -82,10 +86,10 @@ class Recipes {
                 userId: req.decoded.id,
                 id: id
               }
-            }).then((Recipe) => {
+            }).then((recipeDetails) => {
             return res.status(200).json({
               Message: 'Succesfully Updated Recipe',
-              Recipe
+              recipeDetails
             });
           });
         }

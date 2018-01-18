@@ -2,22 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import classnames from 'classnames';
-import { addRecipeAction } from '../../../actions/addRecipeAction';
+import { editRecipeAction } from '../../../actions/editRecipeAction';
+import { getRecipeDetails } from '../../../actions/getRecipeDetails';
 import validateInput from './validations';
 import FroalaEditor from 'react-froala-wysiwyg';
-
 import * as firebase from 'firebase';
 
-const config = {
-    apiKey: "AIzaSyCKggfjgpYI7KhsH3LQj9bAlvlx6KEmFs8",
-    authDomain: "morerecipes-aed62.firebaseapp.com",
-    databaseURL: "https://morerecipes-aed62.firebaseio.com",
-    projectId: "morerecipes-aed62",
-    storageBucket: "morerecipes-aed62.appspot.com",
-    messagingSenderId: "428817529818"
-};
-
-firebase.initializeApp(config);
 
 class AddRecipeForm extends React.Component {
   constructor() {
@@ -26,7 +16,6 @@ class AddRecipeForm extends React.Component {
       recipeImage: '',
       recipeName: '',
       description: '',
-      mealType: '',
       ingredients: '',
       method: '',
       errors: {},
@@ -45,20 +34,31 @@ class AddRecipeForm extends React.Component {
       toolbarButtons: ['fullscreen','undo', 'redo' , '|', 'bold', 'italic', 'underline', 'formatOL', 'formatUL', 'clearFormatting', '|', 'help', '|', 'html']
     }
   }
+  
+  componentWillReceiveProps(nextProps) {
+    const { id, recipeImage, recipeName, description, ingredients, instructions } =  nextProps.recipe.recipeDetails;
+    this.setState({
+      id,
+      recipeImage,
+      recipeName,
+      description,
+      ingredients,
+      method: instructions
+    })
+  } 
 
   method(model) {
-     console.log(model)
     this.setState({
       method: model
     });
   }
 
   ingredients(model) {
-     console.log(model)
     this.setState({
       ingredients: model
     });
   }
+
   onChange(e) {
     this.setState({ [e.target.name]: e.target.value });
   }
@@ -89,7 +89,6 @@ class AddRecipeForm extends React.Component {
 
   onSubmit(e) {
     e.preventDefault();
-    console.log(this.state)
     if (this.isValid()) {
       const storage = firebase.storage();
       const url = 'images/more-recipes_'+this.state.recipeName.split(' ').join('_')+'_'+Date.now()+'.jpg';
@@ -102,12 +101,13 @@ class AddRecipeForm extends React.Component {
         const newData = this.state;
         newData.imageUrl = '';
         newData.recipeImage = downloadURL;
-          this.props.addRecipeAction(this.state).then(
+          this.props.editRecipeAction(this.state, this.props.id).then(
             (res) => {
               this.setState({ redirect: true, isLoading: false});
+              Materialize.toast('Recipe updated sucessfully', 3000, 'green darken-3')
             },
             ( err ) => { 
-              console.log(err);
+              Materialize.toast(err.response.data.message, 3000, 'red darken-3')
               this.setState({ errors: err.response.data, isLoading: false }) }
           );         
         })
@@ -117,15 +117,17 @@ class AddRecipeForm extends React.Component {
   
   render() {
     const { errors, isLoading } = this.state;
+    const recipeInfo = this.props.recipe.recipeDetails ? this.props.recipe.recipeDetails : {}
+
     return (
-      <div className="row" style={{marginTop: '3%'}} >
+      <div className="row" style={{padding: '2%', marginBottom: 0,}} >
         <div className="container">
           <div className="col s12 m12 l12"> 
             <div className="col m2"></div>
             <div className="col s12 m8 white">
               {isLoading && <div className="black-text yellow lighten-4"> Uploading Recipe Image ... <br/></div> }
               <form onSubmit={this.onSubmit} encType="multipart/form-data" >
-                <h5 className="center">Add a Recipe</h5>
+                <h5 className="center">Edit Recipe</h5>
                 
                 <div className="file-field input-field">
                   <div className="btn">
@@ -166,39 +168,6 @@ class AddRecipeForm extends React.Component {
                     <label htmlFor="description"  className={classnames('', {'red-text': errors.description})} >Description</label>
                   </div>
                   {errors.description && <span className="red-text">{errors.description}</span>}
-                </div>
-
-                <div className="row">
-                  <div className="input-field col s12">
-                    <select 
-                        name="melType" 
-                        onChange={this.onChange} 
-                        value={this.state.mealType}
-                    >
-
-                      <option value="" disabled >Choose Meal type</option>
-                      <option value="Breakfast">Breakfast</option>
-                      <option value="Elevenses">Elevenses</option>
-                      <option value="Brunch">Brunch</option>
-                      <option value="Lunch">Lunch</option>
-                      <option value="Plate lunch">Plate lunch</option>
-                      <option value="Dinner">Dinner</option>
-                    </select>
-                    <label>Meal Type</label>
-                  </div>
-                </div>
-                <div className="row">
-                  <div className="input-field col s12">
-                    <input name="mealType" 
-                      onChange={this.onChange} 
-                      value={this.state.mealType} 
-                      id="mealType"
-                      type="text" 
-                      className="validate" 
-                    />
-                    <label htmlFor="mealType"  className={classnames('', {'red-text': errors.mealType})} >Meal Type</label>
-                  </div>
-                  {errors.mealType && <span className="red-text">{errors.mealType}</span>}
                 </div>
 
                 <div className="row">
@@ -244,7 +213,14 @@ class AddRecipeForm extends React.Component {
 }
 
 AddRecipeForm.propTypes = {
-  addRecipeAction: PropTypes.func.isRequired
+  editRecipeAction: PropTypes.func.isRequired
 }
 
-export default connect(null, { addRecipeAction })(AddRecipeForm);
+function mapStateToProps(state) { 
+  return {
+    auth: state.auth,
+    recipe: state.recipe
+  }
+}
+
+export default connect(mapStateToProps, { editRecipeAction })(AddRecipeForm);

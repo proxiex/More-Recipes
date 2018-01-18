@@ -1,6 +1,11 @@
-import { ADD_NEW_RECIPE } from '../actions/types';
-import { GET_ALL_RECIPES } from '../actions/types';
-import { GET_RECIPE_DETAILS } from '../actions/types';
+import 
+  { 
+    ADD_NEW_RECIPE, 
+    GET_ALL_RECIPES, 
+    GET_RECIPE_DETAILS,
+    EDIT_RECIPE
+  } from '../actions/types';
+
 import { VOTE } from '../actions/types';
 
 
@@ -26,6 +31,9 @@ export function recipe( state = [], action = {}) {
     newState = action.payload;
     return newState;
   case VOTE:
+    newState = action.payload;
+    return newState;
+  case EDIT_RECIPE:
     newState = action.payload;
     return newState;
   default:
