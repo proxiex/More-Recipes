@@ -47,12 +47,15 @@ class NavigationBar extends Component {
     this.props.logout();
     this.setState({ redirect: true});
     $('.button-collapse').sideNav('destroy');
-    <Redirect to="/" />
   }
 
   render () {
    
     const { isAuthenticated } = this.props.auth;
+    const { redirect } = this.state;
+    if (redirect) {
+      return <Redirect to="/" />
+    }
     const userLinks = (
       <div>
         <ul id="slide-out" className="side-nav">

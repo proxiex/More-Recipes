@@ -18,8 +18,8 @@ class UserRecip extends Component {
 
   render() {
     const userRecipe = this.props.userRecipe ?  this.props.userRecipe : [];
+   
     const userId = this.props.match.params.userId;
-    console.log('from here', userRecipe);
     const userRecipes = userRecipe.map(recipe =>
       <RecipeCard
         key={shortid.generate()}
@@ -29,9 +29,16 @@ class UserRecip extends Component {
         views={recipe.views} 
         downVotes={recipe.downVotes} 
         upVotes={recipe.upVotes}
+        userLName='me'
+        userFName='ok'
+        userId={1}
       />
     )
-
+    const noRecipes = (
+      <div style={{ textAlign: 'center', padding: '5%', paddingBottom: '20%'}}>
+        <h5>You have not created any recipes yet.</h5>
+      </div>
+    )
     return (
       <div id="wrapper">
         <div className="row" style={{marginBottom: '0'}}>
@@ -44,7 +51,7 @@ class UserRecip extends Component {
                 </div>
               </div>
               <div className="row">
-                {userRecipes}
+                {userRecipes.length > 0 ?  userRecipes : noRecipes }
               </div>
             </div> 
 

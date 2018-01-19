@@ -1,10 +1,11 @@
 import 
-  { 
-    ADD_NEW_RECIPE, 
-    GET_ALL_RECIPES, 
-    GET_RECIPE_DETAILS,
-    EDIT_RECIPE
-  } from '../actions/types';
+{ 
+  ADD_NEW_RECIPE, 
+  GET_ALL_RECIPES, 
+  GET_RECIPE_DETAILS,
+  EDIT_RECIPE,
+  DELETE_RECIPE
+} from '../actions/types';
 
 import { VOTE } from '../actions/types';
 
