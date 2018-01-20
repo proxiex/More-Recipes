@@ -1,11 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { getRecipeDetails } from '../../actions/getRecipeDetails';
 import { addReviewAction } from '../../actions/addReviewAction';
 import { voteAction } from '../../actions/voteActions';
 import { favoriteRecipeAction } from '../../actions/favoriteRecipeAction';
+import { deleteRecipeAction } from '../../actions/deleteRecipeAction';
 import shortid from 'shortid';
 import classnames from 'classnames'
 
@@ -23,11 +24,27 @@ class RecipeDetails extends React.Component {
     this.upVote = this.upVote.bind(this)
     this.downVote = this.downVote.bind(this)
     this.favoriteRecipe = this.favoriteRecipe.bind(this)
+    this.delete = this.delete.bind(this)
   }
 
   componentDidMount() {
     const recipeId = this.props.match.params.recipeId;
     this.props.getRecipeDetails(recipeId)
+    $(document).ready(function(){
+      // the "href" attribute of the modal trigger must specify the modal ID that wants to be triggered
+      $('.modal').modal();
+    });
+       
+  }
+
+  delete() {
+    const recipeId = this.props.match.params.recipeId
+    this.props.deleteRecipeAction(recipeId).then(() => {
+      this.setState({ 
+        redirect: true
+      })
+    })
+    $('#modal').modal('close');
   }
 
   upVote(){
@@ -77,6 +94,12 @@ class RecipeDetails extends React.Component {
     
     const { isAuthenticated, user } = this.props.auth;
 
+    const { redirect } = this.state;
+
+    if (redirect) {
+      Materialize.toast('Your Recipe Has been Delted!', 3000, 'red darken-5');      
+      return <Redirect to="/my-recipes" />
+    }
     const reviewForm = (
       <div className="row">
         <div className="col m12">
@@ -121,11 +144,13 @@ class RecipeDetails extends React.Component {
                             Edit
                           </span>
                         </Link>
-                        <Link to="">
-                          <span className="del-btn">
-                            Delete
-                          </span>
-                        </Link>
+                        
+                          <a>
+                            <span data-target="modal" className="del-btn modal-trigger">
+                              Delete
+                            </span>
+                          </a>
+                        
                       </div>
                       : null
                     }
@@ -133,6 +158,20 @@ class RecipeDetails extends React.Component {
                   </div>
                 </div>
               </div>
+              {/* modals */}
+ 
+              <div id="modal" className="modal">
+                <div className="modal-content">
+                  <h4>Confirm Delete</h4>
+                  <p>Are your sure you want to delete this recipe?</p>
+                </div>
+                <div className="modal-footer">
+                  <a onClick={this.delete} className="modal-action modal-close waves-effect waves-green btn-flat red-text">Yes</a>
+                  <a className="modal-action modal-close waves-effect waves-green btn-flat">No</a>
+                </div>
+              </div>
+              
+              {/* end of modals */}
               <div className="col m8">
                 <div className="row">
                   <p className="justify">
@@ -159,7 +198,7 @@ class RecipeDetails extends React.Component {
                 <p dangerouslySetInnerHTML={{ __html:recipeInfo.ingredients}} />
               </div>
               <div className="col m8">
-                <h5 className="center">Preperation</h5>
+                <h5 className="center">Prepration</h5>
                   <p dangerouslySetInnerHTML={{ __html: recipeInfo.instructions }} />
               </div>
             </div>
@@ -221,7 +260,8 @@ RecipeDetails.propTypes = {
   getRecipeDetails: PropTypes.func.isRequired,
   voteAction: PropTypes.func.isRequired,
   addReviewAction: PropTypes.func.isRequired,
-  favoriteRecipeAction: PropTypes.func.isRequired
+  favoriteRecipeAction: PropTypes.func.isRequired,
+  deleteRecipeAction: PropTypes.func.isRequired
 }
 
 function mapStateToProps(state) { 
@@ -234,4 +274,4 @@ function mapStateToProps(state) {
 }
 
 
-export default connect(mapStateToProps, {voteAction, addReviewAction, getRecipeDetails, favoriteRecipeAction })(RecipeDetails);
+export default connect(mapStateToProps, {voteAction, addReviewAction, getRecipeDetails, favoriteRecipeAction, deleteRecipeAction })(RecipeDetails);
