@@ -20,6 +20,9 @@ export function recipes(state = [], action = {} ) {
   case GET_ALL_RECIPES:
     newState = action.payload;
     return newState;
+  case DELETE_RECIPE:
+    newState = state.recipes.filter(recipe => `${recipe.id}` !== `${action.id}`);
+    return newState;
   default: 
     return state;
 

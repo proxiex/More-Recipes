@@ -166,7 +166,7 @@ class Recipes {
         });
       });
     } else {  
-      const limitValue = (req.query.limit <= 0) ? 12 : req.query.limit || 12;
+      const limitValue = (req.query.limit <= 0) ? 9 : req.query.limit || 9;
       const pageValue = (req.query.page <= 0 ) ? 0 : req.query.page - 1 || 0;
       return recipes
         .findAndCountAll({ 
@@ -264,21 +264,33 @@ class Recipes {
   }
 
   getUserRecipe(req, res) {
+    const limitValue = (req.query.limit <= 0) ? 9 : req.query.limit || 9;
+    const pageValue = (req.query.page <= 0 ) ? 0 : req.query.page - 1 || 0;
+
     return recipes
-      .findAll({
+      .findAndCountAll({
+        offset: limitValue * pageValue, 
+        limit: limitValue,
         where: {
           userId: (req.query.userId)? req.query.userId : req.decoded.id
         }
-      }).then(recipe => {
-        if (recipe.length <= 0) {
+      }).then(getAllRecipes => {
+        if (getAllRecipes.length <= 0) {
           return res.status(404).json({
             message: (req.query.userId)? 'This user has not created any recipes yet!': 'You have not created any recipe Yet'
           });
-        } else {
-          return res.status(200).json({
-            recipe
-          });
         }
+
+        const totalCount = getAllRecipes.count;
+        const pageCount = Math.ceil(totalCount / limitValue);
+        const recipes = getAllRecipes.rows;
+
+
+        return res.status(200).json({
+          totalCount,
+          pageCount,
+          recipes
+        });
       });
   }
 

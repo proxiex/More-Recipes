@@ -1,11 +1,19 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import ReactPaginat from 'react-paginate';
 import shortid from 'shortid';
 import PropTypes from 'prop-types';
 import { getUserRecipesActon } from '../../actions/getUserRecipeAction';
 import RecipeCard from '../common/recipeCard';
 class UserRecip extends Component {
-  
+  constructor() {
+    super();
+    this.state = {
+      recipes: [],
+      page: 1,
+    }
+    this.onPageChange = this.onPageChange.bind(this);
+  }
   componentDidMount() {
     // call action here   
     const userId = this.props.match.params.userId;
@@ -14,13 +22,23 @@ class UserRecip extends Component {
     
   }
 
+  componentWillReceiveProps(nextProps) {
+    this.setState({
+      recipes: nextProps.userRecipe.recipes,
+      pageCount: nextProps.userRecipe.pageCount
+    })
+  }
   
+  onPageChange(page) {
+    const userId = this.props.match.params.userId;
+    const currentPage = page.selected + 1;
+    this.props.getUserRecipesActon(userId, currentPage);
+  }
 
   render() {
-    const userRecipe = this.props.userRecipe ?  this.props.userRecipe : [];
-   
+    const { recipes } = this.state
     const userId = this.props.match.params.userId;
-    const userRecipes = userRecipe.map(recipe =>
+    const userRecipes = recipes.map(recipe =>
       <RecipeCard
         key={shortid.generate()}
         id={recipe.id}
@@ -57,16 +75,27 @@ class UserRecip extends Component {
 
             {/* Pagination here */}
 
-            <div className="row">         
-              <ul className="pagination center">
-                <li className="disabled"><a href="#!"><i className="material-icons">chevron_left</i></a></li>
-                <li className="active teal"><a href="#!">1</a></li>
-                <li className="waves-effect"><a href="#!">2</a></li>
-                <li className="waves-effect"><a href="#!">3</a></li>
-                <li className="waves-effect"><a href="#!">4</a></li>
-                <li className="waves-effect"><a href="#!">5</a></li>
-                <li className="waves-effect"><a href="#!"><i className="material-icons">chevron_right</i></a></li>
-              </ul>
+            <div className="row center">         
+              <ReactPaginat
+                previousLabel={'chevron_left'}
+                nextLabel={"chevron_right"}
+                breakLabel={<a href="">...</a>}
+                breakClassName={"break-me"}
+                pageCount={this.state.pageCount}
+                marginPagesDisplayed={2}
+                pageRangeDisplayed={5}
+                onPageChange={this.onPageChange}
+                containerClassName={"pagination"}
+                subContainerClassName={"pages pagination"}
+              
+                pageClassName="page-item, waves-effect"
+                pageLinkClassName="page-link"
+                activeClassName="page-item active"
+                previousClassName="material-icons"
+                nextClassName="material-icons"
+                nextLinkClassName="page-link"
+                previousLinkClassName="page-link"
+               />
             </div>
           </div>
           {/* end of recipe dispalyy here */}

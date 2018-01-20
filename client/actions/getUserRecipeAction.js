@@ -15,12 +15,11 @@ export function getUserRecipesFaliure(payload) {
   };
 }
 
-export const getUserRecipesActon = (userId) => (dispatch) => {
+export const getUserRecipesActon = (userId, page) => (dispatch) => {
   const usersId = userId ? userId : '';
-  return axios.get('/api/v1/users/recipe?userId='+usersId)
+  return axios.get('/api/v1/users/recipe?page='+page+'&userId='+usersId)
     .then(response => {
-      console.log('from action', response.data.recipe)
-      dispatch(getUserRecipesSucess(response.data.recipe));
+      dispatch(getUserRecipesSucess(response.data));
     }, error => {
       dispatch(getUserRecipesFaliure(error.response.data));
     });

@@ -61,6 +61,7 @@
     "react-dom": "^16.0.0",
     "react-froala-wysiwyg": "^2.7.1",
     "react-hot-loader": "^3.0.0",
+    "react-paginate": "^5.0.0",
     "react-redux": "^4.4.5",
     "react-router": "^4.2.0",
     "react-router-dom": "^4.1.1",

@@ -10,8 +10,8 @@ export function getFavoriteRecipeSucess(payload) {
 
 
 
-export const getFavoriteRecipeAction = (userId) => (dispatch) => {
-  return axios.get(`/api/v1/users/${userId}/favorites`)
+export const getFavoriteRecipeAction = (userId, page) => (dispatch) => {
+  return axios.get(`/api/v1/users/${userId}/favorites?page=${page}`)
     .then( response => {
       dispatch(getFavoriteRecipeSucess(response.data));
     });
