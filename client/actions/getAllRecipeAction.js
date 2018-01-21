@@ -8,8 +8,8 @@ export function getAllRecipeSuccess(payload) {
   };
 }
 
-export const getAllRecipeAction  = () => (dispatch) => {
-  return axios.get('/api/v1/recipes/').then(res => {
-    dispatch(getAllRecipeSuccess(res.data.recipes));
+export const getAllRecipeAction  = (page) => (dispatch) => {
+  return axios.get('/api/v1/recipes?page='+page).then(res => {
+    dispatch(getAllRecipeSuccess(res.data));
   });
 };

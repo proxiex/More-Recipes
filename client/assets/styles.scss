@@ -42,6 +42,10 @@ a .active {
   background: #ccc;
 }
 
+.pagination li.active { 
+  background: #26a69a;
+}
+
 p {
   line-height: 2rem;
 }
@@ -138,6 +142,13 @@ footer div {
 
 .del-btn:hover {
   background: rgb(237, 197, 197);
+}
+
+
+// pagination 
+
+.page-item, .page-link {
+  cursor: pointer;
 }
 
 @media (min-width: 320px) and (max-width: 498px) {

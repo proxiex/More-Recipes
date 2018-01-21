@@ -70,13 +70,19 @@ class Favorite {
 
   get(req, res) {
     const id = parseInt(req.params.userId, 10);
+    const limitValue = (req.query.limit <= 0) ? 9 : req.query.limit || 9;
+    const pageValue = (req.query.page <= 0 ) ? 0 : req.query.page - 1 || 0;
+
     if (isNaN(id)) {
       return res.status(400).json({
         message: 'Parameter must be a number!'
       });
     }
     return favorites
-      .findAll({
+      .findAndCountAll({
+        offset: limitValue * pageValue, 
+        limit: limitValue,
+
         where: {
           userId: id
         },
@@ -85,14 +91,24 @@ class Favorite {
             model: recipes
           }
         ]
-      }).then(found => {
-        if (found) {
-          return res.status(200).json(found);
-        } else  {
+      }).then((favoriteRecipe) => {
+        console.log('ok workssdfsfdfs >>>>>>> ', favoriteRecipe);
+        if (favoriteRecipe.length <= 0) {
           return res.status(404).json({
             message: 'Recipe Not found'
           });
+          
         }
+        const totalCount = favoriteRecipe.count;
+        const pageCount = Math.ceil(totalCount / limitValue);
+        const recipes = favoriteRecipe.rows;
+
+        return res.status(200).json({
+          totalCount,
+          pageCount,
+          recipes
+        });
+        
       });
     
 
