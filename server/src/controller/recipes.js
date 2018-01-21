@@ -140,9 +140,9 @@ class Recipes {
           }
         ]
       }).then(result => {
-        if (result.length <= 0) {
-          return res.status(404).json({
-            message: 'No recipe Matched your Search!'
+        if (result.count === 0) {
+          return res.status(200).json({
+            message: `Your search - ${req.query.search} - did not matched any recipe`
           });
         }
         const totalCount = result.count;
@@ -194,7 +194,7 @@ class Recipes {
             ['id', 'DESC']
           ]
         }).then(getAllRecipes => {
-          if (getAllRecipes.length <= 0) {
+          if (getAllRecipes.count === 0) {
            
             return res.status(200).json({
               Message: 'No recipes have yet been created!'
@@ -293,7 +293,7 @@ class Recipes {
           }
         ]
       }).then(getAllRecipes => {
-        if (getAllRecipes.length <= 0) {
+        if (getAllRecipes.count === 0) {
           return res.status(404).json({
             message: (req.query.userId)? 'This user has not created any recipes yet!': 'You have not created any recipe Yet'
           });

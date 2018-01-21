@@ -14,7 +14,8 @@ class RecipePage extends React.Component {
     this.state = {
       recipes: [],
       page: 1,
-      search: ''
+      search: '',
+      pageCount: 1
     }
     //this.getAllRecipe = this.getAllRecipe.bind(this);
     this.onPageChange = this.onPageChange.bind(this);
@@ -29,7 +30,8 @@ class RecipePage extends React.Component {
   componentWillReceiveProps(nextProps) {
     this.setState({
       recipes: nextProps.recipe.recipes,
-      pageCount: nextProps.recipe.pageCount
+      message: nextProps.recipe.message,
+      pageCount: nextProps.recipe.pageCount || 0
     })
   }
 
@@ -43,10 +45,11 @@ class RecipePage extends React.Component {
   }
 
   render () {
-    const { recipes } = this.state;
+    const { recipes, message } = this.state;
     const { isAuthenticated } = this.props.auth;
     
-    const allRecipes = recipes.map(recipe =>
+    console.log(' 09870987098', recipes, typeof (recipes))
+    const allRecipes = typeof recipes === 'object' ? recipes.map(recipe =>
       
       <RecipeCard
         key={shortid.generate()}
@@ -59,7 +62,10 @@ class RecipePage extends React.Component {
         userId={recipe.user.id}
         username={recipe.user.username}
       />  
-    )
+    ) :
+    <div style={{ textAlign: 'center', padding: '5%', paddingBottom: '20%'}}>
+      <h5>{message}</h5>
+    </div> ;
 
     const otherDetails = (
       <div className="col m4">
