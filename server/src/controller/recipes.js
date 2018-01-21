@@ -102,6 +102,9 @@ class Recipes {
   }
 
   get(req, res) {
+    const limitValue = (req.query.limit <= 0) ? 9 : req.query.limit || 9;
+    const pageValue = (req.query.page <= 0 ) ? 0 : req.query.page - 1 || 0;
+
     if (req.query.search) {
       // lets search something 
       const searchQuery = req.query.search.split(' ');
@@ -118,7 +121,10 @@ class Recipes {
         };
       });
 
-      recipes.findAll({
+      recipes.findAndCountAll({
+        offset: limitValue * pageValue, 
+        limit: limitValue,
+
         where: {
           $or: 
           search.concat(ingredients)
@@ -129,7 +135,7 @@ class Recipes {
 
         include: [
           {
-            attributes: ['id', 'firstName', 'lastName'],
+            attributes: ['id', 'firstName', 'lastName', 'username'],
             model: users
           }
         ]
@@ -139,8 +145,15 @@ class Recipes {
             message: 'No recipe Matched your Search!'
           });
         }
+        const totalCount = result.count;
+        const pageCount = Math.ceil(totalCount / limitValue);
+        const recipes = result.rows;
+
         return res.status(200).json({
-          result
+          totalCount,
+          pageCount,
+          page: (pageValue + 1),
+          recipes
         });
       });
 
@@ -156,7 +169,7 @@ class Recipes {
 
         include: [
           {
-            attributes: ['id', 'firstName', 'lastName'],
+            attributes: ['id', 'firstName', 'lastName', 'username'],
             model: users
           }
         ]
@@ -166,8 +179,6 @@ class Recipes {
         });
       });
     } else {  
-      const limitValue = (req.query.limit <= 0) ? 9 : req.query.limit || 9;
-      const pageValue = (req.query.page <= 0 ) ? 0 : req.query.page - 1 || 0;
       return recipes
         .findAndCountAll({ 
           offset: limitValue * pageValue, 
@@ -175,7 +186,7 @@ class Recipes {
 
           include: [
             {
-              attributes: ['id', 'firstName', 'lastName'],
+              attributes: ['id', 'firstName', 'lastName', 'username'],
               model: users
             }
           ],
@@ -207,7 +218,7 @@ class Recipes {
 
         include: [
           {
-            attributes: ['id', 'firstName', 'lastName'],
+            attributes: ['id', 'firstName', 'lastName', 'username'],
             model: users
           }
         ]
@@ -273,7 +284,14 @@ class Recipes {
         limit: limitValue,
         where: {
           userId: (req.query.userId)? req.query.userId : req.decoded.id
-        }
+        },
+        
+        include: [
+          {
+            attributes: ['id', 'avatar', 'username'],
+            model: users
+          }
+        ]
       }).then(getAllRecipes => {
         if (getAllRecipes.length <= 0) {
           return res.status(404).json({

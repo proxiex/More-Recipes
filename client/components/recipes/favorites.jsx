@@ -34,7 +34,7 @@ class Favorites extends React.Component {
   
   render () {
    const { recipes } = this.state;
-
+    console.log(' favs ', recipes);
     const favoritesRecipes = recipes.map(recipe =>
       <RecipeCard
         key={shortid.generate()}
@@ -44,6 +44,10 @@ class Favorites extends React.Component {
         views={recipe.recipe.views} 
         downVotes={recipe.recipe.downVotes} 
         upVotes={recipe.recipe.upVotes}
+        userId={recipe.recipe.user.id}
+        username={recipe.recipe.user.username}
+        userFName={recipe.recipe.user.username}
+        userLName={recipe.recipe.user.username}
       />  
     )
 

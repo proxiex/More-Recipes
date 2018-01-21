@@ -3,6 +3,7 @@ import db from '../models';
 
 const recipes = db.recipes;
 const favorites = db.favorites;
+const users = db.users;
 /**
  * 
  * 
@@ -88,7 +89,12 @@ class Favorite {
         },
         include: [
           {
-            model: recipes
+            model: recipes,
+            include: [
+              {
+                model: users
+              }
+            ]
           }
         ]
       }).then((favoriteRecipe) => {
