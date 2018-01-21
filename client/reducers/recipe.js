@@ -4,7 +4,8 @@ import
   GET_ALL_RECIPES, 
   GET_RECIPE_DETAILS,
   EDIT_RECIPE,
-  DELETE_RECIPE
+  DELETE_RECIPE,
+  SEARCH_RECIPE
 } from '../actions/types';
 
 import { VOTE } from '../actions/types';
@@ -22,6 +23,9 @@ export function recipes(state = [], action = {} ) {
     return newState;
   case DELETE_RECIPE:
     newState = state.recipes.filter(recipe => `${recipe.id}` !== `${action.id}`);
+    return newState;
+  case SEARCH_RECIPE: 
+    newState = action.payload;
     return newState;
   default: 
     return state;

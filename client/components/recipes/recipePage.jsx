@@ -2,6 +2,7 @@ import React from 'react';
 import ReactPaginat from 'react-paginate';
 import { getAllRecipeAction } from '../../actions/getAllRecipeAction';
 import RecipeCard from '../common/recipeCard';
+import Search from '../common/search';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import classnames from 'classnames';
@@ -12,10 +13,12 @@ class RecipePage extends React.Component {
     super(props);
     this.state = {
       recipes: [],
-      page: 1
+      page: 1,
+      search: ''
     }
     //this.getAllRecipe = this.getAllRecipe.bind(this);
     this.onPageChange = this.onPageChange.bind(this);
+    this.searchResult = this.searchResult.bind(this);
   }
 
   
@@ -35,6 +38,10 @@ class RecipePage extends React.Component {
     this.props.getAllRecipeAction(currentPage);
   }
 
+  searchResult(data) {
+    // console.log('search result  >>>', data)
+  }
+
   render () {
     const { recipes } = this.state;
     const { isAuthenticated } = this.props.auth;
@@ -50,8 +57,7 @@ class RecipePage extends React.Component {
         downVotes={recipe.downVotes} 
         upVotes={recipe.upVotes}
         userId={recipe.user.id}
-        userFName={recipe.user.firstName}
-        userLName={recipe.user.lastName}
+        username={recipe.user.username}
       />  
     )
 
@@ -62,12 +68,9 @@ class RecipePage extends React.Component {
             <div className="card">
               <div className="row">
                 <div className="col s12 m12">
-                  <form>
-                    <div className="input-field s12">
-                      <input id="search" type="search" required className="validate" />
-                      <label htmlFor="search">Search for Recipes</label>
-                    </div>  
-                  </form>
+                  <Search 
+                    result={this.searchResult}
+                  />
                 </div>
               </div>
               <div className="row">
@@ -79,20 +82,14 @@ class RecipePage extends React.Component {
                     <li className="collection-item">Rice and Beans </li>
                     <li className="collection-item">Chin chin</li>
                     <li className="collection-item">Yam & Egg source</li>
-                    <li className="collection-item"></li>
-                  </ul>
-                </div> 
-              </div>
-              <div className="row">
-                <div className="col m12"> <h6 className="header"><u>Favorited Recipes</u></h6></div>        
-              </div>
-              <div className="row">      
-                <div className="col s12 m12">
-                  <ul className="collection">
-                    <li className="collection-item">Rice and Beans </li>
-                    <li className="collection-item">Chin chin</li>
                     <li className="collection-item">Yam & Egg source</li>
-                    <li className="collection-item"></li>
+                    <li className="collection-item">Yam & Egg source</li>
+                    <li className="collection-item">Yam & Egg source</li>
+                    <li className="collection-item">Yam & Egg source</li>
+                    <li className="collection-item">Yam & Egg source</li>
+                    <li className="collection-item">Yam & Egg source</li>
+                    <li className="collection-item">Yam & Egg source</li>
+                    
                   </ul>
                 </div> 
               </div>
@@ -111,11 +108,11 @@ class RecipePage extends React.Component {
     return (
       <div id="wrapper">
         <div className="row" style={{marginBottom: '0'}}>
-          <div className={ classnames('col m8 transparent-bg', {'my-recipe': isAuthenticated } ) }>
+          <div className='col m8 transparent-bg' >
             <div className="section">
               <div className="row">
                 <div className="col m4"></div>
-                <div className="col m4"><h4 className="center"> {isAuthenticated ? 'My': null} Recipes</h4></div>
+                <div className="col m4"><h4 className="center"> Recipes</h4></div>
                 <div className="col m4">
                 </div>
               </div>
@@ -151,7 +148,7 @@ class RecipePage extends React.Component {
           </div>
           {/* end of recipe dispalyy here */}
           
-          { isAuthenticated ? null : otherDetails }
+          { otherDetails }
           
         </div>
       </div>

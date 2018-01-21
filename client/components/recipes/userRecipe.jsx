@@ -37,6 +37,7 @@ class UserRecip extends Component {
 
   render() {
     const { recipes } = this.state
+    console.log('OIJSIJ(FDS)ODFSDF', recipes)
     const userId = this.props.match.params.userId;
     const userRecipes = recipes.map(recipe =>
       <RecipeCard
@@ -47,9 +48,8 @@ class UserRecip extends Component {
         views={recipe.views} 
         downVotes={recipe.downVotes} 
         upVotes={recipe.upVotes}
-        userLName='me'
-        userFName='ok'
-        userId={1}
+        username={recipe.user.username}
+        userId={recipe.user.id}
       />
     )
     const noRecipes = (
