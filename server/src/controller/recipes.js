@@ -1,11 +1,11 @@
 import db from '../models';
-// import Sequelize from 'sequelize';
+import Sequelize from 'sequelize';
 
 const recipes = db.recipes;
 const reviews = db.reviews;
 const users = db.users;
 const votes = db.votes;
-// const Op = Sequelize.Op;
+const Op = Sequelize.Op;
 /**
  * 
  * 
@@ -20,6 +20,7 @@ class Recipes {
    * @returns 
    * @memberof Recipes
    */
+
   add(req, res) {
     const { recipeImage, recipeName, description, method, ingredients } = req.body;
     return recipes
@@ -140,9 +141,9 @@ class Recipes {
           }
         ]
       }).then(result => {
-        if (result.length <= 0) {
-          return res.status(404).json({
-            message: 'No recipe Matched your Search!'
+        if (result.count === 0) {
+          return res.status(200).json({
+            message: `Your search - ${req.query.search} - did not matched any recipe`
           });
         }
         const totalCount = result.count;
@@ -194,7 +195,7 @@ class Recipes {
             ['id', 'DESC']
           ]
         }).then(getAllRecipes => {
-          if (getAllRecipes.length <= 0) {
+          if (getAllRecipes.count === 0) {
            
             return res.status(200).json({
               Message: 'No recipes have yet been created!'
@@ -269,8 +270,9 @@ class Recipes {
         } else {
           return res.status(400).json({
             message: 'Recipe Not found'
-          });
-        }
+          }); 
+        } 
+        
       });
   }
 
@@ -293,7 +295,7 @@ class Recipes {
           }
         ]
       }).then(getAllRecipes => {
-        if (getAllRecipes.length <= 0) {
+        if (getAllRecipes.count === 0) {
           return res.status(404).json({
             message: (req.query.userId)? 'This user has not created any recipes yet!': 'You have not created any recipe Yet'
           });
@@ -310,6 +312,19 @@ class Recipes {
           recipes
         });
       });
+  }
+
+  getPopularRecipe(req, res) {
+    recipes.findAll({
+      limit: 10,
+      order: [ 
+        ['favorites', 'DESC']
+      ]
+    }).then(popularRecipes => {
+      return res.status(200).json({
+        popularRecipes
+      });
+    });
   }
 
   delete(req, res) {
@@ -343,7 +358,6 @@ class Recipes {
       }
     });
   }
-
 }
 
 export default Recipes;

@@ -19,7 +19,7 @@ class Search extends Component {
     console.log('key up, ', e)
     this.setState({ [e.target.name] : e.target.value });
     console.log(this.state)
-    this.props.searchSucessAction(this.state.search, '')
+      this.props.searchSucessAction(this.state.search, '') 
   }
 
   componentWillReceiveProps(nextProps) {
