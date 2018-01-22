@@ -1,11 +1,11 @@
 import db from '../models';
-// import Sequelize from 'sequelize';
+import Sequelize from 'sequelize';
 
 const recipes = db.recipes;
 const reviews = db.reviews;
 const users = db.users;
 const votes = db.votes;
-// const Op = Sequelize.Op;
+const Op = Sequelize.Op;
 /**
  * 
  * 
@@ -20,6 +20,7 @@ class Recipes {
    * @returns 
    * @memberof Recipes
    */
+
   add(req, res) {
     const { recipeImage, recipeName, description, method, ingredients } = req.body;
     return recipes
@@ -269,8 +270,9 @@ class Recipes {
         } else {
           return res.status(400).json({
             message: 'Recipe Not found'
-          });
-        }
+          }); 
+        } 
+        
       });
   }
 
@@ -312,6 +314,19 @@ class Recipes {
       });
   }
 
+  getPopularRecipe(req, res) {
+    recipes.findAll({
+      limit: 10,
+      order: [ 
+        ['favorites', 'DESC']
+      ]
+    }).then(popularRecipes => {
+      return res.status(200).json({
+        popularRecipes
+      });
+    });
+  }
+
   delete(req, res) {
     const id = req.params.recipeId;
     
@@ -343,7 +358,6 @@ class Recipes {
       }
     });
   }
-
 }
 
 export default Recipes;

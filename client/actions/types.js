@@ -15,6 +15,7 @@ export const GET_RECIPE_DETAILS = 'GET_RECIPE_DETAILS';
 export const EDIT_RECIPE = 'EDIT_RECIPE';
 export const DELETE_RECIPE = 'DELETE_RECIPE';
 export const SEARCH_RECIPE = 'SEARCH_RECIPE';
+export const POPULAR_RECIPE = 'POPULAR_RECIPE';
 
 // Recipe Review Actions types
 // *** Favorites

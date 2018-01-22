@@ -18,7 +18,9 @@ class Favorite {
    * @returns 
    * @memberof Favorite
    */
+
   add(req, res) {
+    const recipe = {};
     const id = req.params.recipeId;
     if (isNaN(id)) {
       return res.status(400).json({
@@ -44,8 +46,17 @@ class Favorite {
                 recipeId: id
               }
             }).then(() => {
-              return res.status(200).json({
-                message: 'Recipe removed from Favorites'
+              recipe.favorites = found.favorites <= 0 ? 0 : found.favorites - 1;
+              found.update(
+                recipe,
+                {
+                  where: {
+                    id: id
+                  }
+                }).then(() => {
+                return res.status(200).json({
+                  message: 'Recipe removed from Favorites'
+                });
               });
             });
           } else  {
@@ -54,9 +65,21 @@ class Favorite {
                 recipeId: id,
                 userId: req.decoded.id
               }).then(favorite => {
-                return res.status(201).json({
-                  message: 'Recipe has been added to your favorite list',
-                  favorite
+                recipe.favorites = found.favorites + 1;
+                console.log(' >>>>>>>>>> ', recipe);
+
+                found.update(
+                  recipe,
+                  {
+                    where: {
+                      id: id
+                    }
+                  }).then((ok) => {
+                  console.log('###############', ok);
+                  return res.status(201).json({
+                    message: 'Recipe has been added to your favorite list',
+                    favorite
+                  });
                 });
               });
           }
@@ -98,7 +121,6 @@ class Favorite {
           }
         ]
       }).then((favoriteRecipe) => {
-        console.log('ok workssdfsfdfs >>>>>>> ', favoriteRecipe);
         if (favoriteRecipe.length <= 0) {
           return res.status(404).json({
             message: 'Recipe Not found'
@@ -114,7 +136,6 @@ class Favorite {
           pageCount,
           recipes
         });
-        
       });
     
 

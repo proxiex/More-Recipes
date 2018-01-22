@@ -5,7 +5,8 @@ import
   GET_RECIPE_DETAILS,
   EDIT_RECIPE,
   DELETE_RECIPE,
-  SEARCH_RECIPE
+  SEARCH_RECIPE,
+  POPULAR_RECIPE
 } from '../actions/types';
 
 import { VOTE } from '../actions/types';
@@ -49,4 +50,13 @@ export function recipe( state = [], action = {}) {
   }
 }
 
+export function popularRecipe( state = [], action = {} ) {
+  switch(action.type){
+  case POPULAR_RECIPE: 
+    newState = action.payload;
+    return newState;
+  default:
+    return state;
+  }
+}
 

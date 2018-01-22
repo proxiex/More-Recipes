@@ -42,6 +42,11 @@ export default (sequelize, DataTypes) =>  {
       type: DataTypes.INTEGER,
       allowNull: false,
       defaultValue: 0
+    },
+    favorites: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      defaultValue: 0
     }
   });
 

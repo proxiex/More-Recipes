@@ -1,9 +1,11 @@
 import React from 'react';
 import ReactPaginat from 'react-paginate';
 import { getAllRecipeAction } from '../../actions/getAllRecipeAction';
+import { getPopularRecipeAction } from '../../actions/getPopularRecipeAction'
 import RecipeCard from '../common/recipeCard';
 import Search from '../common/search';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import classnames from 'classnames';
 import shortid from 'shortid';
@@ -13,6 +15,7 @@ class RecipePage extends React.Component {
     super(props);
     this.state = {
       recipes: [],
+      popularRecipe: [],
       page: 1,
       search: '',
       pageCount: 1
@@ -24,11 +27,14 @@ class RecipePage extends React.Component {
 
   
   componentWillMount() {
-    this.props.getAllRecipeAction()
+    this.props.getAllRecipeAction();
+    this.props.getPopularRecipeAction();
   }
  
   componentWillReceiveProps(nextProps) {
+    console.log('Reciev Props  >>>', nextProps)
     this.setState({
+      popularRecipe: nextProps.popularRecipe,
       recipes: nextProps.recipe.recipes,
       message: nextProps.recipe.message,
       pageCount: nextProps.recipe.pageCount || 0
@@ -48,7 +54,7 @@ class RecipePage extends React.Component {
     const { recipes, message } = this.state;
     const { isAuthenticated } = this.props.auth;
     
-    console.log(' 09870987098', recipes, typeof (recipes))
+    console.log(' State here', this.state)
     const allRecipes = typeof recipes === 'object' ? recipes.map(recipe =>
       
       <RecipeCard
@@ -85,16 +91,11 @@ class RecipePage extends React.Component {
               <div className="row">      
                 <div className="col s12 m12">
                   <ul className="collection">
-                    <li className="collection-item">Rice and Beans </li>
-                    <li className="collection-item">Chin chin</li>
-                    <li className="collection-item">Yam & Egg source</li>
-                    <li className="collection-item">Yam & Egg source</li>
-                    <li className="collection-item">Yam & Egg source</li>
-                    <li className="collection-item">Yam & Egg source</li>
-                    <li className="collection-item">Yam & Egg source</li>
-                    <li className="collection-item">Yam & Egg source</li>
-                    <li className="collection-item">Yam & Egg source</li>
-                    <li className="collection-item">Yam & Egg source</li>
+                  { this.state.popularRecipe.map(recipe => 
+                    
+                    <Link key={shortid.generate()} to={`/recipe-details/${recipe.id}`}>
+                      <li className="collection-item">{recipe.recipeName}</li> 
+                    </Link> ) }
                     
                   </ul>
                 </div> 
@@ -164,14 +165,21 @@ class RecipePage extends React.Component {
 
 RecipePage.propTypes = {
   getAllRecipeAction: PropTypes.func.isRequired,
+  getPopularRecipeAction: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired
 }
 
 function mapStateToProps(state) {
   return {
     recipe: state.recipes,
+    popularRecipe: state.popularRecipe,
     auth: state.auth
   }
 }
 
-export default connect(mapStateToProps, { getAllRecipeAction })(RecipePage);
+export default connect(
+  mapStateToProps, 
+  {
+     getAllRecipeAction,
+     getPopularRecipeAction
+    })(RecipePage);
