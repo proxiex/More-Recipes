@@ -19,7 +19,7 @@ var swaggerDefinition = {
     version: '1',
     description: 'More recipe allows users add recipes to share with the world!',
   },
-  host: 'localhost:'+process.env.PORT || 8000,
+  // host: 'localhost:'+process.env.PORT || 8000,
   basePath: '/',
 };
 

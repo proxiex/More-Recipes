@@ -3,7 +3,7 @@ import auth from './reducers/auth';
 import { recipe, recipes, popularRecipe } from './reducers/recipe';
 import review from './reducers/review';
 import favorites from './reducers/favorites';
-import { userRecipe } from './reducers/user';
+import { userRecipe, profile } from './reducers/user';
 
 export default combineReducers({
   auth,
@@ -12,5 +12,6 @@ export default combineReducers({
   popularRecipe,
   review,
   favorites,
-  userRecipe
+  userRecipe,
+  profile
 });

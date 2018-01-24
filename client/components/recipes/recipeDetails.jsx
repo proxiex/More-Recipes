@@ -166,7 +166,8 @@ class RecipeDetails extends React.Component {
                   <p>Are your sure you want to delete this recipe?</p>
                 </div>
                 <div className="modal-footer">
-                  <a onClick={this.delete} className="modal-action modal-close waves-effect waves-green btn-flat red-text">Yes</a>
+                  <a onClick={this.delete} 
+                  className="modal-action modal-close waves-effect waves-green btn-flat red-text">Yes</a>
                   <a className="modal-action modal-close waves-effect waves-green btn-flat">No</a>
                 </div>
               </div>
@@ -182,7 +183,7 @@ class RecipeDetails extends React.Component {
                     <table>
                       <tbody>
                         <tr>
-                          <td> <span className=""><a onClick={this.favoriteRecipe} style={{cursor: 'pointer'}} ><i className={classnames("material-icons", { 'teal-text': userVotes.upotes })}>favorite</i></a>Favorite</span></td>
+                          <td> <span className=""><a onClick={this.favoriteRecipe} style={{cursor: 'pointer'}} ><i className={classnames("material-icons", { 'teal-text': userVotes.upotes })}>favorite</i></a>Favorite</span></td> 
                           <td> <span className=""><a onClick={this.downVote} style={{cursor: 'pointer'}} ><i className="material-icons">remove_red_eye</i></a>{recipeInfo.views} Views</span></td>
                           <td><span className=""><a onClick={this.upVote} style={{cursor: 'pointer'}} ><i className={classnames("material-icons", { 'teal-text': userVotes.upVotes })}>thumb_up</i></a> {recipeInfo.upVotes} Like</span></td>
                           <td><span className=""><a onClick={this.downVote} style={{cursor: 'pointer'}} ><i className={classnames("material-icons", { 'teal-text': userVotes.downVotes })}>thumb_down</i></a>{recipeInfo.downVotes} Dislike</span></td>
