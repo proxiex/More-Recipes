@@ -21,7 +21,7 @@ export default function validateInput (data) {
     errors.password = errMsg;
     
   } else if (data.password.length < 6) {
-    errors.password = 'Password is Tooooo Short';
+    errors.password = 'Your password needs to be longer than 6 characters';
   }
 
   return {

@@ -16,15 +16,8 @@ class Search extends Component {
   
 
   onChange(e) {
-    console.log('key up, ', e)
     this.setState({ [e.target.name] : e.target.value });
-    console.log(this.state)
-      this.props.searchSucessAction(this.state.search, '') 
-  }
-
-  componentWillReceiveProps(nextProps) {
-    console.log(' search compoent ', nextProps)
-    this.props.result(nextProps.recipes)
+      this.props.searchSucessAction(e.target.value, '') 
   }
 
   render() {

@@ -1,4 +1,9 @@
-import { GET_USER_RECIPES, DELETE_RECIPE } from '../actions/types';
+import { 
+  GET_USER_RECIPES, 
+  DELETE_RECIPE ,
+  GET_USER_PROFILE,
+  UPDATE_USER_PROFILE
+} from '../actions/types';
 
 let newState;
 
@@ -9,6 +14,19 @@ export function userRecipe( state = [], action = {}) {
     return newState;
   case DELETE_RECIPE:
     newState = state.recipes.filter(recipe => `${recipe.id}` !== `${action.id}`);
+    return newState;
+  default:
+    return state;
+  }
+}
+
+export function profile(state = [], action = {}) {
+  switch(action.type) {
+  case UPDATE_USER_PROFILE: 
+    newState = {...state, UserDetails: action.payload.UserDetails};
+    return newState;
+  case GET_USER_PROFILE: 
+    newState = action.payload;
     return newState;
   default:
     return state;

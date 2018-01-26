@@ -3,27 +3,43 @@ import { Link } from 'react-router-dom';
 import img from '../../assets/imgs/bg.jpg';
 
 export default () => {
+  $(document).ready(() => {
+    $('.slider').slider();
+  });
   return (
-    <div className="row  z-depth-1" style={{marginBottom: '0'}}>
-      <div id="index-banner" className="parallax-container">
-        <div className="section no-pad-bot">
-          <div className="container">
-            <br/><br/>
-            <h1 className="header center teal-text text-lighten-2 black-shadow">Create Your Recipes</h1>
-            <div className="row center">
-              <h5 className="header col s12 light white-shadow">
-                Share​ Your Aawesome​ ​and​ Exciting​ ​​ Recipe​ 
-                ​<br/>Ideas<br/> which You have​ ​Invented​ ​or​ ​Learnt</h5>
-            </div>
-            <div className="row center">
-              <Link to="/signup" id="download-button" className="btn-large waves-effect waves-light teal lighten-1">Signup Its Free </Link>
-            </div>
-            <br/><br/>
-
-          </div>
-        </div>
-        <div className="parallax"><img src={img} alt="Unsplashed background img 1"/></div>
-      </div>
+    <div className="row  z-depth-1" style={{ marginBottom: '0' }}>
+      		 <div className="slider">
+            <ul className="slides">
+              <li>
+                <img src="http://lorempixel.com/580/300/food/1" />
+                <div className="caption center-align">
+                  <h3>Eating is all about enjoying food</h3>
+                  <h5 className="light grey-text text-lighten-3">Eat what you love</h5>
+                </div>
+              </li>
+              <li>
+                <img src="http://lorempixel.com/580/300/food/2" />
+                <div className="caption left-align">
+                  <h3>Create your own recipes</h3>
+                  <h5 className="light grey-text text-lighten-3">Let others be part of your fun</h5>
+                </div>
+              </li>
+              <li>
+                <img src="http://lorempixel.com/580/300/food/3" />
+                <div className="caption right-align">
+                  <h3>Share what you know</h3>
+                  <h5 className="light grey-text text-lighten-3">You can also learn from others.</h5>
+                </div>
+              </li>
+              <li>
+                <img src="http://lorempixel.com/580/300/food/4" />
+                <div className="caption center-align">
+                  <h3>Tasty</h3>
+                  <h5 className="light grey-text text-lighten-3">Give joy to your taste bugs!</h5>
+                </div>
+              </li>
+            </ul>
+         </div>
     </div>
-  )
+  );
 };
