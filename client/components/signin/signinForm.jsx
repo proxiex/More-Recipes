@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import TextFieldGroup from '../common/textFieldGroup';
 import { userSigninRequest } from '../../actions/signinActions';
 import validateInput from './validations';
+import Preloader from '../common/preLoaders';
 
 class SigninForm extends React.Component {
   constructor(props) {
@@ -38,9 +39,12 @@ class SigninForm extends React.Component {
         (res) => {
           this.setState({ redirect: true});
         },
-        ( err ) => { 
-          console.log(err);
-          this.setState({ errors: err.response.data, isLoading: false }) }
+        ( err ) => {
+          this.setState({ errors: err.response.data, isLoading: false }) 
+          
+          Materialize.toast(this.state.errors.message, 3000, 'red darken-3');
+        }
+          
       );
     }
   }
@@ -55,12 +59,9 @@ class SigninForm extends React.Component {
     if (redirect) {
       return <Redirect to="/recipes" />
     }
-    
     return (
       <div className="card-panel">
-      { isLoading && !redirect ? <div className="black-text yellow lighten-4"> Checking Login Credeintials ... <br/></div> : ''}
       { redirect ? <div className="green-text green lighten-4"> Loggin you in... <br/></div> : ''}
-      { errors.message && <div className="red-text red lighten-4"> {errors.message} <br/></div> }
         <br/>
         <form onSubmit={this.onSubmit} className="s12">
           <TextFieldGroup 
@@ -83,7 +84,9 @@ class SigninForm extends React.Component {
             type="password"
             error={errors.password}
           />
-          <div className="row">
+          {
+            isLoading && !redirect ? <span> Checking Login Credeintials ... <Preloader /> </span> :
+            <div className="row">
             <input 
               type="submit" 
               value="Signin" 
@@ -91,6 +94,7 @@ class SigninForm extends React.Component {
               disabled={this.state.isLoading}
             />
           </div>
+          }
           <div className="row">
             <p className="center">or <br/><Link to="/signup" >Signup</Link></p>
           </div>

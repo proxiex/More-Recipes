@@ -6,15 +6,16 @@ const reviews = db.reviews;
 const users = db.users;
 const votes = db.votes;
 const Op = Sequelize.Op;
+
 /**
- * 
- * 
+ *
+ *
  * @class Recipes
  */
 class Recipes {
   /**
-   * 
-   * 
+   *
+   *
    * @param {any} req 
    * @param {any} res 
    * @returns 
@@ -211,6 +212,7 @@ class Recipes {
   }
 
   getOne(req, res) {
+    const id = req.decoded || null;
     return recipes
       .findOne({
         where: { 
@@ -254,7 +256,7 @@ class Recipes {
           }).then(recipeReviews =>{
             votes.findOne({
               where: {
-                userId: req.decoded.id,
+                userId: id,
                 recipeId: req.params.recipeId
               }
             }).then(userVotes => {
@@ -271,8 +273,7 @@ class Recipes {
           return res.status(400).json({
             message: 'Recipe Not found'
           }); 
-        } 
-        
+        }
       });
   }
 

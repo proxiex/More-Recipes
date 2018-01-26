@@ -10,7 +10,6 @@ export function getPopularRecipeSuccess(payload) {
 
 export const getPopularRecipeAction  = () => (dispatch) => {
   return axios.get('/api/v1/recipes/popular').then(res => {
-    console.log('popular action ', res.data.popularRecipes);
     dispatch(getPopularRecipeSuccess(res.data.popularRecipes));
   });
 };
