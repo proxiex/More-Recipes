@@ -11,20 +11,68 @@ const recipeController = new Recipes();
 const reviewController = new Reviews();
 const voteController = new Votes();
 
-let router = express.Router();
+const router = express.Router();
 
 // CRUD => Recipes
-router.post('/',  Auth.Verify, Validate.addRecipe, recipeController.add);
-router.get('/', recipeController.get);
-router.get('/popular', recipeController.getPopularRecipe);
-router.get('/:recipeId', Pass.Verify, Validate.recipeId, recipeController.getOne);
-router.put('/:recipeId', Auth.Verify, Validate.recipeId, recipeController.modify);
-router.delete('/:recipeId',  Auth.Verify, Validate.recipeId, recipeController.delete);
+router
+  .post(
+    '/',
+    Auth.Verify,
+    Validate.addRecipe,
+    recipeController.add
+  );
+router
+  .get(
+    '/',
+    recipeController.get
+  );
+router
+  .get(
+    '/popular',
+    recipeController.getPopularRecipe
+  );
+router
+  .get(
+    '/:recipeId',
+    Pass.Verify,
+    Validate.recipeId,
+    recipeController.getOne
+  );
+router
+  .put(
+    '/:recipeId',
+    Auth.Verify,
+    Validate.recipeId,
+    recipeController.modify
+  );
+router
+  .delete(
+    '/:recipeId',
+    Auth.Verify,
+    Validate.recipeId,
+    recipeController.delete
+  );
 
-router.post('/:recipeId/reviews', Auth.Verify,  Validate.recipeId, reviewController.add); 
-router.get('/:recipeId/reviews', reviewController.getAllRecipeReview);
+router
+  .post(
+    '/:recipeId/reviews',
+    Auth.Verify,
+    Validate.recipeId,
+    reviewController.add
+  );
+router
+  .get(
+    '/:recipeId/reviews',
+    reviewController.getAllRecipeReview
+  );
 
 
-router.post('/:recipeId/votes', Auth.Verify, Validate.recipeId, voteController.votes);
+router
+  .post(
+    '/:recipeId/votes',
+    Auth.Verify,
+    Validate.recipeId,
+    voteController.votes
+  );
 
 export default router;

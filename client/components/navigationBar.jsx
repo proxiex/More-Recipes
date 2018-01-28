@@ -2,14 +2,20 @@ import React, { Component } from 'react';
 import { Redirect, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { logout } from '../actions/signinActions';
 import classnames from 'classnames';
+
+import { logout } from '../actions/signinActions';
 import FAB from './common/FAB';
 
 import background from '../assets/imgs/post_7.jpg';
 import avater from '../assets/imgs/ruth.jpg';
 
-
+/**
+ *
+ *
+ * @class NavigationBar
+ * @extends {Component}
+ */
 class NavigationBar extends Component {
   constructor(props) {
     super(props);
@@ -18,37 +24,45 @@ class NavigationBar extends Component {
     };
   }
 
+  /**
+   * @returns {void}
+   *
+   * @param {any} nextProps
+   * @memberof
+   */
   componentDidUpdate() {
     $('.button-collapse').sideNav();
-    $(document).ready(() => {
-      
-      $('select').material_select();
-      $('.tooltipped').tooltip({delay: 50});
-    
-      $('textarea#description, textarea#method').characterCounter();
-      $('.carousel').carousel();
-    });
+    $('select').material_select();
+    $('.tooltipped').tooltip({ delay: 50 });
+
+    $('textarea#description, textarea#method').characterCounter();
+    $('.carousel').carousel();
 
     $('.recipes').dropdown();
     $('.dropdown-button').dropdown();
 
-    (function ($) {
-      $(() => {
-    
-        $('.button-collapse').sideNav();
-        $('.parallax').parallax();
-    
-      }); // end of document ready
-    }(jQuery));
+    $('.button-collapse').sideNav();
+    $('.parallax').parallax();
   }
-
+  /**
+   *
+   *
+   * @param {any} e
+   * @memberof NavigationBar
+   * @returns {void}
+   */
   logout(e) {
     e.preventDefault();
     this.props.logout();
     this.setState({ redirect: true });
     $('.button-collapse').sideNav('destroy');
   }
-
+  /**
+   *
+   *
+   * @returns {void}
+   * @memberof NavigationBar
+   */
   render() {
     const { isAuthenticated } = this.props.auth;
     const { redirect } = this.state;
@@ -58,22 +72,45 @@ class NavigationBar extends Component {
     const userLinks = (
       <div>
         <ul id="slide-out" className="side-nav">
-          <li><div className="user-view">
-            <div className="background">
-              <img src={background} />
-            </div>
-            <a href="#!user"><img className="circle" src={avater} /></a>
-            <a href="#!name"><span className="white-text name">Samuel Longshak</span></a>
-            <a href="#!email"><span className="white-text email">samuel@andela.com</span></a>
+          <li>
+            <div className="user-view">
+              <div className="background">
+                <img alt="" src={background} />
               </div>
+              <a href="#!user"><img className="circle" alt="" src={avater} /></a>
+              <a href="#!name">
+                <span className="white-text name">
+                  Samuel Longshak
+                </span>
+              </a>
+              <a href="#!email">
+                <span className="white-text email">
+                  samuel@andela.com
+                </span>
+              </a>
+            </div>
           </li>
-          <li><Link to="/profile"><i className="material-icons">account_circle</i>Profile</Link></li>
-          {/* <li><a href="notifications.html"><i className="material-icons">notifications</i><span className="new badge red">4</span> Notifications </a></li> */}
-          <li><a href="settings.html"><i className="material-icons">settings</i>Settings</a></li>
+          <li>
+            <Link to="/profile">
+              <i className="material-icons">account_circle</i>
+              Profile
+            </Link>
+          </li>
           <li className="divider" />
-          <li><a to="/logout" onClick={this.logout.bind(this)}><i className="material-icons">exit_to_app</i> Logout</a></li>
+          <li>
+            <a to="/logout" onClick={this.logout.bind(this)}>
+              <i className="material-icons">exit_to_app</i>
+              Logout
+            </a>
+          </li>
         </ul>
-        <a href="#" data-activates="slide-out" className="button-collapse show-on-large"><i className="material-icons">menu</i></a>
+        <a
+          href="#"
+          data-activates="slide-out"
+          className="button-collapse show-on-large"
+        >
+          <i className="material-icons">menu</i>
+        </a>
       </div>
     );
 
@@ -97,12 +134,17 @@ class NavigationBar extends Component {
 
     return (
       <div className="row parallax-container-bottm">
-        <nav className={classnames({ 'white': !isAuthenticated }, { black: isAuthenticated })} role="navigation">
+        <nav
+          className={classnames(
+            { white: !isAuthenticated },
+            { black: isAuthenticated }
+          )}
+        >
           <div className="nav-wrapper padding-left" >
-
-
             { isAuthenticated ? userLinks : viewerLinks }
-            <Link to="/" id="logo-container" className="brand-logo">More Recipes</Link>
+            <Link to="/" id="logo-container" className="brand-logo">
+              More Recipes
+            </Link>
           </div>
         </nav>
         { isAuthenticated ? <FAB /> : null }
@@ -120,7 +162,7 @@ NavigationBar.propTypes = {
  *
  *
  * @param {any} state
- * @returns
+ * @returns {void}
  */
 function mapStateToProps(state) {
   return {

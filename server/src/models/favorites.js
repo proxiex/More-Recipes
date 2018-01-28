@@ -26,4 +26,4 @@ export default (sequelize, DataTypes) => {
   return favorites;
 };
 
-//favorites
+// favorites

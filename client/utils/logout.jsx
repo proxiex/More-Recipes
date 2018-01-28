@@ -4,7 +4,7 @@ import { logout } from '../actions/signinActions';
 
 const Logout = withRouter(({ history }) => (
 
-  <li><a to="/logout" onClick={() => {history.push('/')}}><i className="material-icons">exit_to_app</i> Logout</a></li>
+  <li><a to="/logout" onClick={() => { history.push('/'); }}><i className="material-icons">exit_to_app</i> Logout</a></li>
 
 ));
 

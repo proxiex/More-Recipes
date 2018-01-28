@@ -10,7 +10,6 @@ const authenticate = {
     const token = req.body.token || req.query.token || req.headers['x-token'];
     if (!token) {
       next();
-
     } else {
       jwt.verify(token, key, (err, decoded) => {
         if (err) {

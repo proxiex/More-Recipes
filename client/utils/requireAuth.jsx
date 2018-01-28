@@ -4,14 +4,31 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 
 const Materialize = window.Materialize;
-
-export default function(ComposedComponent) {
+/**
+ *
+ *
+ * @export
+ * @param {any} ComposedComponent
+ * @returns {void}
+ */
+export default function (ComposedComponent) {
+  /**
+   *
+   *
+   * @class Authenticate
+   * @extends {Component}
+   */
   class Authenticate extends Component {
-    
+    /**
+   * @description Render
+   * @param {any} props
+   * @memberof Home
+   * @return {void}
+   */
     render() {
       if (!this.props.isAuthenticated) {
         Materialize.toast('Login to proceed', 4000, 'red darken-3');
-        return <Redirect to="/signin" />
+        return <Redirect to="/signin" />;
       }
       return (
         <ComposedComponent {...this.props} />
@@ -21,13 +38,17 @@ export default function(ComposedComponent) {
 
   Authenticate.propTypes = {
     isAuthenticated: PropTypes.bool.isRequired
-  }
+  };
 
-  function mapStateToProps(state) {
-    return {
-      isAuthenticated: state.auth.isAuthenticated
-    };
-  }
+  /**
+   *
+   *
+   * @param {any} state
+   * @returns {void}
+   */
+  const mapStateToProps = state => ({
+    isAuthenticated: state.auth.isAuthenticated
+  });
 
   return connect(mapStateToProps)(Authenticate);
 }

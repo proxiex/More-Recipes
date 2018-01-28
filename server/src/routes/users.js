@@ -10,17 +10,52 @@ const usersController = new Users();
 const favoritesController = new Favorites();
 const recipeController = new Recipe();
 
-let router = express.Router();
+const router = express.Router();
 
-router.post('/signup', Validate.userSignup, usersController.signup);
-router.post('/signin', Validate.userSignin, usersController.signin);
+router
+  .post(
+    '/signup',
+    Validate.userSignup,
+    usersController.signup
+  );
+router
+  .post(
+    '/signin',
+    Validate.userSignin,
+    usersController.signin
+  );
 
-router.post('/:recipeId/favorites',  Auth.Verify, Validate.recipeId, favoritesController.add);
-router.get('/:userId/favorites', Auth.Verify, favoritesController.get);
-router.get('/recipe', Pass.Verify, recipeController.getUserRecipe);
+router
+  .post(
+    '/:recipeId/favorites',
+    Auth.Verify,
+    Validate.recipeId,
+    favoritesController.add
+  );
+router
+  .get(
+    '/:userId/favorites',
+    Auth.Verify,
+    favoritesController.get
+  );
+router
+  .get(
+    '/recipe',
+    Pass.Verify,
+    recipeController.getUserRecipe
+  );
 
-router.get('/me', Auth.Verify, usersController.profile);
-router.patch('/me', Auth.Verify, usersController.updateProfile);
-// router.delete('/me', Auth.Verify, usersController.deleteAccount);
+router
+  .get(
+    '/me',
+    Auth.Verify,
+    usersController.profile
+  );
+router
+  .patch(
+    '/me',
+    Auth.Verify,
+    usersController.updateProfile
+  );
 
 export default router;

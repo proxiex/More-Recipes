@@ -4,25 +4,42 @@ import {
   UPDATE_USER_PASSWORD
 } from './types';
 
-export function updateUserProfileSucess(payload) {
-  return {
-    type: UPDATE_USER_PROFILE,
-    payload
-  };
-}
 
-export function updateUserPasswordSucess(payload) {
-  return {
-    type: UPDATE_USER_PASSWORD,
-    payload
-  };
-}
+/**
+ * @returns {void}
+ *
+ * @param {any} payload
+ */
+export const updateUserProfileSucess = payload => ({
+  type: UPDATE_USER_PROFILE,
+  payload
+});
 
+/**
+ * @returns {void}
+ *
+ * @param {any} payload
+ */
+const updateUserPasswordSucess = payload => ({
+  type: UPDATE_USER_PASSWORD,
+  payload
+});
+
+/**
+ *
+ * @returns {void}
+ * @param {any} userData
+ */
 export const updatetUserProfileAction = userData => dispatch =>
   axios.patch('/api/v1/users/me', userData).then((res) => {
     dispatch(updateUserProfileSucess(res.data));
   });
 
+/**
+ * @returns {void}
+ *
+ * @param {any} password
+ */
 export const updatetUserPasswordAction = password => dispatch =>
   axios.patch('/api/v1/users/me', password).then((res) => {
     dispatch(updateUserPasswordSucess(res.data));

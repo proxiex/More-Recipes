@@ -13,7 +13,7 @@ export default (sequelize, DataTypes) => {
       allowNull: false
     }
   });
-  
+
   reviews.associate = (models) => {
     reviews.belongsTo(models.users, {
       foreignKey: 'userId',
