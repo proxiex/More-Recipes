@@ -16,8 +16,8 @@ const authenticate = {
 
     jwt.verify(token, key, (err, decoded) => {
       if (err) {
-        return res.status(403).send({
-          error: 'Token could not be authenticated'
+        return res.status(401).send({
+          message: 'Token could not be authenticated'
         });
       }
       req.decoded = decoded;

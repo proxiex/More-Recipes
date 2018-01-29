@@ -62,8 +62,6 @@ class Favorite {
                 userId: req.decoded.id
               }).then((favorite) => {
                 recipe.favorites = found.favorites + 1;
-                console.log(' >>>>>>>>>> ', recipe);
-
                 found.update(
                   recipe,
                   {
@@ -71,8 +69,7 @@ class Favorite {
                       id
                     }
                   }
-                ).then((ok) => {
-                  console.log('###############', ok);
+                ).then(() => {
                   return res.status(201).json({
                     message: 'Recipe has been added to your favorite list',
                     favorite
