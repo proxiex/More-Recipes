@@ -4,7 +4,20 @@ const reviews = db.reviews;
 const recipes = db.recipes;
 const users = db.users;
 
+/**
+ *
+ *
+ * @class Reviews
+ */
 class Reviews {
+  /**
+   *
+   *
+   * @param {any} req
+   * @param {any} res
+   * @returns {void}
+   * @memberof Reviews
+   */
   add(req, res) {
     // check if recipe exsits.
     const id = req.params.recipeId;
@@ -13,7 +26,7 @@ class Reviews {
         message: 'Parameter must be a number!'
       });
     }
-    recipes.findOne({id: id }).then(found => {
+    recipes.findOne({ id }).then((found) => {
       if (!found) {
         return res.status(404).json({
           message: 'Recipe Not found!'
@@ -40,16 +53,21 @@ class Reviews {
                 model: users
               }
             ],
-            
-          }).then(review => {
-            return res.status(201).json(review);
-          });
-          
+
+          }).then(review => res.status(201).json(review));
         });
     });
- 
+    return this;
   }
 
+  /**
+   *
+   *
+   * @param {any} req
+   * @param {any} res
+   * @returns {void}
+   * @memberof Reviews
+   */
   getAllRecipeReview(req, res) {
     const recipeId = req.params.recipeId;
 
@@ -67,12 +85,13 @@ class Reviews {
           model: users
         }
       ]
-    }).then(recipeReviews => {
-      const reviews = (recipeReviews.length <= 0)? 'No reviews yet': recipeReviews;
+    }).then((recipeReviews) => {
+      const reviews = (recipeReviews.length <= 0) ? 'No reviews 1 yet' : recipeReviews;
       return res.status(200).json({
         reviews
       });
     });
+    return this;
   }
 }
 

@@ -1,9 +1,14 @@
 import axios from 'axios';
-
-export default function setAuthorizationToken (token) {
+/**
+ *
+ * @export
+ * @param {any} token
+ * @returns {void}
+ */
+export default function setAuthorizationToken(token) {
   if (token) {
     axios.defaults.headers.common['x-token'] = token;
-  } else  {
+  } else {
     delete axios.defaults.headers.common['x-token'];
   }
 }

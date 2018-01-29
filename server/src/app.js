@@ -14,11 +14,9 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use('/api/v1/users', users);
 app.use('/api/v1/recipes', recipes);
 
-app.get('/', (req, res) => {
-  return res.status(200).json({
-    message: 'Welcome to more recipe API'
-  });
-});
+app.get('/', (req, res) => res.status(200).json({
+  message: 'Welcome to more recipe API'
+}));
 
 app.use((req, res, next) => {
   const err = res.status(404).send({

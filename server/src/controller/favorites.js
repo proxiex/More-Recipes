@@ -1,24 +1,21 @@
 import db from '../models';
-//import Sequelize from 'sequelize';
+// import Sequelize from 'sequelize';
 
-const recipes = db.recipes;
-const favorites = db.favorites;
-const users = db.users;
+const { recipes, favorites, users } = db;
 /**
- * 
- * 
+ *
+ *
  * @class Favorite
  */
 class Favorite {
   /**
-   * 
-   * 
-   * @param {any} req 
-   * @param {any} res 
-   * @returns 
+   *
+   *
+   * @param {any} req
+   * @param {any} res
+   * @returns {void}
    * @memberof Favorite
    */
-
   add(req, res) {
     const recipe = {};
     const id = req.params.recipeId;
@@ -27,18 +24,18 @@ class Favorite {
         message: 'Parameter must be a number!'
       });
     }
-    recipes.find({ 
+    recipes.find({
       where: {
-        id: id
+        id
       }
-    }).then(found => {
+    }).then((found) => {
       if (found) {
         favorites.findOne({
           where: {
             recipeId: id,
             userId: req.decoded.id
           }
-        }).then(foundFavorite => {
+        }).then((foundFavorite) => {
           if (foundFavorite) {
             favorites.destroy({
               where: {
@@ -51,20 +48,19 @@ class Favorite {
                 recipe,
                 {
                   where: {
-                    id: id
+                    id
                   }
-                }).then(() => {
-                return res.status(200).json({
-                  message: 'Recipe removed from Favorites'
-                });
-              });
+                }
+              ).then(() => res.status(200).json({
+                message: 'Recipe removed from Favorites'
+              }));
             });
-          } else  {
+          } else {
             return favorites
               .create({
                 recipeId: id,
                 userId: req.decoded.id
-              }).then(favorite => {
+              }).then((favorite) => {
                 recipe.favorites = found.favorites + 1;
                 console.log(' >>>>>>>>>> ', recipe);
 
@@ -72,9 +68,10 @@ class Favorite {
                   recipe,
                   {
                     where: {
-                      id: id
+                      id
                     }
-                  }).then((ok) => {
+                  }
+                ).then((ok) => {
                   console.log('###############', ok);
                   return res.status(201).json({
                     message: 'Recipe has been added to your favorite list',
@@ -84,18 +81,27 @@ class Favorite {
               });
           }
         });
-      } else  {
+      } else {
         return res.status(404).json({
           message: 'Recipe Not found!'
         });
       }
     });
+    return this;
   }
 
+  /**
+   *
+   *
+   * @param {any} req
+   * @param {any} res
+   * @returns {void}
+   * @memberof Favorite
+   */
   get(req, res) {
     const id = parseInt(req.params.userId, 10);
     const limitValue = (req.query.limit <= 0) ? 9 : req.query.limit || 9;
-    const pageValue = (req.query.page <= 0 ) ? 0 : req.query.page - 1 || 0;
+    const pageValue = (req.query.page <= 0) ? 0 : req.query.page - 1 || 0;
 
     if (isNaN(id)) {
       return res.status(400).json({
@@ -104,7 +110,7 @@ class Favorite {
     }
     return favorites
       .findAndCountAll({
-        offset: limitValue * pageValue, 
+        offset: limitValue * pageValue,
         limit: limitValue,
 
         where: {
@@ -125,7 +131,6 @@ class Favorite {
           return res.status(404).json({
             message: 'Recipe Not found'
           });
-          
         }
         const totalCount = favoriteRecipe.count;
         const pageCount = Math.ceil(totalCount / limitValue);
@@ -137,8 +142,7 @@ class Favorite {
           recipes
         });
       });
-    
-
+    return this;
   }
 }
 

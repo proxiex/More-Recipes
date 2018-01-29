@@ -1,5 +1,3 @@
-export const ADD_FLASH_MESSAGE = 'ADD_FLASH_MESSAGE';
-
 // Users Action Types
 export const SET_CURRENT_USER = 'SET_CURRENT_USER';
 export const GET_USER_PROFILE = 'GET_USER_PROFILE';
@@ -27,5 +25,4 @@ export const ADD_REVIEW = 'ADD_REVIEW';
 
 // *** Votes
 export const VOTE = 'VOTE';
-
 

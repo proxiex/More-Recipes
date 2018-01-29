@@ -3,34 +3,41 @@ import db from '../models';
 const votes = db.votes;
 const recipes = db.recipes;
 const users = db.users;
-
+/**
+ *
+ *
+ * @class Votes
+ */
 class Votes {
+  /**
+   *
+   * @returns {void}
+   * @param {any} req
+   * @param {any} res
+   * @memberof Votes
+   */
   votes(req, res) {
     // check if user has voted
     const id = req.params.recipeId;
-    console.log(id);
-    return recipes.findById(id).then(found => {
+    return recipes.findById(id).then((found) => {
       if (found) {
         votes.find({
           where: {
             userId: req.decoded.id,
             recipeId: found.id
           }
-        }).then(foundVotes => {
-
+        }).then((foundVotes) => {
           if (foundVotes) {
-            let updateVotes = {};
-            let updateRecipeVotes = {};
-            let msg = {};
+            const updateVotes = {};
+            const updateRecipeVotes = {};
+            const msg = {};
 
             if (req.query.vote === 'up') {
-              if (foundVotes.upVotes === 1) { 
+              if (foundVotes.upVotes === 1) {
                 // remove form db
                 updateVotes.upVotes = 0;
                 updateRecipeVotes.upVotes = (found.upVotes > 0) ? found.upVotes - 1 : 0;
-
               } else if (foundVotes.upVotes === 0) {
-
                 if (foundVotes.downVotes === 1) {
                   // remove form db
                   updateVotes.downVotes = 0;
@@ -53,7 +60,6 @@ class Votes {
                 // remove form db
                 updateVotes.downVotes = 0;
                 updateRecipeVotes.downVotes = (found.downVotes > 0) ? found.downVotes - 1 : 0;
-
               } else if (foundVotes.downVotes === 0) {
                 if (foundVotes.upVotes === 1) {
                   // remove from db
@@ -69,7 +75,6 @@ class Votes {
                   updateRecipeVotes.downVotes = found.downVotes + 1;
                   msg.down = 'Sorry you did not like it.';
                 }
-
               }
             } else {
               return res.status(400).json({
@@ -77,19 +82,23 @@ class Votes {
               });
             }
 
-            foundVotes.update(updateVotes,
+            foundVotes.update(
+              updateVotes,
               {
                 where: {
                   userId: req.decoded.id,
                   recipeId: id
                 }
-              }).then((userVotes) => {
-              found.update(updateRecipeVotes,
+              }
+            ).then((userVotes) => {
+              found.update(
+                updateRecipeVotes,
                 {
                   where: {
-                    id: id
+                    id
                   }
-                }).then((recipeDetails) => {
+                }
+              ).then((recipeDetails) => {
                 const voteMsg = (req.query.vote === 'up') ? msg.up : msg.down;
                 return res.status(200).json({
                   message: voteMsg,
@@ -98,13 +107,11 @@ class Votes {
                 });
               });
             })
-              .catch(error => {
-                console.log(error),
+              .catch(() => {
                 res.status(500).json({
                   message: 'an error occured!'
                 });
               });
-
           } else {
             // create vote records
             let votings = {};
@@ -120,7 +127,6 @@ class Votes {
               createVoteRecipe = {
                 upVotes: found.upVotes + 1
               };
-
             } else if (req.query.vote === 'down') {
               votings = {
                 userId: req.decoded.id,
@@ -137,12 +143,14 @@ class Votes {
               });
             }
             votes.create(votings).then((userVotes) => {
-              found.update(createVoteRecipe,
+              found.update(
+                createVoteRecipe,
                 {
                   where: {
-                    id: id
+                    id
                   }
-                }).then((recipeDetails) => {
+                }
+              ).then((recipeDetails) => {
                 const voteMsg = (req.query.vote === 'up') ? 'You liked this recipe' : 'Sorry you do not like it';
                 return res.status(201).json({
                   message: voteMsg,
@@ -150,8 +158,7 @@ class Votes {
                   recipeDetails
                 });
               });
-
-            }).catch(err => {
+            }).catch((err) => {
               if (err.name === 'SequelizeForeignKeyConstraintError') {
                 return res.status(400).json({
                   message: 'Recipe does not exists!'
@@ -159,26 +166,24 @@ class Votes {
               }
             });
           }
-
         });
-
       } else {
         return res.status(404).json({
           message: 'Recipe Not found!'
         });
       }
     });
-
+    return this;
   }
 }
 
 export default Votes;
-/* 
+/*
   - check if recipe exsit.
 
     - check query.
-      - if up 
-        * user has voted 
+      - if up
+        * user has voted
           - is up
             - remove from db
           - is down or 0

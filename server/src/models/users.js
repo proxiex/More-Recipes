@@ -34,7 +34,7 @@ export default (sequelize, DataTypes) => {
       type: DataTypes.INTEGER
     }
 
-  });  
+  });
 
   users.associate = (models) => {
     users.hasMany(models.reviews, {
@@ -52,7 +52,7 @@ export default (sequelize, DataTypes) => {
     users.hasMany(models.views, {
       foreignKey: 'userId'
     });
-  
+
     users.hasMany(models.recipes, {
       foreignKey: 'userId'
     });

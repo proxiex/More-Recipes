@@ -1,15 +1,27 @@
-import React from 'react';
-import AddRecipeForm from './addRecipeForm';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { addRecipeAction } from '../../../actions/addRecipeAction';
 
-class AddRecipePage extends React.Component {
-  render () {
+import AddRecipeForm from './addRecipeForm';
+import { addRecipeAction } from '../../../actions/addRecipeAction';
+/**
+ *
+ *
+ * @class AddRecipePage
+ * @extends {Component}
+ */
+class AddRecipePage extends Component {
+  /**
+   *
+   *
+   * @returns {void}
+   * @memberof AddRecipePage
+   */
+  render() {
     const { addRecipeAction } = this.props;
     return (
       <div id="wrapper" className="contiainer center">
-        <AddRecipeForm addRecipeAction={addRecipeAction}  />
+        <AddRecipeForm addRecipeAction={addRecipeAction} />
       </div>
     );
   }
@@ -17,6 +29,6 @@ class AddRecipePage extends React.Component {
 
 AddRecipePage.propTypes = {
   addRecipeAction: PropTypes.func.isRequired
-}
+};
 
 export default connect(null, { addRecipeAction })(AddRecipePage);

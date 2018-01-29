@@ -12,11 +12,15 @@ const favorites = db.favorites;
 const reviews = db.reviews;
 const votes = db.votes;
 const Op = Sequelize.Op;
-
+/**
+ *
+ *
+ * @class Users
+ */
 class Users {
   /**
    *
-   *
+   * @returns {void}
    * @param {any} req
    * @param {any} res
    * @memberof Users
@@ -48,26 +52,35 @@ class Users {
           eremail,
           erusername
         });
-      } 
-        return users
+      }
+      return users
 
-          .create({
-            avatar: noImage,
-            username: username.trim(),
-            email,
-            password: bcrypt.hashSync(password, 10)
-          }).then((user) => {
-            const newUser = { username: user.username, email: user.email };
-            res.status(201).json({
-              message: 'Signup succesfull',
-              newUser
-            });
-          })
-          .catch(error => res.status(400).json({ message: error.errors[0].message }));
-      
+        .create({
+          avatar: noImage,
+          username: username.trim(),
+          email,
+          password: bcrypt.hashSync(password, 10)
+        }).then((user) => {
+          const newUser = { username: user.username, email: user.email };
+          res.status(201).json({
+            message: 'Signup succesfull',
+            newUser
+          });
+        })
+        .catch(error => res.status(400).json({
+          message: error.errors[0].message
+        }));
     });
+    return this;
   }
 
+  /**
+   *
+   * @returns {void}
+   * @param {any} req
+   * @param {any} res
+   * @memberof Users
+   */
   signin(req, res) {
     const { username, password } = req.body;
     return users
@@ -100,17 +113,24 @@ class Users {
             user,
             Token: token
           });
-        } 
-          return res.status(400).json({
-            message: 'Incorrect signin credentials!'
-          });
-        
+        }
+        return res.status(400).json({
+          message: 'Incorrect signin credentials!'
+        });
       })
       .catch(() => res.status(500).json({
         message: 'Some error occured!'
       }));
+    return this;
   }
 
+  /**
+   *
+   * @returns {void}
+   * @param {any} req
+   * @param {any} res
+   * @memberof Users
+   */
   profile(req, res) {
     // - get user name
     const userId = req.decoded.id;
@@ -178,8 +198,16 @@ class Users {
         res.status(500).json({
           message: 'Some error occured!'
         }));
+    return this;
   }
 
+  /**
+   *
+   * @returns {void}
+   * @param {any} req
+   * @param {any} res
+   * @memberof Users
+   */
   updateProfile(req, res) {
     // fetch user details from decoded.
     const updateFields = {};
@@ -233,8 +261,7 @@ class Users {
           message: 'Some error occured!'
         });
       });
-    // collect data from user.
-    // update where nessary
+    return this;
   }
 }
 

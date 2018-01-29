@@ -2,18 +2,18 @@ import express from 'express';
 import path from 'path';
 import logger from 'morgan';
 import bodyParser from 'body-parser';
-import users from './routes/users';
-import recipes from './routes/recipes';
-
+import swaggerJSDoc from 'swagger-jsdoc';
 import webpack from 'webpack';
 import webpackMiddleware from 'webpack-dev-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
+
+import users from './routes/users';
+import recipes from './routes/recipes';
 import webpackConfig from '../../webpack.config.dev';
-import swaggerJSDoc from 'swagger-jsdoc';
 
 const app = express();
 // swagger definition
-var swaggerDefinition = {
+const swaggerDefinition = {
   info: {
     title: 'More Recipe API',
     version: '1',
@@ -24,17 +24,17 @@ var swaggerDefinition = {
 };
 
 // options for the swagger docs
-var options = {
+const options = {
   // import swaggerDefinitions
-  swaggerDefinition: swaggerDefinition,
+  swaggerDefinition,
   // path to the API docs
   apis: ['./server/src/doc.js'],
 };
 
 // initialize swagger-jsdoc
-var swaggerSpec = swaggerJSDoc(options);
+const swaggerSpec = swaggerJSDoc(options);
 
-app.get('/swagger.json', function(req, res) {
+app.get('/swagger.json', (req, res) => {
   res.setHeader('Content-Type', 'application/json');
   res.send(swaggerSpec);
 });
@@ -47,12 +47,11 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-// Routes 
+// Routes
 app.use('/api/v1/users', users);
 app.use('/api/v1/recipes', recipes);
 
 if (process.env.NODE_ENV !== 'test') {
-
   app.use(webpackMiddleware(compiler, {
     hot: true,
     publicPath: webpackConfig.output.publicPath,
@@ -64,9 +63,8 @@ if (process.env.NODE_ENV !== 'test') {
   app.get('/*', (req, res) => {
     res.status(200).sendFile(path.join(__dirname, '../../client/index.html'));
   });
-  
 }
-  
+
 
 app.use((req, res, next) => {
   const err = res.status(404).send({
@@ -77,6 +75,6 @@ app.use((req, res, next) => {
 
 
 const port = parseInt(process.env.PORT, 10) || 8000;
-app.listen(port,  () => console.log('Running on localhost: '+port+' Node Env: ' + process.env.NODE_ENV));
+app.listen(port, () => console.log(`Running on localhost: ${port} Node Env: ${process.env.NODE_ENV}`));
 
 export default app;

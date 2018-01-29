@@ -2,10 +2,11 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
+import jwtDecode from 'jwt-decode';
 import { createStore, applyMiddleware, compose } from 'redux';
+
 import rootReducer from './rootReducer';
 import setAuthorizationToken from './utils/setAuthorizationToken';
-import jwtDecode from 'jwt-decode';
 import { setCurrentUser, logout } from './actions/signinActions';
 
 import './assets/init';
@@ -19,7 +20,7 @@ const store = createStore(
     applyMiddleware(thunk),
     window.devToolsExtension ? window.devToolsExtension() : f => f
   )
- 
+
 );
 
 if (localStorage.jwtToken) {
@@ -27,18 +28,16 @@ if (localStorage.jwtToken) {
   const decToken = jwtDecode(localStorage.jwtToken);
   const dateNow = new Date().getTime() / 1000;
 
-  if (decToken.exp < dateNow ) {
-    store.dispatch(logout())
+  if (decToken.exp < dateNow) {
+    store.dispatch(logout());
   } else {
     store.dispatch(setCurrentUser(decToken));
   }
-
- 
 }
 
 ReactDOM.render(
   <Provider store={store}>
     <App />
-  </Provider>, 
+  </Provider>,
   document.getElementById('app')
-); 
+);

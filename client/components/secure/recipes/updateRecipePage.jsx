@@ -1,24 +1,40 @@
 import React from 'react';
-import AddRecipeForm from './updateRecipeForm';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import AddRecipeForm from './updateRecipeForm';
 import { addRecipeAction } from '../../../actions/addRecipeAction';
 import { getRecipeDetails } from '../../../actions/getRecipeDetails';
 
+/**
+ *
+ *
+ * @class UpdateRecipePage
+ * @extends {React.Component}
+ */
 class UpdateRecipePage extends React.Component {
-
+  /**
+   *@returns {void}
+   *
+   * @memberof UpdateRecipePage
+   */
   componentDidMount() {
     const recipeId = this.props.match.params.recipeId;
-    this.props.getRecipeDetails(recipeId)
+    this.props.getRecipeDetails(recipeId);
   }
 
-  render () {
+  /**
+   * @description Render
+   * @param {any} props
+   * @memberof Home
+   * @return {void}
+   */
+  render() {
     const { addRecipeAction } = this.props;
-    const recipeInfo = this.props.recipe
-    
+    const recipeInfo = this.props.recipe;
+
     return (
       <div id="wrapper">
-        <AddRecipeForm recipeInfo={recipeInfo} id={this.props.match.params.recipeId}  />
+        <AddRecipeForm recipeInfo={recipeInfo} id={this.props.match.params.recipeId} />
       </div>
     );
   }
@@ -26,14 +42,16 @@ class UpdateRecipePage extends React.Component {
 
 UpdateRecipePage.propTypes = {
   addRecipeAction: PropTypes.func.isRequired,
-  getRecipeDetails: PropTypes.func.isRequired
-}
+  getRecipeDetails: PropTypes.func.isRequired,
+  recipe: PropTypes.object.isRequired
+};
 
-function mapStateToProps(state) { 
-  return {
-    auth: state.auth,
-    recipe: state.recipe
-  }
-}
+const mapStateToProps = state => ({
+  auth: state.auth,
+  recipe: state.recipe
+});
 
-export default connect(mapStateToProps, { addRecipeAction, getRecipeDetails })(UpdateRecipePage);
+export default connect(
+  mapStateToProps,
+  { addRecipeAction, getRecipeDetails }
+)(UpdateRecipePage);
