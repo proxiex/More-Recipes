@@ -86,9 +86,10 @@ class Recipes {
         if (ingredients) {
           updateFields.ingredients = ingredients;
         }
-        if (updateFields.length < 0) {
+
+        if (Object.keys(updateFields).length === 0 && updateFields.constructor === Object) {
           return res.status(200).json({
-            Message: 'Nothing to update!'
+            message: 'Nothing to update!'
           });
         }
         found.update(
@@ -100,7 +101,7 @@ class Recipes {
             }
           }
         ).then(recipeDetails => res.status(200).json({
-          Message: 'Succesfully Updated Recipe',
+          message: 'Succesfully Updated Recipe',
           recipeDetails
         }));
       } else {

@@ -79,7 +79,7 @@ const Validation = {
       });
     } else if (!method || typeof method !== 'string') {
       return res.status(400).json({
-        method: 'Please Enter Instructions'
+        method: 'Please Enter method'
       });
     } else if (!ingredients || typeof ingredients !== 'string') {
       return res.status(400).json({

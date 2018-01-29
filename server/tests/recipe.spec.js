@@ -20,7 +20,7 @@ describe('Recipes Controller', () => {
     recipeImage: 'http://www.url.here.com/this-cool',
     recipeName: 'recipeName',
     description: 'description',
-    instructions: 'method',
+    method: 'method',
     ingredients: 'ingredients, ingredients, ingredients, ingredients'
   };
   
@@ -32,6 +32,7 @@ describe('Recipes Controller', () => {
         res.should.have.status(401);
         res.should.be.json;
         res.body.should.be.a('object');
+        res.body.should.have.property('message').equal('Unauthorised User!');
         done();
       });
   });
@@ -42,10 +43,10 @@ describe('Recipes Controller', () => {
       .send(recipes)
       .set('x-token', 'this sia bungo iasd ionoiapdif')
       .end((err, res) => {
-        res.should.have.status(403);
+        res.should.have.status(401);
         res.should.be.json;
         res.body.should.be.a('object');
-          
+        res.body.should.have.property('message').equal('Token could not be authenticated');
         done();
       });
   });
@@ -56,7 +57,6 @@ describe('Recipes Controller', () => {
       .send(recipes)
       .set('x-token', token)
       .end((err, res) => {
-        console.log(res.body);
         id = res.body.id;
         res.should.have.status(201);
         res.should.be.json;
@@ -71,7 +71,7 @@ describe('Recipes Controller', () => {
       recipeImage: 'http://www.url.here.com/this-cool',
       recipeName: 'recipeName',
       description: 'description',
-      instructions: 'method',
+      method: 'method',
       ingredients: 'ingredients, ingredients, ingredients, ingredients'
     }
     chai.request(app)
@@ -87,17 +87,17 @@ describe('Recipes Controller', () => {
       });
   });
   
-  it('should let authorized user Modify specific recipe', (done) => {
+  it('should return message if there is nothing to update', (done) => {
     const updateRecipe = {}
     chai.request(app)
       .put('/api/v1/recipes/'+id)
-      .send(updateRecipe)
+      .send({})
       .set('x-token', token)
       .end((err, res) => {
         res.should.have.status(200);
         res.should.be.json;
         res.body.should.be.a('object');
-          
+        res.body.should.have.property('message').equal('Nothing to update!');
         done();
       });
   });
@@ -111,14 +111,15 @@ describe('Recipes Controller', () => {
       ingredients: 'ingredients, ingredients, ingredients, ingredients'
     }
     chai.request(app)
-      .put('/api/v1/recipes/34')
+      .put('/api/v1/recipes/'+id)
       .send(updateRecipe)
       .set('x-token', token)
       .end((err, res) => {
         res.should.have.status(200);
         res.should.be.json;
         res.body.should.be.a('object');
-          
+        res.body.should.have.property('recipeDetails')
+        res.body.should.have.property('message').equal('Succesfully Updated Recipe');
         done();
       });
   });

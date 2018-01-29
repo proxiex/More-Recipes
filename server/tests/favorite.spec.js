@@ -18,9 +18,10 @@ describe('Favorite Recipes Controller', () => {
     
   it('should return error for invalid params', (done) => {
     chai.request(app)
-      .post('/api/v1/users/x3s/recipes') 
+      .post('/api/v1/users/x3s/favorites') 
       .set('x-token', token)
       .end((err, res) => {
+        console.log('#@@@@@@######@#$%^ >>>>>', err)
         res.should.have.status(400);
         res.should.be.json;
         res.body.should.have.property('message').equal('Parameter must be a number!');
@@ -30,7 +31,7 @@ describe('Favorite Recipes Controller', () => {
     
   it('should return error for recipe that does not exist', (done) => {
     chai.request(app)
-      .post('/api/v1/users/12202/recipes')
+      .post('/api/v1/users/12202/favorites')
       .set('x-token', token)
       .end((err, res) => {
         res.should.have.status(404);
@@ -47,7 +48,7 @@ describe('Favorite Recipes Controller', () => {
       .end((err, res) => {
         res.should.have.status(201);
         res.should.be.json;
-        res.body.should.have.property('message').equal('Recipe Favorited!');
+        res.body.should.have.property('message').equal('Recipe has been added to your favorite list');
         done();
       });
   }); 
@@ -57,9 +58,11 @@ describe('Favorite Recipes Controller', () => {
       .get('/api/v1/users/'+id+'/favorites')
       .set('x-token', token)
       .end((err, res) => {
-        res.should.have.status(201);
+        res.should.have.status(200);
         res.should.be.json;
-        res.body.should.have.property('message').equal('Recipe Favorited!');
+        res.body.should.have.property('recipes')
+        res.body.should.have.property('pageCount')
+        res.body.should.have.property('totalCount')
         done();
       });
   }); 
@@ -69,7 +72,6 @@ describe('Favorite Recipes Controller', () => {
       .post('/api/v1/users/'+id+'/favorites')
       .set('x-token', token)
       .end((err, res) => {
-        console.log(err)
         res.should.have.status(200);
         res.should.be.json;
         res.body.should.have.property('message').equal('Recipe removed from Favorites');
