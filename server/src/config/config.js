@@ -1,4 +1,4 @@
-module.exports ={
+module.exports = {
   development: {
     username: 'postgres',
     password: '#101bootcamp',
@@ -8,8 +8,8 @@ module.exports ={
   },
   test: {
     username: 'postgres',
-    password: '',
-    database: 'test',
+    password: '#101bootcamp',
+    database: 'testmorerecipe',
     host: '127.0.0.1',
     dialect: 'postgres',
     logging: false

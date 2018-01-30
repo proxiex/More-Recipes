@@ -20,6 +20,6 @@ export const addReviewSucess = payload => ({
  */
 export const addReviewAction = (recipeId, reviewData) => dispatch =>
   axios.post(`/api/v1/recipes/${recipeId}/reviews`, reviewData).then((res) => {
-    const review = res.data.sort((a, b) => b.id - a.id);
+    const review = res.data.review.sort((a, b) => b.id - a.id);
     dispatch(addReviewSucess(review));
   });
