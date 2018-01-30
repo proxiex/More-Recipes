@@ -102,7 +102,7 @@ class RecipeDetails extends React.Component {
    * @memberof RecipeDetails
    */
   upVote() {
-    if (this.props.isAuthenticated) {
+    if (this.props.auth.isAuthenticated) {
       const recipeId = this.props.match.params.recipeId;
       this.props.voteAction(recipeId, 'up').then(() => {
         Materialize.toast(this.props.recipe.message, 3000, 'green darken-3');
