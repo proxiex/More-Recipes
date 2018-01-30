@@ -61,7 +61,7 @@ class Users {
           email,
           password: bcrypt.hashSync(password, 10)
         }).then((user) => {
-          const newUser = { username: user.username, email: user.email };
+          const newUser = { id: user.id, username: user.username, email: user.email };
           res.status(201).json({
             message: 'Signup succesfull',
             newUser
@@ -238,7 +238,7 @@ class Users {
           }
         } else {
           return res.status(400).json({
-            message: 'Password is too short'
+            message: 'Password should be more than 6 characters'
           });
         }
       }

@@ -4,7 +4,7 @@ node_js:
 services:
 - postgresql
 before_script:
-  - psql -c 'create database test;' -U postgres
+  - psql -c 'create database testmorerecipe;' -U postgres
   - sequelize db:migrate
 env:
   global:

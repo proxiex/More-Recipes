@@ -207,7 +207,7 @@ class Recipes {
         }).then((getAllRecipes) => {
           if (getAllRecipes.count === 0) {
             return res.status(200).json({
-              Message: 'No recipes have yet been created!'
+              message: 'No recipes have yet been created!'
             });
           }
           const totalCount = getAllRecipes.count;
@@ -291,8 +291,8 @@ class Recipes {
             });
           });
         } else {
-          return res.status(400).json({
-            message: 'Recipe Not found'
+          return res.status(404).json({
+            message: 'Recipe not found'
           });
         }
       });
@@ -309,7 +309,6 @@ class Recipes {
   getUserRecipe(req, res) {
     const limitValue = (req.query.limit <= 0) ? 9 : req.query.limit || 9;
     const pageValue = (req.query.page <= 0) ? 0 : req.query.page - 1 || 0;
-
     return recipes
       .findAndCountAll({
         offset: limitValue * pageValue,
@@ -340,6 +339,10 @@ class Recipes {
           totalCount,
           pageCount,
           recipes
+        });
+      }).catch(() => {
+        res.status(500).json({
+          message: 'oops, some error occured'
         });
       });
     return this;

@@ -68,12 +68,12 @@ class Votes {
 
                   updateVotes.downVotes = 1;
                   updateRecipeVotes.downVotes = found.downVotes + 1;
-                  msg.down = 'Sorry you did not like it.';
+                  msg.down = 'Sorry you did not like it';
                 } else {
                   // down vote
                   updateVotes.downVotes = 1;
                   updateRecipeVotes.downVotes = found.downVotes + 1;
-                  msg.down = 'Sorry you did not like it.';
+                  msg.down = 'Sorry you did not like it';
                 }
               }
             } else {
@@ -151,7 +151,7 @@ class Votes {
                   }
                 }
               ).then((recipeDetails) => {
-                const voteMsg = (req.query.vote === 'up') ? 'You liked this recipe' : 'Sorry you do not like it';
+                const voteMsg = (req.query.vote === 'up') ? 'You liked this recipe' : 'Sorry you did not like it';
                 return res.status(201).json({
                   message: voteMsg,
                   userVotes,
