@@ -21,12 +21,10 @@ class Reviews {
   add(req, res) {
     // check if recipe exsits.
     const id = req.params.recipeId;
-    if (isNaN(id)) {
-      return res.status(400).json({
-        message: 'Parameter must be a number!'
-      });
-    }
-    recipes.findOne({ id }).then((found) => {
+
+    recipes.findOne({
+      where: { id }
+    }).then((found) => {
       if (!found) {
         return res.status(404).json({
           message: 'Recipe Not found!'
@@ -54,7 +52,7 @@ class Reviews {
               }
             ],
 
-          }).then(review => res.status(201).json(review));
+          }).then(review => res.status(201).json({ review }));
         });
     });
     return this;
@@ -69,7 +67,7 @@ class Reviews {
    * @memberof Reviews
    */
   getAllRecipeReview(req, res) {
-    const recipeId = req.params.recipeId;
+    const { recipeId } = req.params;
 
     reviews.findAll({
       where: {
@@ -86,7 +84,7 @@ class Reviews {
         }
       ]
     }).then((recipeReviews) => {
-      const reviews = (recipeReviews.length <= 0) ? 'No reviews 1 yet' : recipeReviews;
+      const reviews = (recipeReviews.length <= 0) ? 'No reviews yet' : recipeReviews;
       return res.status(200).json({
         reviews
       });

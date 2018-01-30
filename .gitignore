@@ -1,7 +1,7 @@
 node_modules/
 server/dist/
 .vscode/
-
+.env
 coverage/
 .nyc_output/
 .coveralls

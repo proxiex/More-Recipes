@@ -21,7 +21,6 @@ describe('Favorite Recipes Controller', () => {
       .post('/api/v1/users/x3s/favorites') 
       .set('x-token', token)
       .end((err, res) => {
-        console.log('#@@@@@@######@#$%^ >>>>>', err)
         res.should.have.status(400);
         res.should.be.json;
         res.body.should.have.property('message').equal('Parameter must be a number!');
@@ -81,15 +80,15 @@ describe('Favorite Recipes Controller', () => {
         
     
     
-  it('should let authorized user delete a recipe', (done) => {
-    chai.request(app)
-      .delete('/api/v1/recipes/'+id)
-      .set('x-token', token)
-      .end((err, res) => {
-        res.should.have.status(200);
-        res.should.be.json;
+  // it('should let authorized user delete a recipe', (done) => {
+  //   chai.request(app)
+  //     .delete('/api/v1/recipes/'+id)
+  //     .set('x-token', token)
+  //     .end((err, res) => {
+  //       res.should.have.status(200);
+  //       res.should.be.json;
             
-        done();
-      });
-  });  
+  //       done();
+  //     });
+  // });  
 });

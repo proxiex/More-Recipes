@@ -24,6 +24,17 @@ describe('Recipes Controller', () => {
     ingredients: 'ingredients, ingredients, ingredients, ingredients'
   };
   
+  it('should return message if no recipe has been created', (done) => {
+    chai.request(app)
+      .get('/api/v1/recipes')
+      .end((err, res) => {
+        res.should.have.status(200);
+        res.should.be.json;
+        res.body.should.have.property('message').equal('No recipes have yet been created!')
+        done();
+      });
+  });
+
   it('should not let unauthorized user create new recipe', (done) => {
     chai.request(app)
       .post('/api/v1/recipes')
@@ -124,17 +135,148 @@ describe('Recipes Controller', () => {
       });
   });
 
-  it('should get all recipe', (done) => {
-    chai.request(app)
-      .get('/api/v1/recipes')
+  describe('GET', () => {
+    it('should get all recipe', (done) => {
+      chai.request(app)
+        .get('/api/v1/recipes')
+        .end((err, res) => {
+          res.should.have.status(200);
+          res.should.be.json;
+            
+          done();
+        });
+    });
+
+    it('should get popular recipes', (done) => {
+      chai.request(app)
+        .get('/api/v1/recipes/popular')
+        .end((err, res) => {
+          res.should.have.status(200);
+          res.should.be.json;
+          res.body.should.have.property('popularRecipes')
+          done();
+        });
+    });
+        
+
+    it('should return message if search result of recipes not found', (done) => {
+      const search = 'this is good'
+      chai.request(app)
+        .get('/api/v1/recipes?search='+search)
+        .end((err, res) => {
+          res.should.have.status(200);
+          res.should.be.json;
+          res.body.should.have.property('message').equal('Your search - '+search+' - did not matched any recipe')
+          done();
+        });
+    });
+
+    it('should return search result of recipes found', (done) => {
+      const search = 'recipeName'
+      chai.request(app)
+        .get('/api/v1/recipes?search='+search)
+        .end((err, res) => {
+          res.should.have.status(200);
+          res.should.be.json;
+          res.body.should.have.property('totalCount');
+          res.body.should.have.property('pageCount');
+          res.body.should.have.property('recipes');
+          done();
+        });
+    });
+
+    it('should get all recipe sorted by upvotes', (done) => {
+      chai.request(app)
+        .get('/api/v1/recipes?sort=upVotes&order=des')
+        .end((err, res) => {
+          res.should.have.status(200);
+          res.should.be.json;
+          res.body.should.have.property('recipe');
+          done();
+        });
+    });
+    
+    it('should get all recipe', (done) => {
+      chai.request(app)
+        .get('/api/v1/recipes')
+        .end((err, res) => {
+          res.should.have.status(200);
+          res.should.be.json;
+          res.body.should.have.property('totalCount');
+          res.body.should.have.property('pageCount');
+          res.body.should.have.property('recipes');
+          done();
+        });
+    });
+
+    
+    it('should get details of a specifc reicpe', (done) => {
+      chai.request(app)
+      .get('/api/v1/recipes/'+id)
+      .set('x-token', token)
       .end((err, res) => {
         res.should.have.status(200);
         res.should.be.json;
-          
+        res.body.should.have.property('recipeDetails')
+        res.body.should.have.property('reviews')
+        res.body.should.have.property('userVotes')
         done();
       });
+    });
+
+    it('should return error for reicpe that does not exist', (done) => {
+      chai.request(app)
+      .get('/api/v1/recipes/23232')
+      .set('x-token', token)
+      .end((err, res) => {
+        res.should.have.status(404);
+        res.should.be.json;
+        res.body.should.have.property('message').equal('Recipe not found')
+        done();
+      });
+    });
+    
+
+    it('should get details of a specifc reicpe for unauthenticated users', (done) => {
+      chai.request(app)
+      .get('/api/v1/recipes/'+id)
+      .end((err, res) => {
+        res.should.have.status(200);
+        res.should.be.json;
+        res.body.should.have.property('recipeDetails')
+        res.body.should.have.property('reviews')
+        res.body.should.have.property('userVotes')
+        done();
+      });
+    });
+
+    it('should get recipes created by user', (done) => {
+      chai.request(app)
+      .get('/api/v1/users/recipe')
+      .set('x-token', token)      
+      .end((err, res) => {
+        res.should.have.status(200);
+        res.body.should.have.property('totalCount');
+        res.body.should.have.property('pageCount');
+        res.body.should.have.property('recipes');
+        done();
+      });
+    });
   });
-      
+  
+  it('should return message if no recipes have been created by user', (done) => {
+    chai.request(app)
+    .get('/api/v1/users/recipe?userId=3')
+    .set('x-token', token)      
+    .end((err, res) => {
+      res.should.have.status(404);
+      res.body.should.have.property('message').equal('This user has not created any recipes yet!')
+      done();
+    });
+  });
+
+  // Delete Recipe
+
   it('should not let unauthorized user delete a recipe', (done) => {
     chai.request(app)
       .delete('/api/v1/recipes/'+id)
@@ -145,6 +287,7 @@ describe('Recipes Controller', () => {
         done();
       });
   }); 
+  
     
   it('should return error for invalid params', (done) => {
     chai.request(app)
@@ -157,5 +300,17 @@ describe('Recipes Controller', () => {
         done();
       });
   });  
-  
+
+  it('should return error for recipe not found', (done) => {
+    chai.request(app)
+      .delete('/api/v1/recipes/323332')
+      .set('x-token', token)
+      .end((err, res) => {
+        res.should.have.status(404);
+        res.should.be.json;
+        res.body.should.have.property('message').equal('Recipe Not found!');
+        done();
+      });
+  });
+
 });
