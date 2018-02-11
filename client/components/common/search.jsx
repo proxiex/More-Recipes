@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import PropTyes from 'prop-types';
 import { connect } from 'react-redux';
-import { searchSucessAction } from '../../actions/searchAction';
+import { searchSucessAction } from '../../actions/recipes/search';
 /**
  *
  *
  * @class Search
  * @extends {Component}
  */
-class Search extends Component {
+export class Search extends Component {
   /**
    * Creates an instance of Search.
    * @memberof Search

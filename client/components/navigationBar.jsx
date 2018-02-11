@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 
-import { logout } from '../actions/signinActions';
+import { logout } from '../actions/users/signin';
 import FAB from './common/FAB';
 
 import background from '../assets/imgs/post_7.jpg';
@@ -16,7 +16,12 @@ import avater from '../assets/imgs/ruth.jpg';
  * @class NavigationBar
  * @extends {Component}
  */
-class NavigationBar extends Component {
+export class NavigationBar extends Component {
+  /**
+   * Creates an instance of NavigationBar.
+   * @param {any} props 
+   * @memberof NavigationBar
+   */
   constructor(props) {
     super(props);
     this.state = {
@@ -70,7 +75,7 @@ class NavigationBar extends Component {
       return <Redirect to="/" />;
     }
     const userLinks = (
-      <div>
+      <div id="users-links">
         <ul id="slide-out" className="side-nav">
           <li>
             <div className="user-view">
@@ -115,7 +120,7 @@ class NavigationBar extends Component {
     );
 
     const viewerLinks = (
-      <div >
+      <div id="viewer-link" >
         <ul className="right hide-on-med-and-down">
           <li><Link to="/" className="active" >Home</Link></li>
           <li><Link to="/recipes">Recipes</Link></li>

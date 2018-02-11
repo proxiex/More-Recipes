@@ -2,15 +2,15 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import AddRecipeForm from './addRecipeForm';
-import { addRecipeAction } from '../../../actions/addRecipeAction';
+import { AddRecipeForm } from './addRecipeForm';
+import { addRecipeAction } from '../../../actions/recipes/addRecipe';
 /**
  *
  *
  * @class AddRecipePage
  * @extends {Component}
  */
-class AddRecipePage extends Component {
+export class AddRecipePage extends Component {
   /**
    *
    *

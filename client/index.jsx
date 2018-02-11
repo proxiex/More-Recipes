@@ -7,7 +7,7 @@ import { createStore, applyMiddleware, compose } from 'redux';
 
 import rootReducer from './rootReducer';
 import setAuthorizationToken from './utils/setAuthorizationToken';
-import { setCurrentUser, logout } from './actions/signinActions';
+import { setCurrentUser, logout } from './actions/users/signin';
 
 import './assets/init';
 import './assets/styles.scss';

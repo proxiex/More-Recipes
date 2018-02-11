@@ -1,16 +1,16 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import UserData from './userData';
+import { UserData } from './userData';
 import UserRecipeData from './userRecipeData';
-import { getUserProfileAction } from '../../actions/getUserDetailsAction';
+import { getUserProfileAction } from '../../actions/users/getUserDetails';
 /**
  *
  *
  * @class Profile
  * @extends {Component}
  */
-class Profile extends Component {
+export class Profile extends Component {
   /**
    * Creates an instance of Profile.
    * @memberof Profile

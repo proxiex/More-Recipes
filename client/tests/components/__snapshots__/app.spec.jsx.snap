@@ -1,0 +1,3337 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Given App is mounted allways renders succesfully 1`] = `
+ReactWrapper {
+  "length": 1,
+  Symbol(enzyme.__unrendered__): <App />,
+  Symbol(enzyme.__renderer__): Object {
+    "batchedUpdates": [Function],
+    "getNode": [Function],
+    "render": [Function],
+    "simulateEvent": [Function],
+    "unmount": [Function],
+  },
+  Symbol(enzyme.__root__): [Circular],
+  Symbol(enzyme.__node__): Object {
+    "instance": App {
+      "_reactInternalFiber": FiberNode {
+        "_debugID": 4,
+        "_debugIsCurrentlyTiming": false,
+        "_debugOwner": FiberNode {
+          "_debugID": 3,
+          "_debugIsCurrentlyTiming": false,
+          "_debugOwner": null,
+          "_debugSource": null,
+          "alternate": null,
+          "child": [Circular],
+          "effectTag": 1,
+          "firstEffect": null,
+          "index": 0,
+          "internalContextTag": 0,
+          "key": null,
+          "lastEffect": null,
+          "memoizedProps": Object {
+            "Component": [Function],
+            "context": null,
+            "props": Object {},
+          },
+          "memoizedState": Object {
+            "context": null,
+            "mount": true,
+            "props": Object {},
+          },
+          "nextEffect": null,
+          "pendingProps": null,
+          "pendingWorkPriority": 0,
+          "ref": null,
+          "return": FiberNode {
+            "_debugID": 1,
+            "_debugIsCurrentlyTiming": false,
+            "_debugOwner": null,
+            "_debugSource": null,
+            "alternate": FiberNode {
+              "_debugID": 1,
+              "_debugIsCurrentlyTiming": false,
+              "_debugOwner": null,
+              "_debugSource": null,
+              "alternate": [Circular],
+              "child": null,
+              "effectTag": 0,
+              "firstEffect": null,
+              "index": 0,
+              "internalContextTag": 0,
+              "key": null,
+              "lastEffect": null,
+              "memoizedProps": null,
+              "memoizedState": null,
+              "nextEffect": null,
+              "pendingProps": null,
+              "pendingWorkPriority": 1,
+              "ref": null,
+              "return": null,
+              "sibling": null,
+              "stateNode": Object {
+                "containerInfo": <div />,
+                "context": Object {},
+                "current": [Circular],
+                "isScheduled": false,
+                "nextScheduledRoot": null,
+                "pendingContext": null,
+              },
+              "tag": 3,
+              "type": null,
+              "updateQueue": Object {
+                "callbackList": null,
+                "first": Object {
+                  "callback": null,
+                  "isForced": false,
+                  "isReplace": false,
+                  "isTopLevelUnmount": false,
+                  "next": null,
+                  "partialState": Object {
+                    "element": <WrapperComponent
+                      Component={[Function]}
+                      context={null}
+                      props={Object {}}
+                    />,
+                  },
+                  "priorityLevel": 1,
+                },
+                "hasForceUpdate": false,
+                "isProcessing": false,
+                "last": Object {
+                  "callback": null,
+                  "isForced": false,
+                  "isReplace": false,
+                  "isTopLevelUnmount": false,
+                  "next": null,
+                  "partialState": Object {
+                    "element": <WrapperComponent
+                      Component={[Function]}
+                      context={null}
+                      props={Object {}}
+                    />,
+                  },
+                  "priorityLevel": 1,
+                },
+              },
+            },
+            "child": [Circular],
+            "effectTag": 0,
+            "firstEffect": null,
+            "index": 0,
+            "internalContextTag": 0,
+            "key": null,
+            "lastEffect": null,
+            "memoizedProps": null,
+            "memoizedState": Object {
+              "element": <WrapperComponent
+                Component={[Function]}
+                context={null}
+                props={Object {}}
+              />,
+            },
+            "nextEffect": null,
+            "pendingProps": null,
+            "pendingWorkPriority": 0,
+            "ref": null,
+            "return": null,
+            "sibling": null,
+            "stateNode": Object {
+              "containerInfo": <div />,
+              "context": Object {},
+              "current": [Circular],
+              "isScheduled": false,
+              "nextScheduledRoot": null,
+              "pendingContext": null,
+            },
+            "tag": 3,
+            "type": null,
+            "updateQueue": null,
+          },
+          "sibling": null,
+          "stateNode": WrapperComponent {
+            "_reactInternalFiber": [Circular],
+            "_reactInternalInstance": Object {},
+            "context": Object {},
+            "props": Object {
+              "Component": [Function],
+              "context": null,
+              "props": Object {},
+            },
+            "refs": Object {},
+            "state": Object {
+              "context": null,
+              "mount": true,
+              "props": Object {},
+            },
+            "updater": Object {
+              "enqueueForceUpdate": [Function],
+              "enqueueReplaceState": [Function],
+              "enqueueSetState": [Function],
+              "isMounted": [Function],
+            },
+          },
+          "tag": 2,
+          "type": [Function],
+          "updateQueue": null,
+        },
+        "_debugSource": null,
+        "alternate": null,
+        "child": FiberNode {
+          "_debugID": 5,
+          "_debugIsCurrentlyTiming": false,
+          "_debugOwner": [Circular],
+          "_debugSource": null,
+          "alternate": null,
+          "child": null,
+          "effectTag": 1,
+          "firstEffect": null,
+          "index": 0,
+          "internalContextTag": 0,
+          "key": null,
+          "lastEffect": null,
+          "memoizedProps": Object {
+            "children": <div
+              id="wrap"
+            >
+              <Connect(NavigationBar) />
+              <Switch>
+                <Route
+                  component={[Function]}
+                  exact={true}
+                  path="/"
+                />
+                <Route
+                  component={[Function]}
+                  path="/signup"
+                />
+                <Route
+                  component={[Function]}
+                  path="/signin"
+                />
+                <Route
+                  component={[Function]}
+                  path="/add-recipe"
+                />
+                <Route
+                  component={[Function]}
+                  path="/recipes"
+                />
+                <Route
+                  component={[Function]}
+                  path="/recipe-details/:recipeId"
+                />
+                <Route
+                  component={[Function]}
+                  path="/edit-recipe/:recipeId"
+                />
+                <Route
+                  component={[Function]}
+                  path="/my-recipes"
+                />
+                <Route
+                  component={[Function]}
+                  path="/profile"
+                />
+                <Route
+                  component={[Function]}
+                  path="/recipe-by/:userName/:userId"
+                />
+                <Route
+                  component={[Function]}
+                  path="/favorites"
+                />
+                <Route
+                  component={[Function]}
+                />
+              </Switch>
+              <Unknown />
+            </div>,
+          },
+          "memoizedState": null,
+          "nextEffect": null,
+          "pendingProps": null,
+          "pendingWorkPriority": 0,
+          "ref": null,
+          "return": [Circular],
+          "sibling": null,
+          "stateNode": BrowserRouter {
+            "_reactInternalFiber": [Circular],
+            "_reactInternalInstance": Object {},
+            "componentWillMount": [MockFunction] {
+              "calls": Array [
+                Array [],
+              ],
+            },
+            "context": Object {},
+            "forceUpdate": [MockFunction],
+            "props": Object {
+              "children": <div
+                id="wrap"
+              >
+                <Connect(NavigationBar) />
+                <Switch>
+                  <Route
+                    component={[Function]}
+                    exact={true}
+                    path="/"
+                  />
+                  <Route
+                    component={[Function]}
+                    path="/signup"
+                  />
+                  <Route
+                    component={[Function]}
+                    path="/signin"
+                  />
+                  <Route
+                    component={[Function]}
+                    path="/add-recipe"
+                  />
+                  <Route
+                    component={[Function]}
+                    path="/recipes"
+                  />
+                  <Route
+                    component={[Function]}
+                    path="/recipe-details/:recipeId"
+                  />
+                  <Route
+                    component={[Function]}
+                    path="/edit-recipe/:recipeId"
+                  />
+                  <Route
+                    component={[Function]}
+                    path="/my-recipes"
+                  />
+                  <Route
+                    component={[Function]}
+                    path="/profile"
+                  />
+                  <Route
+                    component={[Function]}
+                    path="/recipe-by/:userName/:userId"
+                  />
+                  <Route
+                    component={[Function]}
+                    path="/favorites"
+                  />
+                  <Route
+                    component={[Function]}
+                  />
+                </Switch>
+                <Unknown />
+              </div>,
+            },
+            "refs": Object {},
+            "render": [MockFunction] {
+              "calls": Array [
+                Array [],
+              ],
+            },
+            "setState": [MockFunction],
+            "state": null,
+            "updater": Object {
+              "enqueueForceUpdate": [Function],
+              "enqueueReplaceState": [Function],
+              "enqueueSetState": [Function],
+              "isMounted": [Function],
+            },
+          },
+          "tag": 2,
+          "type": [MockFunction] {
+            "calls": Array [
+              Array [
+                Object {
+                  "children": <div
+                    id="wrap"
+                  >
+                    <Connect(NavigationBar) />
+                    <Switch>
+                      <Route
+                        component={[Function]}
+                        exact={true}
+                        path="/"
+                      />
+                      <Route
+                        component={[Function]}
+                        path="/signup"
+                      />
+                      <Route
+                        component={[Function]}
+                        path="/signin"
+                      />
+                      <Route
+                        component={[Function]}
+                        path="/add-recipe"
+                      />
+                      <Route
+                        component={[Function]}
+                        path="/recipes"
+                      />
+                      <Route
+                        component={[Function]}
+                        path="/recipe-details/:recipeId"
+                      />
+                      <Route
+                        component={[Function]}
+                        path="/edit-recipe/:recipeId"
+                      />
+                      <Route
+                        component={[Function]}
+                        path="/my-recipes"
+                      />
+                      <Route
+                        component={[Function]}
+                        path="/profile"
+                      />
+                      <Route
+                        component={[Function]}
+                        path="/recipe-by/:userName/:userId"
+                      />
+                      <Route
+                        component={[Function]}
+                        path="/favorites"
+                      />
+                      <Route
+                        component={[Function]}
+                      />
+                    </Switch>
+                    <Unknown />
+                  </div>,
+                },
+                Object {},
+              ],
+            ],
+          },
+          "updateQueue": null,
+        },
+        "effectTag": 1,
+        "firstEffect": null,
+        "index": 0,
+        "internalContextTag": 0,
+        "key": null,
+        "lastEffect": null,
+        "memoizedProps": Object {},
+        "memoizedState": null,
+        "nextEffect": null,
+        "pendingProps": null,
+        "pendingWorkPriority": 0,
+        "ref": null,
+        "return": FiberNode {
+          "_debugID": 3,
+          "_debugIsCurrentlyTiming": false,
+          "_debugOwner": null,
+          "_debugSource": null,
+          "alternate": null,
+          "child": [Circular],
+          "effectTag": 1,
+          "firstEffect": null,
+          "index": 0,
+          "internalContextTag": 0,
+          "key": null,
+          "lastEffect": null,
+          "memoizedProps": Object {
+            "Component": [Function],
+            "context": null,
+            "props": Object {},
+          },
+          "memoizedState": Object {
+            "context": null,
+            "mount": true,
+            "props": Object {},
+          },
+          "nextEffect": null,
+          "pendingProps": null,
+          "pendingWorkPriority": 0,
+          "ref": null,
+          "return": FiberNode {
+            "_debugID": 1,
+            "_debugIsCurrentlyTiming": false,
+            "_debugOwner": null,
+            "_debugSource": null,
+            "alternate": FiberNode {
+              "_debugID": 1,
+              "_debugIsCurrentlyTiming": false,
+              "_debugOwner": null,
+              "_debugSource": null,
+              "alternate": [Circular],
+              "child": null,
+              "effectTag": 0,
+              "firstEffect": null,
+              "index": 0,
+              "internalContextTag": 0,
+              "key": null,
+              "lastEffect": null,
+              "memoizedProps": null,
+              "memoizedState": null,
+              "nextEffect": null,
+              "pendingProps": null,
+              "pendingWorkPriority": 1,
+              "ref": null,
+              "return": null,
+              "sibling": null,
+              "stateNode": Object {
+                "containerInfo": <div />,
+                "context": Object {},
+                "current": [Circular],
+                "isScheduled": false,
+                "nextScheduledRoot": null,
+                "pendingContext": null,
+              },
+              "tag": 3,
+              "type": null,
+              "updateQueue": Object {
+                "callbackList": null,
+                "first": Object {
+                  "callback": null,
+                  "isForced": false,
+                  "isReplace": false,
+                  "isTopLevelUnmount": false,
+                  "next": null,
+                  "partialState": Object {
+                    "element": <WrapperComponent
+                      Component={[Function]}
+                      context={null}
+                      props={Object {}}
+                    />,
+                  },
+                  "priorityLevel": 1,
+                },
+                "hasForceUpdate": false,
+                "isProcessing": false,
+                "last": Object {
+                  "callback": null,
+                  "isForced": false,
+                  "isReplace": false,
+                  "isTopLevelUnmount": false,
+                  "next": null,
+                  "partialState": Object {
+                    "element": <WrapperComponent
+                      Component={[Function]}
+                      context={null}
+                      props={Object {}}
+                    />,
+                  },
+                  "priorityLevel": 1,
+                },
+              },
+            },
+            "child": [Circular],
+            "effectTag": 0,
+            "firstEffect": null,
+            "index": 0,
+            "internalContextTag": 0,
+            "key": null,
+            "lastEffect": null,
+            "memoizedProps": null,
+            "memoizedState": Object {
+              "element": <WrapperComponent
+                Component={[Function]}
+                context={null}
+                props={Object {}}
+              />,
+            },
+            "nextEffect": null,
+            "pendingProps": null,
+            "pendingWorkPriority": 0,
+            "ref": null,
+            "return": null,
+            "sibling": null,
+            "stateNode": Object {
+              "containerInfo": <div />,
+              "context": Object {},
+              "current": [Circular],
+              "isScheduled": false,
+              "nextScheduledRoot": null,
+              "pendingContext": null,
+            },
+            "tag": 3,
+            "type": null,
+            "updateQueue": null,
+          },
+          "sibling": null,
+          "stateNode": WrapperComponent {
+            "_reactInternalFiber": [Circular],
+            "_reactInternalInstance": Object {},
+            "context": Object {},
+            "props": Object {
+              "Component": [Function],
+              "context": null,
+              "props": Object {},
+            },
+            "refs": Object {},
+            "state": Object {
+              "context": null,
+              "mount": true,
+              "props": Object {},
+            },
+            "updater": Object {
+              "enqueueForceUpdate": [Function],
+              "enqueueReplaceState": [Function],
+              "enqueueSetState": [Function],
+              "isMounted": [Function],
+            },
+          },
+          "tag": 2,
+          "type": [Function],
+          "updateQueue": null,
+        },
+        "sibling": null,
+        "stateNode": [Circular],
+        "tag": 2,
+        "type": [Function],
+        "updateQueue": null,
+      },
+      "_reactInternalInstance": Object {},
+      "context": Object {},
+      "props": Object {},
+      "refs": Object {},
+      "state": null,
+      "updater": Object {
+        "enqueueForceUpdate": [Function],
+        "enqueueReplaceState": [Function],
+        "enqueueSetState": [Function],
+        "isMounted": [Function],
+      },
+    },
+    "key": undefined,
+    "nodeType": "class",
+    "props": Object {},
+    "ref": null,
+    "rendered": Object {
+      "instance": BrowserRouter {
+        "_reactInternalFiber": FiberNode {
+          "_debugID": 5,
+          "_debugIsCurrentlyTiming": false,
+          "_debugOwner": FiberNode {
+            "_debugID": 4,
+            "_debugIsCurrentlyTiming": false,
+            "_debugOwner": FiberNode {
+              "_debugID": 3,
+              "_debugIsCurrentlyTiming": false,
+              "_debugOwner": null,
+              "_debugSource": null,
+              "alternate": null,
+              "child": [Circular],
+              "effectTag": 1,
+              "firstEffect": null,
+              "index": 0,
+              "internalContextTag": 0,
+              "key": null,
+              "lastEffect": null,
+              "memoizedProps": Object {
+                "Component": [Function],
+                "context": null,
+                "props": Object {},
+              },
+              "memoizedState": Object {
+                "context": null,
+                "mount": true,
+                "props": Object {},
+              },
+              "nextEffect": null,
+              "pendingProps": null,
+              "pendingWorkPriority": 0,
+              "ref": null,
+              "return": FiberNode {
+                "_debugID": 1,
+                "_debugIsCurrentlyTiming": false,
+                "_debugOwner": null,
+                "_debugSource": null,
+                "alternate": FiberNode {
+                  "_debugID": 1,
+                  "_debugIsCurrentlyTiming": false,
+                  "_debugOwner": null,
+                  "_debugSource": null,
+                  "alternate": [Circular],
+                  "child": null,
+                  "effectTag": 0,
+                  "firstEffect": null,
+                  "index": 0,
+                  "internalContextTag": 0,
+                  "key": null,
+                  "lastEffect": null,
+                  "memoizedProps": null,
+                  "memoizedState": null,
+                  "nextEffect": null,
+                  "pendingProps": null,
+                  "pendingWorkPriority": 1,
+                  "ref": null,
+                  "return": null,
+                  "sibling": null,
+                  "stateNode": Object {
+                    "containerInfo": <div />,
+                    "context": Object {},
+                    "current": [Circular],
+                    "isScheduled": false,
+                    "nextScheduledRoot": null,
+                    "pendingContext": null,
+                  },
+                  "tag": 3,
+                  "type": null,
+                  "updateQueue": Object {
+                    "callbackList": null,
+                    "first": Object {
+                      "callback": null,
+                      "isForced": false,
+                      "isReplace": false,
+                      "isTopLevelUnmount": false,
+                      "next": null,
+                      "partialState": Object {
+                        "element": <WrapperComponent
+                          Component={[Function]}
+                          context={null}
+                          props={Object {}}
+                        />,
+                      },
+                      "priorityLevel": 1,
+                    },
+                    "hasForceUpdate": false,
+                    "isProcessing": false,
+                    "last": Object {
+                      "callback": null,
+                      "isForced": false,
+                      "isReplace": false,
+                      "isTopLevelUnmount": false,
+                      "next": null,
+                      "partialState": Object {
+                        "element": <WrapperComponent
+                          Component={[Function]}
+                          context={null}
+                          props={Object {}}
+                        />,
+                      },
+                      "priorityLevel": 1,
+                    },
+                  },
+                },
+                "child": [Circular],
+                "effectTag": 0,
+                "firstEffect": null,
+                "index": 0,
+                "internalContextTag": 0,
+                "key": null,
+                "lastEffect": null,
+                "memoizedProps": null,
+                "memoizedState": Object {
+                  "element": <WrapperComponent
+                    Component={[Function]}
+                    context={null}
+                    props={Object {}}
+                  />,
+                },
+                "nextEffect": null,
+                "pendingProps": null,
+                "pendingWorkPriority": 0,
+                "ref": null,
+                "return": null,
+                "sibling": null,
+                "stateNode": Object {
+                  "containerInfo": <div />,
+                  "context": Object {},
+                  "current": [Circular],
+                  "isScheduled": false,
+                  "nextScheduledRoot": null,
+                  "pendingContext": null,
+                },
+                "tag": 3,
+                "type": null,
+                "updateQueue": null,
+              },
+              "sibling": null,
+              "stateNode": WrapperComponent {
+                "_reactInternalFiber": [Circular],
+                "_reactInternalInstance": Object {},
+                "context": Object {},
+                "props": Object {
+                  "Component": [Function],
+                  "context": null,
+                  "props": Object {},
+                },
+                "refs": Object {},
+                "state": Object {
+                  "context": null,
+                  "mount": true,
+                  "props": Object {},
+                },
+                "updater": Object {
+                  "enqueueForceUpdate": [Function],
+                  "enqueueReplaceState": [Function],
+                  "enqueueSetState": [Function],
+                  "isMounted": [Function],
+                },
+              },
+              "tag": 2,
+              "type": [Function],
+              "updateQueue": null,
+            },
+            "_debugSource": null,
+            "alternate": null,
+            "child": [Circular],
+            "effectTag": 1,
+            "firstEffect": null,
+            "index": 0,
+            "internalContextTag": 0,
+            "key": null,
+            "lastEffect": null,
+            "memoizedProps": Object {},
+            "memoizedState": null,
+            "nextEffect": null,
+            "pendingProps": null,
+            "pendingWorkPriority": 0,
+            "ref": null,
+            "return": FiberNode {
+              "_debugID": 3,
+              "_debugIsCurrentlyTiming": false,
+              "_debugOwner": null,
+              "_debugSource": null,
+              "alternate": null,
+              "child": [Circular],
+              "effectTag": 1,
+              "firstEffect": null,
+              "index": 0,
+              "internalContextTag": 0,
+              "key": null,
+              "lastEffect": null,
+              "memoizedProps": Object {
+                "Component": [Function],
+                "context": null,
+                "props": Object {},
+              },
+              "memoizedState": Object {
+                "context": null,
+                "mount": true,
+                "props": Object {},
+              },
+              "nextEffect": null,
+              "pendingProps": null,
+              "pendingWorkPriority": 0,
+              "ref": null,
+              "return": FiberNode {
+                "_debugID": 1,
+                "_debugIsCurrentlyTiming": false,
+                "_debugOwner": null,
+                "_debugSource": null,
+                "alternate": FiberNode {
+                  "_debugID": 1,
+                  "_debugIsCurrentlyTiming": false,
+                  "_debugOwner": null,
+                  "_debugSource": null,
+                  "alternate": [Circular],
+                  "child": null,
+                  "effectTag": 0,
+                  "firstEffect": null,
+                  "index": 0,
+                  "internalContextTag": 0,
+                  "key": null,
+                  "lastEffect": null,
+                  "memoizedProps": null,
+                  "memoizedState": null,
+                  "nextEffect": null,
+                  "pendingProps": null,
+                  "pendingWorkPriority": 1,
+                  "ref": null,
+                  "return": null,
+                  "sibling": null,
+                  "stateNode": Object {
+                    "containerInfo": <div />,
+                    "context": Object {},
+                    "current": [Circular],
+                    "isScheduled": false,
+                    "nextScheduledRoot": null,
+                    "pendingContext": null,
+                  },
+                  "tag": 3,
+                  "type": null,
+                  "updateQueue": Object {
+                    "callbackList": null,
+                    "first": Object {
+                      "callback": null,
+                      "isForced": false,
+                      "isReplace": false,
+                      "isTopLevelUnmount": false,
+                      "next": null,
+                      "partialState": Object {
+                        "element": <WrapperComponent
+                          Component={[Function]}
+                          context={null}
+                          props={Object {}}
+                        />,
+                      },
+                      "priorityLevel": 1,
+                    },
+                    "hasForceUpdate": false,
+                    "isProcessing": false,
+                    "last": Object {
+                      "callback": null,
+                      "isForced": false,
+                      "isReplace": false,
+                      "isTopLevelUnmount": false,
+                      "next": null,
+                      "partialState": Object {
+                        "element": <WrapperComponent
+                          Component={[Function]}
+                          context={null}
+                          props={Object {}}
+                        />,
+                      },
+                      "priorityLevel": 1,
+                    },
+                  },
+                },
+                "child": [Circular],
+                "effectTag": 0,
+                "firstEffect": null,
+                "index": 0,
+                "internalContextTag": 0,
+                "key": null,
+                "lastEffect": null,
+                "memoizedProps": null,
+                "memoizedState": Object {
+                  "element": <WrapperComponent
+                    Component={[Function]}
+                    context={null}
+                    props={Object {}}
+                  />,
+                },
+                "nextEffect": null,
+                "pendingProps": null,
+                "pendingWorkPriority": 0,
+                "ref": null,
+                "return": null,
+                "sibling": null,
+                "stateNode": Object {
+                  "containerInfo": <div />,
+                  "context": Object {},
+                  "current": [Circular],
+                  "isScheduled": false,
+                  "nextScheduledRoot": null,
+                  "pendingContext": null,
+                },
+                "tag": 3,
+                "type": null,
+                "updateQueue": null,
+              },
+              "sibling": null,
+              "stateNode": WrapperComponent {
+                "_reactInternalFiber": [Circular],
+                "_reactInternalInstance": Object {},
+                "context": Object {},
+                "props": Object {
+                  "Component": [Function],
+                  "context": null,
+                  "props": Object {},
+                },
+                "refs": Object {},
+                "state": Object {
+                  "context": null,
+                  "mount": true,
+                  "props": Object {},
+                },
+                "updater": Object {
+                  "enqueueForceUpdate": [Function],
+                  "enqueueReplaceState": [Function],
+                  "enqueueSetState": [Function],
+                  "isMounted": [Function],
+                },
+              },
+              "tag": 2,
+              "type": [Function],
+              "updateQueue": null,
+            },
+            "sibling": null,
+            "stateNode": App {
+              "_reactInternalFiber": [Circular],
+              "_reactInternalInstance": Object {},
+              "context": Object {},
+              "props": Object {},
+              "refs": Object {},
+              "state": null,
+              "updater": Object {
+                "enqueueForceUpdate": [Function],
+                "enqueueReplaceState": [Function],
+                "enqueueSetState": [Function],
+                "isMounted": [Function],
+              },
+            },
+            "tag": 2,
+            "type": [Function],
+            "updateQueue": null,
+          },
+          "_debugSource": null,
+          "alternate": null,
+          "child": null,
+          "effectTag": 1,
+          "firstEffect": null,
+          "index": 0,
+          "internalContextTag": 0,
+          "key": null,
+          "lastEffect": null,
+          "memoizedProps": Object {
+            "children": <div
+              id="wrap"
+            >
+              <Connect(NavigationBar) />
+              <Switch>
+                <Route
+                  component={[Function]}
+                  exact={true}
+                  path="/"
+                />
+                <Route
+                  component={[Function]}
+                  path="/signup"
+                />
+                <Route
+                  component={[Function]}
+                  path="/signin"
+                />
+                <Route
+                  component={[Function]}
+                  path="/add-recipe"
+                />
+                <Route
+                  component={[Function]}
+                  path="/recipes"
+                />
+                <Route
+                  component={[Function]}
+                  path="/recipe-details/:recipeId"
+                />
+                <Route
+                  component={[Function]}
+                  path="/edit-recipe/:recipeId"
+                />
+                <Route
+                  component={[Function]}
+                  path="/my-recipes"
+                />
+                <Route
+                  component={[Function]}
+                  path="/profile"
+                />
+                <Route
+                  component={[Function]}
+                  path="/recipe-by/:userName/:userId"
+                />
+                <Route
+                  component={[Function]}
+                  path="/favorites"
+                />
+                <Route
+                  component={[Function]}
+                />
+              </Switch>
+              <Unknown />
+            </div>,
+          },
+          "memoizedState": null,
+          "nextEffect": null,
+          "pendingProps": null,
+          "pendingWorkPriority": 0,
+          "ref": null,
+          "return": FiberNode {
+            "_debugID": 4,
+            "_debugIsCurrentlyTiming": false,
+            "_debugOwner": FiberNode {
+              "_debugID": 3,
+              "_debugIsCurrentlyTiming": false,
+              "_debugOwner": null,
+              "_debugSource": null,
+              "alternate": null,
+              "child": [Circular],
+              "effectTag": 1,
+              "firstEffect": null,
+              "index": 0,
+              "internalContextTag": 0,
+              "key": null,
+              "lastEffect": null,
+              "memoizedProps": Object {
+                "Component": [Function],
+                "context": null,
+                "props": Object {},
+              },
+              "memoizedState": Object {
+                "context": null,
+                "mount": true,
+                "props": Object {},
+              },
+              "nextEffect": null,
+              "pendingProps": null,
+              "pendingWorkPriority": 0,
+              "ref": null,
+              "return": FiberNode {
+                "_debugID": 1,
+                "_debugIsCurrentlyTiming": false,
+                "_debugOwner": null,
+                "_debugSource": null,
+                "alternate": FiberNode {
+                  "_debugID": 1,
+                  "_debugIsCurrentlyTiming": false,
+                  "_debugOwner": null,
+                  "_debugSource": null,
+                  "alternate": [Circular],
+                  "child": null,
+                  "effectTag": 0,
+                  "firstEffect": null,
+                  "index": 0,
+                  "internalContextTag": 0,
+                  "key": null,
+                  "lastEffect": null,
+                  "memoizedProps": null,
+                  "memoizedState": null,
+                  "nextEffect": null,
+                  "pendingProps": null,
+                  "pendingWorkPriority": 1,
+                  "ref": null,
+                  "return": null,
+                  "sibling": null,
+                  "stateNode": Object {
+                    "containerInfo": <div />,
+                    "context": Object {},
+                    "current": [Circular],
+                    "isScheduled": false,
+                    "nextScheduledRoot": null,
+                    "pendingContext": null,
+                  },
+                  "tag": 3,
+                  "type": null,
+                  "updateQueue": Object {
+                    "callbackList": null,
+                    "first": Object {
+                      "callback": null,
+                      "isForced": false,
+                      "isReplace": false,
+                      "isTopLevelUnmount": false,
+                      "next": null,
+                      "partialState": Object {
+                        "element": <WrapperComponent
+                          Component={[Function]}
+                          context={null}
+                          props={Object {}}
+                        />,
+                      },
+                      "priorityLevel": 1,
+                    },
+                    "hasForceUpdate": false,
+                    "isProcessing": false,
+                    "last": Object {
+                      "callback": null,
+                      "isForced": false,
+                      "isReplace": false,
+                      "isTopLevelUnmount": false,
+                      "next": null,
+                      "partialState": Object {
+                        "element": <WrapperComponent
+                          Component={[Function]}
+                          context={null}
+                          props={Object {}}
+                        />,
+                      },
+                      "priorityLevel": 1,
+                    },
+                  },
+                },
+                "child": [Circular],
+                "effectTag": 0,
+                "firstEffect": null,
+                "index": 0,
+                "internalContextTag": 0,
+                "key": null,
+                "lastEffect": null,
+                "memoizedProps": null,
+                "memoizedState": Object {
+                  "element": <WrapperComponent
+                    Component={[Function]}
+                    context={null}
+                    props={Object {}}
+                  />,
+                },
+                "nextEffect": null,
+                "pendingProps": null,
+                "pendingWorkPriority": 0,
+                "ref": null,
+                "return": null,
+                "sibling": null,
+                "stateNode": Object {
+                  "containerInfo": <div />,
+                  "context": Object {},
+                  "current": [Circular],
+                  "isScheduled": false,
+                  "nextScheduledRoot": null,
+                  "pendingContext": null,
+                },
+                "tag": 3,
+                "type": null,
+                "updateQueue": null,
+              },
+              "sibling": null,
+              "stateNode": WrapperComponent {
+                "_reactInternalFiber": [Circular],
+                "_reactInternalInstance": Object {},
+                "context": Object {},
+                "props": Object {
+                  "Component": [Function],
+                  "context": null,
+                  "props": Object {},
+                },
+                "refs": Object {},
+                "state": Object {
+                  "context": null,
+                  "mount": true,
+                  "props": Object {},
+                },
+                "updater": Object {
+                  "enqueueForceUpdate": [Function],
+                  "enqueueReplaceState": [Function],
+                  "enqueueSetState": [Function],
+                  "isMounted": [Function],
+                },
+              },
+              "tag": 2,
+              "type": [Function],
+              "updateQueue": null,
+            },
+            "_debugSource": null,
+            "alternate": null,
+            "child": [Circular],
+            "effectTag": 1,
+            "firstEffect": null,
+            "index": 0,
+            "internalContextTag": 0,
+            "key": null,
+            "lastEffect": null,
+            "memoizedProps": Object {},
+            "memoizedState": null,
+            "nextEffect": null,
+            "pendingProps": null,
+            "pendingWorkPriority": 0,
+            "ref": null,
+            "return": FiberNode {
+              "_debugID": 3,
+              "_debugIsCurrentlyTiming": false,
+              "_debugOwner": null,
+              "_debugSource": null,
+              "alternate": null,
+              "child": [Circular],
+              "effectTag": 1,
+              "firstEffect": null,
+              "index": 0,
+              "internalContextTag": 0,
+              "key": null,
+              "lastEffect": null,
+              "memoizedProps": Object {
+                "Component": [Function],
+                "context": null,
+                "props": Object {},
+              },
+              "memoizedState": Object {
+                "context": null,
+                "mount": true,
+                "props": Object {},
+              },
+              "nextEffect": null,
+              "pendingProps": null,
+              "pendingWorkPriority": 0,
+              "ref": null,
+              "return": FiberNode {
+                "_debugID": 1,
+                "_debugIsCurrentlyTiming": false,
+                "_debugOwner": null,
+                "_debugSource": null,
+                "alternate": FiberNode {
+                  "_debugID": 1,
+                  "_debugIsCurrentlyTiming": false,
+                  "_debugOwner": null,
+                  "_debugSource": null,
+                  "alternate": [Circular],
+                  "child": null,
+                  "effectTag": 0,
+                  "firstEffect": null,
+                  "index": 0,
+                  "internalContextTag": 0,
+                  "key": null,
+                  "lastEffect": null,
+                  "memoizedProps": null,
+                  "memoizedState": null,
+                  "nextEffect": null,
+                  "pendingProps": null,
+                  "pendingWorkPriority": 1,
+                  "ref": null,
+                  "return": null,
+                  "sibling": null,
+                  "stateNode": Object {
+                    "containerInfo": <div />,
+                    "context": Object {},
+                    "current": [Circular],
+                    "isScheduled": false,
+                    "nextScheduledRoot": null,
+                    "pendingContext": null,
+                  },
+                  "tag": 3,
+                  "type": null,
+                  "updateQueue": Object {
+                    "callbackList": null,
+                    "first": Object {
+                      "callback": null,
+                      "isForced": false,
+                      "isReplace": false,
+                      "isTopLevelUnmount": false,
+                      "next": null,
+                      "partialState": Object {
+                        "element": <WrapperComponent
+                          Component={[Function]}
+                          context={null}
+                          props={Object {}}
+                        />,
+                      },
+                      "priorityLevel": 1,
+                    },
+                    "hasForceUpdate": false,
+                    "isProcessing": false,
+                    "last": Object {
+                      "callback": null,
+                      "isForced": false,
+                      "isReplace": false,
+                      "isTopLevelUnmount": false,
+                      "next": null,
+                      "partialState": Object {
+                        "element": <WrapperComponent
+                          Component={[Function]}
+                          context={null}
+                          props={Object {}}
+                        />,
+                      },
+                      "priorityLevel": 1,
+                    },
+                  },
+                },
+                "child": [Circular],
+                "effectTag": 0,
+                "firstEffect": null,
+                "index": 0,
+                "internalContextTag": 0,
+                "key": null,
+                "lastEffect": null,
+                "memoizedProps": null,
+                "memoizedState": Object {
+                  "element": <WrapperComponent
+                    Component={[Function]}
+                    context={null}
+                    props={Object {}}
+                  />,
+                },
+                "nextEffect": null,
+                "pendingProps": null,
+                "pendingWorkPriority": 0,
+                "ref": null,
+                "return": null,
+                "sibling": null,
+                "stateNode": Object {
+                  "containerInfo": <div />,
+                  "context": Object {},
+                  "current": [Circular],
+                  "isScheduled": false,
+                  "nextScheduledRoot": null,
+                  "pendingContext": null,
+                },
+                "tag": 3,
+                "type": null,
+                "updateQueue": null,
+              },
+              "sibling": null,
+              "stateNode": WrapperComponent {
+                "_reactInternalFiber": [Circular],
+                "_reactInternalInstance": Object {},
+                "context": Object {},
+                "props": Object {
+                  "Component": [Function],
+                  "context": null,
+                  "props": Object {},
+                },
+                "refs": Object {},
+                "state": Object {
+                  "context": null,
+                  "mount": true,
+                  "props": Object {},
+                },
+                "updater": Object {
+                  "enqueueForceUpdate": [Function],
+                  "enqueueReplaceState": [Function],
+                  "enqueueSetState": [Function],
+                  "isMounted": [Function],
+                },
+              },
+              "tag": 2,
+              "type": [Function],
+              "updateQueue": null,
+            },
+            "sibling": null,
+            "stateNode": App {
+              "_reactInternalFiber": [Circular],
+              "_reactInternalInstance": Object {},
+              "context": Object {},
+              "props": Object {},
+              "refs": Object {},
+              "state": null,
+              "updater": Object {
+                "enqueueForceUpdate": [Function],
+                "enqueueReplaceState": [Function],
+                "enqueueSetState": [Function],
+                "isMounted": [Function],
+              },
+            },
+            "tag": 2,
+            "type": [Function],
+            "updateQueue": null,
+          },
+          "sibling": null,
+          "stateNode": [Circular],
+          "tag": 2,
+          "type": [MockFunction] {
+            "calls": Array [
+              Array [
+                Object {
+                  "children": <div
+                    id="wrap"
+                  >
+                    <Connect(NavigationBar) />
+                    <Switch>
+                      <Route
+                        component={[Function]}
+                        exact={true}
+                        path="/"
+                      />
+                      <Route
+                        component={[Function]}
+                        path="/signup"
+                      />
+                      <Route
+                        component={[Function]}
+                        path="/signin"
+                      />
+                      <Route
+                        component={[Function]}
+                        path="/add-recipe"
+                      />
+                      <Route
+                        component={[Function]}
+                        path="/recipes"
+                      />
+                      <Route
+                        component={[Function]}
+                        path="/recipe-details/:recipeId"
+                      />
+                      <Route
+                        component={[Function]}
+                        path="/edit-recipe/:recipeId"
+                      />
+                      <Route
+                        component={[Function]}
+                        path="/my-recipes"
+                      />
+                      <Route
+                        component={[Function]}
+                        path="/profile"
+                      />
+                      <Route
+                        component={[Function]}
+                        path="/recipe-by/:userName/:userId"
+                      />
+                      <Route
+                        component={[Function]}
+                        path="/favorites"
+                      />
+                      <Route
+                        component={[Function]}
+                      />
+                    </Switch>
+                    <Unknown />
+                  </div>,
+                },
+                Object {},
+              ],
+            ],
+          },
+          "updateQueue": null,
+        },
+        "_reactInternalInstance": Object {},
+        "componentWillMount": [MockFunction] {
+          "calls": Array [
+            Array [],
+          ],
+        },
+        "context": Object {},
+        "forceUpdate": [MockFunction],
+        "props": Object {
+          "children": <div
+            id="wrap"
+          >
+            <Connect(NavigationBar) />
+            <Switch>
+              <Route
+                component={[Function]}
+                exact={true}
+                path="/"
+              />
+              <Route
+                component={[Function]}
+                path="/signup"
+              />
+              <Route
+                component={[Function]}
+                path="/signin"
+              />
+              <Route
+                component={[Function]}
+                path="/add-recipe"
+              />
+              <Route
+                component={[Function]}
+                path="/recipes"
+              />
+              <Route
+                component={[Function]}
+                path="/recipe-details/:recipeId"
+              />
+              <Route
+                component={[Function]}
+                path="/edit-recipe/:recipeId"
+              />
+              <Route
+                component={[Function]}
+                path="/my-recipes"
+              />
+              <Route
+                component={[Function]}
+                path="/profile"
+              />
+              <Route
+                component={[Function]}
+                path="/recipe-by/:userName/:userId"
+              />
+              <Route
+                component={[Function]}
+                path="/favorites"
+              />
+              <Route
+                component={[Function]}
+              />
+            </Switch>
+            <Unknown />
+          </div>,
+        },
+        "refs": Object {},
+        "render": [MockFunction] {
+          "calls": Array [
+            Array [],
+          ],
+        },
+        "setState": [MockFunction],
+        "state": null,
+        "updater": Object {
+          "enqueueForceUpdate": [Function],
+          "enqueueReplaceState": [Function],
+          "enqueueSetState": [Function],
+          "isMounted": [Function],
+        },
+      },
+      "key": undefined,
+      "nodeType": "class",
+      "props": Object {
+        "children": <div
+          id="wrap"
+        >
+          <Connect(NavigationBar) />
+          <Switch>
+            <Route
+              component={[Function]}
+              exact={true}
+              path="/"
+            />
+            <Route
+              component={[Function]}
+              path="/signup"
+            />
+            <Route
+              component={[Function]}
+              path="/signin"
+            />
+            <Route
+              component={[Function]}
+              path="/add-recipe"
+            />
+            <Route
+              component={[Function]}
+              path="/recipes"
+            />
+            <Route
+              component={[Function]}
+              path="/recipe-details/:recipeId"
+            />
+            <Route
+              component={[Function]}
+              path="/edit-recipe/:recipeId"
+            />
+            <Route
+              component={[Function]}
+              path="/my-recipes"
+            />
+            <Route
+              component={[Function]}
+              path="/profile"
+            />
+            <Route
+              component={[Function]}
+              path="/recipe-by/:userName/:userId"
+            />
+            <Route
+              component={[Function]}
+              path="/favorites"
+            />
+            <Route
+              component={[Function]}
+            />
+          </Switch>
+          <Unknown />
+        </div>,
+      },
+      "ref": null,
+      "rendered": null,
+      "type": [MockFunction] {
+        "calls": Array [
+          Array [
+            Object {
+              "children": <div
+                id="wrap"
+              >
+                <Connect(NavigationBar) />
+                <Switch>
+                  <Route
+                    component={[Function]}
+                    exact={true}
+                    path="/"
+                  />
+                  <Route
+                    component={[Function]}
+                    path="/signup"
+                  />
+                  <Route
+                    component={[Function]}
+                    path="/signin"
+                  />
+                  <Route
+                    component={[Function]}
+                    path="/add-recipe"
+                  />
+                  <Route
+                    component={[Function]}
+                    path="/recipes"
+                  />
+                  <Route
+                    component={[Function]}
+                    path="/recipe-details/:recipeId"
+                  />
+                  <Route
+                    component={[Function]}
+                    path="/edit-recipe/:recipeId"
+                  />
+                  <Route
+                    component={[Function]}
+                    path="/my-recipes"
+                  />
+                  <Route
+                    component={[Function]}
+                    path="/profile"
+                  />
+                  <Route
+                    component={[Function]}
+                    path="/recipe-by/:userName/:userId"
+                  />
+                  <Route
+                    component={[Function]}
+                    path="/favorites"
+                  />
+                  <Route
+                    component={[Function]}
+                  />
+                </Switch>
+                <Unknown />
+              </div>,
+            },
+            Object {},
+          ],
+        ],
+      },
+    },
+    "type": [Function],
+  },
+  Symbol(enzyme.__nodes__): Array [
+    Object {
+      "instance": App {
+        "_reactInternalFiber": FiberNode {
+          "_debugID": 4,
+          "_debugIsCurrentlyTiming": false,
+          "_debugOwner": FiberNode {
+            "_debugID": 3,
+            "_debugIsCurrentlyTiming": false,
+            "_debugOwner": null,
+            "_debugSource": null,
+            "alternate": null,
+            "child": [Circular],
+            "effectTag": 1,
+            "firstEffect": null,
+            "index": 0,
+            "internalContextTag": 0,
+            "key": null,
+            "lastEffect": null,
+            "memoizedProps": Object {
+              "Component": [Function],
+              "context": null,
+              "props": Object {},
+            },
+            "memoizedState": Object {
+              "context": null,
+              "mount": true,
+              "props": Object {},
+            },
+            "nextEffect": null,
+            "pendingProps": null,
+            "pendingWorkPriority": 0,
+            "ref": null,
+            "return": FiberNode {
+              "_debugID": 1,
+              "_debugIsCurrentlyTiming": false,
+              "_debugOwner": null,
+              "_debugSource": null,
+              "alternate": FiberNode {
+                "_debugID": 1,
+                "_debugIsCurrentlyTiming": false,
+                "_debugOwner": null,
+                "_debugSource": null,
+                "alternate": [Circular],
+                "child": null,
+                "effectTag": 0,
+                "firstEffect": null,
+                "index": 0,
+                "internalContextTag": 0,
+                "key": null,
+                "lastEffect": null,
+                "memoizedProps": null,
+                "memoizedState": null,
+                "nextEffect": null,
+                "pendingProps": null,
+                "pendingWorkPriority": 1,
+                "ref": null,
+                "return": null,
+                "sibling": null,
+                "stateNode": Object {
+                  "containerInfo": <div />,
+                  "context": Object {},
+                  "current": [Circular],
+                  "isScheduled": false,
+                  "nextScheduledRoot": null,
+                  "pendingContext": null,
+                },
+                "tag": 3,
+                "type": null,
+                "updateQueue": Object {
+                  "callbackList": null,
+                  "first": Object {
+                    "callback": null,
+                    "isForced": false,
+                    "isReplace": false,
+                    "isTopLevelUnmount": false,
+                    "next": null,
+                    "partialState": Object {
+                      "element": <WrapperComponent
+                        Component={[Function]}
+                        context={null}
+                        props={Object {}}
+                      />,
+                    },
+                    "priorityLevel": 1,
+                  },
+                  "hasForceUpdate": false,
+                  "isProcessing": false,
+                  "last": Object {
+                    "callback": null,
+                    "isForced": false,
+                    "isReplace": false,
+                    "isTopLevelUnmount": false,
+                    "next": null,
+                    "partialState": Object {
+                      "element": <WrapperComponent
+                        Component={[Function]}
+                        context={null}
+                        props={Object {}}
+                      />,
+                    },
+                    "priorityLevel": 1,
+                  },
+                },
+              },
+              "child": [Circular],
+              "effectTag": 0,
+              "firstEffect": null,
+              "index": 0,
+              "internalContextTag": 0,
+              "key": null,
+              "lastEffect": null,
+              "memoizedProps": null,
+              "memoizedState": Object {
+                "element": <WrapperComponent
+                  Component={[Function]}
+                  context={null}
+                  props={Object {}}
+                />,
+              },
+              "nextEffect": null,
+              "pendingProps": null,
+              "pendingWorkPriority": 0,
+              "ref": null,
+              "return": null,
+              "sibling": null,
+              "stateNode": Object {
+                "containerInfo": <div />,
+                "context": Object {},
+                "current": [Circular],
+                "isScheduled": false,
+                "nextScheduledRoot": null,
+                "pendingContext": null,
+              },
+              "tag": 3,
+              "type": null,
+              "updateQueue": null,
+            },
+            "sibling": null,
+            "stateNode": WrapperComponent {
+              "_reactInternalFiber": [Circular],
+              "_reactInternalInstance": Object {},
+              "context": Object {},
+              "props": Object {
+                "Component": [Function],
+                "context": null,
+                "props": Object {},
+              },
+              "refs": Object {},
+              "state": Object {
+                "context": null,
+                "mount": true,
+                "props": Object {},
+              },
+              "updater": Object {
+                "enqueueForceUpdate": [Function],
+                "enqueueReplaceState": [Function],
+                "enqueueSetState": [Function],
+                "isMounted": [Function],
+              },
+            },
+            "tag": 2,
+            "type": [Function],
+            "updateQueue": null,
+          },
+          "_debugSource": null,
+          "alternate": null,
+          "child": FiberNode {
+            "_debugID": 5,
+            "_debugIsCurrentlyTiming": false,
+            "_debugOwner": [Circular],
+            "_debugSource": null,
+            "alternate": null,
+            "child": null,
+            "effectTag": 1,
+            "firstEffect": null,
+            "index": 0,
+            "internalContextTag": 0,
+            "key": null,
+            "lastEffect": null,
+            "memoizedProps": Object {
+              "children": <div
+                id="wrap"
+              >
+                <Connect(NavigationBar) />
+                <Switch>
+                  <Route
+                    component={[Function]}
+                    exact={true}
+                    path="/"
+                  />
+                  <Route
+                    component={[Function]}
+                    path="/signup"
+                  />
+                  <Route
+                    component={[Function]}
+                    path="/signin"
+                  />
+                  <Route
+                    component={[Function]}
+                    path="/add-recipe"
+                  />
+                  <Route
+                    component={[Function]}
+                    path="/recipes"
+                  />
+                  <Route
+                    component={[Function]}
+                    path="/recipe-details/:recipeId"
+                  />
+                  <Route
+                    component={[Function]}
+                    path="/edit-recipe/:recipeId"
+                  />
+                  <Route
+                    component={[Function]}
+                    path="/my-recipes"
+                  />
+                  <Route
+                    component={[Function]}
+                    path="/profile"
+                  />
+                  <Route
+                    component={[Function]}
+                    path="/recipe-by/:userName/:userId"
+                  />
+                  <Route
+                    component={[Function]}
+                    path="/favorites"
+                  />
+                  <Route
+                    component={[Function]}
+                  />
+                </Switch>
+                <Unknown />
+              </div>,
+            },
+            "memoizedState": null,
+            "nextEffect": null,
+            "pendingProps": null,
+            "pendingWorkPriority": 0,
+            "ref": null,
+            "return": [Circular],
+            "sibling": null,
+            "stateNode": BrowserRouter {
+              "_reactInternalFiber": [Circular],
+              "_reactInternalInstance": Object {},
+              "componentWillMount": [MockFunction] {
+                "calls": Array [
+                  Array [],
+                ],
+              },
+              "context": Object {},
+              "forceUpdate": [MockFunction],
+              "props": Object {
+                "children": <div
+                  id="wrap"
+                >
+                  <Connect(NavigationBar) />
+                  <Switch>
+                    <Route
+                      component={[Function]}
+                      exact={true}
+                      path="/"
+                    />
+                    <Route
+                      component={[Function]}
+                      path="/signup"
+                    />
+                    <Route
+                      component={[Function]}
+                      path="/signin"
+                    />
+                    <Route
+                      component={[Function]}
+                      path="/add-recipe"
+                    />
+                    <Route
+                      component={[Function]}
+                      path="/recipes"
+                    />
+                    <Route
+                      component={[Function]}
+                      path="/recipe-details/:recipeId"
+                    />
+                    <Route
+                      component={[Function]}
+                      path="/edit-recipe/:recipeId"
+                    />
+                    <Route
+                      component={[Function]}
+                      path="/my-recipes"
+                    />
+                    <Route
+                      component={[Function]}
+                      path="/profile"
+                    />
+                    <Route
+                      component={[Function]}
+                      path="/recipe-by/:userName/:userId"
+                    />
+                    <Route
+                      component={[Function]}
+                      path="/favorites"
+                    />
+                    <Route
+                      component={[Function]}
+                    />
+                  </Switch>
+                  <Unknown />
+                </div>,
+              },
+              "refs": Object {},
+              "render": [MockFunction] {
+                "calls": Array [
+                  Array [],
+                ],
+              },
+              "setState": [MockFunction],
+              "state": null,
+              "updater": Object {
+                "enqueueForceUpdate": [Function],
+                "enqueueReplaceState": [Function],
+                "enqueueSetState": [Function],
+                "isMounted": [Function],
+              },
+            },
+            "tag": 2,
+            "type": [MockFunction] {
+              "calls": Array [
+                Array [
+                  Object {
+                    "children": <div
+                      id="wrap"
+                    >
+                      <Connect(NavigationBar) />
+                      <Switch>
+                        <Route
+                          component={[Function]}
+                          exact={true}
+                          path="/"
+                        />
+                        <Route
+                          component={[Function]}
+                          path="/signup"
+                        />
+                        <Route
+                          component={[Function]}
+                          path="/signin"
+                        />
+                        <Route
+                          component={[Function]}
+                          path="/add-recipe"
+                        />
+                        <Route
+                          component={[Function]}
+                          path="/recipes"
+                        />
+                        <Route
+                          component={[Function]}
+                          path="/recipe-details/:recipeId"
+                        />
+                        <Route
+                          component={[Function]}
+                          path="/edit-recipe/:recipeId"
+                        />
+                        <Route
+                          component={[Function]}
+                          path="/my-recipes"
+                        />
+                        <Route
+                          component={[Function]}
+                          path="/profile"
+                        />
+                        <Route
+                          component={[Function]}
+                          path="/recipe-by/:userName/:userId"
+                        />
+                        <Route
+                          component={[Function]}
+                          path="/favorites"
+                        />
+                        <Route
+                          component={[Function]}
+                        />
+                      </Switch>
+                      <Unknown />
+                    </div>,
+                  },
+                  Object {},
+                ],
+              ],
+            },
+            "updateQueue": null,
+          },
+          "effectTag": 1,
+          "firstEffect": null,
+          "index": 0,
+          "internalContextTag": 0,
+          "key": null,
+          "lastEffect": null,
+          "memoizedProps": Object {},
+          "memoizedState": null,
+          "nextEffect": null,
+          "pendingProps": null,
+          "pendingWorkPriority": 0,
+          "ref": null,
+          "return": FiberNode {
+            "_debugID": 3,
+            "_debugIsCurrentlyTiming": false,
+            "_debugOwner": null,
+            "_debugSource": null,
+            "alternate": null,
+            "child": [Circular],
+            "effectTag": 1,
+            "firstEffect": null,
+            "index": 0,
+            "internalContextTag": 0,
+            "key": null,
+            "lastEffect": null,
+            "memoizedProps": Object {
+              "Component": [Function],
+              "context": null,
+              "props": Object {},
+            },
+            "memoizedState": Object {
+              "context": null,
+              "mount": true,
+              "props": Object {},
+            },
+            "nextEffect": null,
+            "pendingProps": null,
+            "pendingWorkPriority": 0,
+            "ref": null,
+            "return": FiberNode {
+              "_debugID": 1,
+              "_debugIsCurrentlyTiming": false,
+              "_debugOwner": null,
+              "_debugSource": null,
+              "alternate": FiberNode {
+                "_debugID": 1,
+                "_debugIsCurrentlyTiming": false,
+                "_debugOwner": null,
+                "_debugSource": null,
+                "alternate": [Circular],
+                "child": null,
+                "effectTag": 0,
+                "firstEffect": null,
+                "index": 0,
+                "internalContextTag": 0,
+                "key": null,
+                "lastEffect": null,
+                "memoizedProps": null,
+                "memoizedState": null,
+                "nextEffect": null,
+                "pendingProps": null,
+                "pendingWorkPriority": 1,
+                "ref": null,
+                "return": null,
+                "sibling": null,
+                "stateNode": Object {
+                  "containerInfo": <div />,
+                  "context": Object {},
+                  "current": [Circular],
+                  "isScheduled": false,
+                  "nextScheduledRoot": null,
+                  "pendingContext": null,
+                },
+                "tag": 3,
+                "type": null,
+                "updateQueue": Object {
+                  "callbackList": null,
+                  "first": Object {
+                    "callback": null,
+                    "isForced": false,
+                    "isReplace": false,
+                    "isTopLevelUnmount": false,
+                    "next": null,
+                    "partialState": Object {
+                      "element": <WrapperComponent
+                        Component={[Function]}
+                        context={null}
+                        props={Object {}}
+                      />,
+                    },
+                    "priorityLevel": 1,
+                  },
+                  "hasForceUpdate": false,
+                  "isProcessing": false,
+                  "last": Object {
+                    "callback": null,
+                    "isForced": false,
+                    "isReplace": false,
+                    "isTopLevelUnmount": false,
+                    "next": null,
+                    "partialState": Object {
+                      "element": <WrapperComponent
+                        Component={[Function]}
+                        context={null}
+                        props={Object {}}
+                      />,
+                    },
+                    "priorityLevel": 1,
+                  },
+                },
+              },
+              "child": [Circular],
+              "effectTag": 0,
+              "firstEffect": null,
+              "index": 0,
+              "internalContextTag": 0,
+              "key": null,
+              "lastEffect": null,
+              "memoizedProps": null,
+              "memoizedState": Object {
+                "element": <WrapperComponent
+                  Component={[Function]}
+                  context={null}
+                  props={Object {}}
+                />,
+              },
+              "nextEffect": null,
+              "pendingProps": null,
+              "pendingWorkPriority": 0,
+              "ref": null,
+              "return": null,
+              "sibling": null,
+              "stateNode": Object {
+                "containerInfo": <div />,
+                "context": Object {},
+                "current": [Circular],
+                "isScheduled": false,
+                "nextScheduledRoot": null,
+                "pendingContext": null,
+              },
+              "tag": 3,
+              "type": null,
+              "updateQueue": null,
+            },
+            "sibling": null,
+            "stateNode": WrapperComponent {
+              "_reactInternalFiber": [Circular],
+              "_reactInternalInstance": Object {},
+              "context": Object {},
+              "props": Object {
+                "Component": [Function],
+                "context": null,
+                "props": Object {},
+              },
+              "refs": Object {},
+              "state": Object {
+                "context": null,
+                "mount": true,
+                "props": Object {},
+              },
+              "updater": Object {
+                "enqueueForceUpdate": [Function],
+                "enqueueReplaceState": [Function],
+                "enqueueSetState": [Function],
+                "isMounted": [Function],
+              },
+            },
+            "tag": 2,
+            "type": [Function],
+            "updateQueue": null,
+          },
+          "sibling": null,
+          "stateNode": [Circular],
+          "tag": 2,
+          "type": [Function],
+          "updateQueue": null,
+        },
+        "_reactInternalInstance": Object {},
+        "context": Object {},
+        "props": Object {},
+        "refs": Object {},
+        "state": null,
+        "updater": Object {
+          "enqueueForceUpdate": [Function],
+          "enqueueReplaceState": [Function],
+          "enqueueSetState": [Function],
+          "isMounted": [Function],
+        },
+      },
+      "key": undefined,
+      "nodeType": "class",
+      "props": Object {},
+      "ref": null,
+      "rendered": Object {
+        "instance": BrowserRouter {
+          "_reactInternalFiber": FiberNode {
+            "_debugID": 5,
+            "_debugIsCurrentlyTiming": false,
+            "_debugOwner": FiberNode {
+              "_debugID": 4,
+              "_debugIsCurrentlyTiming": false,
+              "_debugOwner": FiberNode {
+                "_debugID": 3,
+                "_debugIsCurrentlyTiming": false,
+                "_debugOwner": null,
+                "_debugSource": null,
+                "alternate": null,
+                "child": [Circular],
+                "effectTag": 1,
+                "firstEffect": null,
+                "index": 0,
+                "internalContextTag": 0,
+                "key": null,
+                "lastEffect": null,
+                "memoizedProps": Object {
+                  "Component": [Function],
+                  "context": null,
+                  "props": Object {},
+                },
+                "memoizedState": Object {
+                  "context": null,
+                  "mount": true,
+                  "props": Object {},
+                },
+                "nextEffect": null,
+                "pendingProps": null,
+                "pendingWorkPriority": 0,
+                "ref": null,
+                "return": FiberNode {
+                  "_debugID": 1,
+                  "_debugIsCurrentlyTiming": false,
+                  "_debugOwner": null,
+                  "_debugSource": null,
+                  "alternate": FiberNode {
+                    "_debugID": 1,
+                    "_debugIsCurrentlyTiming": false,
+                    "_debugOwner": null,
+                    "_debugSource": null,
+                    "alternate": [Circular],
+                    "child": null,
+                    "effectTag": 0,
+                    "firstEffect": null,
+                    "index": 0,
+                    "internalContextTag": 0,
+                    "key": null,
+                    "lastEffect": null,
+                    "memoizedProps": null,
+                    "memoizedState": null,
+                    "nextEffect": null,
+                    "pendingProps": null,
+                    "pendingWorkPriority": 1,
+                    "ref": null,
+                    "return": null,
+                    "sibling": null,
+                    "stateNode": Object {
+                      "containerInfo": <div />,
+                      "context": Object {},
+                      "current": [Circular],
+                      "isScheduled": false,
+                      "nextScheduledRoot": null,
+                      "pendingContext": null,
+                    },
+                    "tag": 3,
+                    "type": null,
+                    "updateQueue": Object {
+                      "callbackList": null,
+                      "first": Object {
+                        "callback": null,
+                        "isForced": false,
+                        "isReplace": false,
+                        "isTopLevelUnmount": false,
+                        "next": null,
+                        "partialState": Object {
+                          "element": <WrapperComponent
+                            Component={[Function]}
+                            context={null}
+                            props={Object {}}
+                          />,
+                        },
+                        "priorityLevel": 1,
+                      },
+                      "hasForceUpdate": false,
+                      "isProcessing": false,
+                      "last": Object {
+                        "callback": null,
+                        "isForced": false,
+                        "isReplace": false,
+                        "isTopLevelUnmount": false,
+                        "next": null,
+                        "partialState": Object {
+                          "element": <WrapperComponent
+                            Component={[Function]}
+                            context={null}
+                            props={Object {}}
+                          />,
+                        },
+                        "priorityLevel": 1,
+                      },
+                    },
+                  },
+                  "child": [Circular],
+                  "effectTag": 0,
+                  "firstEffect": null,
+                  "index": 0,
+                  "internalContextTag": 0,
+                  "key": null,
+                  "lastEffect": null,
+                  "memoizedProps": null,
+                  "memoizedState": Object {
+                    "element": <WrapperComponent
+                      Component={[Function]}
+                      context={null}
+                      props={Object {}}
+                    />,
+                  },
+                  "nextEffect": null,
+                  "pendingProps": null,
+                  "pendingWorkPriority": 0,
+                  "ref": null,
+                  "return": null,
+                  "sibling": null,
+                  "stateNode": Object {
+                    "containerInfo": <div />,
+                    "context": Object {},
+                    "current": [Circular],
+                    "isScheduled": false,
+                    "nextScheduledRoot": null,
+                    "pendingContext": null,
+                  },
+                  "tag": 3,
+                  "type": null,
+                  "updateQueue": null,
+                },
+                "sibling": null,
+                "stateNode": WrapperComponent {
+                  "_reactInternalFiber": [Circular],
+                  "_reactInternalInstance": Object {},
+                  "context": Object {},
+                  "props": Object {
+                    "Component": [Function],
+                    "context": null,
+                    "props": Object {},
+                  },
+                  "refs": Object {},
+                  "state": Object {
+                    "context": null,
+                    "mount": true,
+                    "props": Object {},
+                  },
+                  "updater": Object {
+                    "enqueueForceUpdate": [Function],
+                    "enqueueReplaceState": [Function],
+                    "enqueueSetState": [Function],
+                    "isMounted": [Function],
+                  },
+                },
+                "tag": 2,
+                "type": [Function],
+                "updateQueue": null,
+              },
+              "_debugSource": null,
+              "alternate": null,
+              "child": [Circular],
+              "effectTag": 1,
+              "firstEffect": null,
+              "index": 0,
+              "internalContextTag": 0,
+              "key": null,
+              "lastEffect": null,
+              "memoizedProps": Object {},
+              "memoizedState": null,
+              "nextEffect": null,
+              "pendingProps": null,
+              "pendingWorkPriority": 0,
+              "ref": null,
+              "return": FiberNode {
+                "_debugID": 3,
+                "_debugIsCurrentlyTiming": false,
+                "_debugOwner": null,
+                "_debugSource": null,
+                "alternate": null,
+                "child": [Circular],
+                "effectTag": 1,
+                "firstEffect": null,
+                "index": 0,
+                "internalContextTag": 0,
+                "key": null,
+                "lastEffect": null,
+                "memoizedProps": Object {
+                  "Component": [Function],
+                  "context": null,
+                  "props": Object {},
+                },
+                "memoizedState": Object {
+                  "context": null,
+                  "mount": true,
+                  "props": Object {},
+                },
+                "nextEffect": null,
+                "pendingProps": null,
+                "pendingWorkPriority": 0,
+                "ref": null,
+                "return": FiberNode {
+                  "_debugID": 1,
+                  "_debugIsCurrentlyTiming": false,
+                  "_debugOwner": null,
+                  "_debugSource": null,
+                  "alternate": FiberNode {
+                    "_debugID": 1,
+                    "_debugIsCurrentlyTiming": false,
+                    "_debugOwner": null,
+                    "_debugSource": null,
+                    "alternate": [Circular],
+                    "child": null,
+                    "effectTag": 0,
+                    "firstEffect": null,
+                    "index": 0,
+                    "internalContextTag": 0,
+                    "key": null,
+                    "lastEffect": null,
+                    "memoizedProps": null,
+                    "memoizedState": null,
+                    "nextEffect": null,
+                    "pendingProps": null,
+                    "pendingWorkPriority": 1,
+                    "ref": null,
+                    "return": null,
+                    "sibling": null,
+                    "stateNode": Object {
+                      "containerInfo": <div />,
+                      "context": Object {},
+                      "current": [Circular],
+                      "isScheduled": false,
+                      "nextScheduledRoot": null,
+                      "pendingContext": null,
+                    },
+                    "tag": 3,
+                    "type": null,
+                    "updateQueue": Object {
+                      "callbackList": null,
+                      "first": Object {
+                        "callback": null,
+                        "isForced": false,
+                        "isReplace": false,
+                        "isTopLevelUnmount": false,
+                        "next": null,
+                        "partialState": Object {
+                          "element": <WrapperComponent
+                            Component={[Function]}
+                            context={null}
+                            props={Object {}}
+                          />,
+                        },
+                        "priorityLevel": 1,
+                      },
+                      "hasForceUpdate": false,
+                      "isProcessing": false,
+                      "last": Object {
+                        "callback": null,
+                        "isForced": false,
+                        "isReplace": false,
+                        "isTopLevelUnmount": false,
+                        "next": null,
+                        "partialState": Object {
+                          "element": <WrapperComponent
+                            Component={[Function]}
+                            context={null}
+                            props={Object {}}
+                          />,
+                        },
+                        "priorityLevel": 1,
+                      },
+                    },
+                  },
+                  "child": [Circular],
+                  "effectTag": 0,
+                  "firstEffect": null,
+                  "index": 0,
+                  "internalContextTag": 0,
+                  "key": null,
+                  "lastEffect": null,
+                  "memoizedProps": null,
+                  "memoizedState": Object {
+                    "element": <WrapperComponent
+                      Component={[Function]}
+                      context={null}
+                      props={Object {}}
+                    />,
+                  },
+                  "nextEffect": null,
+                  "pendingProps": null,
+                  "pendingWorkPriority": 0,
+                  "ref": null,
+                  "return": null,
+                  "sibling": null,
+                  "stateNode": Object {
+                    "containerInfo": <div />,
+                    "context": Object {},
+                    "current": [Circular],
+                    "isScheduled": false,
+                    "nextScheduledRoot": null,
+                    "pendingContext": null,
+                  },
+                  "tag": 3,
+                  "type": null,
+                  "updateQueue": null,
+                },
+                "sibling": null,
+                "stateNode": WrapperComponent {
+                  "_reactInternalFiber": [Circular],
+                  "_reactInternalInstance": Object {},
+                  "context": Object {},
+                  "props": Object {
+                    "Component": [Function],
+                    "context": null,
+                    "props": Object {},
+                  },
+                  "refs": Object {},
+                  "state": Object {
+                    "context": null,
+                    "mount": true,
+                    "props": Object {},
+                  },
+                  "updater": Object {
+                    "enqueueForceUpdate": [Function],
+                    "enqueueReplaceState": [Function],
+                    "enqueueSetState": [Function],
+                    "isMounted": [Function],
+                  },
+                },
+                "tag": 2,
+                "type": [Function],
+                "updateQueue": null,
+              },
+              "sibling": null,
+              "stateNode": App {
+                "_reactInternalFiber": [Circular],
+                "_reactInternalInstance": Object {},
+                "context": Object {},
+                "props": Object {},
+                "refs": Object {},
+                "state": null,
+                "updater": Object {
+                  "enqueueForceUpdate": [Function],
+                  "enqueueReplaceState": [Function],
+                  "enqueueSetState": [Function],
+                  "isMounted": [Function],
+                },
+              },
+              "tag": 2,
+              "type": [Function],
+              "updateQueue": null,
+            },
+            "_debugSource": null,
+            "alternate": null,
+            "child": null,
+            "effectTag": 1,
+            "firstEffect": null,
+            "index": 0,
+            "internalContextTag": 0,
+            "key": null,
+            "lastEffect": null,
+            "memoizedProps": Object {
+              "children": <div
+                id="wrap"
+              >
+                <Connect(NavigationBar) />
+                <Switch>
+                  <Route
+                    component={[Function]}
+                    exact={true}
+                    path="/"
+                  />
+                  <Route
+                    component={[Function]}
+                    path="/signup"
+                  />
+                  <Route
+                    component={[Function]}
+                    path="/signin"
+                  />
+                  <Route
+                    component={[Function]}
+                    path="/add-recipe"
+                  />
+                  <Route
+                    component={[Function]}
+                    path="/recipes"
+                  />
+                  <Route
+                    component={[Function]}
+                    path="/recipe-details/:recipeId"
+                  />
+                  <Route
+                    component={[Function]}
+                    path="/edit-recipe/:recipeId"
+                  />
+                  <Route
+                    component={[Function]}
+                    path="/my-recipes"
+                  />
+                  <Route
+                    component={[Function]}
+                    path="/profile"
+                  />
+                  <Route
+                    component={[Function]}
+                    path="/recipe-by/:userName/:userId"
+                  />
+                  <Route
+                    component={[Function]}
+                    path="/favorites"
+                  />
+                  <Route
+                    component={[Function]}
+                  />
+                </Switch>
+                <Unknown />
+              </div>,
+            },
+            "memoizedState": null,
+            "nextEffect": null,
+            "pendingProps": null,
+            "pendingWorkPriority": 0,
+            "ref": null,
+            "return": FiberNode {
+              "_debugID": 4,
+              "_debugIsCurrentlyTiming": false,
+              "_debugOwner": FiberNode {
+                "_debugID": 3,
+                "_debugIsCurrentlyTiming": false,
+                "_debugOwner": null,
+                "_debugSource": null,
+                "alternate": null,
+                "child": [Circular],
+                "effectTag": 1,
+                "firstEffect": null,
+                "index": 0,
+                "internalContextTag": 0,
+                "key": null,
+                "lastEffect": null,
+                "memoizedProps": Object {
+                  "Component": [Function],
+                  "context": null,
+                  "props": Object {},
+                },
+                "memoizedState": Object {
+                  "context": null,
+                  "mount": true,
+                  "props": Object {},
+                },
+                "nextEffect": null,
+                "pendingProps": null,
+                "pendingWorkPriority": 0,
+                "ref": null,
+                "return": FiberNode {
+                  "_debugID": 1,
+                  "_debugIsCurrentlyTiming": false,
+                  "_debugOwner": null,
+                  "_debugSource": null,
+                  "alternate": FiberNode {
+                    "_debugID": 1,
+                    "_debugIsCurrentlyTiming": false,
+                    "_debugOwner": null,
+                    "_debugSource": null,
+                    "alternate": [Circular],
+                    "child": null,
+                    "effectTag": 0,
+                    "firstEffect": null,
+                    "index": 0,
+                    "internalContextTag": 0,
+                    "key": null,
+                    "lastEffect": null,
+                    "memoizedProps": null,
+                    "memoizedState": null,
+                    "nextEffect": null,
+                    "pendingProps": null,
+                    "pendingWorkPriority": 1,
+                    "ref": null,
+                    "return": null,
+                    "sibling": null,
+                    "stateNode": Object {
+                      "containerInfo": <div />,
+                      "context": Object {},
+                      "current": [Circular],
+                      "isScheduled": false,
+                      "nextScheduledRoot": null,
+                      "pendingContext": null,
+                    },
+                    "tag": 3,
+                    "type": null,
+                    "updateQueue": Object {
+                      "callbackList": null,
+                      "first": Object {
+                        "callback": null,
+                        "isForced": false,
+                        "isReplace": false,
+                        "isTopLevelUnmount": false,
+                        "next": null,
+                        "partialState": Object {
+                          "element": <WrapperComponent
+                            Component={[Function]}
+                            context={null}
+                            props={Object {}}
+                          />,
+                        },
+                        "priorityLevel": 1,
+                      },
+                      "hasForceUpdate": false,
+                      "isProcessing": false,
+                      "last": Object {
+                        "callback": null,
+                        "isForced": false,
+                        "isReplace": false,
+                        "isTopLevelUnmount": false,
+                        "next": null,
+                        "partialState": Object {
+                          "element": <WrapperComponent
+                            Component={[Function]}
+                            context={null}
+                            props={Object {}}
+                          />,
+                        },
+                        "priorityLevel": 1,
+                      },
+                    },
+                  },
+                  "child": [Circular],
+                  "effectTag": 0,
+                  "firstEffect": null,
+                  "index": 0,
+                  "internalContextTag": 0,
+                  "key": null,
+                  "lastEffect": null,
+                  "memoizedProps": null,
+                  "memoizedState": Object {
+                    "element": <WrapperComponent
+                      Component={[Function]}
+                      context={null}
+                      props={Object {}}
+                    />,
+                  },
+                  "nextEffect": null,
+                  "pendingProps": null,
+                  "pendingWorkPriority": 0,
+                  "ref": null,
+                  "return": null,
+                  "sibling": null,
+                  "stateNode": Object {
+                    "containerInfo": <div />,
+                    "context": Object {},
+                    "current": [Circular],
+                    "isScheduled": false,
+                    "nextScheduledRoot": null,
+                    "pendingContext": null,
+                  },
+                  "tag": 3,
+                  "type": null,
+                  "updateQueue": null,
+                },
+                "sibling": null,
+                "stateNode": WrapperComponent {
+                  "_reactInternalFiber": [Circular],
+                  "_reactInternalInstance": Object {},
+                  "context": Object {},
+                  "props": Object {
+                    "Component": [Function],
+                    "context": null,
+                    "props": Object {},
+                  },
+                  "refs": Object {},
+                  "state": Object {
+                    "context": null,
+                    "mount": true,
+                    "props": Object {},
+                  },
+                  "updater": Object {
+                    "enqueueForceUpdate": [Function],
+                    "enqueueReplaceState": [Function],
+                    "enqueueSetState": [Function],
+                    "isMounted": [Function],
+                  },
+                },
+                "tag": 2,
+                "type": [Function],
+                "updateQueue": null,
+              },
+              "_debugSource": null,
+              "alternate": null,
+              "child": [Circular],
+              "effectTag": 1,
+              "firstEffect": null,
+              "index": 0,
+              "internalContextTag": 0,
+              "key": null,
+              "lastEffect": null,
+              "memoizedProps": Object {},
+              "memoizedState": null,
+              "nextEffect": null,
+              "pendingProps": null,
+              "pendingWorkPriority": 0,
+              "ref": null,
+              "return": FiberNode {
+                "_debugID": 3,
+                "_debugIsCurrentlyTiming": false,
+                "_debugOwner": null,
+                "_debugSource": null,
+                "alternate": null,
+                "child": [Circular],
+                "effectTag": 1,
+                "firstEffect": null,
+                "index": 0,
+                "internalContextTag": 0,
+                "key": null,
+                "lastEffect": null,
+                "memoizedProps": Object {
+                  "Component": [Function],
+                  "context": null,
+                  "props": Object {},
+                },
+                "memoizedState": Object {
+                  "context": null,
+                  "mount": true,
+                  "props": Object {},
+                },
+                "nextEffect": null,
+                "pendingProps": null,
+                "pendingWorkPriority": 0,
+                "ref": null,
+                "return": FiberNode {
+                  "_debugID": 1,
+                  "_debugIsCurrentlyTiming": false,
+                  "_debugOwner": null,
+                  "_debugSource": null,
+                  "alternate": FiberNode {
+                    "_debugID": 1,
+                    "_debugIsCurrentlyTiming": false,
+                    "_debugOwner": null,
+                    "_debugSource": null,
+                    "alternate": [Circular],
+                    "child": null,
+                    "effectTag": 0,
+                    "firstEffect": null,
+                    "index": 0,
+                    "internalContextTag": 0,
+                    "key": null,
+                    "lastEffect": null,
+                    "memoizedProps": null,
+                    "memoizedState": null,
+                    "nextEffect": null,
+                    "pendingProps": null,
+                    "pendingWorkPriority": 1,
+                    "ref": null,
+                    "return": null,
+                    "sibling": null,
+                    "stateNode": Object {
+                      "containerInfo": <div />,
+                      "context": Object {},
+                      "current": [Circular],
+                      "isScheduled": false,
+                      "nextScheduledRoot": null,
+                      "pendingContext": null,
+                    },
+                    "tag": 3,
+                    "type": null,
+                    "updateQueue": Object {
+                      "callbackList": null,
+                      "first": Object {
+                        "callback": null,
+                        "isForced": false,
+                        "isReplace": false,
+                        "isTopLevelUnmount": false,
+                        "next": null,
+                        "partialState": Object {
+                          "element": <WrapperComponent
+                            Component={[Function]}
+                            context={null}
+                            props={Object {}}
+                          />,
+                        },
+                        "priorityLevel": 1,
+                      },
+                      "hasForceUpdate": false,
+                      "isProcessing": false,
+                      "last": Object {
+                        "callback": null,
+                        "isForced": false,
+                        "isReplace": false,
+                        "isTopLevelUnmount": false,
+                        "next": null,
+                        "partialState": Object {
+                          "element": <WrapperComponent
+                            Component={[Function]}
+                            context={null}
+                            props={Object {}}
+                          />,
+                        },
+                        "priorityLevel": 1,
+                      },
+                    },
+                  },
+                  "child": [Circular],
+                  "effectTag": 0,
+                  "firstEffect": null,
+                  "index": 0,
+                  "internalContextTag": 0,
+                  "key": null,
+                  "lastEffect": null,
+                  "memoizedProps": null,
+                  "memoizedState": Object {
+                    "element": <WrapperComponent
+                      Component={[Function]}
+                      context={null}
+                      props={Object {}}
+                    />,
+                  },
+                  "nextEffect": null,
+                  "pendingProps": null,
+                  "pendingWorkPriority": 0,
+                  "ref": null,
+                  "return": null,
+                  "sibling": null,
+                  "stateNode": Object {
+                    "containerInfo": <div />,
+                    "context": Object {},
+                    "current": [Circular],
+                    "isScheduled": false,
+                    "nextScheduledRoot": null,
+                    "pendingContext": null,
+                  },
+                  "tag": 3,
+                  "type": null,
+                  "updateQueue": null,
+                },
+                "sibling": null,
+                "stateNode": WrapperComponent {
+                  "_reactInternalFiber": [Circular],
+                  "_reactInternalInstance": Object {},
+                  "context": Object {},
+                  "props": Object {
+                    "Component": [Function],
+                    "context": null,
+                    "props": Object {},
+                  },
+                  "refs": Object {},
+                  "state": Object {
+                    "context": null,
+                    "mount": true,
+                    "props": Object {},
+                  },
+                  "updater": Object {
+                    "enqueueForceUpdate": [Function],
+                    "enqueueReplaceState": [Function],
+                    "enqueueSetState": [Function],
+                    "isMounted": [Function],
+                  },
+                },
+                "tag": 2,
+                "type": [Function],
+                "updateQueue": null,
+              },
+              "sibling": null,
+              "stateNode": App {
+                "_reactInternalFiber": [Circular],
+                "_reactInternalInstance": Object {},
+                "context": Object {},
+                "props": Object {},
+                "refs": Object {},
+                "state": null,
+                "updater": Object {
+                  "enqueueForceUpdate": [Function],
+                  "enqueueReplaceState": [Function],
+                  "enqueueSetState": [Function],
+                  "isMounted": [Function],
+                },
+              },
+              "tag": 2,
+              "type": [Function],
+              "updateQueue": null,
+            },
+            "sibling": null,
+            "stateNode": [Circular],
+            "tag": 2,
+            "type": [MockFunction] {
+              "calls": Array [
+                Array [
+                  Object {
+                    "children": <div
+                      id="wrap"
+                    >
+                      <Connect(NavigationBar) />
+                      <Switch>
+                        <Route
+                          component={[Function]}
+                          exact={true}
+                          path="/"
+                        />
+                        <Route
+                          component={[Function]}
+                          path="/signup"
+                        />
+                        <Route
+                          component={[Function]}
+                          path="/signin"
+                        />
+                        <Route
+                          component={[Function]}
+                          path="/add-recipe"
+                        />
+                        <Route
+                          component={[Function]}
+                          path="/recipes"
+                        />
+                        <Route
+                          component={[Function]}
+                          path="/recipe-details/:recipeId"
+                        />
+                        <Route
+                          component={[Function]}
+                          path="/edit-recipe/:recipeId"
+                        />
+                        <Route
+                          component={[Function]}
+                          path="/my-recipes"
+                        />
+                        <Route
+                          component={[Function]}
+                          path="/profile"
+                        />
+                        <Route
+                          component={[Function]}
+                          path="/recipe-by/:userName/:userId"
+                        />
+                        <Route
+                          component={[Function]}
+                          path="/favorites"
+                        />
+                        <Route
+                          component={[Function]}
+                        />
+                      </Switch>
+                      <Unknown />
+                    </div>,
+                  },
+                  Object {},
+                ],
+              ],
+            },
+            "updateQueue": null,
+          },
+          "_reactInternalInstance": Object {},
+          "componentWillMount": [MockFunction] {
+            "calls": Array [
+              Array [],
+            ],
+          },
+          "context": Object {},
+          "forceUpdate": [MockFunction],
+          "props": Object {
+            "children": <div
+              id="wrap"
+            >
+              <Connect(NavigationBar) />
+              <Switch>
+                <Route
+                  component={[Function]}
+                  exact={true}
+                  path="/"
+                />
+                <Route
+                  component={[Function]}
+                  path="/signup"
+                />
+                <Route
+                  component={[Function]}
+                  path="/signin"
+                />
+                <Route
+                  component={[Function]}
+                  path="/add-recipe"
+                />
+                <Route
+                  component={[Function]}
+                  path="/recipes"
+                />
+                <Route
+                  component={[Function]}
+                  path="/recipe-details/:recipeId"
+                />
+                <Route
+                  component={[Function]}
+                  path="/edit-recipe/:recipeId"
+                />
+                <Route
+                  component={[Function]}
+                  path="/my-recipes"
+                />
+                <Route
+                  component={[Function]}
+                  path="/profile"
+                />
+                <Route
+                  component={[Function]}
+                  path="/recipe-by/:userName/:userId"
+                />
+                <Route
+                  component={[Function]}
+                  path="/favorites"
+                />
+                <Route
+                  component={[Function]}
+                />
+              </Switch>
+              <Unknown />
+            </div>,
+          },
+          "refs": Object {},
+          "render": [MockFunction] {
+            "calls": Array [
+              Array [],
+            ],
+          },
+          "setState": [MockFunction],
+          "state": null,
+          "updater": Object {
+            "enqueueForceUpdate": [Function],
+            "enqueueReplaceState": [Function],
+            "enqueueSetState": [Function],
+            "isMounted": [Function],
+          },
+        },
+        "key": undefined,
+        "nodeType": "class",
+        "props": Object {
+          "children": <div
+            id="wrap"
+          >
+            <Connect(NavigationBar) />
+            <Switch>
+              <Route
+                component={[Function]}
+                exact={true}
+                path="/"
+              />
+              <Route
+                component={[Function]}
+                path="/signup"
+              />
+              <Route
+                component={[Function]}
+                path="/signin"
+              />
+              <Route
+                component={[Function]}
+                path="/add-recipe"
+              />
+              <Route
+                component={[Function]}
+                path="/recipes"
+              />
+              <Route
+                component={[Function]}
+                path="/recipe-details/:recipeId"
+              />
+              <Route
+                component={[Function]}
+                path="/edit-recipe/:recipeId"
+              />
+              <Route
+                component={[Function]}
+                path="/my-recipes"
+              />
+              <Route
+                component={[Function]}
+                path="/profile"
+              />
+              <Route
+                component={[Function]}
+                path="/recipe-by/:userName/:userId"
+              />
+              <Route
+                component={[Function]}
+                path="/favorites"
+              />
+              <Route
+                component={[Function]}
+              />
+            </Switch>
+            <Unknown />
+          </div>,
+        },
+        "ref": null,
+        "rendered": null,
+        "type": [MockFunction] {
+          "calls": Array [
+            Array [
+              Object {
+                "children": <div
+                  id="wrap"
+                >
+                  <Connect(NavigationBar) />
+                  <Switch>
+                    <Route
+                      component={[Function]}
+                      exact={true}
+                      path="/"
+                    />
+                    <Route
+                      component={[Function]}
+                      path="/signup"
+                    />
+                    <Route
+                      component={[Function]}
+                      path="/signin"
+                    />
+                    <Route
+                      component={[Function]}
+                      path="/add-recipe"
+                    />
+                    <Route
+                      component={[Function]}
+                      path="/recipes"
+                    />
+                    <Route
+                      component={[Function]}
+                      path="/recipe-details/:recipeId"
+                    />
+                    <Route
+                      component={[Function]}
+                      path="/edit-recipe/:recipeId"
+                    />
+                    <Route
+                      component={[Function]}
+                      path="/my-recipes"
+                    />
+                    <Route
+                      component={[Function]}
+                      path="/profile"
+                    />
+                    <Route
+                      component={[Function]}
+                      path="/recipe-by/:userName/:userId"
+                    />
+                    <Route
+                      component={[Function]}
+                      path="/favorites"
+                    />
+                    <Route
+                      component={[Function]}
+                    />
+                  </Switch>
+                  <Unknown />
+                </div>,
+              },
+              Object {},
+            ],
+          ],
+        },
+      },
+      "type": [Function],
+    },
+  ],
+  Symbol(enzyme.__options__): Object {
+    "adapter": ReactSixteenAdapter {
+      "options": Object {
+        "enableComponentDidUpdateOnSetState": true,
+      },
+    },
+  },
+}
+`;

@@ -1,21 +1,21 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import * as firebase from 'firebase';
 import TextFieldGroup from '../common/textFieldGroup';
 import Preloader from '../common/preLoaders';
 
 import {
   updatetUserProfileAction,
   updatetUserPasswordAction
-} from '../../actions/updateUserProfile';
+} from '../../actions/users/updateUserProfile';
 
-import * as firebase from 'firebase';
 /**
  *
  *
  * @class UserData
  * @extends {Component}
  */
-class UserData extends Component {
+export class UserData extends Component {
   /**
    * Creates an instance of UserData.
    * @param {any} props

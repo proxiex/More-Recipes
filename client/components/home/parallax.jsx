@@ -2,9 +2,7 @@ import React from 'react';
 import img from '../../assets/imgs/bg.jpg';
 
 export default () => {
-  $(document).ready(() => {
-    $('.slider').slider();
-  });
+  $('.slider').slider();
   return (
     <div className="row  z-depth-1" style={{ marginBottom: '0' }}>
       <div className="slider">
