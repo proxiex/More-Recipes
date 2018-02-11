@@ -1,14 +1,14 @@
-import React from 'react';
+import React, { Component } from 'react';
 import ReactPaginat from 'react-paginate';
 import shortid from 'shortid';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import { getAllRecipeAction } from '../../actions/getAllRecipeAction';
-import { getPopularRecipeAction } from '../../actions/getPopularRecipeAction';
+import { getAllRecipeAction } from '../../actions/recipes/getAllRecipe';
+import { getPopularRecipeAction } from '../../actions/recipes/getPopularRecipe';
 import RecipeCard from '../common/recipeCard';
-import Search from '../common/search';
+import { Search } from '../common/search';
 import Preloader from '../common/preLoaders';
 
 /**
@@ -17,7 +17,7 @@ import Preloader from '../common/preLoaders';
  * @class RecipePage
  * @extends {React.Component}
  */
-class RecipePage extends React.Component {
+export class RecipePage extends Component {
   /**
    * Creates an instance of RecipePage.
    * @param {any} props
@@ -113,7 +113,7 @@ class RecipePage extends React.Component {
       />)) :
       (<div style={{ textAlign: 'center', padding: '5%', paddingBottom: '20%' }}>
         <h5>{message}</h5>
-      </div>);
+       </div>);
 
     const otherDetails = (
       <div className="col m4">
@@ -122,24 +122,24 @@ class RecipePage extends React.Component {
             <div className="card">
               <div className="row">
                 <div className="col s12 m12">
-                <Search />
-              </div>
+                  <Search />
+                </div>
               </div>
               <div className="row">
                 <div className="col m12">
-                <h6 className="header"><u>Popular Recipes</u></h6>
-              </div>
+                  <h6 className="header"><u>Popular Recipes</u></h6>
+                </div>
               </div>
               <div className="row">
                 <div className="col s12 m12">
-                <ul className="collection">
-                  { this.state.popularRecipe.map(recipe =>
+                  <ul className="collection">
+                    { this.state.popularRecipe.map(recipe =>
 
                 (<Link key={shortid.generate()} to={`/recipe-details/${recipe.id}`}>
                   <li className="collection-item">{recipe.recipeName}</li>
-                </Link>)) }
-                </ul>
-              </div>
+                 </Link>)) }
+                  </ul>
+                </div>
               </div>
               <div className="card-stacked">
                 <div className="card-content" />
@@ -187,9 +187,9 @@ class RecipePage extends React.Component {
                   marginPagesDisplayed={2}
                   pageRangeDisplayed={5}
                   onPageChange={this.onPageChange}
+
                   containerClassName="pagination"
                   subContainerClassName="pages pagination"
-
                   pageClassName="page-item, waves-effect"
                   pageLinkClassName="page-link"
                   activeClassName="page-item active"

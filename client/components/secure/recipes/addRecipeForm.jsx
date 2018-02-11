@@ -6,7 +6,7 @@ import classnames from 'classnames';
 import FroalaEditor from 'react-froala-wysiwyg';
 import * as firebase from 'firebase';
 
-import { addRecipeAction } from '../../../actions/addRecipeAction';
+import { addRecipeAction } from '../../../actions/recipes/addRecipe';
 import validateInput from './validations';
 import Preloader from '../../common/preLoaders';
 
@@ -25,7 +25,7 @@ firebase.initializeApp(config);
  * @class AddRecipeForm
  * @extends {React.Component}
  */
-class AddRecipeForm extends React.Component {
+export class AddRecipeForm extends React.Component {
   /**
    * Creates an instance of AddRecipeForm.
    * @memberof AddRecipeForm
@@ -36,12 +36,11 @@ class AddRecipeForm extends React.Component {
       recipeImage: '',
       recipeName: '',
       description: '',
-      mealType: '',
       ingredients: '',
       method: '',
       errors: {},
       isLoading: false,
-      model: ''
+      imageUrl: ''
     };
 
     this.onChange = this.onChange.bind(this);
@@ -78,6 +77,7 @@ class AddRecipeForm extends React.Component {
    */
   onSubmit(e) {
     e.preventDefault();
+
     if (this.isValid()) {
       const storage = firebase.storage();
       const url = `images/more-recipes_${this.state.recipeName.split(' ').join('_')}_${Date.now()}.jpg`;
@@ -85,14 +85,14 @@ class AddRecipeForm extends React.Component {
       const message = this.state.imageUrl;
 
       this.setState({ errors: {}, isLoading: true });
-      const uploadTask = storageRef.putString(message, 'data_url')
+      storageRef.putString(message, 'data_url')
         .then((snapshot) => {
-          const downloadURL = snapshot.downloadURL;
+          const { downloadURL } = snapshot;
           const newData = this.state;
           newData.imageUrl = '';
-          newData.recipeImage = downloadURL;
+          newData.recipeImage = downloadURL || '';
           this.props.addRecipeAction(this.state).then(
-            (res) => {
+            () => {
               this.setState({ redirect: true, isLoading: false });
               Materialize.toast('Recipe created succesfully', 3000, 'green darken-3');
             },

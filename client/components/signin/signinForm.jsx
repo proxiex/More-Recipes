@@ -3,11 +3,21 @@ import { Redirect, Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import TextFieldGroup from '../common/textFieldGroup';
-import { userSigninRequest } from '../../actions/signinActions';
+import { userSigninRequest } from '../../actions/users/signin';
 import validateInput from './validations';
 import Preloader from '../common/preLoaders';
-
-class SigninForm extends React.Component {
+/**
+ * signin compontent
+ *
+ * @class SigninForm
+ * @extends {React.Component}
+ */
+export class SigninForm extends React.Component {
+  /**
+   * Creates an instance of SigninForm.
+   * @param {any} props
+   * @memberof SigninForm
+   */
   constructor(props) {
     super(props);
     this.state = {
@@ -15,11 +25,51 @@ class SigninForm extends React.Component {
       password: '',
       errors: {},
       isLoading: false,
-    }
+    };
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
   }
 
+  /**
+   * @returns {void}
+   *
+   * @param {any} e
+   * @memberof SigninForm
+   */
+  onSubmit(e) {
+    e.preventDefault();
+
+    if (this.isValid()) {
+      this.setState({ errors: {}, isLoading: true });
+      this.props.userSigninRequest(this.state).then(
+        () => {
+          this.setState({ redirect: true });
+        },
+        (err) => {
+          this.setState({ errors: err.response.data, isLoading: false });
+          Materialize.toast(this.state.errors.message, 3000, 'red darken-3');
+        }
+
+      );
+    }
+  }
+
+  /**
+   *
+   * @returns {void}
+   * @param {any} e
+   * @memberof SigninForm
+   */
+  onChange(e) {
+    this.setState({ [e.target.name]: e.target.value });
+  }
+
+  /**
+   *
+   *
+   * @returns {void}
+   * @memberof SigninForm
+   */
   isValid() {
     const { errors, isValid } = validateInput(this.state);
 
@@ -30,41 +80,24 @@ class SigninForm extends React.Component {
     return isValid;
   }
 
-  onSubmit(e) {
-    e.preventDefault();
-
-    if (this.isValid()) {
-      this.setState({ errors: {}, isLoading: true });
-      this.props.userSigninRequest(this.state).then(
-        (res) => {
-          this.setState({ redirect: true});
-        },
-        ( err ) => {
-          this.setState({ errors: err.response.data, isLoading: false }) 
-          
-          Materialize.toast(this.state.errors.message, 3000, 'red darken-3');
-        }
-          
-      );
-    }
-  }
-
-  onChange(e) {
-    this.setState({ [e.target.name]: e.target.value });
-  }
-
+  /**
+   *
+   *
+   * @returns {void}
+   * @memberof SigninForm
+   */
   render() {
     const { errors, redirect, isLoading } = this.state;
-    
+
     if (redirect) {
-      return <Redirect to="/recipes" />
+      return <Redirect to="/recipes" />;
     }
     return (
       <div className="card-panel">
-      { redirect ? <div className="green-text green lighten-4"> Loggin you in... <br/></div> : ''}
-        <br/>
+        { redirect ? <div className="green-text green lighten-4"> Loggin you in... <br /></div> : ''}
+        <br />
         <form onSubmit={this.onSubmit} className="s12">
-          <TextFieldGroup 
+          <TextFieldGroup
             icon="account_circle"
             value={this.state.username}
             onChange={this.onChange}
@@ -74,7 +107,7 @@ class SigninForm extends React.Component {
             type="text"
             error={errors.username || errors.erusername}
           />
-          <TextFieldGroup 
+          <TextFieldGroup
             icon="lock"
             value={this.state.password}
             onChange={this.onChange}
@@ -87,29 +120,29 @@ class SigninForm extends React.Component {
           {
             isLoading && !redirect ? <span> Checking Login Credeintials ... <Preloader /> </span> :
             <div className="row">
-            <input 
-              type="submit" 
-              value="Signin" 
-              className="btn black-text grey lighten-2" 
-              disabled={this.state.isLoading}
-            />
-          </div>
+              <input
+                type="submit"
+                value="Signin"
+                className="btn black-text grey lighten-2"
+                disabled={this.state.isLoading}
+              />
+            </div>
           }
           <div className="row">
-            <p className="center">or <br/><Link to="/signup" >Signup</Link></p>
+            <p className="center">or <br /><Link to="/signup" >Signup</Link></p>
           </div>
         </form>
-        <br/>    
-            <br/>    
-            <br/>    
-            <br/>   
+        <br />
+        <br />
+        <br />
+        <br />
       </div>
-    )
+    );
   }
 }
 
 SigninForm.propTypes = {
   userSigninRequest: PropTypes.func.isRequired
-}
+};
 
 export default connect(null, { userSigninRequest })(SigninForm);

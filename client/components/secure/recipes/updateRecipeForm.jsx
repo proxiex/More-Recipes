@@ -5,18 +5,17 @@ import classnames from 'classnames';
 import FroalaEditor from 'react-froala-wysiwyg';
 import * as firebase from 'firebase';
 import Preloader from '../../common/preLoaders';
-import { editRecipeAction } from '../../../actions/editRecipeAction';
-import validateInput from './validations';
+import { editRecipeAction } from '../../../actions/recipes/editRecipe';
 
 /**
  *
- * @class AddRecipeForm
+ * @class UpdateRecipeForm
  * @extends {React.Component}
  */
-class AddRecipeForm extends React.Component {
+export class UpdateRecipeForm extends React.Component {
   /**
-   * Creates an instance of AddRecipeForm.
-   * @memberof AddRecipeForm
+   * Creates an instance of UpdateRecipeForm.
+   * @memberof UpdateRecipeForm
    */
   constructor() {
     super();
@@ -28,7 +27,6 @@ class AddRecipeForm extends React.Component {
       method: '',
       errors: {},
       isLoading: false,
-      model: ''
     };
 
     this.onChange = this.onChange.bind(this);
@@ -87,7 +85,7 @@ class AddRecipeForm extends React.Component {
    * @returns {void}
    *
    * @param {any} e
-   * @memberof AddRecipeForm
+   * @memberof UpdateRecipeForm
    */
   onSubmit(e) {
     e.preventDefault();
@@ -133,7 +131,7 @@ class AddRecipeForm extends React.Component {
    * @returns {void}
    *
    * @param {any} e
-   * @memberof AddRecipeForm
+   * @memberof UpdateRecipeForm
    */
   onChange(e) {
     this.setState({ [e.target.name]: e.target.value });
@@ -143,7 +141,7 @@ class AddRecipeForm extends React.Component {
    * @returns {void}
    *
    * @param {any} e
-   * @memberof AddRecipeForm
+   * @memberof UpdateRecipeForm
    */
   getPhoto(e) {
     e.preventDefault();
@@ -163,7 +161,7 @@ class AddRecipeForm extends React.Component {
    *
    * @returns {void}
    * @param {any} model
-   * @memberof AddRecipeForm
+   * @memberof UpdateRecipeForm
    */
   method(model) {
     this.setState({
@@ -175,27 +173,12 @@ class AddRecipeForm extends React.Component {
    * @returns {void}
    *
    * @param {any} model
-   * @memberof AddRecipeForm
+   * @memberof UpdateRecipeForm
    */
   ingredients(model) {
     this.setState({
       ingredients: model
     });
-  }
-
-  /**
-   *
-   * @returns {void}
-   * @memberof AddRecipeForm
-   */
-  isValid() {
-    const { errors, isValid } = validateInput(this.state);
-
-    if (!isValid) {
-      this.setState({ errors });
-    }
-
-    return isValid;
   }
 
   /**
@@ -356,7 +339,7 @@ class AddRecipeForm extends React.Component {
   }
 }
 
-AddRecipeForm.propTypes = {
+UpdateRecipeForm.propTypes = {
   editRecipeAction: PropTypes.func.isRequired
 };
 
@@ -372,4 +355,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, { editRecipeAction })(AddRecipeForm);
+export default connect(mapStateToProps, { editRecipeAction })(UpdateRecipeForm);

@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import ReactPaginat from 'react-paginate';
 import shortid from 'shortid';
 import PropTypes from 'prop-types';
-import { getUserRecipesActon } from '../../actions/getUserRecipeAction';
+import { getUserRecipesActon } from '../../actions/users/getUserRecipe';
 import RecipeCard from '../common/recipeCard';
 import Preloader from '../common/preLoaders';
 
@@ -13,7 +13,7 @@ import Preloader from '../common/preLoaders';
  * @class UserRecip
  * @extends {Component}
  */
-class UserRecip extends Component {
+export class UserRecipe extends Component {
   /**
    * Creates an instance of UserRecip.
    * @memberof UserRecip
@@ -157,7 +157,7 @@ class UserRecip extends Component {
   }
 }
 
-UserRecip.propTypes = {
+UserRecipe.propTypes = {
   getUserRecipesActon: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired
 };
@@ -175,4 +175,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, { getUserRecipesActon })(UserRecip);
+export default connect(mapStateToProps, { getUserRecipesActon })(UserRecipe);

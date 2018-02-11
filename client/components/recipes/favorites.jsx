@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import ReactPaginat from 'react-paginate';
 import shortid from 'shortid';
-import { getFavoriteRecipeAction } from '../../actions/getFavoriteRecipe';
+import { getFavoriteRecipeAction } from '../../actions/favorites/getFavoriteRecipe';
 import RecipeCard from '../common/recipeCard';
 import Preloader from '../common/preLoaders';
 
@@ -13,7 +13,7 @@ import Preloader from '../common/preLoaders';
  * @class Favorites
  * @extends {React.Component}
  */
-class Favorites extends React.Component {
+export class Favorites extends React.Component {
   /**
    * Creates an instance of Favorites.
    * @memberof Favorites
@@ -75,19 +75,21 @@ class Favorites extends React.Component {
   render() {
     const { recipes, isLoading, paginate } = this.state;
     const favoritesRecipes = recipes.map(recipe =>
-      (<RecipeCard
-        key={shortid.generate()}
-        id={recipe.recipe.id}
-        recipeName={recipe.recipe.recipeName}
-        recipeImage={recipe.recipe.recipeImage}
-        views={recipe.recipe.views}
-        downVotes={recipe.recipe.downVotes}
-        upVotes={recipe.recipe.upVotes}
-        userId={recipe.recipe.user.id}
-        username={recipe.recipe.user.username}
-        userFName={recipe.recipe.user.username}
-        userLName={recipe.recipe.user.username}
-      />));
+      (
+        console.log(' >>>>>>>>>>>>>', recipe.recipe.user),
+          <RecipeCard
+            key={shortid.generate()}
+            id={recipe.recipe.id}
+            recipeName={recipe.recipe.recipeName}
+            recipeImage={recipe.recipe.recipeImage}
+            views={recipe.recipe.views}
+            downVotes={recipe.recipe.downVotes}
+            upVotes={recipe.recipe.upVotes}
+            userId={recipe.recipe.user.id}
+            username={recipe.recipe.user.username}
+            userFName={recipe.recipe.user.username}
+            userLName={recipe.recipe.user.username}
+          />));
 
     return (
       <div id="wrapper">

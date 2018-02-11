@@ -2,8 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import AddRecipeForm from './updateRecipeForm';
-import { addRecipeAction } from '../../../actions/addRecipeAction';
-import { getRecipeDetails } from '../../../actions/getRecipeDetails';
+import { addRecipeAction } from '../../../actions/recipes/addRecipe';
+import { getRecipeDetails } from '../../../actions/recipes/getRecipeDetails';
 
 /**
  *
@@ -11,7 +11,7 @@ import { getRecipeDetails } from '../../../actions/getRecipeDetails';
  * @class UpdateRecipePage
  * @extends {React.Component}
  */
-class UpdateRecipePage extends React.Component {
+export class UpdateRecipePage extends React.Component {
   /**
    *@returns {void}
    *

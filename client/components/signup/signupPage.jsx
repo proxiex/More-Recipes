@@ -1,16 +1,16 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import SignupForm from './signupForm';
-import { userSignupRequest } from '../../actions/signupActions';
+import { userSignupRequest } from '../../actions/users/signup';
+
 /**
- *
- *
+ * Signup page
  * @class SignupPage
  * @extends {React.Component}
  */
-class SignupPage extends React.Component {
+export class SignupPage extends Component {
   /**
    * @description Render
    * @param {any} props

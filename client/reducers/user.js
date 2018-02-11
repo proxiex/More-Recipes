@@ -21,7 +21,8 @@ export function userRecipe(state = [], action = {}) {
       newState = action.payload;
       return newState;
     case DELETE_RECIPE:
-      newState = state.recipes.filter(recipe => `${recipe.id}` !== `${action.id}`);
+      newState = state.recipes
+        .filter(recipe => `${recipe.id}` !== `${action.id}`);
       return newState;
     default:
       return state;

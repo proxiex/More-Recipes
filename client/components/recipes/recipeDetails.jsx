@@ -5,11 +5,11 @@ import PropTypes from 'prop-types';
 import shortid from 'shortid';
 import classnames from 'classnames';
 
-import { getRecipeDetails } from '../../actions/getRecipeDetails';
-import { addReviewAction } from '../../actions/addReviewAction';
-import { voteAction } from '../../actions/voteActions';
-import { favoriteRecipeAction } from '../../actions/favoriteRecipeAction';
-import { deleteRecipeAction } from '../../actions/deleteRecipeAction';
+import { getRecipeDetails } from '../../actions/recipes/getRecipeDetails';
+import { addReviewAction } from '../../actions/reviews/addReview';
+import { voteAction } from '../../actions/recipes/vote';
+import { favoriteRecipeAction } from '../../actions/favorites/favoriteRecipe';
+import { deleteRecipeAction } from '../../actions/recipes/deleteRecipe';
 
 /**
  *
@@ -17,7 +17,7 @@ import { deleteRecipeAction } from '../../actions/deleteRecipeAction';
  * @class RecipeDetails
  * @extends {React.Component}
  */
-class RecipeDetails extends React.Component {
+export class RecipeDetails extends React.Component {
   /**
    * Creates an instance of RecipeDetails.
    * @param {any} props
@@ -136,7 +136,6 @@ class RecipeDetails extends React.Component {
   favoriteRecipe() {
     if (this.props.auth.isAuthenticated) {
       const recipeId = this.props.match.params.recipeId;
-      console.log('favrited');
       this.props.favoriteRecipeAction(recipeId).then(() => {
         Materialize.toast(this.props.favorites.message, 3000, 'green darken-3');
       });
@@ -154,11 +153,11 @@ class RecipeDetails extends React.Component {
   render() {
     const recipeInfo = this.props.recipe.recipeDetails ?
       this.props.recipe.recipeDetails : {};
-    const reviewData = this.props.review ? this.props.review : {};
+    const reviewData = this.props.review ? this.props.review : [];
     const userVotes = this.props.recipe.userVotes ?
       this.props.recipe.userVotes : {};
 
-    const review = (review instanceof Array) ?
+    const review = (reviewData instanceof Array) ?
       reviewData.sort((a, b) => b.id - a.id) : reviewData;
     const { isAuthenticated, user } = this.props.auth;
 
