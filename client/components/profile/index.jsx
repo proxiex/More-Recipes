@@ -53,7 +53,6 @@ export class Profile extends Component {
    */
   render() {
     const avatar = this.state.UserData.avatar;
-    console.log('State >>>', this.state);
     return (
       <div id="wrapper">
         <div className="row" style={{ padding: '2%', marginBottom: '0' }}>

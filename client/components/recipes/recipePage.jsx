@@ -8,7 +8,7 @@ import { connect } from 'react-redux';
 import { getAllRecipeAction } from '../../actions/recipes/getAllRecipe';
 import { getPopularRecipeAction } from '../../actions/recipes/getPopularRecipe';
 import RecipeCard from '../common/recipeCard';
-import { Search } from '../common/search';
+import Search from '../common/search';
 import Preloader from '../common/preLoaders';
 
 /**
@@ -224,13 +224,11 @@ RecipePage.propTypes = {
  * @param {any} state
  * @returns {void}
  */
-function mapStateToProps(state) {
-  return {
-    recipe: state.recipes,
-    popularRecipe: state.popularRecipe,
-    auth: state.auth
-  };
-}
+const mapStateToProps = state => ({
+  recipe: state.recipes,
+  popularRecipe: state.popularRecipe,
+  auth: state.auth
+});
 
 export default connect(
   mapStateToProps,

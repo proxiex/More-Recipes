@@ -83,7 +83,6 @@ export class UserData extends Component {
         const newData = this.state;
         newData.imageUrl = '';
         newData.avatar = downloadURL;
-        console.log('Submited State', this.state);
 
         this.props.updatetUserProfileAction(this.state).then(
           (res) => {
@@ -137,7 +136,6 @@ export class UserData extends Component {
     this.props.updatetUserPasswordAction(passwords).then(
       (res) => {
         this.setState({ redirect: true, isLoading: false });
-        console.log(res);
         Materialize.toast(
           'Your password has been updated sucessfully',
           3000,
@@ -145,7 +143,6 @@ export class UserData extends Component {
         );
       },
       (err) => {
-        console.log('error >>>', err.response);
         Materialize.toast(err.response.data.message, 3000, 'red darken-3');
         this.setState({ errors: err.response.data, isLoading: false });
       }

@@ -29,6 +29,22 @@ export class SigninForm extends React.Component {
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
   }
+  /**
+   *
+   * @param {any} nextProps
+   * @memberof SigninForm
+   * @returns {void}
+   */
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.error.length !== undefined) {
+      Materialize.toast(nextProps.error.message, 3000, 'red darken-3');
+      this.setState({
+        isLoading: false
+      });
+    } else {
+      this.setState({ redirect: true });
+    }
+  }
 
   /**
    * @returns {void}
@@ -41,16 +57,8 @@ export class SigninForm extends React.Component {
 
     if (this.isValid()) {
       this.setState({ errors: {}, isLoading: true });
-      this.props.userSigninRequest(this.state).then(
-        () => {
-          this.setState({ redirect: true });
-        },
-        (err) => {
-          this.setState({ errors: err.response.data, isLoading: false });
-          Materialize.toast(this.state.errors.message, 3000, 'red darken-3');
-        }
 
-      );
+      this.props.userSigninRequest(this.state);
     }
   }
 
@@ -90,6 +98,8 @@ export class SigninForm extends React.Component {
     const { errors, redirect, isLoading } = this.state;
 
     if (redirect) {
+      Materialize.toast('Welcome to More Recipe!', 3000, 'green darken-3');
+      
       return <Redirect to="/recipes" />;
     }
     return (
@@ -145,4 +155,7 @@ SigninForm.propTypes = {
   userSigninRequest: PropTypes.func.isRequired
 };
 
-export default connect(null, { userSigninRequest })(SigninForm);
+const mapStateToProps = state => ({
+  error: state.auth.error
+});
+export default connect(mapStateToProps, { userSigninRequest })(SigninForm);

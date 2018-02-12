@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { VOTE } from '../types';
+import { VOTE, VOTE_ERROR } from '../types';
 
 /**
  *
@@ -8,8 +8,20 @@ import { VOTE } from '../types';
  * @param {any} payload
  * @returns {void}
  */
-export const upVoteSucess = payload => ({
+export const VoteSucess = payload => ({
   type: VOTE,
+  payload
+});
+
+/**
+ *
+ *
+ * @export
+ * @param {any} payload
+ * @returns {void}
+ */
+export const VoteFailure = payload => ({
+  type: VOTE_ERROR,
   payload
 });
 
@@ -21,5 +33,7 @@ export const upVoteSucess = payload => ({
  */
 export const voteAction = (recipeId, type) => dispatch =>
   axios.post(`/api/v1/recipes/${recipeId}/votes?vote=${type}`).then((res) => {
-    dispatch(upVoteSucess(res.data));
+    dispatch(VoteSucess(res.data));
+  }, (error) => {
+    dispatch(VoteFailure(error.response.data));
   });
