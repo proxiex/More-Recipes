@@ -1,5 +1,6 @@
 import axios from 'axios';
-import { GET_FAVORITE_RECIPES } from '../types';
+import { GET_FAVORITE_RECIPES, GET_FAVORITE_RECIPES_ERROR } from '../types';
+
 /**
  *
  * @export
@@ -13,6 +14,17 @@ export const getFavoriteRecipeSucess = payload => ({
 
 
 /**
+ *
+ * @export
+ * @param {any} payload
+ * @returns {void}
+ */
+export const getFavoriteRecipeFailure = payload => ({
+  type: GET_FAVORITE_RECIPES_ERROR,
+  payload
+});
+
+/**
  * @returns {void}
  *
  * @param {any} userId
@@ -22,6 +34,7 @@ export const getFavoriteRecipeSucess = payload => ({
 export const getFavoriteRecipeAction = (userId, page) => dispatch =>
   axios.get(`/api/v1/users/${userId}/favorites?page=${page}`)
     .then((response) => {
-      console.log(' ***************** ', response.data);
       dispatch(getFavoriteRecipeSucess(response.data));
+    }, (error) => {
+      dispatch(getFavoriteRecipeFailure(error.response.data));
     });

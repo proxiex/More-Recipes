@@ -17,7 +17,7 @@ const setup = () => {
     }
   }
 
-  const wrapper = mount(<RecipePage {...props} />);
+  const wrapper = shallow(<RecipePage {...props} />);
   return {
     wrapper,
     props

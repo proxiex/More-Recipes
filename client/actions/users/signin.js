@@ -1,7 +1,8 @@
 import axios from 'axios';
 import jwtDecode from 'jwt-decode';
 import setAuthorizationToken from '../../utils/setAuthorizationToken';
-import { SET_CURRENT_USER } from '../types';
+import { SET_CURRENT_USER, SET_CURRENT_USER_ERROR } from '../types';
+
 /**
  *
  *
@@ -14,6 +15,17 @@ export const setCurrentUser = user => ({
   user
 });
 
+/**
+ *
+ *
+ * @export
+ * @param {any} user
+ * @returns {void}
+ */
+export const setCurrentUserFailure = error => ({
+  type: SET_CURRENT_USER_ERROR,
+  error
+});
 
 /**
  * @returns {void}
@@ -40,4 +52,6 @@ export const userSigninRequest = userData => dispatch =>
     localStorage.setItem('jwtToken', token);
     setAuthorizationToken(token);
     dispatch(setCurrentUser(decToken));
+  }, (error) => {
+    dispatch(setCurrentUserFailure(error.response.data));
   });

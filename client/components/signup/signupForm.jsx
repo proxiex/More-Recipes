@@ -1,4 +1,5 @@
 import React from 'react';
+// import { connect } from 'react-redux';
 import { Redirect, Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import TextFieldGroup from '../common/textFieldGroup';
@@ -10,7 +11,7 @@ import validateInput from './validations';
  * @class SignupForm
  * @extends {React.Component}
  */
-class SignupForm extends React.Component {
+export class SignupForm extends React.Component {
   /**
    * Creates an instance of SignupForm.
    * @param {any} props
@@ -27,6 +28,18 @@ class SignupForm extends React.Component {
     };
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
+  }
+  /**
+   *
+   * @param {any} nextProps
+   * @memberof SignupForm
+   * @returns {void}
+   */
+  componentWillReceiveProps(nextProps) {
+    this.setState({ errors: nextProps.error, isLoading: false });
+    if (nextProps.error === undefined) {
+      this.setState({ redirect: true });
+    }
   }
 
   /**
@@ -50,14 +63,7 @@ class SignupForm extends React.Component {
 
     if (this.isValid()) {
       this.setState({ errors: {}, isLoading: true });
-      this.props.userSignupRequest(this.state).then(
-        () => {
-          this.setState({ redirect: true });
-        },
-        (err) => {
-          this.setState({ errors: err.response.data, isLoading: false });
-        }
-      );
+      this.props.userSignupRequest(this.state);
     }
   }
 
@@ -86,7 +92,6 @@ class SignupForm extends React.Component {
   render() {
     const { errors } = this.state;
     const { redirect } = this.state;
-
     if (redirect) {
       Materialize.toast('Registration Successful, please login to continue', 5000, 'green darken-3');
       return <Redirect to="/signin" />;
@@ -143,7 +148,6 @@ class SignupForm extends React.Component {
 
 SignupForm.propTypes = {
   userSignupRequest: PropTypes.func.isRequired
-
 };
 
 export default SignupForm;

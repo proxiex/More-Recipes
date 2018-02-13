@@ -32,6 +32,7 @@ describe('Search component', () => {
         value: 'Seomthg is search'
       }
     }
+    wrapper.set
     wrapper.instance().onChange(event);
     expect(wrapper.state().search).toEqual('Seomthg is search');
     expect(props.searchSucessAction.mock.calls.length).toEqual(1);
